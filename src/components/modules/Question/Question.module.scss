@@ -1,0 +1,27 @@
+.question {
+    padding-top: 80px;
+    &__description {
+        text-align: center;
+        font-size: 18px; 
+        color: #fff;
+    }
+    &__input {
+        display: block;
+        margin: auto;
+    }
+    &__text {
+        display: block;
+        margin: auto;
+        min-height: 70px !important;
+    }
+    &__body {
+        max-width: 400px;
+        margin: 40px auto;
+    }
+}
+.block-title {
+    padding-top: 110px;
+    color: #fff;
+    text-align: center;
+    line-height: 32px;
+}

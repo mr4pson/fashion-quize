@@ -1,0 +1,12 @@
+.header {
+    padding: 5px 0 10px;
+    position: fixed;
+    background: #212121;
+    width: 100%;
+    z-index: 100;
+    &__logo {
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+    } 
+}

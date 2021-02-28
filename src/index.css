@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: AGOpus !important;
+  font-family: cursive !important;
 }
 
 @font-face {
@@ -17,4 +17,35 @@ body {
   url("./fonts/agopus-bold.woff") format("woff"); /* Modern Browsers */
 	font-weight: bold;
 	font-style: normal;
+}
+
+.container {
+	max-width: 1170px;
+	padding: 0 15px;
+	margin: auto;
+}
+
+.ant-radio-wrapper {
+    color: #fff !important;
+}
+
+.ant-radio-wrapper span {
+	line-height: 16px;
+}
+
+.ant-form label {
+	font-size: 16px !important;
+    display: flex !important;
+    align-items: center;
+	white-space: unset;
+}
+
+.ant-checkbox-group .ant-row {
+	margin-bottom: 20px;
+}
+
+.ant-checkbox-wrapper span {
+	color: #fff;
+	font-size: 16px;
+	line-height: 16px;
 }

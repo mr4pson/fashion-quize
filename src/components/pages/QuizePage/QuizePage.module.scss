@@ -1,0 +1,46 @@
+.quize-page {
+    background: #212121;
+    color: #fff;
+    min-height: 100vh;
+    padding-bottom: 20px;
+    &__nav {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #212121;
+        .container {
+            justify-content: space-between;
+            display: flex;
+            align-items: center;
+            max-width: 1170px;
+            margin: auto;
+        }
+    }
+    &__no-questions {
+        color: #fff;
+        padding-top: 70px;
+        font-size: 16px;
+    }
+}
+
+.navgation {
+    &__next-btn {
+        width: 33%;
+        text-align: right;
+    }
+    &__prev-btn {
+        width: 33%;
+    }
+    &__questions {
+        width: 34%;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        color: #fff;
+    }
+    &__quize-btn {
+        font-size: 18px;
+        height: 40px;
+        padding: 0 25px;
+    }
+}

@@ -14,9 +14,7 @@ function App() {
       <Router>
         <Switch>
           {getRoutes().map((route: TypeRoute) => (
-            <Route exact={route.exact} key={route.path} path={route.path}>
-              {route.component}
-            </Route>
+            <Route exact={route.exact} key={route.path} path={route.path} children={route.component}/>
           ))}
         </Switch>
       </Router>

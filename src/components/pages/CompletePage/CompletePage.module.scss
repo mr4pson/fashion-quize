@@ -1,0 +1,13 @@
+.complete-page {
+    background: #212121;
+    color: #fff;
+    min-height: 100vh;
+    padding-bottom: 20px;
+    &__body {
+        padding-top: 70px;
+    }
+    &__title {
+        text-align: center;
+        color: #fff;
+    }
+}
