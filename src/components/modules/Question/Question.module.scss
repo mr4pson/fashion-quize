@@ -19,9 +19,16 @@
         margin: 40px auto;
     }
 }
-.block-title {
-    padding-top: 110px;
-    color: #fff;
-    text-align: center;
-    line-height: 32px;
+.block {
+    &__title {
+        padding-top: 110px;
+        color: #fff;
+        text-align: center;
+        line-height: 32px;
+    }
+    &__desc {
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+    }
 }

@@ -12,6 +12,7 @@ export enum QuestionType {
 export type TypeQuestionBlock = {
     id: number;
     title: string;
+    description?: string;
 }
 
 export type TypeQuestion = {
@@ -19,6 +20,7 @@ export type TypeQuestion = {
     type: QuestionType;
     description: string;
     options?: string[];
+    image?: string;
     block: TypeQuestionBlock;
 }
 

@@ -19,7 +19,10 @@ function Question(props: TypeQuestionProps): JSX.Element {
     };
     return (
         <>
-            <h1 className={styles['block-title']}>{block.title}</h1>
+            <div className={styles['block']}>
+                <h1 className={styles['block__title']}>{block.title}</h1>
+                <div className={styles['block__desc']}>{block.description}</div>
+            </div>
             <div className={styles['question']}>
                 <div className={styles['question__description']}>{description}</div>
                 <div className={styles['question__body']}>

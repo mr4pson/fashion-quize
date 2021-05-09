@@ -1,22 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Balsamiq Sans', cursive !important;
-}
-
-@font-face {
-	font-family: "AGOpus";
-	src: url("./fonts/agopus.ttf") format("truetype"), /* Safari, Android, iOS */
-  url("./fonts/agopus.woff") format("woff"); /* Modern Browsers */
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: "AGOpus";
-	src: url("./fonts/agopus-bold.ttf") format("truetype"), /* Safari, Android, iOS */
-  url("./fonts/agopus-bold.woff") format("woff"); /* Modern Browsers */
-	font-weight: bold;
-	font-style: normal;
+  /* font-family: 'Balsamiq Sans', cursive !important; */
 }
 
 .container {
@@ -35,9 +19,12 @@ body {
 
 .ant-form label {
 	font-size: 16px !important;
-    display: flex !important;
-    align-items: center;
+	display: flex !important;
+	align-items: center;
 	white-space: unset;
+	height: auto!important;
+	margin-bottom: 5px;
+	line-height: auto!important;
 }
 
 .ant-checkbox-group .ant-row {
