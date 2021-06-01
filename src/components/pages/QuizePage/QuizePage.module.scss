@@ -1,13 +1,13 @@
 .quize-page {
-    background: #212121;
-    color: #fff;
+    background: #fff;
+    color: #000;
     min-height: 100vh;
     padding-bottom: 20px;
     &__nav {
         position: fixed;
         bottom: 0;
         width: 100%;
-        background: #212121;
+        // background: #212121;
         .container {
             justify-content: space-between;
             display: flex;
@@ -22,22 +22,55 @@
         font-size: 16px;
     }
 }
+.sidebar {
+    position: fixed;
+    right: 40px;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    &::before {
+        top: 0;
+        right: 68px;
+        content: "";
+        display: block;
+        position: absolute;
+        width: 5px;
+        height: 100%;
+        background-color: currentColor;
+    }
+    &__number {
+        height: 140px;
+        width: 140px;
+        font-size: 64px;
+        border: 5px solid currentColor;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        z-index: 100;
+        span {
+            color: #000;
+        }
+    }
+}
 
 .navgation {
     &__next-btn {
-        width: 33%;
+        width: 50%;
         text-align: right;
     }
     &__prev-btn {
-        width: 33%;
+        width: 50%;
     }
-    &__questions {
-        width: 34%;
-        font-size: 18px;
-        font-weight: bold;
-        text-align: center;
-        color: #fff;
-    }
+    // &__questions {
+    //     width: 34%;
+    //     font-size: 18px;
+    //     font-weight: bold;
+    //     text-align: center;
+    //     color: #fff;
+    // }
     &__quize-btn {
         font-size: 18px;
         height: 40px;

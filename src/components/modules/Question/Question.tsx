@@ -10,13 +10,15 @@ type TypeQuestionProps = {
 }
 
 function Question(props: TypeQuestionProps): JSX.Element {
-    const { description, type, block, options } = props.question;
+    const { description, image, type, block, options } = props.question;
     const optionList = options as string[];
     const radioStyle = {
         display: 'block',
         height: '30px',
         lineHeight: '30px',
     };
+
+    console.log(image);
     return (
         <>
             <div className={styles['block']}>
@@ -24,6 +26,7 @@ function Question(props: TypeQuestionProps): JSX.Element {
                 <div className={styles['block__desc']}>{block.description}</div>
             </div>
             <div className={styles['question']}>
+                <div style={{ backgroundImage: `url(/assets/images/${image})` }} className={styles['question__image']}></div>
                 <div className={styles['question__description']}>{description}</div>
                 <div className={styles['question__body']}>
                     {type === QuestionType.INPUT && <Form.Item

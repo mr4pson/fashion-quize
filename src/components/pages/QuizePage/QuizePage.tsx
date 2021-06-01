@@ -46,7 +46,7 @@ function QuizePage(props: TypeQuizePageState): JSX.Element {
 
     return (
         <div className={styles['quize-page']}>
-            <Header />
+            {/* <Header /> */}
             <Form
                 name="basic"
                 ref={formRef}
@@ -60,6 +60,11 @@ function QuizePage(props: TypeQuizePageState): JSX.Element {
                         : <div className={styles['quize-page__no-questions']}>Такого вопроса не существует.</div>
                     }
                 </div>
+                <div style={{ color: question.block.sidebarColor }} className={classNames(styles['quize-page__sidebar'], styles['sidebar'])}>
+                    <div className={styles['sidebar__number']}>
+                        <span>{questionNumber}</span>
+                    </div>
+                </div>
                 <div className={classNames(styles['quize-page__nav'], styles['navigation'])}>
                     <div className={styles['container']}>
                         <div className={styles['navgation__prev-btn']}>
@@ -71,7 +76,6 @@ function QuizePage(props: TypeQuizePageState): JSX.Element {
                                 >Назад</Button>
                             </Link> : ''}
                         </div>
-                        <div className={styles['navgation__questions']}>{questionNumber} / {questionsNumber}</div>
                         <div className={styles['navgation__next-btn']}>
                             <Button
                                 htmlType="submit"

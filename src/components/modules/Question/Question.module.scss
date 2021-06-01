@@ -1,13 +1,40 @@
+.block {
+    &__title {
+        padding-top: 110px;
+        color: #000;
+        text-align: center;
+        font-size: 36px;
+        font-weight: 500;
+    }
+    &__desc {
+        color: #000;
+        text-align: center;
+        font-size: 16px;
+    }
+}
+
 .question {
-    padding-top: 80px;
+    padding-top: 10px;
     &__description {
         text-align: center;
-        font-size: 18px; 
-        color: #fff;
+        font-size: 36px; 
+        color: #000;
+        font-weight: 300;
     }
     &__input {
         display: block;
         margin: auto;
+        height: 50px;
+    }
+    &__image {
+        width: 200px;
+        height: 200px;
+        margin: auto;
+        background: #fff;
+        margin-bottom: 20px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
     }
     &__text {
         display: block;
@@ -17,18 +44,5 @@
     &__body {
         max-width: 400px;
         margin: 40px auto;
-    }
-}
-.block {
-    &__title {
-        padding-top: 110px;
-        color: #fff;
-        text-align: center;
-        line-height: 32px;
-    }
-    &__desc {
-        color: #fff;
-        text-align: center;
-        font-size: 16px;
     }
 }

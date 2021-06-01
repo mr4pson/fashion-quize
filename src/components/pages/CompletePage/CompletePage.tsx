@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Header from 'components/modules/Header';
 import { memo, useEffect } from 'react';
 import { connect } from "react-redux";
@@ -7,12 +8,19 @@ import styles from './CompletePage.module.scss';
 
 function CompletePage(props: TypeQuizePageState): JSX.Element {
     useEffect(() => {
-        console.log(props.answers);
+        const payload = {
+            name: props.answers[1],
+            email: props.answers[4],
+            data: JSON.stringify(props.answers),
+        };
+        console.log(payload);
+        
+        axios.post('/api/answers', payload)
         props.setStateAnswersToState({});
     }, [])
     return (
         <div className={styles['complete-page']}>
-            <Header />
+            {/* <Header /> */}
             <div className="container">
                 <div className={styles['complete-page__body']}>
                     <h1 className={styles['complete-page__title']}>Поздравляем, вы успешно прошли опрос.</h1>

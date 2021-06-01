@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  /* font-family: 'Balsamiq Sans', cursive !important; */
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .container {
@@ -10,7 +10,8 @@ body {
 }
 
 .ant-radio-wrapper {
-    color: #fff !important;
+    color: #000 !important;
+		margin-bottom: 15px!important;
 }
 
 .ant-radio-wrapper span {
@@ -32,7 +33,7 @@ body {
 }
 
 .ant-checkbox-wrapper span {
-	color: #fff;
+	color: #000;
 	font-size: 16px;
 	line-height: 16px;
 }
