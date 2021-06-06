@@ -1,26 +1,33 @@
-import CompletePage from "components/pages/CompletePage";
+import AdminPage from "components/pages/AdminPage";
+import CompletePageContainer from "components/pages/CompletePage/CompletePageContainer";
 import HomePage from "components/pages/HomePage";
-import QuizePage from "components/pages/QuizePage";
+import QuizePageContainer from "components/pages/QuizePage/QuizePageContainer";
+import React from "react";
 import { Page, paths } from "./constants";
-import { TypeRoute } from "./type";
+import { TypeAppRoute } from "./type";
 
-export function getRoutes(): TypeRoute[] {
-    return [
-        {
-            type: Page.HOME,
-            path: paths[Page.HOME],
-            component: <HomePage/>,
-            exact: true,
-        },
-        {
-            type: Page.QUIZEROUTE,
-            path: paths[Page.QUIZEROUTE],
-            component: <QuizePage />
-        },
-        {
-            type: Page.COMPLETE,
-            path: paths[Page.COMPLETE],
-            component: <CompletePage />
-        },
-    ];
+export function getAppRoutes(): TypeAppRoute[] {
+  return [
+    {
+      type: Page.HOME,
+      path: paths[Page.HOME],
+      component: <HomePage />,
+      exact: true,
+    },
+    {
+      type: Page.QUIZEROUTE,
+      path: paths[Page.QUIZEROUTE],
+      component: <QuizePageContainer />,
+    },
+    {
+      type: Page.COMPLETE,
+      path: paths[Page.COMPLETE],
+      component: <CompletePageContainer />,
+    },
+    {
+      type: Page.ADMIN,
+      path: paths[Page.ADMIN],
+      component: <AdminPage />,
+    },
+  ];
 }

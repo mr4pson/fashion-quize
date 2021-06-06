@@ -1,0 +1,18 @@
+.color {
+  display: flex;
+  align-items: center;
+
+  &__name {
+  }
+
+  &__box {
+    margin-left: 10px;
+    height: 10px;
+    width: 10px;
+  }
+}
+
+.action {
+  padding: 0;
+  margin-right: 6px;
+}

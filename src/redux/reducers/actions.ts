@@ -1,1 +1,2 @@
 export const SET_STATE_ANSWERS = "SET_STATE_ANSWERS";
+export const SET_STATE_BLOCKS = "SET_STATE_BLOCKS";
