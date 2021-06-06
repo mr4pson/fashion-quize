@@ -1,20 +1,18 @@
-import 'antd/dist/antd.css';
-import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-import { getRoutes } from './routes/routes';
-import { TypeRoute } from './routes/type';
+import "antd/dist/antd.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
+import { getAppRoutes } from "./routes/routes";
+import { TypeAppRoute } from "./routes/type";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          {getRoutes().map((route: TypeRoute) => (
-            <Route exact={route.exact} key={route.path} path={route.path} children={route.component}/>
+          {getAppRoutes().map((route: TypeAppRoute) => (
+            <Route exact={route.exact} key={route.path} path={route.path}>
+              {route.component}
+            </Route>
           ))}
         </Switch>
       </Router>

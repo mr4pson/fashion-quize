@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "title": "block 1",
+    "color": "red"
+  },
+  {
+    "id": "2",
+    "title": "block 2",
+    "color": "green"
+  },
+  {
+    "id": "3",
+    "title": "block 3",
+    "color": "blue"
+  }
+]
