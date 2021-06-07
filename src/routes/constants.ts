@@ -1,7 +1,7 @@
 export enum Page {
   HOME = "HOME",
   QUIZE = "QUIZE",
-  QUIZEROUTE = "QUIZEROUTE",
+  QUIZE_ROUTE = "QUIZE_ROUTE",
   COMPLETE = "COMPLETE",
   ADMIN = "ADMIN",
 }
@@ -9,7 +9,7 @@ export enum Page {
 export const paths = {
   [Page.HOME]: "/",
   [Page.QUIZE]: "/quize",
-  [Page.QUIZEROUTE]: "/quize/:questionNumber",
+  [Page.QUIZE_ROUTE]: "/quize/:questionNumber",
   [Page.COMPLETE]: "/complete",
   [Page.ADMIN]: "/admin",
 };

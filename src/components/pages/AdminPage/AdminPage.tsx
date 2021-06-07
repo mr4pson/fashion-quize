@@ -25,10 +25,10 @@ const AdminPage: React.FC = () => {
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
           {menuItems.map((item) => (
             <Menu.Item
-              className={styles["menu__item"]}
               key={item.key}
               icon={item.icon}
               onClick={() => history.push(item.route)}
+              className={styles["item"]}
             >
               {item.title}
             </Menu.Item>
