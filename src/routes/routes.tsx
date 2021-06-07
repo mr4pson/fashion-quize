@@ -15,8 +15,8 @@ export function getAppRoutes(): TypeAppRoute[] {
       exact: true,
     },
     {
-      type: Page.QUIZEROUTE,
-      path: paths[Page.QUIZEROUTE],
+      type: Page.QUIZE_ROUTE,
+      path: paths[Page.QUIZE_ROUTE],
       component: <QuizePageContainer />,
     },
     {

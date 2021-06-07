@@ -2,7 +2,9 @@ import { Button, Table } from "antd";
 import axios from "axios";
 import { memo } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { actions } from "redux/reducers/blocksPageReducer";
+import { AdmPage, paths } from "../routes/constants";
 import styles from "./BlocksPage.module.scss";
 import { actionButtons, CHANGE, DELETE } from "./constants";
 import { TypeBlocks } from "./type";
@@ -32,29 +34,29 @@ const BlocksPage: React.FC<Props> = (props) => {
       title: "Действие",
       dataIndex: "",
       key: "x",
-      render: () => {
-        return (
-          <>
-            {actionButtons.map((button) => (
-              <Button
-                onClick={getActionRow(button.type, button.id)}
-                key={button.id}
-                type="link"
-                className={styles["action"]}
-              >
-                {button.action}
-              </Button>
-            ))}
-          </>
-        );
-      },
+      render: (blocks: TypeBlocks) => (
+        <>
+          {actionButtons.map((button) => (
+            <Button
+              key={button.id}
+              onClick={getActionRow(button.type, blocks.id)}
+              className={styles["action"]}
+              type="link"
+            >
+              {button.action}
+            </Button>
+          ))}
+        </>
+      ),
     },
   ];
 
-  const getActionRow = (type, id) => {
+  function getActionRow(type: string, id: string) {
     switch (type) {
       case CHANGE:
-        break;
+        return () => {
+          history.push(paths[AdmPage.BLOCKS] + "/" + id);
+        };
       case DELETE:
         return () => {
           if (window.confirm("Вы точно хотите удалить этот блок?")) {
@@ -64,7 +66,9 @@ const BlocksPage: React.FC<Props> = (props) => {
       default:
         break;
     }
-  };
+  }
+
+  const history = useHistory();
 
   const dispatch = useDispatch();
 
@@ -74,7 +78,12 @@ const BlocksPage: React.FC<Props> = (props) => {
     dispatch(actions.setBlocks(result));
   };
 
-  return <Table columns={columns} dataSource={props.blocks} />;
+  const dataSource = props.blocks.map((block) => ({
+    key: block.id,
+    ...block,
+  }));
+
+  return <Table columns={columns} dataSource={dataSource} />;
 };
 
 export default memo(BlocksPage);
