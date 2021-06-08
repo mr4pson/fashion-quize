@@ -4,6 +4,7 @@ import { memo } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { actions } from "redux/reducers/blocksPageReducer";
+import { toBlocksData } from "utils/helpers";
 import { AdmPage, paths } from "../routes/constants";
 import styles from "./BlocksPage.module.scss";
 import { actionButtons, CHANGE, DELETE } from "./constants";
@@ -34,12 +35,12 @@ const BlocksPage: React.FC<Props> = (props) => {
       title: "Действие",
       dataIndex: "",
       key: "x",
-      render: (blocks: TypeBlocks) => (
+      render: (block: TypeBlocks) => (
         <>
           {actionButtons.map((button) => (
             <Button
               key={button.id}
-              onClick={getActionRow(button.type, blocks.id)}
+              onClick={getActionRow(button.type, block.key)}
               className={styles["action"]}
               type="link"
             >
@@ -72,18 +73,14 @@ const BlocksPage: React.FC<Props> = (props) => {
 
   const dispatch = useDispatch();
 
-  const deleteRow = async (id) => {
+  const deleteRow = async (id: string) => {
     const response = await axios.get("/mocks/getBlocks.json");
-    const result = response.data.filter((obj) => obj.id !== id);
+    const blocksData: TypeBlocks[] = toBlocksData(response.data);
+    const result = blocksData.filter((obj) => obj.key !== id);
     dispatch(actions.setBlocks(result));
   };
 
-  const dataSource = props.blocks.map((block) => ({
-    key: block.id,
-    ...block,
-  }));
-
-  return <Table columns={columns} dataSource={dataSource} />;
+  return <Table columns={columns} dataSource={props.blocks} />;
 };
 
 export default memo(BlocksPage);

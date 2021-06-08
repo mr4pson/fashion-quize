@@ -1,6 +1,7 @@
 import axios from "axios";
 import { TypeBlocks } from "components/pages/AdminPage/BlocksPage/type";
 import { InferActionsType, InferThunksType } from "redux/ReduxStore";
+import { toBlocksData } from "utils/helpers";
 import { SET_STATE_BLOCKS } from "./actions";
 
 type TypeInitialState = typeof initialState;
@@ -36,7 +37,8 @@ export const actions = {
 export const thunks = {
   getBlocks: (): TypeThunk => async (dispatch) => {
     const response = await axios.get("/mocks/getBlocks.json");
-    dispatch(actions.setBlocks(response.data));
+    const blocksData = toBlocksData(response.data);
+    dispatch(actions.setBlocks(blocksData));
   },
 };
 

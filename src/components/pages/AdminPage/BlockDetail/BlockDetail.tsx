@@ -20,7 +20,7 @@ const validateMessages = {
 /* eslint-enable no-template-curly-in-string */
 
 const BlockDetail: React.FC = () => {
-  const { id } = useParams() as any;
+  const { id } = useParams<{ id: string }>();
 
   function onFinish(values: any) {
     console.log(values);
@@ -35,6 +35,7 @@ const BlockDetail: React.FC = () => {
             name={[field.name]}
             label={field.label}
             rules={[{ required: true, type: "string", max: 99 }]}
+            className={styles["field"]}
           >
             <Input />
           </Form.Item>
@@ -55,7 +56,7 @@ const BlockDetail: React.FC = () => {
   return (
     <div className={styles["detail"]}>
       <div className={styles["detail__header"]}>
-        <h1>{}</h1>
+        <h1>{id ? `Изменение блока № ${id}` : `Создание блока`}</h1>
       </div>
       <Form
         {...layout}
