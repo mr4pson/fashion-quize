@@ -1,8 +1,8 @@
 import AdminPage from "components/pages/AdminPage";
 import CompletePageContainer from "components/pages/CompletePage/CompletePageContainer";
 import HomePage from "components/pages/HomePage";
+import LoginPage from "components/pages/LoginPage/LoginPage";
 import QuizePageContainer from "components/pages/QuizePage/QuizePageContainer";
-import React from "react";
 import { Page, paths } from "./constants";
 import { TypeAppRoute } from "./type";
 
@@ -28,6 +28,11 @@ export function getAppRoutes(): TypeAppRoute[] {
       type: Page.ADMIN,
       path: paths[Page.ADMIN],
       component: <AdminPage />,
+    },
+    {
+      type: Page.LOGIN,
+      path: paths[Page.LOGIN],
+      component: <LoginPage />,
     },
   ];
 }

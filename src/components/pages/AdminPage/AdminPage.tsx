@@ -1,9 +1,10 @@
 import { Layout, Menu } from "antd";
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import AdmHeader from "./AdmHeader";
 import styles from "./AdminPage.module.scss";
 import { menuItems } from "./constants";
+import { getJwtPair } from "./helpers";
 import AdmRoutes from "./routes/AdmRoutes";
 
 const { Content, Footer, Sider } = Layout;
@@ -12,11 +13,19 @@ const AdminPage: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const history = useHistory();
-  // const location = useLocation();
 
   const onCollapse = (collapsed: boolean) => {
     setIsCollapsed(collapsed);
   };
+
+  useEffect(() => {
+    (async () => {
+      const jwtPair = await getJwtPair();
+      if (!jwtPair) {
+        history.push("/login");
+      }
+    })();
+  }, []);
 
   return (
     <Layout className={styles["layout"]}>

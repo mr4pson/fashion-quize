@@ -1,0 +1,19 @@
+.login-page {
+  background: #f0f2f5;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__card {
+    width: 300px;
+  }
+  &__title {
+    text-align: center;
+  }
+}
+.login-btn-wrap {
+  text-align: center;
+  button {
+    width: 100%;
+  }
+}

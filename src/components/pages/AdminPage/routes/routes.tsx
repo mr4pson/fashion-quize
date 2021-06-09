@@ -1,4 +1,3 @@
-import React from "react";
 import AnswersPage from "../AnswersPage";
 import BlockDetail from "../BlockDetail";
 import BlocksPage from "../BlocksPage";
