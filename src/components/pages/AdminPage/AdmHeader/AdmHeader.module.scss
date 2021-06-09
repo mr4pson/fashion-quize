@@ -1,4 +1,11 @@
 .adm-header {
-  background: #aaa;
+  background: #fff;
   padding: 0;
+  height: 48px;
+  line-height: 0;
+  box-shadow: 0 1px 4px #00152914;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
 }
