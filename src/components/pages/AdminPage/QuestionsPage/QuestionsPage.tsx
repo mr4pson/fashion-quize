@@ -1,13 +1,15 @@
 import { Button, Table } from "antd";
+import { QuizeTypes } from "common/types/type";
 import { TypeQuestion } from "components/pages/QuizePage/types";
 import { memo } from "react";
 import { useHistory } from "react-router";
-import { AdmPage, paths } from "../routes/constants";
+import { AdmPage, ID, paths, QUIZE_TYPE } from "../routes/constants";
 import { CHANGE, DELETE, getColumns } from "./constants";
 import styles from "./QuestionsPage.module.scss";
 
 type Props = {
   questions: TypeQuestion[];
+  quizeType: QuizeTypes;
   onQuestionRemove: (id: number) => void;
 };
 
@@ -18,7 +20,9 @@ const QuestionsPage: React.FC<Props> = (props) => {
     switch (type) {
       case CHANGE:
         return () => {
-          history.push(paths[AdmPage.QUESTIONS] + "/edit/" + id);
+          history.push(paths[AdmPage.QUESTIONS_ROUTE]
+            .replace(QUIZE_TYPE, props.quizeType)
+            .replace(ID, id.toString()));
         };
       case DELETE:
         return () => {
@@ -37,13 +41,15 @@ const QuestionsPage: React.FC<Props> = (props) => {
   }));
 
   const handleRedirect = () => {
-    history.push(paths[AdmPage.QUESTIONS_CREATE]);
+    history.push(paths[AdmPage.QUESTIONS_CREATE].replace(QUIZE_TYPE, props.quizeType));
   };
 
   return (
     <>
       <div className={styles["table-top"]}>
-        <h1 className={styles["table-top__title"]}>Список вопросов</h1>
+        <h1 className={styles["table-top__title"]}>
+          {props.quizeType === QuizeTypes.FOR_MEN ? 'Опрос для мужчин' : 'Опрос для женщин'}
+        </h1>
         <Button
           onClick={handleRedirect}
           className={styles["table-top__btn"]}

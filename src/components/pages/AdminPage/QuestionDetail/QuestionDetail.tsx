@@ -1,6 +1,7 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Button, Form, FormInstance, Input, Select } from "antd";
 import { getImageUrl, openNotification } from "common/heplers/common-helpers";
+import { QuestionType } from "components/pages/QuizePage/types";
 import { useUploadFile } from "hooks/useUploadFile";
 import { memo, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,8 +39,11 @@ type Props = {
 
 const QuestionDetail: React.FC<Props> = (props) => {
   const formRef = useRef<FormInstance>(null);
-  const { id } = useParams() as any;
+  const { id, quizeType } = useParams() as any;
   const [loading, setLoading] = useState(false);
+  const [questionType, setQuestionType] = useState<QuestionType>(
+    "" as QuestionType
+  );
   const history = useHistory();
 
   const dispatch = useDispatch();
@@ -48,13 +52,8 @@ const QuestionDetail: React.FC<Props> = (props) => {
     blocks: state.blocksPage.blocks,
   }));
 
-  const [isChoosenFileChecked, setIsChoosenFileChecked] =
-    useState<boolean>(false);
-  const { mediaFile, uploadMediaFile } = useUploadFile(
-    formRef,
-    setIsChoosenFileChecked
-  );
-  
+  const { mediaFile, uploadMediaFile } = useUploadFile(formRef);
+
   const initialValues = {
     ...state.question,
     block: state.question.block?.id,
@@ -68,18 +67,20 @@ const QuestionDetail: React.FC<Props> = (props) => {
       ...questionData,
       image: mediaFile ? mediaFile : state.question.image,
       options: JSON.stringify(answerOptions),
+      quizeType: quizeType,
     };
+
+    console.log(payload, quizeType);
     setLoading(true);
     if (id) {
       await axiosInstance.put(`/api/questions/${id}`, payload);
       setLoading(false);
-      setIsChoosenFileChecked(false);
-      history.push(paths[AdmPage.QUESTIONS]);
+      history.push(`${paths[AdmPage.QUESTIONS]}/${quizeType}`);
       return;
     }
     await axiosInstance.post("/api/questions", payload);
     setLoading(false);
-    history.push(paths[AdmPage.QUESTIONS]);
+    history.push(`${paths[AdmPage.QUESTIONS]}/${quizeType}`);
   };
 
   useEffect(() => {
@@ -89,9 +90,22 @@ const QuestionDetail: React.FC<Props> = (props) => {
   }, [dispatch, id]);
 
   useEffect(() => {
+    switch (questionType) {
+      case QuestionType.INPUT:
+      case QuestionType.TEXT:
+        setAnswerOptions('');
+        break;
+    
+      default:
+        break;
+    }
+  }, [questionType]);
+
+  useEffect(() => {
     if (state.question.options) {
       setAnswerOptions(state.question.options);
     }
+    setQuestionType(state.question.type);
   }, [state.question]);
 
   useEffect(() => {
@@ -102,7 +116,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
   }, []);
 
   const handleAddAnswerOption = () => {
-    setAnswerOptions((prevState) => prevState.concat(''));
+    setAnswerOptions((prevState) => Array.isArray(prevState) ? prevState.concat("") : [""]);
   };
 
   const handleRemoveAnswerOption = (index) => {
@@ -119,7 +133,11 @@ const QuestionDetail: React.FC<Props> = (props) => {
       newState[index] = e.target.value;
       return newState;
     });
-  }
+  };
+
+  const handleTypeChange = (value: QuestionType) => {
+    setQuestionType(value);
+  };
 
   return (
     <div className={styles["detail"]}>
@@ -143,10 +161,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
             <Input.TextArea />
           </Form.Item>
 
-          <Form.Item
-            name="image"
-            label="Изображение"
-          >
+          <Form.Item name="image" label="Изображение">
             <Input type="file" onChange={uploadMediaFile} />
           </Form.Item>
 
@@ -179,7 +194,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
           </Form.Item>
 
           <Form.Item name="type" label="Тип" rules={[{ required: true }]}>
-            <Select>
+            <Select onChange={handleTypeChange}>
               {QuestionTypeOptions?.map((option, index) => (
                 <Option key={"question-types" + index} value={option.value}>
                   {option.title}
@@ -188,42 +203,46 @@ const QuestionDetail: React.FC<Props> = (props) => {
             </Select>
           </Form.Item>
 
-          <div className={styles["answer-controls"]}>
-            <h2 className={styles["answer-controls__title"]}>
-              Варианты ответов
-            </h2>
-            {answerOptions?.length > 0 &&
-              answerOptions.map((answerOption, index) => (
-                <div
-                  key={"answer-option" + index}
-                  className={styles["answer-control"]}
-                >
-                  <Input
-                    value={answerOption}
-                    onChange={(e) => handleAnswerOptionChange(e, index)}
-                    className={styles["answer-control__body"]}
-                    type="text"
-                  />
-                  <button
-                    onClick={() => handleRemoveAnswerOption(index)}
-                    type="button"
-                    className={styles["answer-control__btn"]}
+          {[QuestionType.SINGLE_OPTION, QuestionType.MULTIPLE_OPTION].includes(
+            questionType
+          ) && (
+            <div className={styles["answer-controls"]}>
+              <h2 className={styles["answer-controls__title"]}>
+                Варианты ответов
+              </h2>
+              {answerOptions?.length > 0 &&
+                answerOptions.map((answerOption, index) => (
+                  <div
+                    key={"answer-option" + index}
+                    className={styles["answer-control"]}
                   >
-                    <CloseOutlined />
-                  </button>
+                    <Input
+                      value={answerOption}
+                      onChange={(e) => handleAnswerOptionChange(e, index)}
+                      className={styles["answer-control__body"]}
+                      type="text"
+                    />
+                    <button
+                      onClick={() => handleRemoveAnswerOption(index)}
+                      type="button"
+                      className={styles["answer-control__btn"]}
+                    >
+                      <CloseOutlined />
+                    </button>
+                  </div>
+                ))}
+              {answerOptions?.length === 0 && (
+                <div className={styles["answer-controls__info"]}>
+                  Список вариантов ответов пуст
                 </div>
-              ))}
-            {answerOptions?.length === 0 && (
-              <div className={styles["answer-controls__info"]}>
-                Список вариантов ответов пуст
+              )}
+              <div className={styles["answer-controls__add-btn-container"]}>
+                <Button type="link" onClick={handleAddAnswerOption}>
+                  Добавить
+                </Button>
               </div>
-            )}
-            <div className={styles["answer-controls__add-btn-container"]}>
-              <Button type="link" onClick={handleAddAnswerOption}>
-                Добавить
-              </Button>
             </div>
-          </div>
+          )}
 
           <div className={styles["detail__save-btn"]}>
             <Button loading={loading} type="primary" htmlType="submit">

@@ -5,15 +5,20 @@ export enum AdmPage {
   QUESTIONS_CREATE = "QUESTIONS_CREATE",
   QUESTIONS_ROUTE = "QUESTIONS_ROUTE",
   QUESTIONS = "QUESTIONS",
+  QUESTIONS_TYPE = "QUESTIONS_TYPE",
   ANSWERS = "ANSWERS",
 }
+
+export const QUIZE_TYPE = ':quizeType';
+export const ID = ':id';
 
 export const paths = {
   [AdmPage.BLOCKS]: "/admin/blocks",
   [AdmPage.BLOCKS_CREATE]: "/admin/blocks/create",
   [AdmPage.BLOCKS_ROUTE]: "/admin/blocks/edit/:id",
   [AdmPage.QUESTIONS]: "/admin/questions",
-  [AdmPage.QUESTIONS_CREATE]: "/admin/questions/create",
-  [AdmPage.QUESTIONS_ROUTE]: "/admin/questions/edit/:id",
+  [AdmPage.QUESTIONS_TYPE]: "/admin/questions/:quizeType",
+  [AdmPage.QUESTIONS_CREATE]: `/admin/questions/${QUIZE_TYPE}/create`,
+  [AdmPage.QUESTIONS_ROUTE]: `/admin/questions/${QUIZE_TYPE}/edit/:id`,
   [AdmPage.ANSWERS]: "/admin/answers",
 };

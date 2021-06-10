@@ -4,7 +4,6 @@ import { useState } from "react";
 
 export function useUploadFile(
   formRef: React.RefObject<FormInstance<any>>,
-  setIsChoosenFileChecked?: (value: boolean) => void,
   fieldName: string = 'uploadFile',
 ): any {
   const [mediaFile, setMediaFile] = useState<string>();
@@ -26,9 +25,6 @@ export function useUploadFile(
     formRef.current?.setFieldsValue({
       [fieldName]: uploadFileResponse.data[0].fileName,
     });
-    if (setIsChoosenFileChecked) {
-      setIsChoosenFileChecked(false);
-    }
 
     setMediaFile(uploadFileResponse.data[0].fileName);
     return uploadFileResponse.data[0].fileName;
