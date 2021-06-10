@@ -1,19 +1,16 @@
+import { message } from "antd";
 import axios from "axios";
+import { getUserInfo, openNotification } from "common/heplers/common-helpers";
 // import { getUserInfo } from "components/common/commonHelper";
 import { userType } from "common/types/type";
 import { useState } from "react";
-import { useHistory } from "react-router";
-import { AdmPage, paths } from "../components/pages/AdminPage/routes/constants";
-import { getLoginError, removeJwtPair, setJwtPair } from "../components/pages/AdminPage/helpers";
-import { TypeAuthLoginResponse, TypeUseAuthHookResult, TypeUser } from '../components/pages/AdminPage/types';
 import { Page } from "routes/constants";
-import { getUserInfo } from "common/heplers/common-helpers";
+import { getLoginError, removeJwtPair, setJwtPair } from "../components/pages/AdminPage/helpers";
+import { AdmPage, paths } from "../components/pages/AdminPage/routes/constants";
+import { TypeAuthLoginResponse, TypeUseAuthHookResult, TypeUser } from '../components/pages/AdminPage/types';
 
-export function useAuth(): TypeUseAuthHookResult {
-  const history = useHistory();
+export function useAuth(history): TypeUseAuthHookResult {
   const [loading, setLoading] = useState<boolean>(false);
-  // const [authenticated, setAuthenticated] = useState<boolean>(false);
-  const [errorInfo, setErrorInfo] = useState<{ message: string }>({ message: '' });
 
   async function login({
     login,
@@ -21,6 +18,7 @@ export function useAuth(): TypeUseAuthHookResult {
   }: TypeUser): Promise<TypeAuthLoginResponse> {
     setLoading(true);
     try {
+      message.loading({ content: 'Загрузка...', key: 'auth' });
       const { data: tokenData } = await axios.post<{ accessToken: string }>(
         `/api/auth/login`, {
         login: login,
@@ -30,23 +28,22 @@ export function useAuth(): TypeUseAuthHookResult {
       );
       localStorage.setItem('password', password);
       setJwtPair(tokenData.accessToken);
-      // setAuthenticated(true);
       const userInfo = getUserInfo();
       if (userInfo?.role === userType.ADMIN) {
+        message.success({ content: 'Авторизация прошла успешно', key: 'auth' });
         history.push(paths[AdmPage.BLOCKS]);
       } else {
         history.push(paths[Page.LOGIN]);
       }
       return {};
     } catch ({ response }) {
-      // setAuthenticated(false);
       console.log(response);
       if (response?.status === 401) {
-        console.log(errorInfo);
-        setErrorInfo({ message: 'Неправильные логин или пароль' });
+        openNotification('error', 'Неправильные логин или пароль');
       } else {
-        setErrorInfo({ message: 'Внутрення ошибка сервера' });
+        openNotification('error', 'Внутрення ошибка сервера');
       }
+      message.destroy('auth');
       return { error: getLoginError(response) };
     } finally {
       setLoading(false);
@@ -55,7 +52,6 @@ export function useAuth(): TypeUseAuthHookResult {
 
   function logout(): void {
     removeJwtPair();
-    // setAuthenticated(false);
     history.push("/login");
   }
 
@@ -63,7 +59,5 @@ export function useAuth(): TypeUseAuthHookResult {
     loading,
     login,
     logout,
-    // authenticated,
-    errorInfo
   }
 }

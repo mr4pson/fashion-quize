@@ -16,3 +16,19 @@
   padding: 0;
   margin-right: 6px;
 }
+
+.table-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  &__title {
+    font-size: 28px;
+    text-align: center;
+    margin: 10px 0 20px;
+  }
+  &__btn {
+    position: absolute;
+    right: 0;
+  }
+}

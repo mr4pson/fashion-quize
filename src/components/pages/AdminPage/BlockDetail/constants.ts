@@ -19,6 +19,6 @@ export const formFields = [
     id: "3",
     type: BUTTON,
     name: "button",
-    label: "Изменить",
+    label: "Сохранить",
   },
 ];

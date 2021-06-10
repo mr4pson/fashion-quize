@@ -16,8 +16,6 @@ export type TypeUseAuthHookResult = {
   loading: boolean;
   login: (user: TypeUser) => Promise<TypeAuthLoginResponse>;
   logout: () => void;
-  // authenticated: boolean;
-  errorInfo: { message: string };
 }
 
 export enum LoginError {
@@ -27,4 +25,9 @@ export enum LoginError {
   USER_NOT_FOUND = 'USER_NOT_FOUND',
   DEACTIVATED_USER = 'DEACTIVATED_USER',
   RESET_REQUIRED = 'RESET_REQUIRED',
+}
+
+export enum PageMetods {
+  CREATE = 'CREATE',
+  UPDATE = 'UPDATE'
 }
