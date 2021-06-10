@@ -4,6 +4,7 @@ import {
   QuestionCircleOutlined
 } from "@ant-design/icons";
 import axios from "axios";
+import { QuizeTypes } from "common/types/type";
 import React from "react";
 import { getJwtPair } from "./helpers";
 import { AdmPage, paths } from "./routes/constants";
@@ -18,8 +19,8 @@ export const menuItems = [
   {
     key: "2",
     icon: <QuestionCircleOutlined />,
-    title: "Вопросы",
-    route: paths[AdmPage.QUESTIONS],
+    title: "Опрос",
+    route: `${paths[AdmPage.QUESTIONS]}/${QuizeTypes.FOR_MEN}`,
   },
   {
     key: "3",

@@ -27,8 +27,8 @@ export function getAdmRoutes(): TypeAdmRoute[] {
       component: <BlockDetail method={PageMetods.UPDATE} />,
     },
     {
-      type: AdmPage.QUESTIONS,
-      path: paths[AdmPage.QUESTIONS],
+      type: AdmPage.QUESTIONS_TYPE,
+      path: paths[AdmPage.QUESTIONS_TYPE],
       component: <QuestionsPageContainer />,
       exact: true,
     },

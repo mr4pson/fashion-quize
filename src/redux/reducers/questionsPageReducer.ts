@@ -1,4 +1,5 @@
 import { openNotification } from "common/heplers/common-helpers";
+import { QuizeTypes } from "common/types/type";
 import { axiosInstance } from "components/pages/AdminPage/constants";
 import { TypeQuestion } from "components/pages/QuizePage/types";
 import { InferActionsType, InferThunksType } from "redux/ReduxStore";
@@ -53,6 +54,10 @@ export const thunks = {
     const response = await axiosInstance.get('/api/questions');
     dispatch(actions.setQuestions(response?.data));
   },
+  getQuestionsByQuizeType: (quizeType: QuizeTypes): TypeThunk => async (dispatch) => {
+    const response = await axiosInstance.get(`/api/questions/byQuizeType/${quizeType}`);
+    dispatch(actions.setQuestions(response?.data));
+  },
   getQuestion: (id: number): TypeThunk => async (dispatch) => {
     const response = await axiosInstance.get(`/api/questions/${id}`);
     try {
@@ -67,9 +72,9 @@ export const thunks = {
   clearQuestion: (): TypeThunk => async (dispatch) => {
     dispatch(actions.clearQuestion());
   },
-  removeQuestion: (id: number): TypeThunk => async (dispatch) => {
+  removeQuestion: (id: number, quizeType: QuizeTypes): TypeThunk => async (dispatch) => {
     await axiosInstance.delete(`/api/questions/${id}`);
-    dispatch(thunks.getQuestions());
+    dispatch(thunks.getQuestionsByQuizeType(quizeType));
   },
 };
 
