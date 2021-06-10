@@ -3,7 +3,7 @@ import { memo } from "react";
 import { useHistory } from "react-router";
 import { AdmPage, paths } from "../routes/constants";
 import styles from "./BlocksPage.module.scss";
-import { actionButtons, CHANGE, DELETE } from "./constants";
+import { CHANGE, DELETE, getColumns } from "./constants";
 import { TypeBlock } from "./type";
 
 type Props = {
@@ -12,43 +12,7 @@ type Props = {
 };
 
 const BlocksPage: React.FC<Props> = (props) => {
-  const columns = [
-    { title: "ID", dataIndex: "id", key: "id" },
-    { title: "Заголовок", dataIndex: "title", key: "title" },
-    {
-      title: "Цвет",
-      dataIndex: "color",
-      key: "color",
-      render: (color: string) => (
-        <div className={styles["color"]}>
-          <div className={styles["color__name"]}>{color}</div>
-          <div
-            className={styles["color__box"]}
-            style={{ background: color }}
-          ></div>
-        </div>
-      ),
-    },
-    {
-      title: "Действие",
-      dataIndex: "",
-      key: "x",
-      render: (blocks: TypeBlock) => (
-        <>
-          {actionButtons.map((button) => (
-            <Button
-              key={button.id}
-              onClick={getActionRow(button.type, blocks.id)}
-              className={styles["action"]}
-              type="link"
-            >
-              {button.action}
-            </Button>
-          ))}
-        </>
-      ),
-    },
-  ];
+  const columns = getColumns(styles, getActionRow);
 
   function getActionRow(type: string, id: number) {
     switch (type) {

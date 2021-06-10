@@ -31,3 +31,17 @@ export enum PageMetods {
   CREATE = 'CREATE',
   UPDATE = 'UPDATE'
 }
+
+export enum ControlType {
+  INPUT = "INPUT",
+  FILE = "FILE",
+  RADIO = "RADIO",
+  SELECT = "SELECT",
+  TEXTAREA = "TEXTAREA",
+  BUTTON = "BUTTON",
+}
+
+export type TypeSelectOption = {
+  title: string;
+  value: string | number;
+}
