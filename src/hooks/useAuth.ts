@@ -39,7 +39,7 @@ export function useAuth(history): TypeUseAuthHookResult {
     } catch ({ response }) {
       console.log(response);
       if (response?.status === 401) {
-        openNotification('error', 'Неправильные логин или пароль');
+        openNotification('error', 'Неправильный логин или пароль');
       } else {
         openNotification('error', 'Внутрення ошибка сервера');
       }

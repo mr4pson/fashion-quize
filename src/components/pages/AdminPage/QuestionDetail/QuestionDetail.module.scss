@@ -1,0 +1,79 @@
+.detail {
+  margin: 0 auto;
+  width: 500px;
+
+  &__header {
+    text-align: center;
+    margin: 10px 0 20px;
+    h1 {
+      font-size: 28px;
+    }
+  }
+  &__uploaded-image {
+    margin: auto;
+    margin-bottom: 20px;
+    width: 300px;
+    height: 200px;
+    background-color: #ccc;
+    border-radius: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .answer-controls {
+    &__title {
+      text-align: center;
+    }
+    &__add-btn-container {
+      text-align: center;
+      button {
+        margin-bottom: 15px;
+      }
+    }
+    &__info {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  }
+
+  .answer-control {
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    margin-bottom: 10px;
+    &__body {
+      width: 100%;
+      background: transparent;
+      border-color: transparent!important;
+      outline: none;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    &__btn {
+      background: #d04444;
+      color: #fff;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 50%;
+      transition: all .3s;
+      cursor: pointer;
+      font-weight: bold;
+      &:hover {
+        background: #e81616;
+      }
+    }
+  }
+  &__save-btn {
+    text-align: center;
+  }
+}

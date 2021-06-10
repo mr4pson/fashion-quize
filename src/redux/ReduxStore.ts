@@ -1,11 +1,13 @@
 import { Action, applyMiddleware, combineReducers, createStore } from "redux";
 import thunkMiddleware, { ThunkAction } from "redux-thunk";
 import blocksPageReducer from "./reducers/blocksPageReducer";
+import questionsPageReducer from "./reducers/questionsPageReducer";
 import quizePageReducer from "./reducers/quizePageReducer";
 
 const reducers = combineReducers({
   quizePage: quizePageReducer,
   blocksPage: blocksPageReducer,
+  questionsPage: questionsPageReducer,
 });
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));

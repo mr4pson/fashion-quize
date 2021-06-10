@@ -1,15 +1,18 @@
-import React from 'react';
+import { ConfigProvider } from 'antd';
+import ruRU from 'antd/lib/locale/ru_RU';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { Provider } from 'react-redux';
 import App from './App';
-import { Provider } from 'react-redux'
-import reportWebVitals from './reportWebVitals';
+import './index.css';
 import store from "./redux/ReduxStore";
+import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
+  <ConfigProvider locale={ruRU}>
   <Provider store={store}>
     <App />
-  </Provider>,
+  </Provider>
+  </ConfigProvider>,
   document.getElementById('root') as HTMLElement
 );
 
