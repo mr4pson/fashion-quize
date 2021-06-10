@@ -1,10 +1,12 @@
 import { Button, Form, Input } from "antd";
 import { useAuth } from "hooks/useAuth";
 import { memo } from "react";
+import { useHistory } from "react-router";
 import styles from "./LoginPage.module.scss";
 
-function LoginPage(type: string, id: string) {
-  const { login } = useAuth();
+function LoginPage() {
+  const history = useHistory();
+  const { login } = useAuth(history);
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);

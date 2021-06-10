@@ -1,20 +1,19 @@
 import { Button, Table } from "antd";
-import axios from "axios";
 import { memo } from "react";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { actions } from "redux/reducers/blocksPageReducer";
 import { AdmPage, paths } from "../routes/constants";
 import styles from "./BlocksPage.module.scss";
 import { actionButtons, CHANGE, DELETE } from "./constants";
-import { TypeBlocks } from "./type";
+import { TypeBlock } from "./type";
 
 type Props = {
-  blocks: TypeBlocks[];
+  blocks: TypeBlock[];
+  onBlockRemove: (id: number) => void;
 };
 
 const BlocksPage: React.FC<Props> = (props) => {
   const columns = [
+    { title: "ID", dataIndex: "id", key: "id" },
     { title: "Заголовок", dataIndex: "title", key: "title" },
     {
       title: "Цвет",
@@ -34,7 +33,7 @@ const BlocksPage: React.FC<Props> = (props) => {
       title: "Действие",
       dataIndex: "",
       key: "x",
-      render: (blocks: TypeBlocks) => (
+      render: (blocks: TypeBlock) => (
         <>
           {actionButtons.map((button) => (
             <Button
@@ -51,17 +50,15 @@ const BlocksPage: React.FC<Props> = (props) => {
     },
   ];
 
-  function getActionRow(type: string, id: string) {
+  function getActionRow(type: string, id: number) {
     switch (type) {
       case CHANGE:
         return () => {
-          history.push(paths[AdmPage.BLOCKS] + "/" + id);
+          history.push(paths[AdmPage.BLOCKS] + "/edit/" + id);
         };
       case DELETE:
         return () => {
-          if (window.confirm("Вы точно хотите удалить этот блок?")) {
-            deleteRow(id);
-          }
+          props.onBlockRemove(id);
         };
       default:
         break;
@@ -70,20 +67,30 @@ const BlocksPage: React.FC<Props> = (props) => {
 
   const history = useHistory();
 
-  const dispatch = useDispatch();
-
-  const deleteRow = async (id) => {
-    const response = await axios.get("/mocks/getBlocks.json");
-    const result = response.data.filter((obj) => obj.id !== id);
-    dispatch(actions.setBlocks(result));
-  };
-
-  const dataSource = props.blocks.map((block) => ({
+  const dataSource = props.blocks?.map((block) => ({
     key: block.id,
     ...block,
   }));
 
-  return <Table columns={columns} dataSource={dataSource} />;
+  const handleRedirect = () => {
+    history.push(paths[AdmPage.BLOCKS_CREATE]);
+  };
+
+  return (
+    <>
+      <div className={styles["table-top"]}>
+        <h1 className={styles["table-top__title"]}>Список блоков</h1>
+        <Button
+          onClick={handleRedirect}
+          className={styles["table-top__btn"]}
+          type="primary"
+        >
+          Создать
+        </Button>
+      </div>
+      <Table columns={columns} dataSource={dataSource} />
+    </>
+  );
 };
 
 export default memo(BlocksPage);

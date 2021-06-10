@@ -1,9 +1,15 @@
 import { Button, Form, Input } from "antd";
-import { memo } from "react";
-import { useParams } from "react-router";
+import { memo, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router";
+import { thunks } from "redux/reducers/blocksPageReducer";
+import { TypeAppState } from "redux/ReduxStore";
+import { axiosInstance } from "../constants";
+import { AdmPage, paths } from "../routes/constants";
+import { PageMetods } from "../types";
 import styles from "./BlockDetail.module.scss";
 import { BUTTON, COLOR, formFields, TITLE } from "./constants";
-import { TypeFormField } from "./type";
+import { ChangeBlockDto, TypeFormField } from "./type";
 
 const layout = {
   labelCol: { span: 8 },
@@ -19,11 +25,35 @@ const validateMessages = {
 };
 /* eslint-enable no-template-curly-in-string */
 
-const BlockDetail: React.FC = () => {
-  const { id } = useParams() as any;
+type Props = {
+  method: PageMetods;
+}
 
-  function onFinish(values: any) {
-    console.log(values);
+const BlockDetail: React.FC<Props> = (props) => {
+  const { id } = useParams() as any;
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+  
+  const dispatch = useDispatch();
+  const blocksState = useSelector((state: TypeAppState) => ({
+    block: state.blocksPage.block,
+  }));
+
+  const onFinish = async (payload: ChangeBlockDto) => {
+    setLoading(true);
+    if (id) {
+      await axiosInstance.put(`/api/blocks/${id}`, payload);
+      setLoading(false);
+      history.push(paths[AdmPage.BLOCKS]);
+      return;
+    }
+    await axiosInstance.post('/api/blocks', payload);
+    setLoading(false);
+    history.push(paths[AdmPage.BLOCKS]);
+  }
+  
+  function getPageTitle() {
+    return id ? `Изменение блока №${id}` : 'Создание блока';
   }
 
   function getFormField(type: string, field: TypeFormField) {
@@ -42,22 +72,34 @@ const BlockDetail: React.FC = () => {
       case BUTTON:
         return (
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-            <Button type="primary" htmlType="submit" size="large">
+            <Button loading={loading} type="primary" htmlType="submit">
               {field.label}
             </Button>
           </Form.Item>
         );
       default:
-        return <></>;
+        return <></>
     }
   }
 
+  useEffect(() => {
+    if (id) {
+      dispatch(thunks.getBlock(id));
+    }
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(thunks.clearBlock());
+    };
+  }, []);
   return (
     <div className={styles["detail"]}>
       <div className={styles["detail__header"]}>
-        <h1>{}</h1>
+        <h1>{getPageTitle()}</h1>
       </div>
-      <Form
+      {(!!id && !!blocksState.block.title) || props.method === PageMetods.CREATE ?<Form
+        initialValues={blocksState.block}
         {...layout}
         name="nest-messages"
         onFinish={onFinish}
@@ -68,7 +110,7 @@ const BlockDetail: React.FC = () => {
             {getFormField(field.type, field)}
           </div>
         ))}
-      </Form>
+      </Form> : ''}
     </div>
   );
 };
