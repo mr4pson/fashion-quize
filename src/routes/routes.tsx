@@ -3,6 +3,7 @@ import CompletePageContainer from "components/pages/CompletePage/CompletePageCon
 import HomePage from "components/pages/HomePage";
 import LoginPage from "components/pages/LoginPage/LoginPage";
 import QuizePageContainer from "components/pages/QuizePage/QuizePageContainer";
+import SexPage from "components/pages/QuizePage/SexPage/SexPage";
 import { Page, paths } from "./constants";
 import { TypeAppRoute } from "./type";
 
@@ -12,6 +13,12 @@ export function getAppRoutes(): TypeAppRoute[] {
       type: Page.HOME,
       path: paths[Page.HOME],
       component: <HomePage />,
+      exact: true,
+    },
+    {
+      type: Page.QUIZE_SEX,
+      path: paths[Page.QUIZE_SEX],
+      component: <SexPage />,
       exact: true,
     },
     {

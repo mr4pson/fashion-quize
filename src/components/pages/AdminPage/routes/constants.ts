@@ -1,4 +1,5 @@
 export enum AdmPage {
+  BASE = "BASE",
   BLOCKS = "BLOCKS",
   BLOCKS_CREATE = "BLOCKS_CREATE",
   BLOCKS_ROUTE = "BLOCKS_ROUTE",
@@ -13,6 +14,7 @@ export const QUIZE_TYPE = ':quizeType';
 export const ID = ':id';
 
 export const paths = {
+  [AdmPage.BASE]: "/admin",
   [AdmPage.BLOCKS]: "/admin/blocks",
   [AdmPage.BLOCKS_CREATE]: "/admin/blocks/create",
   [AdmPage.BLOCKS_ROUTE]: "/admin/blocks/edit/:id",

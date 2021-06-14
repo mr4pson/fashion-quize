@@ -19,9 +19,9 @@ const CompletePageContainer: React.FC = () => {
     };
     console.log(payload);
 
-    axios.post("/api/answers", payload);
-    dispatch(actions.setStateAnswers({}));
-  }, [dispatch, quizeState]);
+    // axios.post("/api/answers", payload);
+    // dispatch(actions.setStateAnswers({}));
+  }, [dispatch, quizeState.answers]);
   return <CompletePage answers={quizeState.answers} />;
 };
 

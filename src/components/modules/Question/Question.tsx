@@ -1,4 +1,5 @@
 import { Form, Input, Radio, Checkbox, Row, Col } from 'antd';
+import { getImageUrl } from 'common/heplers/common-helpers';
 import { QuestionType, TypeQuestion } from "components/pages/QuizePage/types";
 import { memo } from "react";
 import styles from './Question.module.scss';
@@ -10,23 +11,25 @@ type TypeQuestionProps = {
 }
 
 function Question(props: TypeQuestionProps): JSX.Element {
+    if (!props.question?.block) {
+        return <div></div>;
+    }
     const { description, image, type, block, options } = props.question;
-    const optionList = options as string[];
+    const optionList = JSON.parse(options!) as string[];
+
     const radioStyle = {
         display: 'block',
         height: '30px',
         lineHeight: '30px',
     };
 
-    console.log(image);
     return (
         <>
             <div className={styles['block']}>
                 <h1 className={styles['block__title']}>{block.title}</h1>
-                <div className={styles['block__desc']}>{block.description}</div>
             </div>
             <div className={styles['question']}>
-                <div style={{ backgroundImage: `url(/assets/images/${image})` }} className={styles['question__image']}></div>
+                <div style={{ backgroundImage: `url(${getImageUrl(image!)})` }} className={styles['question__image']}></div>
                 <div className={styles['question__description']}>{description}</div>
                 <div className={styles['question__body']}>
                     {type === QuestionType.INPUT && <Form.Item

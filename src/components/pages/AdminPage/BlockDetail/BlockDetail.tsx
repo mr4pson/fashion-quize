@@ -92,7 +92,7 @@ const BlockDetail: React.FC<Props> = (props) => {
     return () => {
       dispatch(thunks.clearBlock());
     };
-  }, []);
+  }, [dispatch]);
   return (
     <div className={styles["detail"]}>
       <div className={styles["detail__header"]}>

@@ -1,5 +1,5 @@
 import { Layout, Menu } from "antd";
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useState } from "react";
 import { useHistory } from "react-router";
 import AdmHeader from "./AdmHeader";
 import styles from "./AdminPage.module.scss";

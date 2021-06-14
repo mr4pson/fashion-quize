@@ -1,15 +1,17 @@
 import { Button, Form, FormInstance } from "antd";
 import classNames from "classnames";
 import Question from "components/modules/Question/Question";
-import { memo, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { memo, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { thunks } from "redux/reducers/quizePageReducer";
 import { actions } from "redux/reducers/quizePageReducer";
+import { TypeAppState } from "redux/ReduxStore";
 import { Page, paths } from "routes/constants";
-import { questions } from "./constants";
 import { getNextQuestionLink, getPrevQuestionLink } from "./helper";
 import styles from "./QuizePage.module.scss";
+import { TypeQuestion } from "./types";
 
 type Props = {
   answers: Object | {};
@@ -18,30 +20,40 @@ type Props = {
 const QuizePage: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
 
-  const { questionNumber } = useParams() as any;
-  const questionsNumber = questions.length;
-  const questionIndex = questions.findIndex(
-    (question) => question.id === +questionNumber
-  );
-  const question = questions[questionIndex];
+  const state = useSelector((state: TypeAppState) => ({
+    questions: state.quizePage.questions,
+  }));
+  const { questionNumber, quizeType } = useParams() as any;
+  const questionsNumber = state.questions.length;
+  const [question, setQuestion] = useState<TypeQuestion>({} as TypeQuestion);
   const formRef = useRef<FormInstance>(null);
   const history = useHistory();
+
+  console.log(question);
 
   useEffect(() => {
     formRef.current?.resetFields();
   });
+
+  useEffect(() => {
+    dispatch(thunks.getQuestionsByQuizeType(quizeType));
+  }, [dispatch, quizeType]);
+
+  useEffect(() => {
+    setQuestion(state.questions[questionNumber]);
+  }, [dispatch, questionNumber, state.questions]);
 
   const onFinish = (values: any) => {
     const formValue = formRef.current?.getFieldsValue();
     const answers = { ...props.answers, [question.id]: formValue.answer };
     dispatch(actions.setStateAnswers(answers));
 
-    if (+questionNumber === questionsNumber) {
+    if (+questionNumber === questionsNumber - 1) {
       history.push(paths[Page.COMPLETE]);
       return;
     }
 
-    history.push(getNextQuestionLink(questionNumber));
+    history.push(getNextQuestionLink(+questionNumber, quizeType));
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -61,7 +73,7 @@ const QuizePage: React.FC<Props> = (props) => {
         onFinishFailed={onFinishFailed}
       >
         <div className="container">
-          {questionIndex !== -1 ? (
+          {+questionNumber !== -1 ? (
             <Question question={question} />
           ) : (
             <div className={styles["quize-page__no-questions"]}>
@@ -70,7 +82,7 @@ const QuizePage: React.FC<Props> = (props) => {
           )}
         </div>
         <div
-          style={{ color: question.block.sidebarColor }}
+          style={{ color: question?.block?.color }}
           className={classNames(
             styles["quize-page__sidebar"],
             styles["sidebar"]
@@ -88,8 +100,8 @@ const QuizePage: React.FC<Props> = (props) => {
         >
           <div className={styles["container"]}>
             <div className={styles["navgation__prev-btn"]}>
-              {questionNumber > 1 ? (
-                <Link to={getPrevQuestionLink(questionNumber)}>
+              {questionNumber > 0 ? (
+                <Link to={getPrevQuestionLink(questionNumber, quizeType)}>
                   <Button
                     type="primary"
                     danger
