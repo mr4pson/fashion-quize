@@ -19,3 +19,17 @@ export const QuestionTypeOptions: TypeSelectOption[] = [
     value: QuestionType.MULTIPLE_OPTION,
   },
 ]
+
+export const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+
+/* eslint-disable no-template-curly-in-string */
+export const validateMessages = {
+  required: "${label} не может быть пустым!",
+  string: {
+    max: "${label} не может быть длиннее ${max} символов",
+  },
+};
+/* eslint-enable no-template-curly-in-string */

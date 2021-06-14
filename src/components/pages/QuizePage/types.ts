@@ -13,14 +13,14 @@ export type TypeQuestionBlock = {
     id: number;
     title: string;
     description?: string;
-    sidebarColor: string;
+    color: string;
 }
 
 export type TypeQuestion = {
     id: number;
     type: QuestionType;
     description: string;
-    options?: string[];
+    options?: string;
     image?: string;
     block: TypeQuestionBlock;
 }

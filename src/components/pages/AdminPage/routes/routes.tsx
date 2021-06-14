@@ -10,6 +10,12 @@ import { TypeAdmRoute } from "./type";
 export function getAdmRoutes(): TypeAdmRoute[] {
   return [
     {
+      type: AdmPage.BASE,
+      path: paths[AdmPage.BASE],
+      component: <div></div>,
+      exact: true,
+    },
+    {
       type: AdmPage.BLOCKS,
       path: paths[AdmPage.BLOCKS],
       component: <BlocksPage />,

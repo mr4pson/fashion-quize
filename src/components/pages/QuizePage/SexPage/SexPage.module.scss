@@ -1,0 +1,43 @@
+.sex-page {
+  &__title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    height: 80px;
+    box-sizing: border-box;
+    padding-top: 10px;
+  }
+  &__body {
+    display: flex;
+  }
+  &__item {
+    width: calc(50vw - 9px);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s;
+    &:hover {
+      background-color: #f2f2ff;
+    }
+  }
+  .sex-item {
+    &__wrapper {
+    }
+    &__icon {
+      text-align: center;
+      font-size: 160px;
+    }
+    &__title {
+      font-size: 36px;
+      text-align: center;
+    }
+  }
+}
+.for-men {
+  color: #9d2fb1;
+}
+.for-women {
+  color: #4d4dca;
+}

@@ -1,6 +1,6 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Button, Form, FormInstance, Input, Select } from "antd";
-import { getImageUrl, openNotification } from "common/heplers/common-helpers";
+import { getImageUrl } from "common/heplers/common-helpers";
 import { QuestionType } from "components/pages/QuizePage/types";
 import { useUploadFile } from "hooks/useUploadFile";
 import { memo, useEffect, useRef, useState } from "react";
@@ -12,32 +12,19 @@ import { TypeAppState } from "redux/ReduxStore";
 import { axiosInstance } from "../constants";
 import { AdmPage, paths } from "../routes/constants";
 import { PageMetods } from "../types";
-import { QuestionTypeOptions } from "./constants";
+import { layout, QuestionTypeOptions, validateMessages } from "./constants";
 import { getPageTitle } from "./helpers";
 import styles from "./QuestionDetail.module.scss";
 import { ChangeQuestionDto } from "./types";
 
 const { Option } = Select;
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-
-/* eslint-disable no-template-curly-in-string */
-const validateMessages = {
-  required: "${label} не может быть пустым!",
-  string: {
-    max: "${label} не может быть длиннее ${max} символов",
-  },
-};
-/* eslint-enable no-template-curly-in-string */
-
 type Props = {
   method: PageMetods;
 };
 
 const QuestionDetail: React.FC<Props> = (props) => {
+
   const formRef = useRef<FormInstance>(null);
   const { id, quizeType } = useParams() as any;
   const [loading, setLoading] = useState(false);
@@ -63,6 +50,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
   const [answerOptions, setAnswerOptions] = useState<any>([]);
 
   const onFinish = async (questionData: ChangeQuestionDto) => {
+
     const payload = {
       ...questionData,
       image: mediaFile ? mediaFile : state.question.image,
@@ -70,17 +58,19 @@ const QuestionDetail: React.FC<Props> = (props) => {
       quizeType: quizeType,
     };
 
-    console.log(payload, quizeType);
     setLoading(true);
+
     if (id) {
       await axiosInstance.put(`/api/questions/${id}`, payload);
       setLoading(false);
       history.push(`${paths[AdmPage.QUESTIONS]}/${quizeType}`);
       return;
     }
+
     await axiosInstance.post("/api/questions", payload);
     setLoading(false);
     history.push(`${paths[AdmPage.QUESTIONS]}/${quizeType}`);
+
   };
 
   useEffect(() => {
@@ -113,7 +103,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
     return () => {
       dispatch(thunks.clearQuestion());
     };
-  }, []);
+  }, [dispatch]);
 
   const handleAddAnswerOption = () => {
     setAnswerOptions((prevState) => Array.isArray(prevState) ? prevState.concat("") : [""]);

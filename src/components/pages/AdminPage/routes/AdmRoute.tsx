@@ -1,5 +1,6 @@
 import React, { memo } from "react";
-import { Route } from "react-router-dom";
+import { Redirect, Route, useLocation } from 'react-router-dom';
+import { AdmPage, paths } from "./constants";
 
 type Props = {
   path: string;
@@ -9,6 +10,22 @@ type Props = {
 };
 
 const AdmRoute: React.FC<Props> = ({ path, exact, children }) => {
+  const location = useLocation();
+
+  function hasRedirect(): boolean {
+    return `${location.pathname}` === paths[AdmPage.BASE];
+  }
+
+  if (hasRedirect()) {
+    return (
+      <Redirect
+        to={{
+          pathname: paths[AdmPage.BLOCKS],
+        }}
+      />
+    );
+  }
+
   return (
     <Route path={path} exact={exact}>
       {children}
