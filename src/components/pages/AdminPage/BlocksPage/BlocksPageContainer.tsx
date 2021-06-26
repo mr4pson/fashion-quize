@@ -1,18 +1,18 @@
 import { Modal } from "antd";
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunks } from "redux/reducers/blocksPageReducer";
-import { TypeAppState } from "redux/ReduxStore";
+import { thunks } from "redux/reducers/blocksPageSlice";
+import { TypeRootState } from "redux/ReduxStore";
 import BlocksPage from "./BlocksPage";
 
 const BlocksPageContainer: React.FC = () => {
   const dispatch = useDispatch();
-  const blocksState = useSelector((state: TypeAppState) => ({
+  const blocksState = useSelector((state: TypeRootState) => ({
     blocks: state.blocksPage.blocks,
   }));
-  const [visible, setVisible] = React.useState(false);
-  const [confirmLoading, setConfirmLoading] = React.useState(false);
-  const [blockId, setBlockId] = React.useState<number | null>(null);
+  const [visible, setVisible] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [blockId, setBlockId] = useState<number | null>(null);
 
   const showModal = () => {
     setVisible(true);
@@ -34,7 +34,7 @@ const BlocksPageContainer: React.FC = () => {
   const onBlockRemove = (id: number) => {
     setBlockId(id);
     showModal();
-  }
+  };
 
   useEffect(() => {
     dispatch(thunks.getBlocks());

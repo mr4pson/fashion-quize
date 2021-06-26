@@ -5,9 +5,8 @@ import { memo, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { thunks } from "redux/reducers/quizePageReducer";
-import { actions } from "redux/reducers/quizePageReducer";
-import { TypeAppState } from "redux/ReduxStore";
+import { setStateAnswers, thunks } from "redux/reducers/quizePageSlice";
+import { TypeRootState } from "redux/ReduxStore";
 import { Page, paths } from "routes/constants";
 import { getNextQuestionLink, getPrevQuestionLink } from "./helper";
 import styles from "./QuizePage.module.scss";
@@ -20,11 +19,11 @@ type Props = {
 const QuizePage: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
 
-  const state = useSelector((state: TypeAppState) => ({
+  const state = useSelector((state: TypeRootState) => ({
     questions: state.quizePage.questions,
   }));
   const { questionNumber, quizeType } = useParams() as any;
-  const questionsNumber = state.questions.length;
+  const questionsNumber = state.questions?.length;
   const [question, setQuestion] = useState<TypeQuestion>({} as TypeQuestion);
   const formRef = useRef<FormInstance>(null);
   const history = useHistory();
@@ -40,13 +39,15 @@ const QuizePage: React.FC<Props> = (props) => {
   }, [dispatch, quizeType]);
 
   useEffect(() => {
-    setQuestion(state.questions[questionNumber]);
+    if (state.questions?.length) {
+      setQuestion(state.questions[questionNumber]);
+    }
   }, [dispatch, questionNumber, state.questions]);
 
   const onFinish = (values: any) => {
     const formValue = formRef.current?.getFieldsValue();
     const answers = { ...props.answers, [question.id]: formValue.answer };
-    dispatch(actions.setStateAnswers(answers));
+    dispatch(setStateAnswers(answers));
 
     if (+questionNumber === questionsNumber - 1) {
       history.push(paths[Page.COMPLETE]);
@@ -65,48 +66,28 @@ const QuizePage: React.FC<Props> = (props) => {
   return (
     <div className={styles["quize-page"]}>
       {/* <Header /> */}
-      <Form
-        name="basic"
-        ref={formRef}
-        initialValues={initialValue}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
+      <Form name="basic" ref={formRef} initialValues={initialValue} onFinish={onFinish} onFinishFailed={onFinishFailed}>
         <div className="container">
           {+questionNumber !== -1 ? (
             <Question question={question} />
           ) : (
-            <div className={styles["quize-page__no-questions"]}>
-              Такого вопроса не существует.
-            </div>
+            <div className={styles["quize-page__no-questions"]}>Такого вопроса не существует.</div>
           )}
         </div>
         <div
           style={{ color: question?.block?.color }}
-          className={classNames(
-            styles["quize-page__sidebar"],
-            styles["sidebar"]
-          )}
+          className={classNames(styles["quize-page__sidebar"], styles["sidebar"])}
         >
           <div className={styles["sidebar__number"]}>
             <span>{questionNumber}</span>
           </div>
         </div>
-        <div
-          className={classNames(
-            styles["quize-page__nav"],
-            styles["navigation"]
-          )}
-        >
+        <div className={classNames(styles["quize-page__nav"], styles["navigation"])}>
           <div className={styles["container"]}>
             <div className={styles["navgation__prev-btn"]}>
               {questionNumber > 0 ? (
                 <Link to={getPrevQuestionLink(questionNumber, quizeType)}>
-                  <Button
-                    type="primary"
-                    danger
-                    className={styles["navgation__quize-btn"]}
-                  >
+                  <Button type="primary" danger className={styles["navgation__quize-btn"]}>
                     Назад
                   </Button>
                 </Link>
@@ -115,12 +96,7 @@ const QuizePage: React.FC<Props> = (props) => {
               )}
             </div>
             <div className={styles["navgation__next-btn"]}>
-              <Button
-                htmlType="submit"
-                type="primary"
-                danger
-                className={styles["navgation__quize-btn"]}
-              >
+              <Button htmlType="submit" type="primary" danger className={styles["navgation__quize-btn"]}>
                 {questionNumber < questionsNumber ? "Далее" : "Сдать"}
               </Button>
             </div>
