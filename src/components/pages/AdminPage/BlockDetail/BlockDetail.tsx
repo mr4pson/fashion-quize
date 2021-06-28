@@ -2,7 +2,7 @@ import { Button, Form, Input } from "antd";
 import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { thunks } from "redux/reducers/blocksPageSlice";
+import { blocksThunks } from "redux/reducers/blocksPageSlice";
 import { TypeRootState } from "redux/ReduxStore";
 import { axiosInstance } from "../constants";
 import { AdmPage, paths } from "../routes/constants";
@@ -80,13 +80,13 @@ const BlockDetail: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (id) {
-      dispatch(thunks.getBlock(id));
+      dispatch(blocksThunks.getBlock(id));
     }
   }, [dispatch, id]);
 
   useEffect(() => {
     return () => {
-      dispatch(thunks.clearBlock());
+      dispatch(blocksThunks.clearBlock());
     };
   }, [dispatch]);
   return (

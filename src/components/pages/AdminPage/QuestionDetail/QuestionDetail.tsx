@@ -6,8 +6,8 @@ import { useUploadFile } from "hooks/useUploadFile";
 import { memo, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { thunks as blockThunks } from "redux/reducers/blocksPageSlice";
-import { thunks } from "redux/reducers/questionsPageSlice";
+import { blocksThunks } from "redux/reducers/blocksPageSlice";
+import { questionsThunks } from "redux/reducers/questionsPageSlice";
 import { TypeRootState } from "redux/ReduxStore";
 import { axiosInstance } from "../constants";
 import { AdmPage, paths } from "../routes/constants";
@@ -70,7 +70,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (id) {
-      dispatch(thunks.getQuestion(id));
+      dispatch(questionsThunks.getQuestion(id));
     }
   }, [dispatch, id]);
 
@@ -94,9 +94,9 @@ const QuestionDetail: React.FC<Props> = (props) => {
   }, [state.question]);
 
   useEffect(() => {
-    dispatch(blockThunks.getBlocks());
+    dispatch(blocksThunks.getBlocks());
     return () => {
-      dispatch(thunks.clearQuestion());
+      dispatch(questionsThunks.clearQuestion());
     };
   }, [dispatch]);
 

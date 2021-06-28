@@ -3,7 +3,7 @@ import { QuizeTypes } from "common/types/type";
 import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { thunks } from "redux/reducers/questionsPageSlice";
+import { questionsThunks } from "redux/reducers/questionsPageSlice";
 import { TypeRootState } from "redux/ReduxStore";
 import { AdmPage, paths } from "../routes/constants";
 import QuestionsPage from "./QuestionsPage";
@@ -34,7 +34,7 @@ const QuestionsPageContainer: React.FC = () => {
   const handleDelete = () => {
     setConfirmLoading(true);
 
-    dispatch(thunks.removeQuestion(questionId!, quizeType));
+    dispatch(questionsThunks.removeQuestion(questionId!, quizeType));
 
     setVisible(false);
     setConfirmLoading(false);
@@ -46,7 +46,7 @@ const QuestionsPageContainer: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(thunks.getQuestionsByQuizeType(quizeType));
+    dispatch(questionsThunks.getQuestionsByQuizeType(quizeType));
   }, [dispatch, quizeType]);
 
   const handleQuizeTypeChange = (tabKey) => {

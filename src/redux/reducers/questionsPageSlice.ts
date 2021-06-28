@@ -23,7 +23,7 @@ const questionsPageSlice = createSlice({
   },
 });
 
-export const thunks = {
+export const questionsThunks = {
   getQuestions: () => async (dispatch: TypeDispatch) => {
     const response = await axiosInstance.get("/api/questions");
     dispatch(setQuestions(response?.data));
@@ -48,9 +48,9 @@ export const thunks = {
   clearQuestion: () => async (dispatch: TypeDispatch) => {
     dispatch(setQuestion({} as TypeQuestion));
   },
-  removeQuestion: (id: number, quizeType: QuizeTypes) => async (dispatch: any) => {
+  removeQuestion: (id: number, quizeType: QuizeTypes) => async (dispatch: TypeDispatch) => {
     await axiosInstance.delete(`/api/questions/${id}`);
-    dispatch(thunks.getQuestionsByQuizeType(quizeType));
+    dispatch(questionsThunks.getQuestionsByQuizeType(quizeType));
   },
 };
 

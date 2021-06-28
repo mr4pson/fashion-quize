@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunks } from "redux/reducers/blocksPageSlice";
+import { blocksThunks } from "redux/reducers/blocksPageSlice";
 import { TypeRootState } from "redux/ReduxStore";
 import BlocksPage from "./BlocksPage";
 
@@ -25,7 +25,7 @@ const BlocksPageContainer: React.FC = () => {
   const handleDelete = async () => {
     setConfirmLoading(true);
 
-    dispatch(thunks.removeBlock(blockId!));
+    dispatch(blocksThunks.removeBlock(blockId!));
 
     setVisible(false);
     setConfirmLoading(false);
@@ -37,7 +37,7 @@ const BlocksPageContainer: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(thunks.getBlocks());
+    dispatch(blocksThunks.getBlocks());
   }, [dispatch]);
 
   return (

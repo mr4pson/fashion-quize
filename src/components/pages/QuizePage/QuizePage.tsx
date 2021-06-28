@@ -5,7 +5,7 @@ import { memo, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { setStateAnswers, thunks } from "redux/reducers/quizePageSlice";
+import { quizeThunks, setStateAnswers } from "redux/reducers/quizePageSlice";
 import { TypeRootState } from "redux/ReduxStore";
 import { Page, paths } from "routes/constants";
 import { getNextQuestionLink, getPrevQuestionLink } from "./helper";
@@ -35,7 +35,7 @@ const QuizePage: React.FC<Props> = (props) => {
   });
 
   useEffect(() => {
-    dispatch(thunks.getQuestionsByQuizeType(quizeType));
+    dispatch(quizeThunks.getQuestionsByQuizeType(quizeType));
   }, [dispatch, quizeType]);
 
   useEffect(() => {

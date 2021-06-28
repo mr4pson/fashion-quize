@@ -21,7 +21,7 @@ const blocksPageSlice = createSlice({
   },
 });
 
-export const thunks = {
+export const blocksThunks = {
   getBlocks: () => async (dispatch: TypeDispatch) => {
     const response = await axiosInstance.get("/api/blocks");
     dispatch(setBlocks(response?.data));
@@ -33,9 +33,9 @@ export const thunks = {
   clearBlock: () => (dispatch: TypeDispatch) => {
     dispatch(setBlock({} as TypeBlock));
   },
-  removeBlock: (id: number) => async (dispatch: any) => {
+  removeBlock: (id: number) => async (dispatch: TypeDispatch) => {
     await axiosInstance.delete(`/api/blocks/${id}`);
-    dispatch(thunks.getBlocks());
+    dispatch(blocksThunks.getBlocks());
   },
 };
 

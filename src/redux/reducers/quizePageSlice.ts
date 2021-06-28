@@ -22,7 +22,7 @@ const quizePageSlice = createSlice({
   },
 });
 
-export const thunks = {
+export const quizeThunks = {
   // getQuestions: (): TypeThunk => async (dispatch) => {
   //   const response = await axiosInstance.get('/api/questions');
   //   dispatch(actions.setQuestions(response?.data));
