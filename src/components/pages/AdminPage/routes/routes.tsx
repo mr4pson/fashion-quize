@@ -1,8 +1,9 @@
 import AnswersPage from "../AnswersPage";
 import BlockDetail from "../BlockDetail";
-import QuestionDetail from "../QuestionDetail";
 import BlocksPage from "../BlocksPage";
+import QuestionDetail from "../QuestionDetail";
 import QuestionsPageContainer from "../QuestionsPage";
+import StylistsPageContainer from "../StylistsPage/StylistsPageContainer";
 import { PageMetods } from "../types";
 import { AdmPage, paths } from "./constants";
 import { TypeAdmRoute } from "./type";
@@ -48,6 +49,11 @@ export function getAdmRoutes(): TypeAdmRoute[] {
       type: AdmPage.QUESTIONS_ROUTE,
       path: paths[AdmPage.QUESTIONS_ROUTE],
       component: <QuestionDetail method={PageMetods.UPDATE} />,
+    },
+    {
+      type: AdmPage.STYLISTS,
+      path: paths[AdmPage.STYLISTS],
+      component: <StylistsPageContainer />,
     },
     {
       type: AdmPage.ANSWERS,

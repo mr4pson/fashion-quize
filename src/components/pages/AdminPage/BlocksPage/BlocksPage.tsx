@@ -3,7 +3,7 @@ import { memo } from "react";
 import { useHistory } from "react-router";
 import { AdmPage, paths } from "../routes/constants";
 import styles from "./BlocksPage.module.scss";
-import { CHANGE, DELETE, getColumns } from "./constants";
+import { DELETE, EDIT, getColumns } from "./constants";
 import { TypeBlock } from "./type";
 
 type Props = {
@@ -16,7 +16,7 @@ const BlocksPage: React.FC<Props> = (props) => {
 
   function getActionRow(type: string, id: number) {
     switch (type) {
-      case CHANGE:
+      case EDIT:
         return () => {
           history.push(paths[AdmPage.BLOCKS] + "/edit/" + id);
         };
@@ -44,11 +44,7 @@ const BlocksPage: React.FC<Props> = (props) => {
     <>
       <div className={styles["table-top"]}>
         <h1 className={styles["table-top__title"]}>Список блоков</h1>
-        <Button
-          onClick={handleRedirect}
-          className={styles["table-top__btn"]}
-          type="primary"
-        >
+        <Button onClick={handleRedirect} className={styles["table-top__btn"]} type="primary">
           Создать
         </Button>
       </div>

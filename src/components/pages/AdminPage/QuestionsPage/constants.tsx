@@ -2,13 +2,13 @@ import { Button } from "antd";
 import { QuestionType, TypeQuestion } from "components/pages/QuizePage/types";
 import { TypeBlock } from "../BlocksPage/type";
 
-export const CHANGE = "CHANGE";
+export const EDIT = "EDIT";
 export const DELETE = "DELETE";
 
 export const actionButtons = [
   {
     id: "1",
-    type: CHANGE,
+    type: EDIT,
     action: "Изменить",
   },
   {
@@ -34,16 +34,12 @@ export const getColumns = (
         switch (type) {
           case QuestionType.INPUT:
             return "Строка";
-
           case QuestionType.TEXT:
             return "Текст";
-
           case QuestionType.SINGLE_OPTION:
             return "Один вариант";
-
           case QuestionType.MULTIPLE_OPTION:
             return "Несколько вариантов";
-
           default:
             break;
         }

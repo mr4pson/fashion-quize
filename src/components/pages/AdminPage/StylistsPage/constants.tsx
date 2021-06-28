@@ -1,5 +1,5 @@
-import { Button } from "antd";
-import { TypeBlock } from "./type";
+import { Button, Input } from "antd";
+import { TypeStylists } from "./types";
 
 export const EDIT = "EDIT";
 export const DELETE = "DELETE";
@@ -22,29 +22,27 @@ export const getColumns = (
   getActionRow: (type: string, id: number) => any
 ) => {
   return [
-    { title: "ID", dataIndex: "id", key: "id" },
-    { title: "Заголовок", dataIndex: "title", key: "title" },
+    { title: "ID", dataIndex: "key", key: "key" },
+    { title: "ФИО", dataIndex: "fullName", key: "fullName" },
+    { title: "Почта", dataIndex: "email", key: "email" },
     {
-      title: "Цвет",
-      dataIndex: "color",
-      key: "color",
-      render: (color: string) => (
-        <div className={styles["color"]}>
-          <div className={styles["color__name"]}>{color}</div>
-          <div className={styles["color__box"]} style={{ background: color }}></div>
-        </div>
+      title: "Пароль",
+      dataIndex: "password",
+      key: "password",
+      render: (password: string) => (
+        <Input.Password placeholder="input password" value={password} style={{ ...inputStyles }} />
       ),
     },
     {
       title: "Действие",
       dataIndex: "",
       key: "x",
-      render: (blocks: TypeBlock) => (
+      render: (stylist: TypeStylists) => (
         <>
           {actionButtons.map((button) => (
             <Button
               key={button.id}
-              onClick={getActionRow(button.type, blocks.id)}
+              onClick={getActionRow(button.type, +stylist.id)}
               className={styles["action"]}
               type="link"
             >
@@ -55,4 +53,8 @@ export const getColumns = (
       ),
     },
   ];
+};
+
+const inputStyles = {
+  border: "none",
 };

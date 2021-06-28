@@ -1,8 +1,4 @@
-import {
-  FileSearchOutlined,
-  PieChartOutlined,
-  QuestionCircleOutlined
-} from "@ant-design/icons";
+import { FileSearchOutlined, PieChartOutlined, QuestionCircleOutlined, TeamOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { QuizeTypes } from "common/types/type";
 import React from "react";
@@ -27,6 +23,12 @@ export const menuItems = [
     icon: <FileSearchOutlined />,
     title: "Ответы",
     route: paths[AdmPage.ANSWERS],
+  },
+  {
+    key: "4",
+    icon: <TeamOutlined />,
+    title: "Стилисты",
+    route: paths[AdmPage.STYLISTS],
   },
 ];
 

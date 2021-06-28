@@ -3,8 +3,8 @@ import { QuizeTypes } from "common/types/type";
 import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { questionsThunks } from "redux/reducers/questionsPageSlice";
 import { TypeRootState } from "redux/ReduxStore";
+import { questionsThunks } from "redux/slicers/questionsPageSlice";
 import { AdmPage, paths } from "../routes/constants";
 import QuestionsPage from "./QuestionsPage";
 

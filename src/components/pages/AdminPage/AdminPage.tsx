@@ -1,13 +1,14 @@
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import React, { memo, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
+import { ReactComponent as LogoSvg } from "../../../images/logo.svg";
 import AdmHeader from "./AdmHeader";
 import styles from "./AdminPage.module.scss";
 import { menuItems } from "./constants";
 import { getJwtPair } from "./helpers";
 import AdmRoutes from "./routes/AdmRoutes";
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import { ReactComponent as LogoSvg } from '../../../images/logo.svg';
+import { AdmPage, paths } from "./routes/constants";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -15,6 +16,7 @@ const AdminPage: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const history = useHistory();
+  const location = useLocation();
 
   const onCollapse = (collapsed: boolean) => {
     setIsCollapsed(collapsed);
@@ -27,6 +29,14 @@ const AdminPage: React.FC = () => {
     }
   })();
 
+  function getSelectedKey() {
+    if (location.pathname.includes(paths[AdmPage.BLOCKS])) return "1";
+    if (location.pathname.includes(paths[AdmPage.QUESTIONS])) return "2";
+    if (location.pathname.includes(paths[AdmPage.ANSWERS])) return "3";
+    if (location.pathname.includes(paths[AdmPage.STYLISTS])) return "4";
+    return "1";
+  }
+
   return (
     <Layout className={styles["layout"]}>
       <Sider
@@ -36,10 +46,10 @@ const AdminPage: React.FC = () => {
         collapsed={isCollapsed}
         onCollapse={onCollapse}
       >
-        <div className={styles['layout__logo']} >
+        <div className={styles["layout__logo"]}>
           <LogoSvg />
         </div>
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+        <Menu theme="dark" defaultSelectedKeys={[getSelectedKey()]} mode="inline">
           {menuItems.map((item) => (
             <Menu.Item
               key={item.key}
@@ -55,7 +65,7 @@ const AdminPage: React.FC = () => {
       <Layout className={styles["layout"]}>
         <AdmHeader />
         <Content style={{ margin: "0 16px" }}>
-          <div className={styles['page-content']}>
+          <div className={styles["page-content"]}>
             <AdmRoutes />
           </div>
         </Content>

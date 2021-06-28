@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { Dispatch } from "react";
-import blocksPageSlice from "./reducers/blocksPageSlice";
-import questionsPageSlice from "./reducers/questionsPageSlice";
-import quizePageSlice from "./reducers/quizePageSlice";
+import blocksPageSlice from "./slicers/blocksPageSlice";
+import questionsPageSlice from "./slicers/questionsPageSlice";
+import quizePageSlice from "./slicers/quizePageSlice";
+import stylistsPageSlice from "./slicers/stylistsPageSlice";
 
 const store = configureStore({
   reducer: {
     quizePage: quizePageSlice,
     blocksPage: blocksPageSlice,
     questionsPage: questionsPageSlice,
+    stylistsPage: stylistsPageSlice,
   },
 });
 
