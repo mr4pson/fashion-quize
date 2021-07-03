@@ -1,0 +1,30 @@
+[
+  {
+    "id": 5,
+    "login": "stylist@email.ru",
+    "name": "Stylist 1",
+    "createdAt": "2021-07-03T13:11:45.707Z",
+    "updatedAt": "2021-07-03T13:11:45.707Z"
+  },
+  {
+    "id": 6,
+    "login": "stylist2@email.ru",
+    "name": "Stylist 2",
+    "createdAt": "2021-07-03T13:18:05.302Z",
+    "updatedAt": "2021-07-03T13:18:05.302Z"
+  },
+  {
+    "id": 7,
+    "login": "stylist3@email.ru",
+    "name": "Stylist 3",
+    "createdAt": "2021-07-03T13:24:44.075Z",
+    "updatedAt": "2021-07-03T13:24:44.075Z"
+  },
+  {
+    "id": 8,
+    "login": "stylist4@email.ru",
+    "name": "Stylist 4",
+    "createdAt": "2021-07-03T13:38:56.530Z",
+    "updatedAt": "2021-07-03T13:38:56.530Z"
+  }
+]

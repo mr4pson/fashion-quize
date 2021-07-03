@@ -3,8 +3,9 @@ import BlockDetail from "../BlockDetail";
 import BlocksPage from "../BlocksPage";
 import QuestionDetail from "../QuestionDetail";
 import QuestionsPageContainer from "../QuestionsPage";
+import StylistDetail from "../StylistDetail";
 import StylistsPageContainer from "../StylistsPage/StylistsPageContainer";
-import { PageMetods } from "../types";
+import { PageMethods } from "../types";
 import { AdmPage, paths } from "./constants";
 import { TypeAdmRoute } from "./type";
 
@@ -25,13 +26,13 @@ export function getAdmRoutes(): TypeAdmRoute[] {
     {
       type: AdmPage.BLOCKS_CREATE,
       path: paths[AdmPage.BLOCKS_CREATE],
-      component: <BlockDetail method={PageMetods.CREATE} />,
+      component: <BlockDetail method={PageMethods.CREATE} />,
       exact: true,
     },
     {
-      type: AdmPage.BLOCKS_ROUTE,
-      path: paths[AdmPage.BLOCKS_ROUTE],
-      component: <BlockDetail method={PageMetods.UPDATE} />,
+      type: AdmPage.BLOCKS_EDIT,
+      path: paths[AdmPage.BLOCKS_EDIT],
+      component: <BlockDetail method={PageMethods.UPDATE} />,
     },
     {
       type: AdmPage.QUESTIONS_TYPE,
@@ -42,18 +43,30 @@ export function getAdmRoutes(): TypeAdmRoute[] {
     {
       type: AdmPage.QUESTIONS_CREATE,
       path: paths[AdmPage.QUESTIONS_CREATE],
-      component: <QuestionDetail method={PageMetods.CREATE} />,
+      component: <QuestionDetail method={PageMethods.CREATE} />,
       exact: true,
     },
     {
       type: AdmPage.QUESTIONS_ROUTE,
       path: paths[AdmPage.QUESTIONS_ROUTE],
-      component: <QuestionDetail method={PageMetods.UPDATE} />,
+      component: <QuestionDetail method={PageMethods.UPDATE} />,
     },
     {
       type: AdmPage.STYLISTS,
       path: paths[AdmPage.STYLISTS],
       component: <StylistsPageContainer />,
+      exact: true,
+    },
+    {
+      type: AdmPage.STYLISTS_CREATE,
+      path: paths[AdmPage.STYLISTS_CREATE],
+      component: <StylistDetail method={PageMethods.CREATE} />,
+      exact: true,
+    },
+    {
+      type: AdmPage.STYLISTS_EDIT,
+      path: paths[AdmPage.STYLISTS_EDIT],
+      component: <StylistDetail method={PageMethods.UPDATE} />,
     },
     {
       type: AdmPage.ANSWERS,

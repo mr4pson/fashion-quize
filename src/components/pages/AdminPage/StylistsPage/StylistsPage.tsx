@@ -1,5 +1,7 @@
 import { Button, Table } from "antd";
 import { memo } from "react";
+import { useHistory } from "react-router";
+import { AdmPage, paths } from "../routes/constants";
 import { DELETE, EDIT, getColumns } from "./constants";
 import styles from "./StylistsPage.module.scss";
 import { TypeStylists } from "./types";
@@ -16,7 +18,7 @@ const StylistsPage: React.FC<Props> = (props) => {
     switch (type) {
       case EDIT:
         return () => {
-          // history.push(paths[AdmPage.QUESTIONS_ROUTE].replace(QUIZE_TYPE, props.quizeType).replace(ID, id.toString()));
+          history.push(paths[AdmPage.STYLISTS] + "/edit/" + id);
         };
       case DELETE:
         return () => {
@@ -27,20 +29,22 @@ const StylistsPage: React.FC<Props> = (props) => {
     }
   }
 
+  const history = useHistory();
+
   const dataSource = props.stylists?.map((stylist) => ({
     key: stylist.id,
     ...stylist,
   }));
 
+  const handleRedirect = () => {
+    history.push(paths[AdmPage.STYLISTS_CREATE]);
+  };
+
   return (
     <>
       <div className={styles["table-top"]}>
         <h1 className={styles["table-top__title"]}>Список стилистов</h1>
-        <Button
-          // onClick={handleRedirect}
-          className={styles["table-top__btn"]}
-          type="primary"
-        >
+        <Button onClick={handleRedirect} className={styles["table-top__btn"]} type="primary">
           Создать
         </Button>
       </div>

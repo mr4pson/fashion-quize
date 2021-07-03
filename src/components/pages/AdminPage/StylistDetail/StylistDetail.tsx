@@ -3,13 +3,12 @@ import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { TypeRootState } from "redux/ReduxStore";
-import { blocksThunks } from "redux/slicers/blocksPageSlice";
-import { axiosInstance } from "../constants";
+import { stylistsThunks } from "redux/slicers/stylistsPageSlice";
 import { AdmPage, paths } from "../routes/constants";
 import { PageMethods } from "../types";
-import styles from "./BlockDetail.module.scss";
-import { BUTTON, COLOR, formFields, TITLE } from "./constants";
-import { ChangeBlockDto, TypeFormField } from "./type";
+import { BUTTON, formFields, FULL_NAME, LOGIN } from "./constants";
+import styles from "./StylistDetail.module.scss";
+import { TypeEditStylistDto, TypeFormField } from "./type";
 
 const layout = {
   labelCol: { span: 8 },
@@ -20,7 +19,7 @@ const layout = {
 const validateMessages = {
   required: "${label} не может быть пустым!",
   string: {
-    max: "${label} не может быть длиннее ${max} символов",
+    max: "${label} не может быть длиннее ${max} символов!",
   },
 };
 /* eslint-enable no-template-curly-in-string */
@@ -29,37 +28,37 @@ type Props = {
   method: PageMethods;
 };
 
-const BlockDetail: React.FC<Props> = (props) => {
-  const history = useHistory();
+const StylistDetail: React.FC<Props> = (props) => {
   const { id } = useParams() as any;
+  const history = useHistory();
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
-  const blocksState = useSelector((state: TypeRootState) => ({
-    block: state.blocksPage.block,
+  const stylistsState = useSelector((state: TypeRootState) => ({
+    stylist: state.stylistsPage.stylist,
   }));
 
-  const onFinish = async (payload: ChangeBlockDto) => {
+  const onFinish = async (payload: TypeEditStylistDto) => {
     setLoading(true);
     if (id) {
-      await axiosInstance.put(`/api/blocks/${id}`, payload);
+      // await axiosInstance.put(`/api/stylists/${id}`, payload);
       setLoading(false);
-      history.push(paths[AdmPage.BLOCKS]);
+      history.push(paths[AdmPage.STYLISTS]);
       return;
     }
-    await axiosInstance.post("/api/blocks", payload);
+    // await axiosInstance.post("/api/stylists", payload);
     setLoading(false);
-    history.push(paths[AdmPage.BLOCKS]);
+    history.push(paths[AdmPage.STYLISTS]);
   };
 
   function getPageTitle() {
-    return id ? `Изменение блока №${id}` : "Создание блока";
+    return id ? `Редактирование стилиста №${id}` : "Добавить стилиста";
   }
 
   function getFormField(type: string, field: TypeFormField) {
     switch (type) {
-      case TITLE:
-      case COLOR:
+      case FULL_NAME:
+      case LOGIN:
         return (
           <Form.Item name={[field.name]} label={field.label} rules={[{ required: true, type: "string", max: 99 }]}>
             <Input />
@@ -80,13 +79,13 @@ const BlockDetail: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (id) {
-      dispatch(blocksThunks.getBlock(id));
+      dispatch(stylistsThunks.getStylist(id));
     }
   }, [dispatch, id]);
 
   useEffect(() => {
     return () => {
-      dispatch(blocksThunks.clearBlock());
+      dispatch(stylistsThunks.clearStylist());
     };
   }, [dispatch]);
 
@@ -95,14 +94,13 @@ const BlockDetail: React.FC<Props> = (props) => {
       <div className={styles["detail__header"]}>
         <h1>{getPageTitle()}</h1>
       </div>
-
-      {(!!id && !!blocksState.block.title) || props.method === PageMethods.CREATE ? (
+      {(!!id && !!stylistsState.stylist.name) || props.method === PageMethods.CREATE ? (
         <Form
-          initialValues={blocksState.block}
           {...layout}
           name="nest-messages"
           onFinish={onFinish}
           validateMessages={validateMessages}
+          initialValues={stylistsState.stylist}
         >
           {formFields.map((field) => (
             <div key={field.id} className={styles["detail__field"]}>
@@ -117,4 +115,4 @@ const BlockDetail: React.FC<Props> = (props) => {
   );
 };
 
-export default memo(BlockDetail);
+export default memo(StylistDetail);
