@@ -1,13 +1,12 @@
 import { Modal, Tabs } from "antd";
-import React, { useEffect, useState } from "react";
-import { memo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { thunks } from "redux/reducers/questionsPageReducer";
-import { TypeAppState } from "redux/ReduxStore";
-import QuestionsPage from "./QuestionsPage";
 import { QuizeTypes } from "common/types/type";
+import React, { memo, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
+import { questionsThunks } from "redux/reducers/questionsPageSlice";
+import { TypeRootState } from "redux/ReduxStore";
 import { AdmPage, paths } from "../routes/constants";
+import QuestionsPage from "./QuestionsPage";
 
 const { TabPane } = Tabs;
 
@@ -16,12 +15,12 @@ const QuestionsPageContainer: React.FC = () => {
   const history = useHistory();
   const { quizeType } = useParams() as any;
 
-  const questionState = useSelector((state: TypeAppState) => ({
+  const questionState = useSelector((state: TypeRootState) => ({
     questions: state.questionsPage.questions,
   }));
-  const [visible, setVisible] = React.useState(false);
-  const [confirmLoading, setConfirmLoading] = React.useState(false);
-  const [questionId, setQuestionId] = React.useState<number | null>(null);
+  const [visible, setVisible] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [questionId, setQuestionId] = useState<number | null>(null);
   const [curQuizeType, setCurQuizeType] = useState<QuizeTypes>(quizeType);
 
   const showModal = () => {
@@ -32,10 +31,10 @@ const QuestionsPageContainer: React.FC = () => {
     setVisible(false);
   };
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     setConfirmLoading(true);
 
-    await dispatch(thunks.removeQuestion(questionId!, quizeType));
+    dispatch(questionsThunks.removeQuestion(questionId!, quizeType));
 
     setVisible(false);
     setConfirmLoading(false);
@@ -47,7 +46,7 @@ const QuestionsPageContainer: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(thunks.getQuestionsByQuizeType(quizeType));
+    dispatch(questionsThunks.getQuestionsByQuizeType(quizeType));
   }, [dispatch, quizeType]);
 
   const handleQuizeTypeChange = (tabKey) => {

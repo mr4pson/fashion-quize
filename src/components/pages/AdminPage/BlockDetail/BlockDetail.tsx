@@ -2,8 +2,8 @@ import { Button, Form, Input } from "antd";
 import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { thunks } from "redux/reducers/blocksPageReducer";
-import { TypeAppState } from "redux/ReduxStore";
+import { blocksThunks } from "redux/reducers/blocksPageSlice";
+import { TypeRootState } from "redux/ReduxStore";
 import { axiosInstance } from "../constants";
 import { AdmPage, paths } from "../routes/constants";
 import { PageMetods } from "../types";
@@ -27,15 +27,15 @@ const validateMessages = {
 
 type Props = {
   method: PageMetods;
-}
+};
 
 const BlockDetail: React.FC<Props> = (props) => {
   const { id } = useParams() as any;
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  
+
   const dispatch = useDispatch();
-  const blocksState = useSelector((state: TypeAppState) => ({
+  const blocksState = useSelector((state: TypeRootState) => ({
     block: state.blocksPage.block,
   }));
 
@@ -47,13 +47,13 @@ const BlockDetail: React.FC<Props> = (props) => {
       history.push(paths[AdmPage.BLOCKS]);
       return;
     }
-    await axiosInstance.post('/api/blocks', payload);
+    await axiosInstance.post("/api/blocks", payload);
     setLoading(false);
     history.push(paths[AdmPage.BLOCKS]);
-  }
-  
+  };
+
   function getPageTitle() {
-    return id ? `Изменение блока №${id}` : 'Создание блока';
+    return id ? `Изменение блока №${id}` : "Создание блока";
   }
 
   function getFormField(type: string, field: TypeFormField) {
@@ -61,11 +61,7 @@ const BlockDetail: React.FC<Props> = (props) => {
       case TITLE:
       case COLOR:
         return (
-          <Form.Item
-            name={[field.name]}
-            label={field.label}
-            rules={[{ required: true, type: "string", max: 99 }]}
-          >
+          <Form.Item name={[field.name]} label={field.label} rules={[{ required: true, type: "string", max: 99 }]}>
             <Input />
           </Form.Item>
         );
@@ -78,19 +74,19 @@ const BlockDetail: React.FC<Props> = (props) => {
           </Form.Item>
         );
       default:
-        return <></>
+        return <></>;
     }
   }
 
   useEffect(() => {
     if (id) {
-      dispatch(thunks.getBlock(id));
+      dispatch(blocksThunks.getBlock(id));
     }
   }, [dispatch, id]);
 
   useEffect(() => {
     return () => {
-      dispatch(thunks.clearBlock());
+      dispatch(blocksThunks.clearBlock());
     };
   }, [dispatch]);
   return (
@@ -98,19 +94,23 @@ const BlockDetail: React.FC<Props> = (props) => {
       <div className={styles["detail__header"]}>
         <h1>{getPageTitle()}</h1>
       </div>
-      {(!!id && !!blocksState.block.title) || props.method === PageMetods.CREATE ?<Form
-        initialValues={blocksState.block}
-        {...layout}
-        name="nest-messages"
-        onFinish={onFinish}
-        validateMessages={validateMessages}
-      >
-        {formFields.map((field) => (
-          <div key={field.id} className={styles["detail__field"]}>
-            {getFormField(field.type, field)}
-          </div>
-        ))}
-      </Form> : ''}
+      {(!!id && !!blocksState.block.title) || props.method === PageMetods.CREATE ? (
+        <Form
+          initialValues={blocksState.block}
+          {...layout}
+          name="nest-messages"
+          onFinish={onFinish}
+          validateMessages={validateMessages}
+        >
+          {formFields.map((field) => (
+            <div key={field.id} className={styles["detail__field"]}>
+              {getFormField(field.type, field)}
+            </div>
+          ))}
+        </Form>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

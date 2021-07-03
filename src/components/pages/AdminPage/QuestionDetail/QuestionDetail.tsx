@@ -1,14 +1,14 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Button, Form, FormInstance, Input, Select } from "antd";
-import { getImageUrl } from "common/heplers/common-helpers";
+import { getImageUrl } from "common/helpers/common-helpers";
 import { QuestionType } from "components/pages/QuizePage/types";
 import { useUploadFile } from "hooks/useUploadFile";
 import { memo, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { thunks as blockThunks } from "redux/reducers/blocksPageReducer";
-import { thunks } from "redux/reducers/questionsPageReducer";
-import { TypeAppState } from "redux/ReduxStore";
+import { blocksThunks } from "redux/reducers/blocksPageSlice";
+import { questionsThunks } from "redux/reducers/questionsPageSlice";
+import { TypeRootState } from "redux/ReduxStore";
 import { axiosInstance } from "../constants";
 import { AdmPage, paths } from "../routes/constants";
 import { PageMetods } from "../types";
@@ -24,17 +24,14 @@ type Props = {
 };
 
 const QuestionDetail: React.FC<Props> = (props) => {
-
   const formRef = useRef<FormInstance>(null);
   const { id, quizeType } = useParams() as any;
   const [loading, setLoading] = useState(false);
-  const [questionType, setQuestionType] = useState<QuestionType>(
-    "" as QuestionType
-  );
+  const [questionType, setQuestionType] = useState<QuestionType>("" as QuestionType);
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const state = useSelector((state: TypeAppState) => ({
+  const state = useSelector((state: TypeRootState) => ({
     question: state.questionsPage.question,
     blocks: state.blocksPage.blocks,
   }));
@@ -50,7 +47,6 @@ const QuestionDetail: React.FC<Props> = (props) => {
   const [answerOptions, setAnswerOptions] = useState<any>([]);
 
   const onFinish = async (questionData: ChangeQuestionDto) => {
-
     const payload = {
       ...questionData,
       image: mediaFile ? mediaFile : state.question.image,
@@ -70,12 +66,11 @@ const QuestionDetail: React.FC<Props> = (props) => {
     await axiosInstance.post("/api/questions", payload);
     setLoading(false);
     history.push(`${paths[AdmPage.QUESTIONS]}/${quizeType}`);
-
   };
 
   useEffect(() => {
     if (id) {
-      dispatch(thunks.getQuestion(id));
+      dispatch(questionsThunks.getQuestion(id));
     }
   }, [dispatch, id]);
 
@@ -83,9 +78,9 @@ const QuestionDetail: React.FC<Props> = (props) => {
     switch (questionType) {
       case QuestionType.INPUT:
       case QuestionType.TEXT:
-        setAnswerOptions('');
+        setAnswerOptions("");
         break;
-    
+
       default:
         break;
     }
@@ -99,14 +94,14 @@ const QuestionDetail: React.FC<Props> = (props) => {
   }, [state.question]);
 
   useEffect(() => {
-    dispatch(blockThunks.getBlocks());
+    dispatch(blocksThunks.getBlocks());
     return () => {
-      dispatch(thunks.clearQuestion());
+      dispatch(questionsThunks.clearQuestion());
     };
   }, [dispatch]);
 
   const handleAddAnswerOption = () => {
-    setAnswerOptions((prevState) => Array.isArray(prevState) ? prevState.concat("") : [""]);
+    setAnswerOptions((prevState) => (Array.isArray(prevState) ? prevState.concat("") : [""]));
   };
 
   const handleRemoveAnswerOption = (index) => {
@@ -134,8 +129,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
       <div className={styles["detail__header"]}>
         <h1>{getPageTitle(id)}</h1>
       </div>
-      {(!!id && !!state.question.description) ||
-      props.method === PageMetods.CREATE ? (
+      {(!!id && !!state.question.description) || props.method === PageMetods.CREATE ? (
         <Form
           initialValues={initialValues}
           {...layout}
@@ -143,11 +137,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
           onFinish={onFinish}
           validateMessages={validateMessages}
         >
-          <Form.Item
-            name="description"
-            label="Вопрос"
-            rules={[{ required: true, type: "string", max: 99 }]}
-          >
+          <Form.Item name="description" label="Вопрос" rules={[{ required: true, type: "string", max: 99 }]}>
             <Input.TextArea />
           </Form.Item>
 
@@ -158,11 +148,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
           {state.question?.image && (
             <div
               style={{
-                backgroundImage: `url(${
-                  mediaFile
-                    ? getImageUrl(mediaFile)
-                    : getImageUrl(state.question?.image)
-                })`,
+                backgroundImage: `url(${mediaFile ? getImageUrl(mediaFile) : getImageUrl(state.question?.image)})`,
               }}
               className={styles["detail__uploaded-image"]}
             ></div>
@@ -193,19 +179,12 @@ const QuestionDetail: React.FC<Props> = (props) => {
             </Select>
           </Form.Item>
 
-          {[QuestionType.SINGLE_OPTION, QuestionType.MULTIPLE_OPTION].includes(
-            questionType
-          ) && (
+          {[QuestionType.SINGLE_OPTION, QuestionType.MULTIPLE_OPTION].includes(questionType) && (
             <div className={styles["answer-controls"]}>
-              <h2 className={styles["answer-controls__title"]}>
-                Варианты ответов
-              </h2>
+              <h2 className={styles["answer-controls__title"]}>Варианты ответов</h2>
               {answerOptions?.length > 0 &&
                 answerOptions.map((answerOption, index) => (
-                  <div
-                    key={"answer-option" + index}
-                    className={styles["answer-control"]}
-                  >
+                  <div key={"answer-option" + index} className={styles["answer-control"]}>
                     <Input
                       value={answerOption}
                       onChange={(e) => handleAnswerOptionChange(e, index)}
@@ -222,9 +201,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
                   </div>
                 ))}
               {answerOptions?.length === 0 && (
-                <div className={styles["answer-controls__info"]}>
-                  Список вариантов ответов пуст
-                </div>
+                <div className={styles["answer-controls__info"]}>Список вариантов ответов пуст</div>
               )}
               <div className={styles["answer-controls__add-btn-container"]}>
                 <Button type="link" onClick={handleAddAnswerOption}>

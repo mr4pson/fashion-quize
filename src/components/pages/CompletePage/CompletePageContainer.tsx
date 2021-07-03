@@ -1,13 +1,11 @@
-import axios from "axios";
 import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actions } from "redux/reducers/quizePageReducer";
-import { TypeAppState } from "redux/ReduxStore";
+import { TypeRootState } from "redux/ReduxStore";
 import CompletePage from "./CompletePage";
 
 const CompletePageContainer: React.FC = () => {
   const dispatch = useDispatch();
-  const quizeState = useSelector((state: TypeAppState) => ({
+  const quizeState = useSelector((state: TypeRootState) => ({
     answers: state.quizePage.answers,
   }));
 

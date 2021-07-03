@@ -1,5 +1,5 @@
 import "antd/dist/antd.css";
-import { errorResponseHandler } from "common/heplers/common-helpers";
+import { errorResponseHandler } from "common/helpers/common-helpers";
 import { axiosInstance } from "components/pages/AdminPage/constants";
 import { useAuth } from "hooks/useAuth";
 import { useHistory } from "react-router";
