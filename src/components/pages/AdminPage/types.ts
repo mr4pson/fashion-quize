@@ -6,7 +6,7 @@ export type TypeAuthLogin = {
 export type TypeUser = {
   login: string;
   password: string;
-}
+};
 
 export type TypeAuthLoginResponse = {
   error?: LoginError;
@@ -16,20 +16,20 @@ export type TypeUseAuthHookResult = {
   loading: boolean;
   login: (user: TypeUser) => Promise<TypeAuthLoginResponse>;
   logout: () => void;
-}
+};
 
 export enum LoginError {
-  MISSING_FIELDS = 'MISSING_FIELDS',
-  WRONG_PASSWORD = 'WRONG_PASSWORD',
-  ACCOUNT_BLOCKED = 'ACCOUNT_BLOCKED',
-  USER_NOT_FOUND = 'USER_NOT_FOUND',
-  DEACTIVATED_USER = 'DEACTIVATED_USER',
-  RESET_REQUIRED = 'RESET_REQUIRED',
+  MISSING_FIELDS = "MISSING_FIELDS",
+  WRONG_PASSWORD = "WRONG_PASSWORD",
+  ACCOUNT_BLOCKED = "ACCOUNT_BLOCKED",
+  USER_NOT_FOUND = "USER_NOT_FOUND",
+  DEACTIVATED_USER = "DEACTIVATED_USER",
+  RESET_REQUIRED = "RESET_REQUIRED",
 }
 
-export enum PageMetods {
-  CREATE = 'CREATE',
-  UPDATE = 'UPDATE'
+export enum PageMethods {
+  CREATE = "CREATE",
+  UPDATE = "UPDATE",
 }
 
 export enum ControlType {
@@ -44,4 +44,4 @@ export enum ControlType {
 export type TypeSelectOption = {
   title: string;
   value: string | number;
-}
+};

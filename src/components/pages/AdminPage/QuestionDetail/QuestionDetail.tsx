@@ -11,7 +11,7 @@ import { blocksThunks } from "redux/slicers/blocksPageSlice";
 import { questionsThunks } from "redux/slicers/questionsPageSlice";
 import { axiosInstance } from "../constants";
 import { AdmPage, paths } from "../routes/constants";
-import { PageMetods } from "../types";
+import { PageMethods } from "../types";
 import { layout, QuestionTypeOptions, validateMessages } from "./constants";
 import { getPageTitle } from "./helpers";
 import styles from "./QuestionDetail.module.scss";
@@ -20,15 +20,15 @@ import { ChangeQuestionDto } from "./types";
 const { Option } = Select;
 
 type Props = {
-  method: PageMetods;
+  method: PageMethods;
 };
 
 const QuestionDetail: React.FC<Props> = (props) => {
+  const history = useHistory();
   const formRef = useRef<FormInstance>(null);
   const { id, quizeType } = useParams() as any;
   const [loading, setLoading] = useState(false);
   const [questionType, setQuestionType] = useState<QuestionType>("" as QuestionType);
-  const history = useHistory();
 
   const dispatch = useDispatch();
   const state = useSelector((state: TypeRootState) => ({
@@ -129,7 +129,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
       <div className={styles["detail__header"]}>
         <h1>{getPageTitle(id)}</h1>
       </div>
-      {(!!id && !!state.question.description) || props.method === PageMetods.CREATE ? (
+      {(!!id && !!state.question.description) || props.method === PageMethods.CREATE ? (
         <Form
           initialValues={initialValues}
           {...layout}

@@ -1,5 +1,5 @@
 import { Modal } from "antd";
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TypeRootState } from "redux/ReduxStore";
 import { stylistsThunks } from "redux/slicers/stylistsPageSlice";
@@ -14,7 +14,6 @@ const StylistsPageContainer: React.FC = () => {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [stylistId, setStylistId] = useState<number | null>(null);
-  // const [curQuizeType, setCurQuizeType] = useState<QuizeTypes>(quizeType);
 
   const showModal = () => {
     setVisible(true);
@@ -38,20 +37,20 @@ const StylistsPageContainer: React.FC = () => {
     showModal();
   };
 
-  // useEffect(() => {
-  //   dispatch(questionsThunks.getQuestionsByQuizeType(quizeType));
-  // }, [dispatch, quizeType]);
+  useEffect(() => {
+    dispatch(stylistsThunks.getStylists());
+  }, [dispatch]);
 
   return (
     <>
-      <StylistsPage stylists={stylistsState.stylists} onStylistsRemove={onStylistsRemove} />;
+      <StylistsPage stylists={stylistsState.stylists} onStylistsRemove={onStylistsRemove} />
       <Modal
         title="Удаление стилиста"
-        visible={visible}
         okText="Удалить"
         cancelText="Отменить"
-        onOk={handleDelete}
+        visible={visible}
         confirmLoading={confirmLoading}
+        onOk={handleDelete}
         onCancel={handleCancel}
       >
         <p>Вы точно хотите удалить стилиста №{stylistId}?</p>

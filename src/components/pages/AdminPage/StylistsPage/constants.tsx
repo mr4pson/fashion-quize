@@ -1,4 +1,4 @@
-import { Button, Input } from "antd";
+import { Button } from "antd";
 import { TypeStylists } from "./types";
 
 export const EDIT = "EDIT";
@@ -23,16 +23,10 @@ export const getColumns = (
 ) => {
   return [
     { title: "ID", dataIndex: "key", key: "key" },
-    { title: "ФИО", dataIndex: "fullName", key: "fullName" },
-    { title: "Почта", dataIndex: "email", key: "email" },
-    {
-      title: "Пароль",
-      dataIndex: "password",
-      key: "password",
-      render: (password: string) => (
-        <Input.Password placeholder="input password" value={password} style={{ ...inputStyles }} />
-      ),
-    },
+    { title: "ФИО", dataIndex: "name", key: "name" },
+    { title: "Логин", dataIndex: "login", key: "login" },
+    { title: "Дата создания", dataIndex: "createdAt", key: "createdAt" },
+    { title: "Дата обновления", dataIndex: "updatedAt", key: "updatedAt" },
     {
       title: "Действие",
       dataIndex: "",
@@ -53,8 +47,4 @@ export const getColumns = (
       ),
     },
   ];
-};
-
-const inputStyles = {
-  border: "none",
 };
