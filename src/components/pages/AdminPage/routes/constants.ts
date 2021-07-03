@@ -7,11 +7,12 @@ export enum AdmPage {
   QUESTIONS_ROUTE = "QUESTIONS_ROUTE",
   QUESTIONS = "QUESTIONS",
   QUESTIONS_TYPE = "QUESTIONS_TYPE",
+  STYLISTS = "STYLISTS",
   ANSWERS = "ANSWERS",
 }
 
-export const QUIZE_TYPE = ':quizeType';
-export const ID = ':id';
+export const QUIZE_TYPE = ":quizeType";
+export const ID = ":id";
 
 export const paths = {
   [AdmPage.BASE]: "/admin",
@@ -22,5 +23,6 @@ export const paths = {
   [AdmPage.QUESTIONS_TYPE]: "/admin/questions/:quizeType",
   [AdmPage.QUESTIONS_CREATE]: `/admin/questions/${QUIZE_TYPE}/create`,
   [AdmPage.QUESTIONS_ROUTE]: `/admin/questions/${QUIZE_TYPE}/edit/:id`,
+  [AdmPage.STYLISTS]: "/admin/stylists",
   [AdmPage.ANSWERS]: "/admin/answers",
 };

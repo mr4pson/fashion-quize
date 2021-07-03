@@ -1,8 +1,8 @@
 import { Modal } from "antd";
 import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { blocksThunks } from "redux/reducers/blocksPageSlice";
 import { TypeRootState } from "redux/ReduxStore";
+import { blocksThunks } from "redux/slicers/blocksPageSlice";
 import BlocksPage from "./BlocksPage";
 
 const BlocksPageContainer: React.FC = () => {

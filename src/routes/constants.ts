@@ -18,5 +18,5 @@ export const paths = {
   [Page.QUIZE_ROUTE]: `/quize/${QUIZE_TYPE}/${QUESTION_NUMBER}`,
   [Page.COMPLETE]: "/complete",
   [Page.ADMIN]: "/admin",
-  [Page.LOGIN]: "/login"
+  [Page.LOGIN]: "/login",
 };

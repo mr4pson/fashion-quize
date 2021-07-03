@@ -4,7 +4,7 @@ import { TypeQuestion } from "components/pages/QuizePage/types";
 import { memo } from "react";
 import { useHistory } from "react-router";
 import { AdmPage, ID, paths, QUIZE_TYPE } from "../routes/constants";
-import { CHANGE, DELETE, getColumns } from "./constants";
+import { DELETE, EDIT, getColumns } from "./constants";
 import styles from "./QuestionsPage.module.scss";
 
 type Props = {
@@ -18,11 +18,9 @@ const QuestionsPage: React.FC<Props> = (props) => {
 
   function getActionRow(type: string, id: number) {
     switch (type) {
-      case CHANGE:
+      case EDIT:
         return () => {
-          history.push(paths[AdmPage.QUESTIONS_ROUTE]
-            .replace(QUIZE_TYPE, props.quizeType)
-            .replace(ID, id.toString()));
+          history.push(paths[AdmPage.QUESTIONS_ROUTE].replace(QUIZE_TYPE, props.quizeType).replace(ID, id.toString()));
         };
       case DELETE:
         return () => {
@@ -48,13 +46,9 @@ const QuestionsPage: React.FC<Props> = (props) => {
     <>
       <div className={styles["table-top"]}>
         <h1 className={styles["table-top__title"]}>
-          {props.quizeType === QuizeTypes.FOR_MEN ? 'Опрос для мужчин' : 'Опрос для женщин'}
+          {props.quizeType === QuizeTypes.FOR_MEN ? "Опрос для мужчин" : "Опрос для женщин"}
         </h1>
-        <Button
-          onClick={handleRedirect}
-          className={styles["table-top__btn"]}
-          type="primary"
-        >
+        <Button onClick={handleRedirect} className={styles["table-top__btn"]} type="primary">
           Создать
         </Button>
       </div>
