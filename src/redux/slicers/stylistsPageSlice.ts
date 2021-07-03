@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
 import { TypeStylists } from "components/pages/AdminPage/StylistsPage/types";
 import { TypeDispatch } from "redux/ReduxStore";
+import { axiosInstance } from "components/pages/AdminPage/constants";
 
 const stylistsPageSlice = createSlice({
   name: "stylistsPage",
@@ -23,20 +23,19 @@ const stylistsPageSlice = createSlice({
 
 export const stylistsThunks = {
   getStylists: () => async (dispatch: TypeDispatch) => {
-    // const response = await axiosInstance.get("/api/stylists");
-    const response = await axios.get("/mocks/getStylists.json");
+    const response = await axiosInstance.get("/api/stylists");
     dispatch(setStylists(response?.data));
   },
   getStylist: (id: number) => async (dispatch: TypeDispatch) => {
-    // const response = await axiosInstance.get(`/api/stylists/${id}`);
-    // dispatch(setStylist(response?.data));
+    const response = await axiosInstance.get(`/api/stylists/${id}`);
+    dispatch(setStylist(response?.data));
   },
   clearStylist: () => (dispatch: TypeDispatch) => {
     dispatch(setStylist({} as TypeStylists));
   },
   removeStylist: (id: number) => async (dispatch: TypeDispatch) => {
-    // await axiosInstance.delete(`/api/stylists/${id}`);
-    // dispatch(stylistsThunks.getStylists());
+    await axiosInstance.delete(`/api/stylists/${id}`);
+    dispatch(stylistsThunks.getStylists());
   },
 };
 
