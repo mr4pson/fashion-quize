@@ -1,4 +1,5 @@
 import { Button, Form, Input } from "antd";
+import { axiosInstance } from "components/pages/AdminPage/constants";
 import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
@@ -41,12 +42,12 @@ const StylistDetail: React.FC<Props> = (props) => {
   const onFinish = async (payload: TypeEditStylistDto) => {
     setLoading(true);
     if (id) {
-      // await axiosInstance.put(`/api/stylists/${id}`, payload);
+      await axiosInstance.put(`/api/stylists/${id}`, payload);
       setLoading(false);
       history.push(paths[AdmPage.STYLISTS]);
       return;
     }
-    // await axiosInstance.post("/api/stylists", payload);
+    await axiosInstance.post("/api/stylists", payload);
     setLoading(false);
     history.push(paths[AdmPage.STYLISTS]);
   };
