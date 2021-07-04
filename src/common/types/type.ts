@@ -1,6 +1,7 @@
 export enum userType {
   USER = 'USER',
-  ADMIN = 'ADMIN'
+  ADMIN = 'ADMIN',
+  STYLIST = 'STYLIST'
 }
 
 export enum QuizeTypes {

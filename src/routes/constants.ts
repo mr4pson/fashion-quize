@@ -5,7 +5,9 @@ export enum Page {
   QUIZE_ROUTE = "QUIZE_ROUTE",
   COMPLETE = "COMPLETE",
   ADMIN = "ADMIN",
+  STYLIST = "STYLIST",
   LOGIN = "LOGIN",
+  RESET_PASSWORD = "RESET_PASSWORD",
 }
 
 export const QUIZE_TYPE = ":quizeType";
@@ -18,5 +20,7 @@ export const paths = {
   [Page.QUIZE_ROUTE]: `/quize/${QUIZE_TYPE}/${QUESTION_NUMBER}`,
   [Page.COMPLETE]: "/complete",
   [Page.ADMIN]: "/admin",
+  [Page.STYLIST]: "/stylist",
   [Page.LOGIN]: "/login",
+  [Page.RESET_PASSWORD]: "/reset-password",
 };

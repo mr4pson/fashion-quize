@@ -1,0 +1,31 @@
+#components-layout-demo-side .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.layout {
+  min-height: 100vh;
+
+  &__content {
+    position: relative;
+    overflow: initial;
+  }
+  &__logo {
+    text-align: center;
+    margin: 10px 0 0;
+    svg {
+      width: 40px;
+      height: 100%;
+    }
+  }
+}
+
+.item {
+  font-size: 14px;
+}
+
+.page-content {
+  background: #fff;
+  padding: 10px 20px;
+}

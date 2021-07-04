@@ -1,20 +1,19 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
-import { getUserInfo } from "common/helpers/common-helpers";
-import { userType } from "common/types/type";
 import React, { memo, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import { ReactComponent as LogoSvg } from "../../../images/logo.svg";
-import AdmHeader from "./AdmHeader";
-import styles from "./AdminPage.module.scss";
+import AdmHeader from "../AdminPage/AdmHeader";
+import styles from "./StylistPage.module.scss";
 import { menuItems } from "./constants";
-import { getJwtPair } from "./helpers";
-import AdmRoutes from "./routes/AdmRoutes";
-import { AdmPage, paths } from "./routes/constants";
+import { getJwtPair } from "../AdminPage/helpers";
+import { getUserInfo } from "common/helpers/common-helpers";
+import StylistRoutes from "./routes/StylistRoutes";
+import { userType } from "common/types/type";
 
 const { Content, Footer, Sider } = Layout;
 
-const AdminPage: React.FC = () => {
+const StylistPage: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const history = useHistory();
@@ -27,20 +26,20 @@ const AdminPage: React.FC = () => {
   (async () => {
     const jwtPair = await getJwtPair();
     const userInfo = await getUserInfo();
-    if (!jwtPair || userInfo.role !== userType.ADMIN) {
+    if (!jwtPair || userInfo.role !== userType.STYLIST) {
       history.push("/login");
     }
   })();
 
   function getSelectedKey() {
-    if (location.pathname.includes(paths[AdmPage.BLOCKS])) return "1";
-    if (location.pathname.includes(paths[AdmPage.QUESTIONS])) return "2";
-    if (location.pathname.includes(paths[AdmPage.ANSWERS])) return "3";
-    if (location.pathname.includes(paths[AdmPage.STYLISTS])) return "4";
+    // if (location.pathname.includes(paths[AdmPage.BLOCKS])) return "1";
+    // if (location.pathname.includes(paths[AdmPage.QUESTIONS])) return "2";
+    // if (location.pathname.includes(paths[AdmPage.ANSWERS])) return "3";
+    // if (location.pathname.includes(paths[AdmPage.STYLISTS])) return "4";
     return "1";
   }
 
-  return (
+  return(
     <Layout className={styles["layout"]}>
       <Sider
         trigger={isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -69,7 +68,7 @@ const AdminPage: React.FC = () => {
         <AdmHeader />
         <Content style={{ margin: "0 16px" }}>
           <div className={styles["page-content"]}>
-            <AdmRoutes />
+            <StylistRoutes />
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}></Footer>
@@ -78,4 +77,4 @@ const AdminPage: React.FC = () => {
   );
 };
 
-export default memo(AdminPage);
+export default memo(StylistPage);

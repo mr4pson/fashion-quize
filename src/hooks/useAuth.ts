@@ -4,9 +4,8 @@ import { getUserInfo, openNotification } from "common/helpers/common-helpers";
 // import { getUserInfo } from "components/common/commonHelper";
 import { userType } from "common/types/type";
 import { useState } from "react";
-import { Page } from "routes/constants";
+import { Page, paths } from "routes/constants";
 import { getLoginError, removeJwtPair, setJwtPair } from "../components/pages/AdminPage/helpers";
-import { AdmPage, paths } from "../components/pages/AdminPage/routes/constants";
 import { TypeAuthLoginResponse, TypeUseAuthHookResult, TypeUser } from "../components/pages/AdminPage/types";
 
 export function useAuth(history): TypeUseAuthHookResult {
@@ -27,11 +26,20 @@ export function useAuth(history): TypeUseAuthHookResult {
       localStorage.setItem("password", password);
       setJwtPair(tokenData.accessToken);
       const userInfo = getUserInfo();
-      if (userInfo?.role === userType.ADMIN) {
+      if (userInfo?.role) {
         message.success({ content: "Авторизация прошла успешно", key: "auth" });
-        history.push(paths[AdmPage.BLOCKS]);
-      } else {
-        history.push(paths[Page.LOGIN]);
+      }
+
+      switch (userInfo?.role) {
+        case userType.ADMIN:
+          history.push(paths[Page.ADMIN]);
+          break;
+        case userType.STYLIST:
+          history.push(paths[Page.STYLIST]);
+          break;
+        default:
+          history.push(paths[Page.LOGIN]);
+          break;
       }
       return {};
     } catch ({ response }) {
