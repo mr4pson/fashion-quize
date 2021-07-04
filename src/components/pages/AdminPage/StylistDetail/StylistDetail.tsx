@@ -42,12 +42,12 @@ const StylistDetail: React.FC<Props> = (props) => {
   const onFinish = async (payload: TypeEditStylistDto) => {
     setLoading(true);
     if (id) {
-      await axiosInstance.put(`/api/stylists/${id}`, payload);
+      dispatch(stylistsThunks.updateStylist(id, payload));
       setLoading(false);
       history.push(paths[AdmPage.STYLISTS]);
       return;
     }
-    await axiosInstance.post("/api/stylists", payload);
+    dispatch(stylistsThunks.createStylist(payload));
     setLoading(false);
     history.push(paths[AdmPage.STYLISTS]);
   };
