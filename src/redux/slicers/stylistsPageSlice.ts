@@ -34,14 +34,17 @@ export const stylistsThunks = {
   },
   createStylist: (payload: TypeEditStylistDto) => async () => {
     const response = await axiosInstance.post("/api/stylists", payload);
-    if (response.status === 201) {
+    if (response && response.status === 201) {
       openNotification('success', `Email с паролем был отправлен стилисту на почту ${payload.login}`);
     } else {
       openNotification('error', `Не удалось создать стилиста`);
     }
   },
   updateStylist: (id: number, payload: TypeEditStylistDto) => async () => {
-    await axiosInstance.put(`/api/stylists/${id}`, payload);
+    const response = await axiosInstance.put(`/api/stylists/${id}`, payload);
+    if (!(response && response.status === 200)) {
+      openNotification('error', `Не удалось обновить стилиста`);
+    }
   },
   clearStylist: () => (dispatch: TypeDispatch) => {
     dispatch(setStylist({} as TypeStylists));
