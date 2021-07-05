@@ -1,15 +1,15 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
+import { getUserInfo } from "common/helpers/common-helpers";
+import { userType } from "common/types/type";
 import React, { memo, useState } from "react";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 import { ReactComponent as LogoSvg } from "../../../images/logo.svg";
 import AdmHeader from "../AdminPage/AdmHeader";
-import styles from "./StylistPage.module.scss";
-import { menuItems } from "./constants";
 import { getJwtPair } from "../AdminPage/helpers";
-import { getUserInfo } from "common/helpers/common-helpers";
+import { menuItems } from "./constants";
 import StylistRoutes from "./routes/StylistRoutes";
-import { userType } from "common/types/type";
+import styles from "./StylistPage.module.scss";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -17,7 +17,7 @@ const StylistPage: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const history = useHistory();
-  const location = useLocation();
+  // const location = useLocation();
 
   const onCollapse = (collapsed: boolean) => {
     setIsCollapsed(collapsed);
@@ -39,7 +39,7 @@ const StylistPage: React.FC = () => {
     return "1";
   }
 
-  return(
+  return (
     <Layout className={styles["layout"]}>
       <Sider
         trigger={isCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
