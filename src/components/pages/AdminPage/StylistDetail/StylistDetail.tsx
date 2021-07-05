@@ -1,5 +1,4 @@
 import { Button, Form, Input } from "antd";
-import { axiosInstance } from "components/pages/AdminPage/constants";
 import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
@@ -30,8 +29,8 @@ type Props = {
 };
 
 const StylistDetail: React.FC<Props> = (props) => {
-  const { id } = useParams() as any;
   const history = useHistory();
+  const { id } = useParams() as any;
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -43,14 +42,24 @@ const StylistDetail: React.FC<Props> = (props) => {
     setLoading(true);
     if (id) {
       await dispatch(stylistsThunks.updateStylist(id, payload));
-      setLoading(false);
-      history.push(paths[AdmPage.STYLISTS]);
-      return;
+    } else {
+      await dispatch(stylistsThunks.createStylist(payload));
     }
-    await dispatch(stylistsThunks.createStylist(payload));
     setLoading(false);
     history.push(paths[AdmPage.STYLISTS]);
   };
+
+  useEffect(() => {
+    if (id) {
+      dispatch(stylistsThunks.getStylist(id));
+    }
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(stylistsThunks.clearStylist());
+    };
+  }, [dispatch]);
 
   function getPageTitle() {
     return id ? `Редактирование стилиста №${id}` : "Добавить стилиста";
@@ -77,18 +86,6 @@ const StylistDetail: React.FC<Props> = (props) => {
         return <></>;
     }
   }
-
-  useEffect(() => {
-    if (id) {
-      dispatch(stylistsThunks.getStylist(id));
-    }
-  }, [dispatch, id]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(stylistsThunks.clearStylist());
-    };
-  }, [dispatch]);
 
   return (
     <div className={styles["detail"]}>

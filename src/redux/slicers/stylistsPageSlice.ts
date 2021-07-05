@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TypeStylists } from "components/pages/AdminPage/StylistsPage/types";
-import { TypeDispatch } from "redux/ReduxStore";
+import { openNotification } from "common/helpers/common-helpers";
 import { axiosInstance } from "components/pages/AdminPage/constants";
 import { TypeEditStylistDto } from "components/pages/AdminPage/StylistDetail/type";
-import { openNotification } from "common/helpers/common-helpers";
+import { TypeStylists } from "components/pages/AdminPage/StylistsPage/types";
+import { TypeDispatch } from "redux/ReduxStore";
 
 const stylistsPageSlice = createSlice({
   name: "stylistsPage",
@@ -32,15 +32,15 @@ export const stylistsThunks = {
     const response = await axiosInstance.get(`/api/stylists/${id}`);
     dispatch(setStylist(response?.data));
   },
-  createStylist: (payload: TypeEditStylistDto) => async () => {
+  createStylist: (payload: TypeEditStylistDto) => async (dispatch) => {
     const response = await axiosInstance.post("/api/stylists", payload);
     if (response.status === 201) {
-      openNotification('success', `Email с паролем был отправлен стилисту на почту ${payload.login}`);
+      openNotification("success", `Email с паролем был отправлен стилисту на почту ${payload.login}`);
     } else {
-      openNotification('error', `Не удалось создать стилиста`);
+      openNotification("error", `Не удалось создать стилиста`);
     }
   },
-  updateStylist: (id: number, payload: TypeEditStylistDto) => async () => {
+  updateStylist: (id: number, payload: TypeEditStylistDto) => async (dispatch) => {
     await axiosInstance.put(`/api/stylists/${id}`, payload);
   },
   clearStylist: () => (dispatch: TypeDispatch) => {
