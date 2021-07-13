@@ -7,6 +7,7 @@ import compilationsPageSlice from "./slicers/compilationsPageSlice";
 import questionsPageSlice from "./slicers/questionsPageSlice";
 import quizePageSlice from "./slicers/quizePageSlice";
 import stylistsPageSlice from "./slicers/stylistsPageSlice";
+import tasksPageSlice from "./slicers/tasksPageSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     blocksPage: blocksPageSlice,
     questionsPage: questionsPageSlice,
     stylistsPage: stylistsPageSlice,
+    tasksPage: tasksPageSlice,
     compilationsPage: compilationsPageSlice,
   },
 });
@@ -21,6 +23,7 @@ const store = configureStore({
 export const useAppDispatch = () => useDispatch();
 
 export type TypeRootState = ReturnType<typeof store.getState>;
+// const useAppDispatch = () => useDispatch();
 export type TypeDispatch = Dispatch<any>;
 
 export default store;

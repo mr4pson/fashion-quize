@@ -49,7 +49,7 @@ function ResetPasswordPage(): JSX.Element {
                     <Form.Item>
                         <div className={styles["reset-password-btn-wrap"]}>
                             <Button loading={loading} type="primary" htmlType="submit">
-                                Войти
+                                Отправить
                             </Button>
                         </div>
                     </Form.Item>
