@@ -1,6 +1,7 @@
 import React, { memo } from "react";
-import { Redirect, Route, useLocation } from 'react-router-dom';
-import { StylistPage, paths } from "./constants";
+import { Redirect, Route, useLocation } from "react-router-dom";
+
+import { paths, StlPage } from "./consts";
 
 type Props = {
   path: string;
@@ -9,11 +10,11 @@ type Props = {
   isPrivate?: boolean;
 };
 
-const AdmRoute: React.FC<Props> = ({ path, exact, children }) => {
+const StylistRoute: React.FC<Props> = ({ path, exact, children }) => {
   const location = useLocation();
 
   function hasRedirect(): boolean {
-    return `${location.pathname}` === paths[StylistPage.BASE];
+    return `${location.pathname}` === paths[StlPage.BASE];
   }
 
   if (hasRedirect()) {
@@ -21,7 +22,7 @@ const AdmRoute: React.FC<Props> = ({ path, exact, children }) => {
       // TODO change to diff default
       <Redirect
         to={{
-          pathname: paths[StylistPage.TASKS],
+          pathname: paths[StlPage.TASKS],
         }}
       />
     );
@@ -34,4 +35,4 @@ const AdmRoute: React.FC<Props> = ({ path, exact, children }) => {
   );
 };
 
-export default memo(AdmRoute);
+export default memo(StylistRoute);

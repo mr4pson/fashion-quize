@@ -1,10 +1,10 @@
 import { Button } from "antd";
-import { paths, StylistPage } from "../routes/constants";
+import { paths, StlPage } from "../routes/consts";
 import { TaskStatus, TaskType } from "./types";
 
 export const getColumns = (styles: any, history: any) => {
   const onEditClick = (id) => {
-    history.push(`${paths[StylistPage.TASKS]}/${id}`);
+    history.push(`${paths[StlPage.TASKS]}/${id}`);
   }
   return [
     { title: "ID", dataIndex: "id", key: "id" },

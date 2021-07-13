@@ -1,20 +1,16 @@
-import React, { memo } from "react";
+import React from "react";
+
+import { getStylistRoutes } from "./routes";
 // import { useUser } from 'core/app';
 import StylistRoute from "./StylistRoute";
-import { getStylistRoutes } from "./routes";
 
-const AdmRoutes: React.FC = () => {
+const StylistRoutes: React.FC = () => {
   // const { account } = useUser();
 
   return (
     <>
       {getStylistRoutes().map((route) => (
-        <StylistRoute
-          key={route.type}
-          exact={route.exact}
-          path={route.path}
-          isPrivate={false}
-        >
+        <StylistRoute key={route.type} exact={route.exact} path={route.path} isPrivate={false}>
           {route.component}
         </StylistRoute>
       ))}
@@ -22,4 +18,4 @@ const AdmRoutes: React.FC = () => {
   );
 };
 
-export default memo(AdmRoutes);
+export default StylistRoutes;
