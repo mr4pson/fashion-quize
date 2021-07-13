@@ -1,7 +1,8 @@
-// import { PageMethods } from "../types";
+import CompilationDetail from "../CompilationDetail";
 import CompilationsPageContainer from "../CompilationsPage/CompilationsPageContainer";
 import TaskDetailPage from "../TaskDetailPage";
 import TasksPageContainer from "../TasksPage/TasksPageContainer";
+import { PageMethods } from "../types";
 import { paths, StlPage } from "./consts";
 import { IStylistPage } from "./types";
 
@@ -28,7 +29,12 @@ export function getStylistRoutes(): IStylistPage[] {
     {
       type: StlPage.TASKS_EDIT,
       path: paths[StlPage.TASKS_EDIT],
-      component: <TaskDetailPage/>,
+      component: <TaskDetailPage />,
+    },
+    {
+      type: StlPage.COMPILATIONS_EDIT,
+      path: paths[StlPage.COMPILATIONS_EDIT],
+      component: <CompilationDetail method={PageMethods.UPDATE} />,
     },
   ];
 }

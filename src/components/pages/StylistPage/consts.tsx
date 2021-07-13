@@ -1,4 +1,4 @@
-import { SolutionOutlined } from "@ant-design/icons";
+import { CarryOutOutlined, SolutionOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 import { getJwtPair } from "../AdminPage/helpers";
@@ -13,7 +13,7 @@ export const menuItems = [
   },
   {
     key: "2",
-    icon: <SolutionOutlined />,
+    icon: <CarryOutOutlined />,
     title: "Подборки",
     route: paths[StlPage.COMPILATIONS],
   },
