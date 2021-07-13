@@ -1,5 +1,6 @@
 // import { PageMethods } from "../types";
-import TasksPage from "../TasksPage";
+import TaskDetailPage from "../TaskDetailPage";
+import TasksPageContainer from "../TasksPage/TasksPageContainer";
 import { paths, StylistPage } from "./constants";
 import { TypeAdmRoute } from "./type";
 
@@ -14,8 +15,13 @@ export function getStylistRoutes(): TypeAdmRoute[] {
     {
       type: StylistPage.TASKS,
       path: paths[StylistPage.TASKS],
-      component: <TasksPage/>,
+      component: <TasksPageContainer/>,
       exact: true,
+    },
+    {
+      type: StylistPage.TASKS_EDIT,
+      path: paths[StylistPage.TASKS_EDIT],
+      component: <TaskDetailPage/>,
     },
   ];
 }
