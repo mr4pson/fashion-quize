@@ -1,20 +1,27 @@
 // import { PageMethods } from "../types";
+import CompilationsPageContainer from "../CompilationsPage/CompilationsPageContainer";
 import TasksPage from "../TasksPage";
-import { paths, StylistPage } from "./constants";
-import { TypeAdmRoute } from "./type";
+import { paths, StlPage } from "./consts";
+import { IStylistPage } from "./types";
 
-export function getStylistRoutes(): TypeAdmRoute[] {
+export function getStylistRoutes(): IStylistPage[] {
   return [
     {
-      type: StylistPage.BASE,
-      path: paths[StylistPage.BASE],
+      type: StlPage.BASE,
+      path: paths[StlPage.BASE],
       component: <div></div>,
       exact: true,
     },
     {
-      type: StylistPage.TASKS,
-      path: paths[StylistPage.TASKS],
-      component: <TasksPage/>,
+      type: StlPage.TASKS,
+      path: paths[StlPage.TASKS],
+      component: <TasksPage />,
+      exact: true,
+    },
+    {
+      type: StlPage.COMPILATIONS,
+      path: paths[StlPage.COMPILATIONS],
+      component: <CompilationsPageContainer />,
       exact: true,
     },
   ];

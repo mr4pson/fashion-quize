@@ -2,13 +2,14 @@ import { Button, Form, Input } from "antd";
 import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
+
 import { TypeRootState } from "redux/ReduxStore";
 import { stylistsThunks } from "redux/slicers/stylistsPageSlice";
 import { AdmPage, paths } from "../routes/constants";
 import { PageMethods } from "../types";
 import { BUTTON, formFields, FULL_NAME, LOGIN } from "./constants";
 import styles from "./StylistDetail.module.scss";
-import { TypeEditStylistDto, TypeFormField } from "./type";
+import { TypeEditStylistDto, TypeFormField } from "./types";
 
 const layout = {
   labelCol: { span: 8 },
@@ -87,12 +88,14 @@ const StylistDetail: React.FC<Props> = (props) => {
     }
   }
 
+  const formMethod = (!!id && !!stylistsState.stylist.name) || props.method === PageMethods.CREATE;
+
   return (
     <div className={styles["detail"]}>
       <div className={styles["detail__header"]}>
         <h1>{getPageTitle()}</h1>
       </div>
-      {(!!id && !!stylistsState.stylist.name) || props.method === PageMethods.CREATE ? (
+      {formMethod && (
         <Form
           {...layout}
           name="nest-messages"
@@ -106,8 +109,6 @@ const StylistDetail: React.FC<Props> = (props) => {
             </div>
           ))}
         </Form>
-      ) : (
-        ""
       )}
     </div>
   );

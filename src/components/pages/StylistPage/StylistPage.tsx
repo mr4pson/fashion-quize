@@ -1,14 +1,16 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
+import React, { useState } from "react";
+import { useHistory, useLocation } from "react-router";
+
 import { getUserInfo } from "common/helpers/common-helpers";
 import { userType } from "common/types/type";
-import React, { memo, useState } from "react";
-import { useHistory } from "react-router";
 import { ReactComponent as LogoSvg } from "../../../images/logo.svg";
-import AdmHeader from "../AdminPage/AdmHeader";
 import { getJwtPair } from "../AdminPage/helpers";
-import { menuItems } from "./constants";
+import { menuItems } from "./consts";
+import { paths, StlPage } from "./routes/consts";
 import StylistRoutes from "./routes/StylistRoutes";
+import StlHeader from "./StlHeader";
 import styles from "./StylistPage.module.scss";
 
 const { Content, Footer, Sider } = Layout;
@@ -17,7 +19,7 @@ const StylistPage: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const history = useHistory();
-  // const location = useLocation();
+  const location = useLocation();
 
   const onCollapse = (collapsed: boolean) => {
     setIsCollapsed(collapsed);
@@ -31,13 +33,11 @@ const StylistPage: React.FC = () => {
     }
   })();
 
-  function getSelectedKey() {
-    // if (location.pathname.includes(paths[AdmPage.BLOCKS])) return "1";
-    // if (location.pathname.includes(paths[AdmPage.QUESTIONS])) return "2";
-    // if (location.pathname.includes(paths[AdmPage.ANSWERS])) return "3";
-    // if (location.pathname.includes(paths[AdmPage.STYLISTS])) return "4";
+  const getSelectedKey = () => {
+    if (location.pathname.includes(paths[StlPage.TASKS])) return "1";
+    if (location.pathname.includes(paths[StlPage.COMPILATIONS])) return "2";
     return "1";
-  }
+  };
 
   return (
     <Layout className={styles["layout"]}>
@@ -65,7 +65,7 @@ const StylistPage: React.FC = () => {
         </Menu>
       </Sider>
       <Layout className={styles["layout"]}>
-        <AdmHeader />
+        <StlHeader />
         <Content style={{ margin: "0 16px" }}>
           <div className={styles["page-content"]}>
             <StylistRoutes />
@@ -77,4 +77,4 @@ const StylistPage: React.FC = () => {
   );
 };
 
-export default memo(StylistPage);
+export default StylistPage;

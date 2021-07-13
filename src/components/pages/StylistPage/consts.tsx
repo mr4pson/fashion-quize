@@ -1,14 +1,21 @@
 import { SolutionOutlined } from "@ant-design/icons";
 import axios from "axios";
+
 import { getJwtPair } from "../AdminPage/helpers";
-import { paths, StylistPage } from "./routes/constants";
+import { paths, StlPage } from "./routes/consts";
 
 export const menuItems = [
   {
     key: "1",
     icon: <SolutionOutlined />,
     title: "Задачи",
-    route: paths[StylistPage.TASKS],
+    route: paths[StlPage.TASKS],
+  },
+  {
+    key: "2",
+    icon: <SolutionOutlined />,
+    title: "Подборки",
+    route: paths[StlPage.COMPILATIONS],
   },
 ];
 
