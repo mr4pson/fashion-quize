@@ -1,5 +1,5 @@
+import { TypeSelectOption } from "common/types/type";
 import { QuestionType } from "components/pages/QuizePage/types";
-import { TypeSelectOption } from "../types";
 
 export const QuestionTypeOptions: TypeSelectOption[] = [
   {

@@ -25,7 +25,7 @@ export const getColumns = (styles: any, history: any) => {
       ),
     },
     { 
-      title: "Создана",
+      title: "Дата создания",
       dataIndex: "createdAt",
       key: "createdAt",
       render: (createdAt: string) => (
@@ -33,7 +33,7 @@ export const getColumns = (styles: any, history: any) => {
       ),
     },
     { 
-      title: "Изменена",
+      title: "Дата изменения",
       dataIndex: "updatedAt",
       key: "updatedAt",
       render: (updatedAt: string) => (

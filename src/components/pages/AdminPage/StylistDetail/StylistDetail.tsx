@@ -1,4 +1,5 @@
 import { Button, Form, Input } from "antd";
+import { TypeFormField } from "common/types/type";
 import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
@@ -9,7 +10,7 @@ import { AdmPage, paths } from "../routes/constants";
 import { PageMethods } from "../types";
 import { BUTTON, formFields, FULL_NAME, LOGIN } from "./constants";
 import styles from "./StylistDetail.module.scss";
-import { TypeEditStylistDto, TypeFormField } from "./types";
+import { TypeEditStylistDto } from "./types";
 
 const layout = {
   labelCol: { span: 8 },
