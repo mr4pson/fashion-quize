@@ -1,14 +1,16 @@
 import { message } from "antd";
 import axios from "axios";
+import { useState } from "react";
+
 import { getUserInfo, openNotification } from "common/helpers/common-helpers";
 // import { getUserInfo } from "components/common/commonHelper";
 import { userType } from "common/types/type";
-import { useState } from "react";
+import { History } from "history";
 import { Page, paths } from "routes/constants";
 import { getLoginError, removeJwtPair, setJwtPair } from "../components/pages/AdminPage/helpers";
 import { TypeAuthLoginResponse, TypeUseAuthHookResult, TypeUser } from "../components/pages/AdminPage/types";
 
-export function useAuth(history): TypeUseAuthHookResult {
+export function useAuth(history: History<unknown> | string[]): TypeUseAuthHookResult {
   const [loading, setLoading] = useState<boolean>(false);
 
   async function login({ login, password }: TypeUser): Promise<TypeAuthLoginResponse> {
@@ -58,7 +60,7 @@ export function useAuth(history): TypeUseAuthHookResult {
 
   function logout(): void {
     removeJwtPair();
-    history.push("/login");
+    history.push(paths[Page.LOGIN]);
   }
 
   return {
