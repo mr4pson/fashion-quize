@@ -1,4 +1,5 @@
 import { Button, Form, Input } from "antd";
+import { TypeFormField } from "common/types/type";
 import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
@@ -9,7 +10,7 @@ import { AdmPage, paths } from "../routes/constants";
 import { PageMethods } from "../types";
 import styles from "./BlockDetail.module.scss";
 import { BUTTON, COLOR, formFields, TITLE } from "./constants";
-import { ChangeBlockDto, TypeFormField } from "./type";
+import { ChangeBlockDto } from "./type";
 
 const layout = {
   labelCol: { span: 8 },

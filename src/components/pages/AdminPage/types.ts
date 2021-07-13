@@ -40,8 +40,3 @@ export enum ControlType {
   TEXTAREA = "TEXTAREA",
   BUTTON = "BUTTON",
 }
-
-export type TypeSelectOption = {
-  title: string;
-  value: string | number;
-};
