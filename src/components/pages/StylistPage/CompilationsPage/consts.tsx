@@ -1,20 +1,24 @@
 import { Button } from "antd";
 import { memo } from "react";
+import { useHistory } from "react-router";
 
-import { ICompilation } from "./types";
+import { paths, StlPage } from "../routes/consts";
+import styles from "./CompilationsPage.module.scss";
+import { ICompilation, ILook } from "./types";
 
 type TProps = {
   id?: number;
   task?: any;
-  styles: { readonly [key: string]: string };
 };
 
-const StlButton: React.FC<TProps> = ({ id, task, styles }) => {
+const StlButton: React.FC<TProps> = ({ id, task }) => {
+  const history = useHistory();
+
   const handleClick = () => {
     if (task) {
-      console.log(task);
+      history.push(paths[StlPage.TASKS] + `/${id}`);
     } else {
-      console.log(`editing ${id}`);
+      history.push(paths[StlPage.COMPILATIONS] + `/${id}`);
     }
   };
 
@@ -27,7 +31,7 @@ const StlButton: React.FC<TProps> = ({ id, task, styles }) => {
 
 const StlButtonMemorized = memo(StlButton);
 
-export const getColumns = (styles: { readonly [key: string]: string }) => {
+export const getColumns = () => {
   return [
     { title: "ID", dataIndex: "key", key: "key" },
     { title: "Статус", dataIndex: "status", key: "status" },
@@ -35,14 +39,31 @@ export const getColumns = (styles: { readonly [key: string]: string }) => {
       title: "Задача",
       dataIndex: "",
       key: "task",
-      render: (compilation: ICompilation) => <StlButtonMemorized task={compilation.task} styles={styles} />,
+      render: (compilation: ICompilation) => <StlButtonMemorized task={compilation.task} id={compilation.id} />,
     },
     { title: "Пользователь", dataIndex: "user", key: "user" },
+    {
+      title: "Луки",
+      dataIndex: "looks",
+      key: "looks",
+      render: (looks: ILook[]) => (
+        <div>
+          {looks?.length &&
+            looks.map((look) => (
+              <div key={look.id}>
+                {look.items.map((item) => (
+                  <div key={item.id}>{item.photo}</div>
+                ))}
+              </div>
+            ))}
+        </div>
+      ),
+    },
     {
       title: "Действие",
       dataIndex: "",
       key: "x",
-      render: (compilation: ICompilation) => <StlButtonMemorized id={compilation.id} styles={styles} />,
+      render: (compilation: ICompilation) => <StlButtonMemorized id={compilation.id} />,
     },
   ];
 };

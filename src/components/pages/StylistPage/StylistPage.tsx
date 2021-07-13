@@ -10,7 +10,7 @@ import { getJwtPair } from "../AdminPage/helpers";
 import { menuItems } from "./consts";
 import { paths, StlPage } from "./routes/consts";
 import StylistRoutes from "./routes/StylistRoutes";
-import StlHeader from "./StlHeader";
+import StylistHeader from "./StylistHeader";
 import styles from "./StylistPage.module.scss";
 
 const { Content, Footer, Sider } = Layout;
@@ -65,7 +65,7 @@ const StylistPage: React.FC = () => {
         </Menu>
       </Sider>
       <Layout className={styles["layout"]}>
-        <StlHeader />
+        <StylistHeader />
         <Content style={{ margin: "0 16px" }}>
           <div className={styles["page-content"]}>
             <StylistRoutes />

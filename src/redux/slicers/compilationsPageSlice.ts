@@ -8,11 +8,16 @@ const compilationsPageSlice = createSlice({
   name: "compilationsPageSlice",
   initialState: {
     compilations: [] as ICompilation[],
+    compilation: {} as ICompilation,
   },
   reducers: {
     setCompilations: (state, action: PayloadAction<ICompilation[]>) => ({
       ...state,
       compilations: action.payload,
+    }),
+    setCompilation: (state, action: PayloadAction<ICompilation>) => ({
+      ...state,
+      compilation: action.payload,
     }),
   },
 });
@@ -26,7 +31,14 @@ export const compilationsThunks = {
   clearCompilations: () => (dispatch: TypeDispatch) => {
     dispatch(setCompilations([]));
   },
+  getCompilation: (id: number) => async (dispatch: TypeDispatch) => {
+    // const response = await axiosInstance.get(`/api/compilations/${id}`);
+    // dispatch(setCompilation(response?.data));
+  },
+  clearCompilation: () => (dispatch: TypeDispatch) => {
+    dispatch(setCompilation({} as ICompilation));
+  },
 };
 
-export const { setCompilations } = compilationsPageSlice.actions;
+export const { setCompilations, setCompilation } = compilationsPageSlice.actions;
 export default compilationsPageSlice.reducer;
