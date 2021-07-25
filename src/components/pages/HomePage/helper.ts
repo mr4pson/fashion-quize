@@ -4,6 +4,6 @@ export const getLinkToFisrtQuestion = () => {
     return paths[Page.QUIZE] + '/' + 1;
 }
 
-export const getLinkToSexQuestion = () => {
-    return paths[Page.QUIZE_SEX];
+export const getLinkToNameInput = () => {
+    return paths[Page.NAME_INPUT];
 }

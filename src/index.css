@@ -1,47 +1,85 @@
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 .container {
-	max-width: 1170px;
-	padding: 0 15px;
-	margin: auto;
+  max-width: 1170px;
+  padding: 0 15px;
+  margin: auto;
 }
 
 .ant-radio-wrapper {
-    color: #000 !important;
-		margin-bottom: 15px!important;
+  color: #000 !important;
+  margin-bottom: 15px !important;
 }
 
 .ant-radio-wrapper span {
-	line-height: 16px;
+  line-height: 16px;
 }
 
 .ant-form label {
-	font-size: 16px !important;
-	display: flex !important;
-	align-items: center;
-	white-space: unset;
-	height: auto!important;
-	margin-bottom: 5px;
-	line-height: auto!important;
+  font-size: 16px !important;
+  display: flex !important;
+  align-items: center;
+  white-space: unset;
+  height: auto !important;
+  margin-bottom: 5px;
+  line-height: auto !important;
 }
 
 .ant-checkbox-group .ant-row {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .ant-checkbox-wrapper span {
-	color: #000;
-	font-size: 16px;
-	line-height: 16px;
+  color: #000;
+  font-size: 16px;
+  line-height: 16px;
 }
 
 .ant-layout .ant-layout-sider {
-	background-color: #001529;
+  background-color: #001529;
 }
 
 .ant-layout .ant-layout-sider-trigger {
-	background-color: #001529;
+  background-color: #001529;
+}
+
+.quize-page .ant-checkbox-inner {
+	width: 26px;
+	height: 26px;
+}
+
+.quize-page .ant-checkbox-checked .ant-checkbox-inner {
+	background-color: #9de1ac;
+	border-color: #9de1ac;
+}
+
+.quize-page .ant-checkbox-checked .ant-checkbox-inner::after {
+  transform: rotate(45deg) scale(1.6) translate(-7%, -50%);
+}
+.quize-page .ant-checkbox-wrapper span {
+	display: inline-block;
+}
+
+.quize-page .ant-radio-inner::after {
+	top: 4px;
+	left: 4px;
+	width: 14px;
+	height: 14px;
+	background-color: #9de1ac;
+}
+
+.quize-page .ant-radio-inner {
+	width: 24px;
+	height: 24px;
+}
+
+.ant-radio-checked .ant-radio-inner {
+	border-color: #9de1ac;
+}
+
+.quize-page .ant-radio-wrapper span {
+	display: inline-block;
 }

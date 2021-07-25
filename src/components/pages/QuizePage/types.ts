@@ -22,7 +22,7 @@ export type TypeQuestion = {
     description: string;
     options?: string;
     image?: string;
-    block: TypeQuestionBlock;
+    block?: TypeQuestionBlock;
 }
 
 export type TypeQuizePageState = {
