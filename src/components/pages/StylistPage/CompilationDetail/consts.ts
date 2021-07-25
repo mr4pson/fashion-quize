@@ -1,22 +1,15 @@
-export const FULL_NAME = "FULL_NAME";
-export const LOGIN = "LOGIN";
+export const STATUS = "STATUS";
 export const BUTTON = "BUTTON";
 
 export const formFields = [
   {
     id: "1",
-    type: FULL_NAME,
-    name: "name",
-    label: "ФИО",
+    type: STATUS,
+    name: "status",
+    label: "Статус",
   },
   {
     id: "2",
-    type: LOGIN,
-    name: "login",
-    label: "Логин",
-  },
-  {
-    id: "3",
     type: BUTTON,
     name: "button",
     label: "Сохранить",
