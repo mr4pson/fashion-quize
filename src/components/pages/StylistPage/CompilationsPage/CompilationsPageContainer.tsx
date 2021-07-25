@@ -1,51 +1,21 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { TypeRootState, useAppDispatch } from "redux/ReduxStore";
 import { compilationsThunks } from "redux/slicers/compilationsPageSlice";
-import CompilationPage from "./CompilationsPage";
+import CompilationsPage from "./CompilationsPage";
 
-const CompilationsPageContainer: React.FC = () => {
+const CompilationsPageContainer: FC = () => {
   const dispatch = useAppDispatch();
-  const compilationsState = useSelector((state: TypeRootState) => ({
-    compilations: state.compilationsPage.compilations,
-  }));
-
-  // const [visible, setVisible] = useState(false);
-  // const [confirmLoading, setConfirmLoading] = useState(false);
-  // const [stylistId, setStylistId] = useState<number | null>(null);
-
-  // const showModal = () => {
-  //   setVisible(true);
-  // };
-
-  // const handleCancel = () => {
-  //   setVisible(false);
-  // };
-
-  // const handleDelete = () => {
-  //   setConfirmLoading(true);
-
-  //   dispatch(stylistsThunks.removeStylist(stylistId!));
-
-  //   setVisible(false);
-  //   setConfirmLoading(false);
-  // };
-
-  // const onStylistsRemove = (id: number) => {
-  //   setStylistId(id);
-  //   showModal();
-  // };
+  const compilations = useSelector((state: TypeRootState) => state.compilationsPage.compilations);
 
   useEffect(() => {
     dispatch(compilationsThunks.getCompilations());
 
-    return () => {
-      compilationsThunks.clearCompilations();
-    };
+    return () => dispatch(compilationsThunks.clearCompilations());
   }, [dispatch]);
 
-  return <CompilationPage compilations={compilationsState.compilations} />;
+  return <CompilationsPage compilations={compilations} />;
 };
 
 export default CompilationsPageContainer;

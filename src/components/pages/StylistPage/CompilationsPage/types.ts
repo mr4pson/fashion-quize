@@ -1,16 +1,16 @@
-export interface ICompilation {
+export type TCompilation = {
   id: number;
   task: any;
-  looks: ILook[];
-}
+  looks: TLook[];
+};
 
-export interface ILook {
+export type TLook = {
   id?: number;
-  items: ILookItem[];
-}
+  items: TLookItem[];
+};
 
-export interface ILookItem {
+export type TLookItem = {
   id?: number;
   name: string;
   photo: string;
-}
+};

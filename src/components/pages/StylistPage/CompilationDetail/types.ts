@@ -1,4 +1,5 @@
-export type TypeEditStylistDto = {
-  name: string;
-  login: string;
+export type TStatus = {
+  status: {
+    status: number;
+  };
 };

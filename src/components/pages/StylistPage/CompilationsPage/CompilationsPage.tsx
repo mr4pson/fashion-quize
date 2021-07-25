@@ -1,15 +1,15 @@
 import { Table } from "antd";
-import { memo } from "react";
+import { FC, memo } from "react";
 
 import styles from "./CompilationsPage.module.scss";
 import { getColumns } from "./consts";
-import { ICompilation } from "./types";
+import { TCompilation } from "./types";
 
 type TProps = {
-  compilations: ICompilation[];
+  compilations: TCompilation[];
 };
 
-const CompilationsPage: React.FC<TProps> = (props) => {
+const CompilationsPage: FC<TProps> = (props) => {
   const columns = getColumns();
   const dataSource = props.compilations?.map((compilation) => ({
     ...compilation,
