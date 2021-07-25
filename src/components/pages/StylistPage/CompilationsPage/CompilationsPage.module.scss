@@ -31,3 +31,25 @@
     right: 0;
   }
 }
+
+.look {
+  display: flex;
+  justify-content: space-between;
+}
+
+.look-item {
+  width: 80px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  &__photo {
+    background: #ccc;
+    height: 80px;
+  }
+  &__name {
+    text-align: center;
+    line-height: 16px;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}

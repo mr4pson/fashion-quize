@@ -1,19 +1,16 @@
 export interface ICompilation {
   id: number;
-  status: string;
   task: any;
-  user: any;
   looks: ILook[];
 }
 
 export interface ILook {
-  id: number;
-  name: string;
+  id?: number;
   items: ILookItem[];
 }
 
 export interface ILookItem {
-  id: number;
+  id?: number;
   name: string;
   photo: string;
 }

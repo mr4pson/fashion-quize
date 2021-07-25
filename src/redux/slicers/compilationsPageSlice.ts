@@ -24,16 +24,15 @@ const compilationsPageSlice = createSlice({
 
 export const compilationsThunks = {
   getCompilations: () => async (dispatch: TypeDispatch) => {
-    // const response = await axiosInstance.get("/api/compilations");
-    const response = await axiosInstance.get("/mocks/getCompilations.json");
+    const response = await axiosInstance.get("/api/compilations");
     dispatch(setCompilations(response?.data));
   },
   clearCompilations: () => (dispatch: TypeDispatch) => {
     dispatch(setCompilations([]));
   },
   getCompilation: (id: number) => async (dispatch: TypeDispatch) => {
-    // const response = await axiosInstance.get(`/api/compilations/${id}`);
-    // dispatch(setCompilation(response?.data));
+    const response = await axiosInstance.get(`/api/compilations/${id}`);
+    dispatch(setCompilation(response?.data));
   },
   clearCompilation: () => (dispatch: TypeDispatch) => {
     dispatch(setCompilation({} as ICompilation));
