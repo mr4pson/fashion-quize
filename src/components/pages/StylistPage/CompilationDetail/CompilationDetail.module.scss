@@ -36,20 +36,43 @@
 .look {
   display: flex;
 }
+
 .look-item {
   width: 80px;
   margin-right: 10px;
   margin-bottom: 10px;
+
   &__photo {
     height: 80px;
     background: #ccc;
+    cursor: pointer;
   }
+
+  &__backdrop {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+
+    opacity: 0;
+    color: #fff;
+    background: #000;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
   &__name {
     text-align: center;
   }
 }
+
 .look-add-btn {
   width: 80px;
   height: 80px;
+  margin-bottom: 40px;
   font-size: 32px;
 }

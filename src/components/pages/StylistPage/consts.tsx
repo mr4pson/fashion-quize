@@ -4,6 +4,12 @@ import axios from "axios";
 import { getJwtPair } from "../AdminPage/helpers";
 import { paths, StlPage } from "./routes/consts";
 
+export const getSelectedKey = (location: any) => {
+  if (location.includes(paths[StlPage.TASKS])) return "1";
+  if (location.includes(paths[StlPage.COMPILATIONS])) return "2";
+  return "1";
+};
+
 export const menuItems = [
   {
     key: "1",
