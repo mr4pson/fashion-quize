@@ -39,6 +39,9 @@ export function useAuth(history: History<unknown> | string[]): TypeUseAuthHookRe
         case userType.STYLIST:
           history.push(paths[Page.STYLIST]);
           break;
+        case userType.USER:
+          history.push(paths[Page.USER]);
+          break;
         default:
           history.push(paths[Page.LOGIN]);
           break;
