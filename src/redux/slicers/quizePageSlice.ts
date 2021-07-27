@@ -11,8 +11,10 @@ const quizePageSlice = createSlice({
     answers: {} as Object | {},
     questions: [] as TypeQuestion[],
     blocks: [] as TypeBlock[],
-    email: '' as string,
     name: '' as string,
+    email: '' as string,
+    age: 0 as number,
+    city: '' as string,
   },
   reducers: {
     setStateAnswers: (state, action: PayloadAction<Object | {}>) => ({
@@ -27,13 +29,21 @@ const quizePageSlice = createSlice({
       ...state,
       blocks: action.payload,
     }),
+    setName: (state, action: PayloadAction<string>) => ({
+      ...state,
+      name: action.payload,
+    }),
     setEmail: (state, action: PayloadAction<string>) => ({
       ...state,
       email: action.payload,
     }),
-    setName: (state, action: PayloadAction<string>) => ({
+    setAge: (state, action: PayloadAction<number>) => ({
       ...state,
-      name: action.payload,
+      age: action.payload,
+    }),
+    setCity: (state, action: PayloadAction<string>) => ({
+      ...state,
+      city: action.payload,
     }),
   },
 });
@@ -57,10 +67,16 @@ export const quizeThunks = {
   setName: (payload: string) => async (dispatch: TypeDispatch) => {
     dispatch(setName(payload));
   },
+  setAge: (payload: number) => async (dispatch: TypeDispatch) => {
+    dispatch(setAge(payload));
+  },
+  setCity: (payload: string) => async (dispatch: TypeDispatch) => {
+    dispatch(setCity(payload));
+  },
   registrateUser: (payload: any) => async (dispatch: TypeDispatch) => {
     await axiosInstance.post('/api/auth/registrate', payload);
   },
 };
 
-export const { setStateAnswers, setQuestions, setEmail, setName, setBlocks } = quizePageSlice.actions;
+export const { setStateAnswers, setQuestions, setEmail, setName, setBlocks, setAge, setCity } = quizePageSlice.actions;
 export default quizePageSlice.reducer;

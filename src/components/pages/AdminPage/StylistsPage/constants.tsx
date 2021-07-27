@@ -25,6 +25,8 @@ export const getColumns = (
     { title: "ID", dataIndex: "key", key: "key" },
     { title: "ФИО", dataIndex: "name", key: "name" },
     { title: "Логин", dataIndex: "login", key: "login" },
+    { title: "Возраст", dataIndex: "age", key: "age" },
+    { title: "Город", dataIndex: "city", key: "city" },
     { title: "Дата создания", dataIndex: "createdAt", key: "createdAt" },
     { title: "Дата обновления", dataIndex: "updatedAt", key: "updatedAt" },
     {

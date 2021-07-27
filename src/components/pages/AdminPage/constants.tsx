@@ -1,8 +1,8 @@
 import { FileSearchOutlined, PieChartOutlined, QuestionCircleOutlined, TeamOutlined } from "@ant-design/icons";
 import axios from "axios";
+import { getJwtPair } from "common/helpers/auth-helpers";
 import { QuizeTypes } from "common/types/type";
 import React from "react";
-import { getJwtPair } from "./helpers";
 import { AdmPage, paths } from "./routes/constants";
 
 export const menuItems = [

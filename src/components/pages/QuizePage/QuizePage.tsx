@@ -19,12 +19,14 @@ type Props = {
 const QuizePage: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
 
-  const { questions, blocks, name, email } = useSelector(
+  const { questions, blocks, name, email, age, city } = useSelector(
     (state: TypeRootState) => ({
       questions: state.quizePage.questions,
       blocks: state.quizePage.blocks,
       name: state.quizePage.name,
       email: state.quizePage.email,
+      age: state.quizePage.age,
+      city: state.quizePage.city,
     })
   );
   const { questionNumber, quizeType } = useParams() as any;
@@ -57,6 +59,8 @@ const QuizePage: React.FC<Props> = (props) => {
       const payload = {
         name,
         email,
+        age,
+        city,
         data: JSON.stringify(answers),
       };
       await dispatch(quizeThunks.registrateUser(payload));

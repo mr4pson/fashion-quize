@@ -7,8 +7,8 @@ import { getUserInfo, openNotification } from "common/helpers/common-helpers";
 import { userType } from "common/types/type";
 import { History } from "history";
 import { Page, paths } from "routes/constants";
-import { getLoginError, removeJwtPair, setJwtPair } from "../components/pages/AdminPage/helpers";
 import { TypeAuthLoginResponse, TypeUseAuthHookResult, TypeUser } from "../components/pages/AdminPage/types";
+import { getLoginError, removeJwtPair, setJwtPair } from "common/helpers/auth-helpers";
 
 export function useAuth(history: History<unknown> | string[]): TypeUseAuthHookResult {
   const [loading, setLoading] = useState<boolean>(false);
@@ -63,7 +63,7 @@ export function useAuth(history: History<unknown> | string[]): TypeUseAuthHookRe
 
   function logout(): void {
     removeJwtPair();
-    history.push(paths[Page.LOGIN]);
+    history?.push(paths[Page.LOGIN]);
   }
 
   return {

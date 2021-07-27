@@ -8,7 +8,7 @@ import { TypeRootState } from "redux/ReduxStore";
 import { stylistsThunks } from "redux/slicers/stylistsPageSlice";
 import { AdmPage, paths } from "../routes/constants";
 import { PageMethods } from "../types";
-import { BUTTON, formFields, FULL_NAME, LOGIN } from "./constants";
+import { AGE, BUTTON, CITY, formFields, FULL_NAME, LOGIN } from "./constants";
 import styles from "./StylistDetail.module.scss";
 import { TypeEditStylistDto } from "./types";
 
@@ -71,6 +71,8 @@ const StylistDetail: React.FC<Props> = (props) => {
     switch (type) {
       case FULL_NAME:
       case LOGIN:
+      case AGE:
+      case CITY:
         return (
           <Form.Item name={[field.name]} label={field.label} rules={[{ required: true, type: "string", max: 99 }]}>
             <Input />

@@ -1,7 +1,8 @@
 import { message, notification } from "antd";
+import { IUserInfo, userType } from "common/types/type";
 import { extractHS256Token } from "jwt-hs256";
 
-export function getUserInfo(): any | null {
+export function getUserInfo(): IUserInfo | null {
   const jwtPair: string | null = localStorage.getItem("jwtPair") ? localStorage.getItem("jwtPair") : "";
   const currentJwt: string = jwtPair ? JSON.parse(jwtPair) : "";
   if (!currentJwt) {
@@ -18,7 +19,12 @@ export function getUserInfo(): any | null {
   const userInfo = {
     id: jwtInfo.id,
     name: jwtInfo.name,
-    role: roles[0],
+    login: jwtInfo.login,
+    age: jwtInfo.age,
+    city: jwtInfo.city,
+    role: roles[0] as userType,
+    expire: jwtInfo.exp,
+    createdAt: jwtInfo.createdAt,
   };
 
   return userInfo;
@@ -64,4 +70,12 @@ export const errorResponseHandler = ({ error, logout }) => {
 
 export function getImageUrl(fileName: string): string {
   return `/api/attachments/${fileName}`;
+}
+
+export function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
 }
