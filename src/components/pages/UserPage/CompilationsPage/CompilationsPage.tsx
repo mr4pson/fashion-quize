@@ -1,12 +1,12 @@
 import { Card, Table } from "antd";
-import { ICompilation } from "components/pages/StylistPage/CompilationsPage/types";
+import { TCompilation } from "components/pages/StylistPage/CompilationsPage/types";
 import React, { memo } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import styles from './CompilationsPage.module.scss';
 import { getColumns } from "./constants";
 
 type TProps = {
-  compilations: ICompilation[];
+  compilations: TCompilation[];
   loading: boolean;
 };
 

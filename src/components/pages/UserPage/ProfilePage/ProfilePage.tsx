@@ -12,10 +12,17 @@ const ProfilePage: React.FC = () => {
 
   const getDescriptionCols = (): number => {
     return width < 550 ? 1 : 2;
-  }
+  };
 
   return (
-    <Card title="Профиль Пользователя" bordered={false}>
+    <Card
+      title={
+        <div className={styles["header"]}>
+          <h2 className={styles["title"]}>Профиль пользователя</h2>
+        </div>
+      }
+      bordered={false}
+    >
       <div className={styles["profile-page"]}>
         <Descriptions size="default" column={getDescriptionCols()}>
           <Descriptions.Item label="Email">{userInfo?.login}</Descriptions.Item>

@@ -1,4 +1,4 @@
-import { ICompilation, ILook } from "components/pages/StylistPage/CompilationsPage/types";
+import { TCompilation, TLook } from "components/pages/StylistPage/CompilationsPage/types";
 import { TaskStatus, TypeTask } from "components/pages/StylistPage/TasksPage/types";
 import { Link } from "react-router-dom";
 import { paths, UsrPage,  } from "../routes/consts";
@@ -26,7 +26,7 @@ export const getColumns = (styles) => {
       title: "Луки",
       dataIndex: "looks",
       key: "looks",
-      render: (looks: ILook[]) => (
+      render: (looks: TLook[]) => (
         <div>
           {!!looks?.length &&
             looks.map((look) => (
@@ -46,7 +46,7 @@ export const getColumns = (styles) => {
       title: "Действие",
       dataIndex: "",
       key: "x",
-      render: (compilation: ICompilation) => (
+      render: (compilation: TCompilation) => (
         <Link to={`${paths[UsrPage.COMPILATIONS]}/${compilation.id}`}>
           Изменить
         </Link>
