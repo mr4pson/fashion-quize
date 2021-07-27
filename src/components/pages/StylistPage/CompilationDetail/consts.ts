@@ -1,5 +1,5 @@
-export const STATUS = "STATUS";
-export const BUTTON = "BUTTON";
+const STATUS = "STATUS";
+const BUTTON = "BUTTON";
 
 export const formFields = [
   {

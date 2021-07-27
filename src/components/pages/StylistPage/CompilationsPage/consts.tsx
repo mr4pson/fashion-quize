@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+
 import { paths, StlPage } from "../routes/consts";
 import { TaskStatus, TypeTask } from "../TasksPage/types";
 import styles from "./CompilationsPage.module.scss";
-import { ICompilation, ILook } from "./types";
+import { TCompilation, TLook } from "./types";
 
 export const getColumns = () => {
   return [
@@ -11,34 +12,28 @@ export const getColumns = () => {
       title: "Статус",
       dataIndex: "status",
       key: "status",
-      render: (status: TaskStatus) => <div>{status?.title}</div>,
+      render: (status: TaskStatus) => <>{status?.title}</>,
     },
     {
       title: "Задача",
       dataIndex: "task",
       key: "task",
       render: (task: TypeTask) => (
-        <Link to={`${paths[StlPage.TASKS]}/${task.id}`}>
-          {!!task.id && `Задача №${task.id}`}
-        </Link>
+        <Link to={`${paths[StlPage.TASKS]}/${task.id}`}>{!!task.id && `Задача №${task.id}`}</Link>
       ),
     },
     {
       title: "Пользователь",
       dataIndex: "user",
       key: "user",
-      render: (user: any) => (
-        <Link to={'#'}>
-          {user.name}
-        </Link>
-        ),
+      render: (user: any) => <Link to={"#"}>{user.name}</Link>,
     },
     {
       title: "Луки",
       dataIndex: "looks",
       key: "looks",
-      render: (looks: ILook[]) => (
-        <div>
+      render: (looks: TLook[]) => (
+        <>
           {!!looks?.length &&
             looks.map((look) => (
               <div className={styles["look"]} key={look.id}>
@@ -50,17 +45,15 @@ export const getColumns = () => {
                 ))}
               </div>
             ))}
-        </div>
+        </>
       ),
     },
     {
       title: "Действие",
       dataIndex: "",
       key: "x",
-      render: (compilation: ICompilation) => (
-        <Link to={`${paths[StlPage.COMPILATIONS]}/${compilation.id}`}>
-          Изменить
-        </Link>
+      render: (compilation: TCompilation) => (
+        <Link to={`${paths[StlPage.COMPILATIONS]}/${compilation.id}`}>Изменить</Link>
       ),
     },
   ];

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { openNotification } from "common/helpers/common-helpers";
 import { axiosInstance } from "components/pages/AdminPage/constants";
 import { TaskStatus, TaskType, TypeTask } from "components/pages/StylistPage/TasksPage/types";
@@ -50,11 +51,17 @@ export const tasksThunks = {
     dispatch(setTasks(response?.data));
     dispatch(setLoading(false));
   },
+  clearTasks: () => (dispatch: TypeDispatch) => {
+    dispatch(setTasks([]));
+  },
   getTask: (id: number) => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
     const response = await axiosInstance.get(`/api/tasks/${id}`);
     dispatch(setTask(response?.data));
     dispatch(setLoading(false));
+  },
+  clearTask: () => (dispatch: TypeDispatch) => {
+    dispatch(setTask({} as TypeTask));
   },
   getTaskStatuses: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
@@ -87,13 +94,7 @@ export const tasksThunks = {
       openNotification("error", `Не удалось отменить задачу`);
     }
   },
-  clearTask: () => (dispatch: TypeDispatch) => {
-    dispatch(setTask({} as TypeTask));
-  },
-  clearTasks: () => (dispatch: TypeDispatch) => {
-    dispatch(setTasks([]));
-  },
 }
 
-export const { setTasks, setTask, setTaskStatuses, setTaskTypes, setLoading } = tasksPageSlice.actions;
+export const { setTasks, setTask, setTaskStatuses, setTaskTypes, setLoading,  } = tasksPageSlice.actions;
 export default tasksPageSlice.reducer;

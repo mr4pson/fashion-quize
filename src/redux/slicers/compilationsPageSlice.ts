@@ -1,22 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { axiosInstance } from "components/pages/AdminPage/constants";
-import { ICompilation } from "components/pages/StylistPage/CompilationsPage/types";
+import { TCompilation } from "components/pages/StylistPage/CompilationsPage/types";
 import { TypeDispatch } from "redux/ReduxStore";
 
 const compilationsPageSlice = createSlice({
   name: "compilationsPageSlice",
   initialState: {
-    compilations: [] as ICompilation[],
-    compilation: {} as ICompilation,
+    compilations: [] as TCompilation[],
+    compilation: {} as TCompilation,
     loading: false as boolean,
   },
   reducers: {
-    setCompilations: (state, action: PayloadAction<ICompilation[]>) => ({
+    setCompilations: (state, action: PayloadAction<TCompilation[]>) => ({
       ...state,
       compilations: action.payload,
     }),
-    setCompilation: (state, action: PayloadAction<ICompilation>) => ({
+    setCompilation: (state, action: PayloadAction<TCompilation>) => ({
       ...state,
       compilation: action.payload,
     }),
@@ -50,7 +50,11 @@ export const compilationsThunks = {
     dispatch(setLoading(false));
   },
   clearCompilation: () => (dispatch: TypeDispatch) => {
-    dispatch(setCompilation({} as ICompilation));
+    dispatch(setCompilation({} as TCompilation));
+  },
+  updateCompilation: (payload: any) => async () => {
+    console.log("compilation updated", payload);
+    // await
   },
 };
 

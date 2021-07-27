@@ -1,22 +1,24 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
-import React, { useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 
+import { getJwtPair } from "common/helpers/auth-helpers";
 import { getUserInfo } from "common/helpers/common-helpers";
 import { userType } from "common/types/type";
+
 import { ReactComponent as LogoSvg } from "../../../images/logo.svg";
-import { menuItems } from "./consts";
-import { paths, StlPage } from "./routes/consts";
+import { getSelectedKey, menuItems } from "./consts";
 import StylistRoutes from "./routes/StylistRoutes";
 import StylistHeader from "./StylistHeader";
 import styles from "./StylistPage.module.scss";
-import { getJwtPair } from "common/helpers/auth-helpers";
+
 
 const { Content, Footer, Sider } = Layout;
 
-const StylistPage: React.FC = () => {
+const StylistPage: FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const [selectedKey, setSelectedKey] = useState("1");
 
   const history = useHistory();
   const location = useLocation();
@@ -33,11 +35,11 @@ const StylistPage: React.FC = () => {
     }
   })();
 
-  const getSelectedKey = () => {
-    if (location.pathname.includes(paths[StlPage.TASKS])) return "1";
-    if (location.pathname.includes(paths[StlPage.COMPILATIONS])) return "2";
-    return "1";
-  };
+  useEffect(() => {
+    const takedKey = getSelectedKey(location.pathname);
+
+    setSelectedKey(takedKey);
+  }, [location.pathname]);
 
   return (
     <Layout className={styles["layout"]}>
@@ -51,7 +53,7 @@ const StylistPage: React.FC = () => {
         <div className={styles["layout__logo"]}>
           <LogoSvg />
         </div>
-        <Menu theme="dark" defaultSelectedKeys={[getSelectedKey()]} mode="inline">
+        <Menu theme="dark" mode="inline" selectedKeys={[selectedKey]}>
           {menuItems.map((item) => (
             <Menu.Item
               key={item.key}
