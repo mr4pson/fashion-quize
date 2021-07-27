@@ -1,10 +1,10 @@
+import { IStylistPage } from "common/types/type";
 import CompilationDetail from "../CompilationDetail";
 import CompilationsPageContainer from "../CompilationsPage/CompilationsPageContainer";
 import TaskDetailPage from "../TaskDetailPage";
 import TasksPageContainer from "../TasksPage/TasksPageContainer";
 import { PageMethods } from "../types";
 import { paths, StlPage } from "./consts";
-import { IStylistPage } from "./types";
 
 export function getStylistRoutes(): IStylistPage[] {
   return [

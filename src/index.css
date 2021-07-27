@@ -83,3 +83,18 @@ body {
 .quize-page .ant-radio-wrapper span {
 	display: inline-block;
 }
+
+.ant-dropdown-menu-title-content .ant-btn {
+	color: #000;
+}
+
+a:hover {
+	color: #1389ff;
+}
+
+.ant-layout {
+	height: 100vh;
+}
+.ant-layout-header {
+	background: #fff;
+}

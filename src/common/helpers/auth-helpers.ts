@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { getUserInfo } from "common/helpers/common-helpers";
-import { LoginError, TypeAuthLogin } from "./types";
+import { LoginError, TypeAuthLogin } from "components/pages/AdminPage/types";
 
 export const setJwtPair = (jwtPair: string): void => {
   localStorage.setItem("jwtPair", JSON.stringify(jwtPair));

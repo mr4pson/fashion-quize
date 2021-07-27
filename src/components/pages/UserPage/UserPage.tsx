@@ -1,11 +1,12 @@
-import React from "react";
+import React, { memo } from "react";
 import { useHistory } from "react-router";
 
 import { getUserInfo } from "common/helpers/common-helpers";
 import { userType } from "common/types/type";
-import { getJwtPair } from "../AdminPage/helpers";
 import styles from "./UserPage.module.scss";
-
+import { getJwtPair } from "common/helpers/auth-helpers";
+import UserRoutes from "./routes/UsrRoutes";
+import Header from "./Header";
 
 const UserPage: React.FC = () => {
   const history = useHistory();
@@ -13,16 +14,21 @@ const UserPage: React.FC = () => {
   (async () => {
     const jwtPair = await getJwtPair();
     const userInfo = await getUserInfo();
-    if (!jwtPair || userInfo.role !== userType.USER) {
-      // history.push("/login");
+    if (!jwtPair || userInfo?.role !== userType.USER) {
+      history.push("/login");
     }
   })();
 
   return (
-    <div className={styles['user-page']}>
-      <h1>User page</h1>
+    <div className={styles["user-page"]}>
+      <Header />
+      <div className={styles["user-page__body"]}>
+        <div className="container">
+          <UserRoutes />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default UserPage;
+export default memo(UserPage);

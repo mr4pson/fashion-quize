@@ -4,13 +4,13 @@ import HomePage from "components/pages/HomePage";
 import LoginPage from "components/pages/LoginPage/LoginPage";
 import QuizePageContainer from "components/pages/QuizePage/QuizePageContainer";
 import SexPage from "components/pages/QuizePage/SexPage/SexPage";
-import EmailPage from "components/pages/QuizePage/EmailPage/EmailPage";
-import NamePage from "components/pages/QuizePage/NamePage/NamePage";
+import FieldPage from "components/pages/QuizePage/FieldPage/FieldPage";
 import ResetPasswordPage from "components/pages/ResetPasswordPage/ResetPasswordPage";
 import StylistPage from "components/pages/StylistPage";
 import UserPage from "components/pages/UserPage";
 import { Page, paths } from "./constants";
 import { TypeAppRoute } from "./type";
+import { quizeThunks } from "redux/slicers/quizePageSlice";
 
 export function getAppRoutes(): TypeAppRoute[] {
   return [
@@ -27,15 +27,27 @@ export function getAppRoutes(): TypeAppRoute[] {
       exact: true,
     },
     {
-      type: Page.EMAIL_INPUT,
-      path: paths[Page.EMAIL_INPUT],
-      component: <EmailPage />,
+      type: Page.NAME_INPUT,
+      path: paths[Page.NAME_INPUT],
+      component: <FieldPage next={Page.EMAIL_INPUT} type={'text'} thunk={quizeThunks.setName} title={'Введите ваше имя'}/>,
       exact: true,
     },
     {
-      type: Page.NAME_INPUT,
-      path: paths[Page.NAME_INPUT],
-      component: <NamePage />,
+      type: Page.EMAIL_INPUT,
+      path: paths[Page.EMAIL_INPUT],
+      component: <FieldPage next={Page.AGE_INPUT} type={'email'} thunk={quizeThunks.setEmail} title={'Введите ваше email'}/>,
+      exact: true,
+    },
+    {
+      type: Page.AGE_INPUT,
+      path: paths[Page.AGE_INPUT],
+      component: <FieldPage next={Page.CITY_INPUT} type={'number'} thunk={quizeThunks.setAge} title={'Введите ваше возраст'}/>,
+      exact: true,
+    },
+    {
+      type: Page.CITY_INPUT,
+      path: paths[Page.CITY_INPUT],
+      component: <FieldPage next={Page.QUIZE_SEX} type={'text'} thunk={quizeThunks.setCity} title={'Введите ваше город'}/>,
       exact: true,
     },
     {

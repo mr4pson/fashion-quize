@@ -6,12 +6,12 @@ import { useHistory, useLocation } from "react-router";
 import { getUserInfo } from "common/helpers/common-helpers";
 import { userType } from "common/types/type";
 import { ReactComponent as LogoSvg } from "../../../images/logo.svg";
-import { getJwtPair } from "../AdminPage/helpers";
 import { menuItems } from "./consts";
 import { paths, StlPage } from "./routes/consts";
 import StylistRoutes from "./routes/StylistRoutes";
 import StylistHeader from "./StylistHeader";
 import styles from "./StylistPage.module.scss";
+import { getJwtPair } from "common/helpers/auth-helpers";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -28,7 +28,7 @@ const StylistPage: React.FC = () => {
   (async () => {
     const jwtPair = await getJwtPair();
     const userInfo = await getUserInfo();
-    if (!jwtPair || userInfo.role !== userType.STYLIST) {
+    if (!jwtPair || userInfo?.role !== userType.STYLIST) {
       history.push("/login");
     }
   })();

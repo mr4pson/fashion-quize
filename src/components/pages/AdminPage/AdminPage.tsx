@@ -1,5 +1,6 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
+import { getJwtPair } from "common/helpers/auth-helpers";
 import { getUserInfo } from "common/helpers/common-helpers";
 import { userType } from "common/types/type";
 import React, { memo, useState } from "react";
@@ -8,7 +9,6 @@ import { ReactComponent as LogoSvg } from "../../../images/logo.svg";
 import AdmHeader from "./AdmHeader";
 import styles from "./AdminPage.module.scss";
 import { menuItems } from "./constants";
-import { getJwtPair } from "./helpers";
 import AdmRoutes from "./routes/AdmRoutes";
 import { AdmPage, paths } from "./routes/constants";
 
@@ -27,7 +27,7 @@ const AdminPage: React.FC = () => {
   (async () => {
     const jwtPair = await getJwtPair();
     const userInfo = await getUserInfo();
-    if (!jwtPair || userInfo.role !== userType.ADMIN) {
+    if (!jwtPair || userInfo?.role !== userType.ADMIN) {
       history.push("/login");
     }
   })();
