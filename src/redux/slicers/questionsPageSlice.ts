@@ -49,7 +49,7 @@ export const questionsThunks = {
       dispatch(
         setQuestion({
           ...response?.data,
-          options: JSON.parse(response?.data.options),
+          options: response?.data.options ? JSON.parse(response?.data.options) : [],
         })
       );
     } catch (error) {
