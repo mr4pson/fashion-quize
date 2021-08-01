@@ -35,19 +35,19 @@ export function getAppRoutes(): TypeAppRoute[] {
     {
       type: Page.EMAIL_INPUT,
       path: paths[Page.EMAIL_INPUT],
-      component: <FieldPage next={Page.AGE_INPUT} type={'email'} thunk={quizeThunks.setEmail} title={'Введите ваше email'}/>,
+      component: <FieldPage next={Page.AGE_INPUT} type={'email'} thunk={quizeThunks.setEmail} title={'Введите ваш email'}/>,
       exact: true,
     },
     {
       type: Page.AGE_INPUT,
       path: paths[Page.AGE_INPUT],
-      component: <FieldPage next={Page.CITY_INPUT} type={'number'} thunk={quizeThunks.setAge} title={'Введите ваше возраст'}/>,
+      component: <FieldPage next={Page.CITY_INPUT} type={'number'} thunk={quizeThunks.setAge} title={'Введите ваш возраст'}/>,
       exact: true,
     },
     {
       type: Page.CITY_INPUT,
       path: paths[Page.CITY_INPUT],
-      component: <FieldPage next={Page.QUIZE_SEX} type={'text'} thunk={quizeThunks.setCity} title={'Введите ваше город'}/>,
+      component: <FieldPage next={Page.QUIZE_SEX} type={'text'} thunk={quizeThunks.setCity} title={'Введите ваш город'}/>,
       exact: true,
     },
     {

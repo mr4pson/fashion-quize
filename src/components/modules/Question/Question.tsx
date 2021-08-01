@@ -15,7 +15,7 @@ function Question(props: TypeQuestionProps): JSX.Element {
     return <div></div>;
   }
   const { description, image, type, block, options } = props.question;
-  const optionList = JSON.parse(options!) as string[];
+  const optionList = options ? JSON.parse(options!) as string[] : [];
 
   const radioStyle = {
     display: "block",
