@@ -138,7 +138,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
           onFinish={onFinish}
           validateMessages={validateMessages}
         >
-          <Form.Item name="description" label="Вопрос" rules={[{ required: true, type: "string", max: 99 }]}>
+          <Form.Item name="description" label="Вопрос" rules={[{ required: true, type: "string", max: 255 }]}>
             <Input.TextArea />
           </Form.Item>
 
