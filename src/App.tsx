@@ -6,8 +6,6 @@ import { axiosInstance } from "components/pages/AdminPage/constants";
 import { useAuth } from "hooks/useAuth";
 import AppRoutes from "routes/AppRoutes";
 
-import "antd/dist/antd.css";
-import 'react-perfect-scrollbar/dist/css/styles.css';
 import "./App.css";
 
 

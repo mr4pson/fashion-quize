@@ -8,6 +8,7 @@ import { TypeBlock } from "./type";
 
 type Props = {
   blocks: TypeBlock[];
+  loading: boolean;
   onBlockRemove: (id: number) => void;
 };
 
@@ -48,7 +49,7 @@ const BlocksPage: React.FC<Props> = (props) => {
           Создать
         </Button>
       </div>
-      <Table columns={columns} dataSource={dataSource} />
+      <Table columns={columns} loading={props.loading} dataSource={dataSource} />
     </>
   );
 };

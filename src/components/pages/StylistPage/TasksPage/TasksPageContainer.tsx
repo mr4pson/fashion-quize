@@ -7,7 +7,9 @@ import TasksPage from "./TasksPage";
 
 const TasksPageContainer: FC = () => {
   const dispatch = useAppDispatch();
-  const tasks = useSelector((state: TypeRootState) => state.tasksPage.tasks);
+  const { tasks, loading } = useSelector(
+    (state: TypeRootState) => state.tasksPage
+  );
 
   useEffect(() => {
     dispatch(tasksThunks.getTasks());
@@ -15,7 +17,7 @@ const TasksPageContainer: FC = () => {
     return () => dispatch(tasksThunks.clearTasks());
   }, [dispatch]);
 
-  return <TasksPage tasks={tasks} />;
+  return <TasksPage tasks={tasks} loading={loading}/>;
 };
 
 export default TasksPageContainer;

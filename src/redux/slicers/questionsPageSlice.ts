@@ -10,6 +10,7 @@ const questionsPageSlice = createSlice({
   initialState: {
     questions: [] as TypeQuestion[],
     question: {} as TypeQuestion,
+    loading: false,
   },
   reducers: {
     setQuestions: (state, action: PayloadAction<TypeQuestion[]>) => ({
@@ -20,20 +21,30 @@ const questionsPageSlice = createSlice({
       ...state,
       question: action.payload,
     }),
+    setLoading: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      loading: action.payload,
+    }),
   },
 });
 
 export const questionsThunks = {
   getQuestions: () => async (dispatch: TypeDispatch) => {
+    dispatch(setLoading(true));
     const response = await axiosInstance.get("/api/questions");
     dispatch(setQuestions(response?.data));
+    dispatch(setLoading(false));
   },
   getQuestionsByQuizeType: (quizeType: QuizeTypes) => async (dispatch: TypeDispatch) => {
+    dispatch(setLoading(true));
     const response = await axiosInstance.get(`/api/questions/byQuizeType/${quizeType}`);
     dispatch(setQuestions(response?.data));
+    dispatch(setLoading(false));
   },
   getQuestion: (id: number) => async (dispatch: TypeDispatch) => {
+    dispatch(setLoading(true));
     const response = await axiosInstance.get(`/api/questions/${id}`);
+    dispatch(setLoading(false));
     try {
       dispatch(
         setQuestion({
@@ -42,11 +53,14 @@ export const questionsThunks = {
         })
       );
     } catch (error) {
-      openNotification("error", "Не удалось загрузить варианты ответа. Получены данные в неправильном формате.");
+      openNotification("error", "Не удалось загрузить варианты ответов. Получены данные имеют неверный формат.");
     }
   },
   clearQuestion: () => async (dispatch: TypeDispatch) => {
     dispatch(setQuestion({} as TypeQuestion));
+  },
+  clearQuestions: () => async (dispatch: TypeDispatch) => {
+    dispatch(setQuestions([]));
   },
   removeQuestion: (id: number, quizeType: QuizeTypes) => async (dispatch: TypeDispatch) => {
     await axiosInstance.delete(`/api/questions/${id}`);
@@ -54,5 +68,5 @@ export const questionsThunks = {
   },
 };
 
-export const { setQuestions, setQuestion } = questionsPageSlice.actions;
+export const { setQuestions, setQuestion, setLoading } = questionsPageSlice.actions;
 export default questionsPageSlice.reducer;

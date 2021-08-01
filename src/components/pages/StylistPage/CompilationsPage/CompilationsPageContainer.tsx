@@ -7,7 +7,9 @@ import CompilationsPage from "./CompilationsPage";
 
 const CompilationsPageContainer: FC = () => {
   const dispatch = useAppDispatch();
-  const compilations = useSelector((state: TypeRootState) => state.compilationsPage.compilations);
+  const { compilations, loading } = useSelector(
+    (state: TypeRootState) => state.compilationsPage
+  );
 
   useEffect(() => {
     dispatch(compilationsThunks.getCompilations());
@@ -15,7 +17,7 @@ const CompilationsPageContainer: FC = () => {
     return () => dispatch(compilationsThunks.clearCompilations());
   }, [dispatch]);
 
-  return <CompilationsPage compilations={compilations} />;
+  return <CompilationsPage compilations={compilations} loading={loading}/>;
 };
 
 export default CompilationsPageContainer;

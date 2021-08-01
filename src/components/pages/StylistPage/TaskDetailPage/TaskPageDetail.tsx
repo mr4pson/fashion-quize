@@ -8,8 +8,18 @@ import { useHistory, useParams } from "react-router";
 import { TypeRootState, useAppDispatch } from "redux/ReduxStore";
 import { tasksThunks } from "redux/slicers/tasksPageSlice";
 import { paths, StlPage } from "../routes/consts";
-import { BUTTON, COMMENT, CREATED_AT, DATE, formFields, STATUS, TYPE, UPDATED_AT } from "./constants";
+import {
+  BUTTON,
+  COMMENT,
+  CREATED_AT,
+  DATE,
+  formFields,
+  STATUS,
+  TYPE,
+  UPDATED_AT,
+} from "./constants";
 import styles from "./TaskPageDetail.module.scss";
+import Loader from "components/modules/Loader";
 
 const layout = {
   labelCol: { span: 8 },
@@ -30,14 +40,12 @@ const { Option } = Select;
 const TaskPageDetail: FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams() as any;
-  const [loading, setLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
   const history = useHistory();
 
-  const { task, types, statuses } = useSelector((state: TypeRootState) => ({
-    task: state.tasksPage.task,
-    statuses: state.tasksPage.statuses,
-    types: state.tasksPage.types,
-  }));
+  const { task, types, statuses } = useSelector(
+    (state: TypeRootState) => state.tasksPage
+  );
 
   useEffect(() => {
     (async () => {
@@ -50,9 +58,9 @@ const TaskPageDetail: FC = () => {
   }, [dispatch, id]);
 
   const onFinish = async (payload: any) => {
-    setLoading(true);
+    setSaveLoading(true);
     await dispatch(tasksThunks.updateTask(id, payload));
-    setLoading(false);
+    setSaveLoading(false);
     history.push(paths[StlPage.TASKS]);
   };
 
@@ -63,14 +71,22 @@ const TaskPageDetail: FC = () => {
       case UPDATED_AT:
       case DATE:
         return (
-          <Form.Item name={field.name} label={field.label} rules={[{ required: true, type: "string", max: 99 }]}>
+          <Form.Item
+            name={field.name}
+            label={field.label}
+            rules={[{ required: true, type: "string", max: 99 }]}
+          >
             <Input readOnly={field.readonly} />
           </Form.Item>
         );
       case STATUS:
       case TYPE:
         return (
-          <Form.Item name={field.name} label={field.label} rules={[{ required: true }]}>
+          <Form.Item
+            name={field.name}
+            label={field.label}
+            rules={[{ required: true }]}
+          >
             <Select open={field.readonly ? false : undefined}>
               {options
                 .map((type) => ({
@@ -78,7 +94,10 @@ const TaskPageDetail: FC = () => {
                   title: type.title,
                 }))
                 .map((option, index) => (
-                  <Option key={`task-${field.name}` + index} value={option.value}>
+                  <Option
+                    key={`task-${field.name}` + index}
+                    value={option.value}
+                  >
                     {option.title}
                   </Option>
                 ))}
@@ -88,14 +107,18 @@ const TaskPageDetail: FC = () => {
       case BUTTON:
         return (
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-            <Button loading={loading} type="primary" htmlType="submit">
+            <Button loading={saveLoading} type="primary" htmlType="submit">
               {field.label}
             </Button>
           </Form.Item>
         );
       case COMMENT:
         return (
-          <Form.Item name={field.name} label={field.label} rules={[{ required: true }]}>
+          <Form.Item
+            name={field.name}
+            label={field.label}
+            rules={[{ required: true }]}
+          >
             <Input.TextArea readOnly={field.readonly} />
           </Form.Item>
         );
@@ -132,6 +155,7 @@ const TaskPageDetail: FC = () => {
           ))}
         </Form>
       )}
+      {!(task.id && types && statuses) && <Loader />}
     </div>
   );
 };

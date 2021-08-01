@@ -10,6 +10,7 @@ import styles from "./QuestionsPage.module.scss";
 type Props = {
   questions: TypeQuestion[];
   quizeType: QuizeTypes;
+  loading: boolean;
   onQuestionRemove: (id: number) => void;
 };
 
@@ -52,7 +53,7 @@ const QuestionsPage: React.FC<Props> = (props) => {
           Создать
         </Button>
       </div>
-      <Table columns={columns} dataSource={dataSource} />
+      <Table columns={columns} loading={props.loading} dataSource={dataSource} />
     </>
   );
 };

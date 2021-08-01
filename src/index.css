@@ -93,7 +93,7 @@ a:hover {
 }
 
 .ant-layout {
-	height: 100vh;
+	min-height: 100vh;
 }
 .ant-layout-header {
 	background: #fff;

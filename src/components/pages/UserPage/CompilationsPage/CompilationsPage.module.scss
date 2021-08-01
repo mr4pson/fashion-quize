@@ -6,3 +6,23 @@
 .title {
   margin: 0;
 }
+
+.look {
+  display: flex;
+}
+
+.look-item {
+  width: 100px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  &__photo {
+    height: 80px;
+  }
+  &__name {
+    text-align: center;
+    line-height: 16px;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}

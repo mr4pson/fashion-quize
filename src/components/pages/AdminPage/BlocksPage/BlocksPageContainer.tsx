@@ -7,9 +7,7 @@ import BlocksPage from "./BlocksPage";
 
 const BlocksPageContainer: React.FC = () => {
   const dispatch = useDispatch();
-  const blocksState = useSelector((state: TypeRootState) => ({
-    blocks: state.blocksPage.blocks,
-  }));
+  const { blocks, loading } = useSelector((state: TypeRootState) => state.blocksPage);
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [blockId, setBlockId] = useState<number | null>(null);
@@ -38,11 +36,14 @@ const BlocksPageContainer: React.FC = () => {
 
   useEffect(() => {
     dispatch(blocksThunks.getBlocks());
+    return () => {
+      dispatch(blocksThunks.clearBlocks());
+    }
   }, [dispatch]);
 
   return (
     <>
-      <BlocksPage blocks={blocksState.blocks} onBlockRemove={onBlockRemove} />
+      <BlocksPage blocks={blocks} loading={loading} onBlockRemove={onBlockRemove} />
       <Modal
         title="Удаление блока"
         visible={visible}

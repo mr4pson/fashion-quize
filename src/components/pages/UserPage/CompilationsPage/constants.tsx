@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
+import { Image } from 'antd';
+
 import { TCompilation, TLook } from "components/pages/StylistPage/CompilationsPage/types";
 import { TaskStatus, TypeTask } from "components/pages/StylistPage/TasksPage/types";
-import { Link } from "react-router-dom";
 import { paths, UsrPage,  } from "../routes/consts";
+import { getImageUrl } from "common/helpers/common-helpers";
 
 export const getColumns = (styles) => {
   return [
@@ -33,7 +36,12 @@ export const getColumns = (styles) => {
               <div className={styles["look"]} key={look.id}>
                 {look.items.map((item) => (
                   <div className={styles["look-item"]} key={item.id}>
-                    <div className={styles["look-item__photo"]}></div>
+                    <Image
+                      className={styles["look-item__photo"]}
+                      width={100}
+                      height={80}
+                      src={getImageUrl(item.photo)}
+                    />
                     <div className={styles["look-item__name"]}>{item.name}</div>
                   </div>
                 ))}

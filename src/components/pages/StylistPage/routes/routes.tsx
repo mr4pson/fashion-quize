@@ -35,6 +35,12 @@ export function getStylistRoutes(): IStylistPage[] {
       type: StlPage.COMPILATIONS_EDIT,
       path: paths[StlPage.COMPILATIONS_EDIT],
       component: <CompilationDetail method={PageMethods.UPDATE} />,
+      exact: true,
+    },
+    {
+      type: StlPage.COMPILATIONS_CREATE,
+      path: paths[StlPage.COMPILATIONS_CREATE],
+      component: <CompilationDetail method={PageMethods.CREATE} />,
     },
   ];
 }

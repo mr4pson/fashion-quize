@@ -45,7 +45,7 @@ export const openNotification = (type: string, message: string) => {
 
 export const errorResponseHandler = ({ error, logout }) => {
   // check for errorHandle config
-  if (error.config.hasOwnProperty("errorHandle") && error.config.errorHandle === false) {
+  if (error.config?.hasOwnProperty("errorHandle") && error.config.errorHandle === false) {
     return Promise.reject(error);
   }
 

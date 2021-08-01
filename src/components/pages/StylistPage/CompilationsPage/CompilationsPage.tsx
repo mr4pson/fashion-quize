@@ -7,6 +7,7 @@ import { TCompilation } from "./types";
 
 type TProps = {
   compilations: TCompilation[];
+  loading: boolean;
 };
 
 const CompilationsPage: FC<TProps> = (props) => {
@@ -23,7 +24,7 @@ const CompilationsPage: FC<TProps> = (props) => {
       <div className={styles["table-top"]}>
         <h1 className={styles["table-top__title"]}>Список подборок</h1>
       </div>
-      <Table columns={columns} dataSource={dataSource} />
+      <Table columns={columns} dataSource={dataSource} loading={props.loading}/>
     </>
   );
 };

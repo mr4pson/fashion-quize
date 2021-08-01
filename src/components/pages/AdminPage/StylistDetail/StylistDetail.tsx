@@ -1,5 +1,6 @@
 import { Button, Form, Input } from "antd";
 import { TypeFormField } from "common/types/type";
+import Loader from "components/modules/Loader";
 import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
@@ -91,14 +92,14 @@ const StylistDetail: React.FC<Props> = (props) => {
     }
   }
 
-  const formMethod = (!!id && !!stylistsState.stylist.name) || props.method === PageMethods.CREATE;
+  const isFormVisible = (!!id && !!stylistsState.stylist.name) || props.method === PageMethods.CREATE;
 
   return (
     <div className={styles["detail"]}>
       <div className={styles["detail__header"]}>
         <h1>{getPageTitle()}</h1>
       </div>
-      {formMethod && (
+      {isFormVisible && (
         <Form
           {...layout}
           name="nest-messages"
@@ -113,6 +114,7 @@ const StylistDetail: React.FC<Props> = (props) => {
           ))}
         </Form>
       )}
+      {!isFormVisible && <Loader />}
     </div>
   );
 };
