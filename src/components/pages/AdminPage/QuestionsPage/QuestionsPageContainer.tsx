@@ -15,9 +15,7 @@ const QuestionsPageContainer: React.FC = () => {
   const history = useHistory();
   const { quizeType } = useParams() as any;
 
-  const questionState = useSelector((state: TypeRootState) => ({
-    questions: state.questionsPage.questions,
-  }));
+  const { questions, loading } = useSelector((state: TypeRootState) => state.questionsPage);
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [questionId, setQuestionId] = useState<number | null>(null);
@@ -47,6 +45,9 @@ const QuestionsPageContainer: React.FC = () => {
 
   useEffect(() => {
     dispatch(questionsThunks.getQuestionsByQuizeType(quizeType));
+    return () => {
+      dispatch(questionsThunks.clearQuestions());
+    }
   }, [dispatch, quizeType]);
 
   const handleQuizeTypeChange = (tabKey) => {
@@ -59,14 +60,16 @@ const QuestionsPageContainer: React.FC = () => {
       <Tabs defaultActiveKey={quizeType} onChange={handleQuizeTypeChange}>
         <TabPane tab="Опрос для мужчин" key={QuizeTypes.FOR_MEN}>
           <QuestionsPage
-            questions={questionState.questions}
+            questions={questions}
+            loading={loading}
             onQuestionRemove={onQuestionRemove}
             quizeType={curQuizeType}
           />
         </TabPane>
         <TabPane tab="Опрос для женщин" key={QuizeTypes.FOR_WOMEN}>
           <QuestionsPage
-            questions={questionState.questions}
+            questions={questions}
+            loading={loading}
             onQuestionRemove={onQuestionRemove}
             quizeType={curQuizeType}
           />

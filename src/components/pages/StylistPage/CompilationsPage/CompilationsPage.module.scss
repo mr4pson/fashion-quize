@@ -34,15 +34,13 @@
 
 .look {
   display: flex;
-  justify-content: space-between;
 }
 
 .look-item {
-  width: 80px;
-  margin-bottom: 5px;
-  margin-right: 5px;
+  width: 100px;
+  margin-bottom: 10px;
+  margin-right: 10px;
   &__photo {
-    background: #ccc;
     height: 80px;
   }
   &__name {

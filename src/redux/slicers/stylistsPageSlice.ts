@@ -11,6 +11,7 @@ const stylistsPageSlice = createSlice({
   initialState: {
     stylists: [] as TypeStylists[],
     stylist: {} as TypeStylists,
+    loading: false,
   },
   reducers: {
     setStylists: (state, action: PayloadAction<TypeStylists[]>) => ({
@@ -21,17 +22,25 @@ const stylistsPageSlice = createSlice({
       ...state,
       stylist: action.payload,
     }),
+    setLoading: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      loading: action.payload,
+    }),
   },
 });
 
 export const stylistsThunks = {
   getStylists: () => async (dispatch: TypeDispatch) => {
+    dispatch(setLoading(true));
     const response = await axiosInstance.get("/api/stylists");
     dispatch(setStylists(response?.data));
+    dispatch(setLoading(false));
   },
   getStylist: (id: number) => async (dispatch: TypeDispatch) => {
+    dispatch(setLoading(true));
     const response = await axiosInstance.get(`/api/stylists/${id}`);
     dispatch(setStylist(response?.data));
+    dispatch(setLoading(false));
   },
   createStylist: (payload: TypeEditStylistDto) => async (dispatch) => {
     const response = await axiosInstance.post("/api/stylists", payload);
@@ -50,11 +59,14 @@ export const stylistsThunks = {
   clearStylist: () => (dispatch: TypeDispatch) => {
     dispatch(setStylist({} as TypeStylists));
   },
+  clearStylists: () => (dispatch: TypeDispatch) => {
+    dispatch(setStylists([]));
+  },
   removeStylist: (id: number) => async (dispatch: TypeDispatch) => {
     await axiosInstance.delete(`/api/stylists/${id}`);
     dispatch(stylistsThunks.getStylists());
   },
 };
 
-export const { setStylists, setStylist } = stylistsPageSlice.actions;
+export const { setStylists, setStylist, setLoading } = stylistsPageSlice.actions;
 export default stylistsPageSlice.reducer;

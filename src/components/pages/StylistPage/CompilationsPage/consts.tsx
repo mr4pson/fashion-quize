@@ -1,4 +1,6 @@
+import { getImageUrl } from "common/helpers/common-helpers";
 import { Link } from "react-router-dom";
+import { Image } from 'antd';
 
 import { paths, StlPage } from "../routes/consts";
 import { TaskStatus, TypeTask } from "../TasksPage/types";
@@ -19,7 +21,9 @@ export const getColumns = () => {
       dataIndex: "task",
       key: "task",
       render: (task: TypeTask) => (
-        <Link to={`${paths[StlPage.TASKS]}/${task.id}`}>{!!task.id && `Задача №${task.id}`}</Link>
+        <Link to={`${paths[StlPage.TASKS]}/${task.id}`}>
+          {!!task.id && `Задача №${task.id}`}
+        </Link>
       ),
     },
     {
@@ -39,7 +43,12 @@ export const getColumns = () => {
               <div className={styles["look"]} key={look.id}>
                 {look.items.map((item) => (
                   <div className={styles["look-item"]} key={item.id}>
-                    <div className={styles["look-item__photo"]}></div>
+                    <Image
+                      className={styles["look-item__photo"]}
+                      width={100}
+                      height={80}
+                      src={getImageUrl(item.photo)}
+                    />
                     <div className={styles["look-item__name"]}>{item.name}</div>
                   </div>
                 ))}
@@ -53,7 +62,9 @@ export const getColumns = () => {
       dataIndex: "",
       key: "x",
       render: (compilation: TCompilation) => (
-        <Link to={`${paths[StlPage.COMPILATIONS]}/${compilation.id}`}>Изменить</Link>
+        <Link to={`${paths[StlPage.COMPILATIONS]}/${compilation.id}`}>
+          Изменить
+        </Link>
       ),
     },
   ];

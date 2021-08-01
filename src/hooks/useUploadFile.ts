@@ -33,5 +33,6 @@ export function useUploadFile(
   return {
     uploadMediaFile,
     mediaFile,
+    uploadFiles,
   }
 }

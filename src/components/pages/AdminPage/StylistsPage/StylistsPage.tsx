@@ -8,6 +8,7 @@ import { TypeStylists } from "./types";
 
 type Props = {
   stylists: TypeStylists[];
+  loading: boolean;
   onStylistsRemove: (id: number) => void;
 };
 
@@ -48,7 +49,7 @@ const StylistsPage: React.FC<Props> = (props) => {
           Создать
         </Button>
       </div>
-      <Table columns={columns} dataSource={dataSource} />
+      <Table columns={columns} loading={props.loading} dataSource={dataSource} />
     </>
   );
 };

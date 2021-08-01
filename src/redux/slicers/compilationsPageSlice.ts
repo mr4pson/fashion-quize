@@ -40,6 +40,9 @@ export const compilationsThunks = {
     dispatch(setCompilations(response?.data));
     dispatch(setLoading(false));
   },
+  setCompilation: (compilation: TCompilation) => (dispatch: TypeDispatch) => {
+    dispatch(setCompilation(compilation));
+  },
   clearCompilations: () => (dispatch: TypeDispatch) => {
     dispatch(setCompilations([]));
   },
@@ -52,9 +55,12 @@ export const compilationsThunks = {
   clearCompilation: () => (dispatch: TypeDispatch) => {
     dispatch(setCompilation({} as TCompilation));
   },
-  updateCompilation: (payload: any) => async () => {
-    console.log("compilation updated", payload);
-    // await
+  createCompilation: (payload: any) => async () => {
+    await axiosInstance.post(`/api/compilations`, payload);
+  },
+  updateCompilation: (id, payload: any) => async (dispatch: TypeDispatch) => {
+    await axiosInstance.put(`/api/compilations/${id}`, payload);
+    dispatch(setCompilation({} as TCompilation));
   },
 };
 

@@ -7,9 +7,7 @@ import StylistsPage from "./StylistsPage";
 
 const StylistsPageContainer: React.FC = () => {
   const dispatch = useDispatch();
-  const stylistsState = useSelector((state: TypeRootState) => ({
-    stylists: state.stylistsPage.stylists,
-  }));
+  const { stylists, loading } = useSelector((state: TypeRootState) => state.stylistsPage);
 
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -39,11 +37,14 @@ const StylistsPageContainer: React.FC = () => {
 
   useEffect(() => {
     dispatch(stylistsThunks.getStylists());
+    return () => {
+      dispatch(stylistsThunks.clearStylists());
+    }
   }, [dispatch]);
 
   return (
     <>
-      <StylistsPage stylists={stylistsState.stylists} onStylistsRemove={onStylistsRemove} />
+      <StylistsPage loading={loading} stylists={stylists} onStylistsRemove={onStylistsRemove} />
       <Modal
         title="Удаление стилиста"
         okText="Удалить"

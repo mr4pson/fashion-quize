@@ -1,6 +1,7 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Button, Form, FormInstance, Input, Select } from "antd";
 import { getImageUrl } from "common/helpers/common-helpers";
+import Loader from "components/modules/Loader";
 import { QuestionType } from "components/pages/QuizePage/types";
 import { useUploadFile } from "hooks/useUploadFile";
 import { memo, useEffect, useRef, useState } from "react";
@@ -218,7 +219,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
           </div>
         </Form>
       ) : (
-        ""
+        <Loader />
       )}
     </div>
   );

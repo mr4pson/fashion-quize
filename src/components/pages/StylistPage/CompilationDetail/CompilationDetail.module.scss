@@ -1,6 +1,6 @@
 .detail {
   margin: 0 auto;
-  width: 500px;
+  width: 550px;
 
   &__header {
     text-align: center;
@@ -38,25 +38,26 @@
 }
 
 .look-item {
-  width: 80px;
+  width: 100px;
   margin-right: 10px;
   margin-bottom: 10px;
 
   &__photo {
     height: 80px;
     background: #ccc;
+    background-position: center;
+    background-size: cover;
     cursor: pointer;
   }
 
   &__backdrop {
     height: 100%;
-    display: flex;
+    display: flex!important;
     justify-content: center;
     align-items: center;
     font-size: 32px;
-
     opacity: 0;
-    color: #fff;
+    color: #fff!important;
     background: #000;
     transition: 0.3s ease-in-out;
 
@@ -70,8 +71,8 @@
   }
 }
 
-.look-add-btn {
-  width: 80px;
+button.look-add-btn {
+  width: 100px;
   height: 80px;
   margin-bottom: 40px;
   font-size: 32px;

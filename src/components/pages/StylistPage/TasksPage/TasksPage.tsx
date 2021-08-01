@@ -9,6 +9,7 @@ import { TypeTask } from "./types";
 
 type Props = {
   tasks: TypeTask[];
+  loading: boolean;
 };
 
 const TasksPage: FC<Props> = (props) => {
@@ -27,7 +28,7 @@ const TasksPage: FC<Props> = (props) => {
       <div className={styles["table-top"]}>
         <h1 className={styles["table-top__title"]}>Список задач</h1>
       </div>
-      <Table columns={columns} dataSource={dataSource} />
+      <Table columns={columns} dataSource={dataSource} loading={props.loading}/>
     </>
   );
 };

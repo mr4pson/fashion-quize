@@ -107,7 +107,7 @@ const QuizePage: React.FC<Props> = (props) => {
             <span>{questionNumber}</span>
           </div> */}
           <div className={styles["progress"]}>
-            {blocks.map((block) => (
+            {blocks?.map((block) => (
               <div key={block.id} className={styles["progress__item"]}></div>
             ))}
           </div>

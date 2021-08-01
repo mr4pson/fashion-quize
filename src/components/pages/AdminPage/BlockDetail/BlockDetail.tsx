@@ -1,5 +1,6 @@
 import { Button, Form, Input } from "antd";
 import { TypeFormField } from "common/types/type";
+import Loader from "components/modules/Loader";
 import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
@@ -112,7 +113,7 @@ const BlockDetail: React.FC<Props> = (props) => {
           ))}
         </Form>
       ) : (
-        ""
+        <Loader />
       )}
     </div>
   );
