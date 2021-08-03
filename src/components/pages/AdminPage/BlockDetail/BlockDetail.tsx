@@ -1,12 +1,13 @@
 import { Button, Form, Input } from "antd";
-import { TypeFormField } from "common/types/type";
-import Loader from "components/modules/Loader";
-import { memo, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, memo, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { TypeRootState } from "redux/ReduxStore";
+
+import { TFormField } from "common/types/types";
+import Loader from "components/modules/Loader";
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { blocksThunks } from "redux/slicers/blocksPageSlice";
-import { axiosInstance } from "../constants";
+import { axiosInstance } from "../consts";
 import { AdmPage, paths } from "../routes/constants";
 import { PageMethods } from "../types";
 import styles from "./BlockDetail.module.scss";
@@ -27,19 +28,17 @@ const validateMessages = {
 };
 /* eslint-enable no-template-curly-in-string */
 
-type Props = {
+type TProps = {
   method: PageMethods;
 };
 
-const BlockDetail: React.FC<Props> = (props) => {
+const BlockDetail: FC<TProps> = (props) => {
   const history = useHistory();
   const { id } = useParams() as any;
   const [loading, setLoading] = useState(false);
 
-  const dispatch = useDispatch();
-  const blocksState = useSelector((state: TypeRootState) => ({
-    block: state.blocksPage.block,
-  }));
+  const dispatch = useAppDispatch();
+  const { block } = useSelector((state: TRootState) => state.blocksPage);
 
   const onFinish = async (payload: ChangeBlockDto) => {
     setLoading(true);
@@ -58,7 +57,7 @@ const BlockDetail: React.FC<Props> = (props) => {
     return id ? `Изменение блока №${id}` : "Создание блока";
   }
 
-  function getFormField(type: string, field: TypeFormField) {
+  function getFormField(type: string, field: TFormField) {
     switch (type) {
       case TITLE:
       case COLOR:
@@ -84,13 +83,11 @@ const BlockDetail: React.FC<Props> = (props) => {
     if (id) {
       dispatch(blocksThunks.getBlock(id));
     }
-  }, [dispatch, id]);
 
-  useEffect(() => {
     return () => {
       dispatch(blocksThunks.clearBlock());
     };
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <div className={styles["detail"]}>
@@ -98,9 +95,9 @@ const BlockDetail: React.FC<Props> = (props) => {
         <h1>{getPageTitle()}</h1>
       </div>
 
-      {(!!id && !!blocksState.block.title) || props.method === PageMethods.CREATE ? (
+      {(!!id && !!block.title) || props.method === PageMethods.CREATE ? (
         <Form
-          initialValues={blocksState.block}
+          initialValues={block}
           {...layout}
           name="nest-messages"
           onFinish={onFinish}

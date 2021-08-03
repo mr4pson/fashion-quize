@@ -1,16 +1,17 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Button, Form, FormInstance, Input, Select } from "antd";
+import { FC, memo, useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router";
+
 import { getImageUrl } from "common/helpers/common-helpers";
 import Loader from "components/modules/Loader";
 import { QuestionType } from "components/pages/QuizePage/types";
 import { useUploadFile } from "hooks/useUploadFile";
-import { memo, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
-import { TypeRootState } from "redux/ReduxStore";
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { blocksThunks } from "redux/slicers/blocksPageSlice";
 import { questionsThunks } from "redux/slicers/questionsPageSlice";
-import { axiosInstance } from "../constants";
+import { axiosInstance } from "../consts";
 import { AdmPage, paths } from "../routes/constants";
 import { PageMethods } from "../types";
 import { layout, QuestionTypeOptions, validateMessages } from "./constants";
@@ -20,19 +21,19 @@ import { ChangeQuestionDto } from "./types";
 
 const { Option } = Select;
 
-type Props = {
+type TProps = {
   method: PageMethods;
 };
 
-const QuestionDetail: React.FC<Props> = (props) => {
+const QuestionDetail: FC<TProps> = (props) => {
   const history = useHistory();
   const formRef = useRef<FormInstance>(null);
   const { id, quizeType } = useParams() as any;
   const [loading, setLoading] = useState(false);
   const [questionType, setQuestionType] = useState<QuestionType>("" as QuestionType);
 
-  const dispatch = useDispatch();
-  const state = useSelector((state: TypeRootState) => ({
+  const dispatch = useAppDispatch();
+  const { question, blocks } = useSelector((state: TRootState) => ({
     question: state.questionsPage.question,
     blocks: state.blocksPage.blocks,
   }));
@@ -40,8 +41,8 @@ const QuestionDetail: React.FC<Props> = (props) => {
   const { mediaFile, uploadMediaFile } = useUploadFile(formRef);
 
   const initialValues = {
-    ...state.question,
-    block: state.question.block?.id,
+    ...question,
+    block: question.block?.id,
     image: "",
   };
 
@@ -50,7 +51,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
   const onFinish = async (questionData: ChangeQuestionDto) => {
     const payload = {
       ...questionData,
-      image: mediaFile ? mediaFile : state.question.image,
+      image: mediaFile ? mediaFile : question.image,
       options: JSON.stringify(answerOptions),
       quizeType: quizeType,
     };
@@ -88,14 +89,15 @@ const QuestionDetail: React.FC<Props> = (props) => {
   }, [questionType]);
 
   useEffect(() => {
-    if (state.question.options) {
-      setAnswerOptions(state.question.options);
+    if (question.options) {
+      setAnswerOptions(question.options);
     }
-    setQuestionType(state.question.type);
-  }, [state.question]);
+    setQuestionType(question.type);
+  }, [question]);
 
   useEffect(() => {
     dispatch(blocksThunks.getBlocks());
+
     return () => {
       dispatch(questionsThunks.clearQuestion());
     };
@@ -130,7 +132,7 @@ const QuestionDetail: React.FC<Props> = (props) => {
       <div className={styles["detail__header"]}>
         <h1>{getPageTitle(id)}</h1>
       </div>
-      {(!!id && !!state.question.description) || props.method === PageMethods.CREATE ? (
+      {(!!id && !!question.description) || props.method === PageMethods.CREATE ? (
         <Form
           initialValues={initialValues}
           {...layout}
@@ -146,10 +148,10 @@ const QuestionDetail: React.FC<Props> = (props) => {
             <Input type="file" onChange={uploadMediaFile} />
           </Form.Item>
 
-          {state.question?.image && (
+          {question?.image && (
             <div
               style={{
-                backgroundImage: `url(${mediaFile ? getImageUrl(mediaFile) : getImageUrl(state.question?.image)})`,
+                backgroundImage: `url(${mediaFile ? getImageUrl(mediaFile) : getImageUrl(question?.image)})`,
               }}
               className={styles["detail__uploaded-image"]}
             ></div>
@@ -157,11 +159,8 @@ const QuestionDetail: React.FC<Props> = (props) => {
 
           <Form.Item name="block" label="Блок" rules={[{ required: true }]}>
             <Select>
-              {state.blocks
-                ?.map((block) => ({
-                  value: block.id,
-                  title: block.title,
-                }))
+              {blocks
+                ?.map((block) => ({ value: block.id, title: block.title }))
                 .map((option, index) => (
                   <Option key={"question-types" + index} value={option.value}>
                     {option.title}

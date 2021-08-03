@@ -1,10 +1,18 @@
 import { Button, Form, Select } from "antd";
-import { TypeFormField } from "common/types/type";
+
+import { TFormField } from "common/types/types";
 import { TCompilation } from "../CompilationsPage/types";
 import { TaskStatus } from "../TasksPage/types";
 import { layout } from "./consts";
 
-export const handleEditItemName = (e, compilation: TCompilation, lookIndex?: number, lookItemIndex?: number, dispatch?: any, setCompilation?) => {
+export const handleEditItemName = (
+  e,
+  compilation: TCompilation,
+  lookIndex?: number,
+  lookItemIndex?: number,
+  dispatch?: any,
+  setCompilation?
+) => {
   const updatedCompilation = {
     id: compilation.id,
     task: compilation.task,
@@ -31,7 +39,13 @@ export const handleEditItemName = (e, compilation: TCompilation, lookIndex?: num
   dispatch(setCompilation(updatedCompilation));
 };
 
-export const handleDelItem = (compilation: TCompilation, lookIndex: number, lookItemIndex: number, dispatch, setCompilation) => {
+export const handleDelItem = (
+  compilation: TCompilation,
+  lookIndex: number,
+  lookItemIndex: number,
+  dispatch,
+  setCompilation
+) => {
   const updatedCompilation = {
     id: compilation.id,
     task: compilation.task,
@@ -46,12 +60,16 @@ export const handleDelItem = (compilation: TCompilation, lookIndex: number, look
   dispatch(setCompilation(updatedCompilation));
 };
 
-export const handleAddItem = (index: number, inputFileRef: React.MutableRefObject<any>, setCurrentLookIndex: React.Dispatch<React.SetStateAction<number | undefined>>) => {
+export const handleAddItem = (
+  index: number,
+  inputFileRef: React.MutableRefObject<any>,
+  setCurrentLookIndex: React.Dispatch<React.SetStateAction<number | undefined>>
+) => {
   inputFileRef.current.input.click();
   setCurrentLookIndex(index);
 };
 
-export const getFormField = (type: string, field: TypeFormField, statuses: TaskStatus[], loading: boolean) =>
+export const getFormField = (type: string, field: TFormField, statuses: TaskStatus[], loading: boolean) =>
   ({
     STATUS: (
       <Form.Item name={field.name} label={field.label} rules={[{ required: true }]}>

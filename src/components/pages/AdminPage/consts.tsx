@@ -1,9 +1,17 @@
 import { FileSearchOutlined, PieChartOutlined, QuestionCircleOutlined, TeamOutlined } from "@ant-design/icons";
 import axios from "axios";
+
 import { getJwtPair } from "common/helpers/auth-helpers";
-import { QuizeTypes } from "common/types/type";
-import React from "react";
+import { EQuize } from "common/types/types";
 import { AdmPage, paths } from "./routes/constants";
+
+export const getSelectedKey = (location: string) => {
+  if (location.includes(paths[AdmPage.BLOCKS])) return "1";
+  if (location.includes(paths[AdmPage.QUESTIONS])) return "2";
+  if (location.includes(paths[AdmPage.ANSWERS])) return "3";
+  if (location.includes(paths[AdmPage.STYLISTS])) return "4";
+  return "1";
+};
 
 export const menuItems = [
   {
@@ -16,7 +24,7 @@ export const menuItems = [
     key: "2",
     icon: <QuestionCircleOutlined />,
     title: "Опрос",
-    route: `${paths[AdmPage.QUESTIONS]}/${QuizeTypes.FOR_MEN}`,
+    route: `${paths[AdmPage.QUESTIONS]}/${EQuize.FOR_MEN}`,
   },
   {
     key: "3",

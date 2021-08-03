@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { openNotification } from "common/helpers/common-helpers";
-import { axiosInstance } from "components/pages/AdminPage/constants";
+import { axiosInstance } from "components/pages/AdminPage/consts";
 import { TaskStatus, TaskType, TypeTask } from "components/pages/StylistPage/TasksPage/types";
 import { TypeDispatch } from "redux/ReduxStore";
 
@@ -94,7 +94,7 @@ export const tasksThunks = {
       openNotification("error", `Не удалось отменить задачу`);
     }
   },
-}
+};
 
-export const { setTasks, setTask, setTaskStatuses, setTaskTypes, setLoading,  } = tasksPageSlice.actions;
+export const { setTasks, setTask, setTaskStatuses, setTaskTypes, setLoading } = tasksPageSlice.actions;
 export default tasksPageSlice.reducer;

@@ -1,8 +1,8 @@
-import { QuizeTypes } from "common/types/type";
-import React from "react";
+import { EQuize } from "common/types/types";
+import { ReactElement } from "react";
 
 export type Sex = {
   label: string;
-  path: QuizeTypes;
-  icon: React.ReactElement;
-}
+  path: EQuize;
+  icon: ReactElement;
+};

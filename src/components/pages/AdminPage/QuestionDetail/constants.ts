@@ -1,24 +1,24 @@
-import { TypeSelectOption } from "common/types/type";
+import { TypeSelectOption } from "common/types/types";
 import { QuestionType } from "components/pages/QuizePage/types";
 
 export const QuestionTypeOptions: TypeSelectOption[] = [
   {
-    title: 'Строка',
+    title: "Строка",
     value: QuestionType.INPUT,
   },
   {
-    title: 'Текст',
+    title: "Текст",
     value: QuestionType.TEXT,
   },
   {
-    title: 'Один вариант',
+    title: "Один вариант",
     value: QuestionType.SINGLE_OPTION,
   },
   {
-    title: 'Несколько вариантов',
+    title: "Несколько вариантов",
     value: QuestionType.MULTIPLE_OPTION,
   },
-]
+];
 
 export const layout = {
   labelCol: { span: 8 },

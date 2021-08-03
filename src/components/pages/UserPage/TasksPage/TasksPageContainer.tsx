@@ -1,22 +1,18 @@
 import { Modal } from "antd";
-import React, { memo, useEffect } from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { TypeRootState } from "redux/ReduxStore";
+import { FC, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { tasksThunks } from "redux/slicers/tasksPageSlice";
 import TasksPage from "./TasksPage";
 
-const TasksPageContainer: React.FC = () => {
+const TasksPageContainer: FC = () => {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [taskId, setTaskId] = useState<number | null>(null);
 
-  const dispatch = useDispatch();
-  const { tasks, loading } = useSelector((state: TypeRootState) => ({
-    tasks: state.tasksPage.tasks,
-    loading: state.tasksPage.loading,
-  }));
-
+  const dispatch = useAppDispatch();
+  const { tasks, loading } = useSelector((state: TRootState) => state.tasksPage);
 
   const showModal = () => {
     setVisible(true);
@@ -42,6 +38,7 @@ const TasksPageContainer: React.FC = () => {
 
   useEffect(() => {
     dispatch(tasksThunks.getUserTasks());
+
     return () => {
       dispatch(tasksThunks.clearTasks());
     };
@@ -65,4 +62,4 @@ const TasksPageContainer: React.FC = () => {
   );
 };
 
-export default memo(TasksPageContainer);
+export default TasksPageContainer;

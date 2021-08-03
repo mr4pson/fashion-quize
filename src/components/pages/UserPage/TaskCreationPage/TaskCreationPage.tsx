@@ -1,18 +1,15 @@
 import { Button, Card, DatePicker, Form, Input, Select } from "antd";
-import { TypeFormField } from "common/types/type";
-import React, { memo, useEffect } from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import locale from "antd/es/date-picker/locale/ru_RU";
+import "moment/locale/ru";
+import { FC, memo, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { TypeRootState } from "redux/ReduxStore";
+
+import { TFormField } from "common/types/types";
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { tasksThunks } from "redux/slicers/tasksPageSlice";
 import { paths, UsrPage } from "../routes/consts";
-import {
-  COMMENT,
-  DATE,
-  formFields,
-  TYPE,
-} from "./constants";
+import { formFields } from "./constants";
 import styles from "./TaskCreationPage.module.scss";
 
 const layout = {
@@ -20,26 +17,24 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
+const picker = {
+  showTime: true,
+  locale: locale,
+  disabledDate: (date: moment.Moment) => date.toDate() < new Date(),
+};
+
 /* eslint-disable no-template-curly-in-string */
 const validateMessages = {
   required: "${label} не может быть пустым!",
-  string: {
-    max: "${label} не может быть длиннее ${max} символов!",
-  },
 };
 /* eslint-enable no-template-curly-in-string */
 
-export const TaskCreationPage: React.FC = () => {
+export const TaskCreationPage: FC = () => {
   const history = useHistory();
   const [saveLoading, setSaveLoading] = useState(false);
-  const dispatch = useDispatch();
 
-  const { types, loading } = useSelector((state: TypeRootState) => ({
-    task: state.tasksPage.task,
-    types: state.tasksPage.types,
-    statuses: state.tasksPage.statuses,
-    loading: state.tasksPage.loading,
-  }));
+  const dispatch = useAppDispatch();
+  const { types, loading } = useSelector((state: TRootState) => state.tasksPage);
 
   useEffect(() => {
     (async () => {
@@ -48,87 +43,59 @@ export const TaskCreationPage: React.FC = () => {
     })();
   }, [dispatch]);
 
-  function getFormField(type: string, field: TypeFormField) {
-    const options = types;
-    switch (type) {
-      case DATE:
-        return (
-          <Form.Item
-            name={field.name}
-            label={field.label}
-            rules={[{ required: true, type: "date" }]}
-          >
-            <DatePicker disabledDate={(date) => date.toDate() < new Date()} className={styles['date-picker']}/>
-          </Form.Item>
-        );
-      case TYPE:
-        return (
-          <Form.Item
-            name={field.name}
-            label={field.label}
-            rules={[{ required: true }]}
-          >
-            <Select>
-              {options
-                .map((type) => ({
-                  value: type.id,
-                  title: type.title,
-                }))
-                .map((option, index) => (
-                  <Select.Option
-                    key={`task-${field.name}` + index}
-                    value={option.value}
-                  >
-                    {option.title}
-                  </Select.Option>
-                ))}
-            </Select>
-          </Form.Item>
-        );
-      case COMMENT:
-        return (
-          <Form.Item
-            name={field.name}
-            label={field.label}
-          >
-            <Input.TextArea/>
-          </Form.Item>
-        );
-      default:
-        return <></>;
-    }
-  }
+  const getFormField = (type: string, field: TFormField) => {
+    const options = types.map((type) => ({ value: type.id, title: type.title }));
+
+    return {
+      DATE: (
+        <Form.Item rules={[{ required: true }]} name={field.name} label={field.label}>
+          <DatePicker className={styles["date-picker"]} {...picker} />
+        </Form.Item>
+      ),
+      TYPE: (
+        <Form.Item rules={[{ required: true }]} name={field.name} label={field.label}>
+          <Select>
+            {options.map((option, index) => (
+              <Select.Option key={`task-${field.name}` + index} value={option.value}>
+                {option.title}
+              </Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
+      ),
+      COMMENT: (
+        <Form.Item name={field.name} label={field.label}>
+          <Input.TextArea />
+        </Form.Item>
+      ),
+    }[type];
+  };
+
+  const getCreationTitle = () => (
+    <div className={styles["header"]}>
+      <h2 className={styles["title"]}>Создание задачи</h2>
+      <Button type="primary" htmlType="submit" loading={saveLoading}>
+        Добавить
+      </Button>
+    </div>
+  );
 
   const onFinish = async (formData) => {
     if (formData.date) {
       const payload = {
         ...formData,
-        date: formData.date.format('DD.MM.YYYY'),
-      }
+        date: formData.date.format("DD.MM.YYYY"),
+      };
       await dispatch(tasksThunks.createTask(payload));
       history.push(paths[UsrPage.TASKS]);
     }
   };
 
   return (
-    <Form
-      {...layout}
-      name="nest-messages"
-      onFinish={onFinish}
-      validateMessages={validateMessages}
-    >
-      <Card
-        loading={loading}
-        title={
-          <div className={styles["header"]}>
-            <h2 className={styles["title"]}>Создание задачи</h2>
-            <Button loading={saveLoading} type="primary" htmlType="submit">Добавить</Button>
-          </div>
-        }
-        bordered={false}
-      >
+    <Form name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} {...layout}>
+      <Card bordered={false} loading={loading} title={getCreationTitle()}>
         {formFields.map((field) => (
-          <div key={field.id} className={styles["detail__field"]}>
+          <div className={styles["detail__field"]} key={field.id}>
             {getFormField(field.type, field)}
           </div>
         ))}

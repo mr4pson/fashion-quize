@@ -22,7 +22,7 @@ const store = configureStore({
 
 export const useAppDispatch = () => useDispatch<TypeDispatch>();
 
-export type TypeRootState = ReturnType<typeof store.getState>;
+export type TRootState = ReturnType<typeof store.getState>;
 export type TypeDispatch = Dispatch<any>;
 
 export default store;

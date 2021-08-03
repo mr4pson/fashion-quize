@@ -1,34 +1,26 @@
 import { RightOutlined } from "@ant-design/icons";
 import { Button, Form, FormInstance } from "antd";
 import classNames from "classnames";
-import Question from "components/modules/Question/Question";
-import { memo, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, memo, useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { TypeRootState } from "redux/ReduxStore";
+
+import Question from "components/modules/Question/Question";
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { quizeThunks, setStateAnswers } from "redux/slicers/quizePageSlice";
 import { Page, paths } from "routes/constants";
 import { getNextQuestionLink } from "./helper";
 import styles from "./QuizePage.module.scss";
 import { TypeQuestion } from "./types";
 
-type Props = {
+type TProps = {
   answers: Object | {};
 };
 
-const QuizePage: React.FC<Props> = (props) => {
-  const dispatch = useDispatch();
+const QuizePage: FC<TProps> = (props) => {
+  const dispatch = useAppDispatch();
 
-  const { questions, blocks, name, email, age, city } = useSelector(
-    (state: TypeRootState) => ({
-      questions: state.quizePage.questions,
-      blocks: state.quizePage.blocks,
-      name: state.quizePage.name,
-      email: state.quizePage.email,
-      age: state.quizePage.age,
-      city: state.quizePage.city,
-    })
-  );
+  const { questions, blocks, name, email, age, city } = useSelector((state: TRootState) => state.quizePage);
   const { questionNumber, quizeType } = useParams() as any;
   const questionsNumber = questions?.length;
   const [question, setQuestion] = useState<TypeQuestion>({} as TypeQuestion);
@@ -80,28 +72,17 @@ const QuizePage: React.FC<Props> = (props) => {
   return (
     <div className={classNames(styles["quize-page"], "quize-page")}>
       {/* <Header /> */}
-      <Form
-        name="basic"
-        ref={formRef}
-        initialValues={initialValue}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
+      <Form name="basic" ref={formRef} initialValues={initialValue} onFinish={onFinish} onFinishFailed={onFinishFailed}>
         <div className="container">
           {+questionNumber !== -1 ? (
             <Question question={question} />
           ) : (
-            <div className={styles["quize-page__no-questions"]}>
-              Такого вопроса не существует.
-            </div>
+            <div className={styles["quize-page__no-questions"]}>Такого вопроса не существует.</div>
           )}
         </div>
         <div
           style={{ color: question?.block?.color }}
-          className={classNames(
-            styles["quize-page__sidebar"],
-            styles["sidebar"]
-          )}
+          className={classNames(styles["quize-page__sidebar"], styles["sidebar"])}
         >
           {/* <div className={styles["sidebar__number"]}>
             <span>{questionNumber}</span>

@@ -1,14 +1,13 @@
-import { memo } from "react";
+import { FC } from "react";
 import { useSelector } from "react-redux";
-import { TypeRootState } from "redux/ReduxStore";
+
+import { TRootState } from "redux/ReduxStore";
 import QuizePage from "./QuizePage";
 
-const QuizePageContainer: React.FC = () => {
-  const quizeState = useSelector((state: TypeRootState) => ({
-    answers: state.quizePage.answers,
-  }));
+const QuizePageContainer: FC = () => {
+  const quizeState = useSelector((state: TRootState) => state.quizePage);
 
   return <QuizePage answers={quizeState.answers} />;
 };
 
-export default memo(QuizePageContainer);
+export default QuizePageContainer;

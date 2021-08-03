@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { openNotification } from "common/helpers/common-helpers";
-import { QuizeTypes } from "common/types/type";
-import { axiosInstance } from "components/pages/AdminPage/constants";
+import { EQuize } from "common/types/types";
+import { axiosInstance } from "components/pages/AdminPage/consts";
 import { TypeQuestion } from "components/pages/QuizePage/types";
 import { TypeDispatch } from "redux/ReduxStore";
 
@@ -35,7 +36,7 @@ export const questionsThunks = {
     dispatch(setQuestions(response?.data));
     dispatch(setLoading(false));
   },
-  getQuestionsByQuizeType: (quizeType: QuizeTypes) => async (dispatch: TypeDispatch) => {
+  getQuestionsByQuizeType: (quizeType: EQuize) => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
     const response = await axiosInstance.get(`/api/questions/byQuizeType/${quizeType}`);
     dispatch(setQuestions(response?.data));
@@ -62,7 +63,7 @@ export const questionsThunks = {
   clearQuestions: () => async (dispatch: TypeDispatch) => {
     dispatch(setQuestions([]));
   },
-  removeQuestion: (id: number, quizeType: QuizeTypes) => async (dispatch: TypeDispatch) => {
+  removeQuestion: (id: number, quizeType: EQuize) => async (dispatch: TypeDispatch) => {
     await axiosInstance.delete(`/api/questions/${id}`);
     dispatch(questionsThunks.getQuestionsByQuizeType(quizeType));
   },

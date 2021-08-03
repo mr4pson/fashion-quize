@@ -1,34 +1,26 @@
 import { Button, Table } from "antd";
-import { memo } from "react";
+import { FC, memo } from "react";
 import { useHistory } from "react-router";
+
 import { AdmPage, paths } from "../routes/constants";
-import { DELETE, EDIT, getColumns } from "./constants";
+import { getColumns } from "./consts";
 import styles from "./StylistsPage.module.scss";
 import { TypeStylists } from "./types";
 
-type Props = {
+type TProps = {
   stylists: TypeStylists[];
   loading: boolean;
   onStylistsRemove: (id: number) => void;
 };
 
-const StylistsPage: React.FC<Props> = (props) => {
-  const columns = getColumns(styles, getActionRow);
+const StylistsPage: FC<TProps> = (props) => {
+  const getActionRow = (type: string, id: number) =>
+    ({
+      EDIT: () => history.push(paths[AdmPage.STYLISTS] + "/edit/" + id),
+      DELETE: () => props.onStylistsRemove(id),
+    }[type]);
 
-  function getActionRow(type: string, id: number) {
-    switch (type) {
-      case EDIT:
-        return () => {
-          history.push(paths[AdmPage.STYLISTS] + "/edit/" + id);
-        };
-      case DELETE:
-        return () => {
-          props.onStylistsRemove(id);
-        };
-      default:
-        break;
-    }
-  }
+  const columns = getColumns(styles, getActionRow);
 
   const history = useHistory();
 

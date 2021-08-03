@@ -2,13 +2,13 @@ import { message } from "antd";
 import axios from "axios";
 import { useState } from "react";
 
+import { getLoginError, removeJwtPair, setJwtPair } from "common/helpers/auth-helpers";
 import { getUserInfo, openNotification } from "common/helpers/common-helpers";
 // import { getUserInfo } from "components/common/commonHelper";
-import { userType } from "common/types/type";
+import { EUser } from "common/types/types";
 import { History } from "history";
 import { Page, paths } from "routes/constants";
 import { TypeAuthLoginResponse, TypeUseAuthHookResult, TypeUser } from "../components/pages/AdminPage/types";
-import { getLoginError, removeJwtPair, setJwtPair } from "common/helpers/auth-helpers";
 
 export function useAuth(history: History<unknown> | string[]): TypeUseAuthHookResult {
   const [loading, setLoading] = useState<boolean>(false);
@@ -33,13 +33,13 @@ export function useAuth(history: History<unknown> | string[]): TypeUseAuthHookRe
       }
 
       switch (userInfo?.role) {
-        case userType.ADMIN:
+        case EUser.ADMIN:
           history.push(paths[Page.ADMIN]);
           break;
-        case userType.STYLIST:
+        case EUser.STYLIST:
           history.push(paths[Page.STYLIST]);
           break;
-        case userType.USER:
+        case EUser.USER:
           history.push(paths[Page.USER]);
           break;
         default:

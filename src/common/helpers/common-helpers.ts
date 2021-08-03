@@ -1,8 +1,9 @@
 import { message, notification } from "antd";
-import { IUserInfo, userType } from "common/types/type";
+
+import { EUser, TUserInfo } from "common/types/types";
 import { extractHS256Token } from "jwt-hs256";
 
-export function getUserInfo(): IUserInfo | null {
+export function getUserInfo(): TUserInfo | null {
   const jwtPair: string | null = localStorage.getItem("jwtPair") ? localStorage.getItem("jwtPair") : "";
   const currentJwt: string = jwtPair ? JSON.parse(jwtPair) : "";
   if (!currentJwt) {
@@ -22,7 +23,7 @@ export function getUserInfo(): IUserInfo | null {
     login: jwtInfo.login,
     age: jwtInfo.age,
     city: jwtInfo.city,
-    role: roles[0] as userType,
+    role: roles[0] as EUser,
     expire: jwtInfo.exp,
     createdAt: jwtInfo.createdAt,
   };
@@ -76,6 +77,6 @@ export function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
   return {
     width,
-    height
+    height,
   };
 }

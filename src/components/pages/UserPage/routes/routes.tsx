@@ -1,11 +1,11 @@
-import { IStylistPage } from "common/types/type";
+import { TStylistPage } from "common/types/types";
 import CompilationsPageContainer from "../CompilationsPage";
 import ProfilePage from "../ProfilePage";
 import { TaskCreationPage } from "../TaskCreationPage/TaskCreationPage";
 import TasksPageContainer from "../TasksPage/TasksPageContainer";
 import { paths, UsrPage } from "./consts";
 
-export function getUserRoutes(): IStylistPage[] {
+export function getUserRoutes(): TStylistPage[] {
   return [
     {
       type: UsrPage.BASE,

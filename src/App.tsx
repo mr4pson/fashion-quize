@@ -2,12 +2,10 @@ import { useHistory } from "react-router";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 
 import { errorResponseHandler } from "common/helpers/common-helpers";
-import { axiosInstance } from "components/pages/AdminPage/constants";
+import { axiosInstance } from "components/pages/AdminPage/consts";
 import { useAuth } from "hooks/useAuth";
 import AppRoutes from "routes/AppRoutes";
-
 import "./App.css";
-
 
 function App() {
   const history = useHistory();

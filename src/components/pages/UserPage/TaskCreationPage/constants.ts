@@ -1,10 +1,10 @@
-import { TypeFormField } from "common/types/type";
+import { TFormField } from "common/types/types";
 
-export const TYPE = "TYPE";
-export const DATE = "DATE";
-export const COMMENT = "COMMENT";
+const TYPE = "TYPE";
+const DATE = "DATE";
+const COMMENT = "COMMENT";
 
-export const formFields: TypeFormField[] = [
+export const formFields: TFormField[] = [
   {
     id: "1",
     type: TYPE,

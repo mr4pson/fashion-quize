@@ -1,13 +1,15 @@
 import { Modal } from "antd";
-import React, { memo, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { TypeRootState } from "redux/ReduxStore";
+import { FC, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { blocksThunks } from "redux/slicers/blocksPageSlice";
 import BlocksPage from "./BlocksPage";
 
-const BlocksPageContainer: React.FC = () => {
-  const dispatch = useDispatch();
-  const { blocks, loading } = useSelector((state: TypeRootState) => state.blocksPage);
+const BlocksPageContainer: FC = () => {
+  const dispatch = useAppDispatch();
+  const { blocks, loading } = useSelector((state: TRootState) => state.blocksPage);
+
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [blockId, setBlockId] = useState<number | null>(null);
@@ -36,9 +38,10 @@ const BlocksPageContainer: React.FC = () => {
 
   useEffect(() => {
     dispatch(blocksThunks.getBlocks());
+
     return () => {
       dispatch(blocksThunks.clearBlocks());
-    }
+    };
   }, [dispatch]);
 
   return (
@@ -59,4 +62,4 @@ const BlocksPageContainer: React.FC = () => {
   );
 };
 
-export default memo(BlocksPageContainer);
+export default BlocksPageContainer;

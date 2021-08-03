@@ -1,20 +1,20 @@
-import React, { memo } from "react";
+import { FC } from "react";
 import { useHistory } from "react-router";
 
-import { getUserInfo } from "common/helpers/common-helpers";
-import { userType } from "common/types/type";
-import styles from "./UserPage.module.scss";
 import { getJwtPair } from "common/helpers/auth-helpers";
-import UserRoutes from "./routes/UsrRoutes";
+import { getUserInfo } from "common/helpers/common-helpers";
+import { EUser } from "common/types/types";
 import Header from "./Header";
+import UserRoutes from "./routes/UsrRoutes";
+import styles from "./UserPage.module.scss";
 
-const UserPage: React.FC = () => {
+const UserPage: FC = () => {
   const history = useHistory();
 
   (async () => {
     const jwtPair = await getJwtPair();
     const userInfo = await getUserInfo();
-    if (!jwtPair || userInfo?.role !== userType.USER) {
+    if (!jwtPair || userInfo?.role !== EUser.USER) {
       history.push("/login");
     }
   })();
@@ -31,4 +31,4 @@ const UserPage: React.FC = () => {
   );
 };
 
-export default memo(UserPage);
+export default UserPage;

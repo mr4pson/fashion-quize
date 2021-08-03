@@ -1,15 +1,13 @@
-import { memo } from "react";
+import { FC } from "react";
 import { useSelector } from "react-redux";
-import { TypeRootState } from "redux/ReduxStore";
+
+import { TRootState } from "redux/ReduxStore";
 import CompletePage from "./CompletePage";
 
-const CompletePageContainer: React.FC = () => {
-  const { email, name } = useSelector((state: TypeRootState) => ({
-    email: state.quizePage.email,
-    name: state.quizePage.name,
-  }));
+const CompletePageContainer: FC = () => {
+  const { email, name } = useSelector((state: TRootState) => state.quizePage);
 
   return <CompletePage email={email} name={name} />;
 };
 
-export default memo(CompletePageContainer);
+export default CompletePageContainer;

@@ -1,17 +1,17 @@
 import { MinusOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
-import { getImageUrl } from "common/helpers/common-helpers";
-import Loader from "components/modules/Loader";
-import { useUploadFile } from "hooks/useUploadFile";
 import { FC, memo, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
 
-import { TypeRootState, useAppDispatch } from "redux/ReduxStore";
+import { getImageUrl } from "common/helpers/common-helpers";
+import Loader from "components/modules/Loader";
+import { useUploadFile } from "hooks/useUploadFile";
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { compilationsThunks, setCompilation } from "redux/slicers/compilationsPageSlice";
 import { tasksThunks } from "redux/slicers/tasksPageSlice";
-import { TLook, TLookItem } from "../CompilationsPage/types";
+import { TLookItem } from "../CompilationsPage/types";
 import { paths, StlPage } from "../routes/consts";
 import { PageMethods } from "../types";
 import styles from "./CompilationDetail.module.scss";
@@ -28,11 +28,11 @@ const validateMessages = {
 };
 /* eslint-enable no-template-curly-in-string */
 
-type Props = {
+type TProps = {
   method: PageMethods;
 };
 
-const CompilationDetail: FC<Props> = (props) => {
+const CompilationDetail: FC<TProps> = (props) => {
   const history = useHistory();
   const { id, taskId } = useParams() as any;
   const inputFileRef = useRef<any>();
@@ -45,14 +45,13 @@ const CompilationDetail: FC<Props> = (props) => {
   const { uploadFiles } = useUploadFile(formRef);
 
   const dispatch = useAppDispatch();
-  const { compilation, statuses, task } = useSelector((state: TypeRootState) => ({
+  const { compilation, statuses, task } = useSelector((state: TRootState) => ({
     compilation: state.compilationsPage.compilation,
     statuses: state.tasksPage.statuses,
     task: state.tasksPage.task,
   }));
 
-  
-  const curTask = compilation.task ? compilation.task : task;
+  const curTask = compilation.task ?? task;
   const compilationIsNotEmpty = !!statuses && !!curTask;
 
   useEffect(() => {
@@ -83,6 +82,7 @@ const CompilationDetail: FC<Props> = (props) => {
     })();
 
     return () => dispatch(compilationsThunks.clearCompilation());
+    // eslint-disable-next-line
   }, [dispatch, id, taskId]);
 
   const handleFileLoad = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,10 +92,10 @@ const CompilationDetail: FC<Props> = (props) => {
     const response = await uploadFiles(e.currentTarget.files as FileList);
 
     look?.items.push({
-      name: 'Новая',
+      name: "Новая",
       photo: response.data[0].fileName,
     });
-  
+
     const newCompilation = {
       ...compilation,
       looks: newLooks,
@@ -103,11 +103,11 @@ const CompilationDetail: FC<Props> = (props) => {
 
     dispatch(compilationsThunks.setCompilation(newCompilation));
     form.resetFields();
-  }
+  };
 
   const onFinish = async (status: TStatus) => {
     const payloadForUpdate: any = { status: status.status, looks: JSON.stringify(compilation.looks) };
-  
+
     setLoading(true);
     if (id) {
       await dispatch(compilationsThunks.updateCompilation(id, payloadForUpdate));
@@ -130,7 +130,7 @@ const CompilationDetail: FC<Props> = (props) => {
   return (
     <div className={styles["detail"]}>
       <div className={styles["detail__header"]}>
-        <h1>{id ? `Редактирование подборки №${id}` : 'Создание подборки'}</h1>
+        <h1>{id ? `Редактирование подборки №${id}` : "Создание подборки"}</h1>
       </div>
       {compilationIsNotEmpty && (
         <>
@@ -149,14 +149,20 @@ const CompilationDetail: FC<Props> = (props) => {
             <div className={styles["looks__body"]}>
               <Form form={form} ref={formRef}>
                 <Form.Item name="uploadFile">
-                  <Input type="file" multiple={true} onChange={handleFileLoad} ref={inputFileRef} style={{ display: 'none' }} />
+                  <Input
+                    type="file"
+                    multiple={true}
+                    onChange={handleFileLoad}
+                    ref={inputFileRef}
+                    style={{ display: "none" }}
+                  />
                 </Form.Item>
               </Form>
 
               {compilation.looks?.map((look, lookIndex) => (
-                <div className={styles["look"]} key={'look'+lookIndex}>
+                <div className={styles["look"]} key={"look" + lookIndex}>
                   {look.items.map((lookItem: TLookItem, lookItemIndex: number) => (
-                    <div className={styles["look-item"]} key={'look-item' + lookItemIndex}>
+                    <div className={styles["look-item"]} key={"look-item" + lookItemIndex}>
                       <div
                         style={{ backgroundImage: `url(${getImageUrl(lookItem.photo)})` }}
                         className={styles["look-item__photo"]}
@@ -168,13 +174,18 @@ const CompilationDetail: FC<Props> = (props) => {
                         <Input
                           bordered={false}
                           value={lookItem.name}
-                          onChange={(e) => handleEditItemName(e, compilation, lookIndex, lookItemIndex, dispatch, setCompilation)}
+                          onChange={(e) =>
+                            handleEditItemName(e, compilation, lookIndex, lookItemIndex, dispatch, setCompilation)
+                          }
                         />
                       </div>
                     </div>
                   ))}
                   {look.items.length < 5 && (
-                    <Button className={styles["look-add-btn"]} onClick={() => handleAddItem(lookIndex, inputFileRef, setCurrentLookIndex)}>
+                    <Button
+                      className={styles["look-add-btn"]}
+                      onClick={() => handleAddItem(lookIndex, inputFileRef, setCurrentLookIndex)}
+                    >
                       +
                     </Button>
                   )}

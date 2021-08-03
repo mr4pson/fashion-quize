@@ -1,25 +1,17 @@
 import { Button, Form, Input, Select } from "antd";
-import { TypeFormField } from "common/types/type";
 import moment from "moment";
 import { FC, memo, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
+import { Link } from "react-router-dom";
 
-import { TypeRootState, useAppDispatch } from "redux/ReduxStore";
+import { TFormField } from "common/types/types";
+import Loader from "components/modules/Loader";
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { tasksThunks } from "redux/slicers/tasksPageSlice";
 import { paths, StlPage } from "../routes/consts";
-import {
-  BUTTON,
-  COMMENT,
-  CREATED_AT,
-  DATE,
-  formFields,
-  STATUS,
-  TYPE,
-  UPDATED_AT,
-} from "./constants";
-import styles from "./TaskPageDetail.module.scss";
-import Loader from "components/modules/Loader";
+import { BUTTON, COMMENT, CREATED_AT, DATE, formFields, STATUS, TYPE, UPDATED_AT } from "./consts";
+import styles from "./TaskDetail.module.scss";
 
 const layout = {
   labelCol: { span: 8 },
@@ -37,15 +29,16 @@ const validateMessages = {
 
 const { Option } = Select;
 
-const TaskPageDetail: FC = () => {
+const TaskDetail: FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams() as any;
   const [saveLoading, setSaveLoading] = useState(false);
   const history = useHistory();
 
-  const { task, types, statuses } = useSelector(
-    (state: TypeRootState) => state.tasksPage
-  );
+  const { task, types, statuses } = useSelector((state: TRootState) => state.tasksPage);
+
+  const compilationId = task?.compilation?.id;
+  const userName = task?.user?.name;
 
   useEffect(() => {
     (async () => {
@@ -64,29 +57,22 @@ const TaskPageDetail: FC = () => {
     history.push(paths[StlPage.TASKS]);
   };
 
-  function getFormField(type: string, field: TypeFormField) {
+  function getFormField(type: string, field: TFormField) {
     const options = type === STATUS ? statuses : types;
+
     switch (type) {
       case CREATED_AT:
       case UPDATED_AT:
       case DATE:
         return (
-          <Form.Item
-            name={field.name}
-            label={field.label}
-            rules={[{ required: true, type: "string", max: 99 }]}
-          >
+          <Form.Item name={field.name} label={field.label} rules={[{ required: true, type: "string", max: 99 }]}>
             <Input readOnly={field.readonly} />
           </Form.Item>
         );
       case STATUS:
       case TYPE:
         return (
-          <Form.Item
-            name={field.name}
-            label={field.label}
-            rules={[{ required: true }]}
-          >
+          <Form.Item name={field.name} label={field.label} rules={[{ required: true }]}>
             <Select open={field.readonly ? false : undefined}>
               {options
                 .map((type) => ({
@@ -94,10 +80,7 @@ const TaskPageDetail: FC = () => {
                   title: type.title,
                 }))
                 .map((option, index) => (
-                  <Option
-                    key={`task-${field.name}` + index}
-                    value={option.value}
-                  >
+                  <Option key={`task-${field.name}` + index} value={option.value}>
                     {option.title}
                   </Option>
                 ))}
@@ -114,11 +97,7 @@ const TaskPageDetail: FC = () => {
         );
       case COMMENT:
         return (
-          <Form.Item
-            name={field.name}
-            label={field.label}
-            rules={[{ required: true }]}
-          >
+          <Form.Item name={field.name} label={field.label} rules={[{ required: true }]}>
             <Input.TextArea readOnly={field.readonly} />
           </Form.Item>
         );
@@ -140,6 +119,16 @@ const TaskPageDetail: FC = () => {
       <div className={styles["detail__header"]}>
         <h1>Изменение задачи №{id}</h1>
       </div>
+      <div className={styles["link-rows"]}>
+        <div className={styles["link-row"]}>
+          <span>Подборка:</span>
+          <Link to={`${paths[StlPage.COMPILATIONS]}/${compilationId}`}>Подборка №{compilationId}</Link>
+        </div>
+        <div className={styles["link-row"]}>
+          <span>Пользователь:</span>
+          <Link to={"#"}>{userName}</Link>
+        </div>
+      </div>
       {task.id && types && statuses && (
         <Form
           {...layout}
@@ -160,4 +149,4 @@ const TaskPageDetail: FC = () => {
   );
 };
 
-export default memo(TaskPageDetail);
+export default memo(TaskDetail);

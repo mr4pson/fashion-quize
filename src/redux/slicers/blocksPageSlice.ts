@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { TypeBlock } from "components/pages/AdminPage/BlocksPage/type";
-import { axiosInstance } from "components/pages/AdminPage/constants";
+import { axiosInstance } from "components/pages/AdminPage/consts";
 import { TypeDispatch } from "redux/ReduxStore";
 
 const blocksPageSlice = createSlice({

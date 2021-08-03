@@ -1,16 +1,17 @@
-import { QuizeTypes } from "common/types/type";
-import { Sex } from "./types";
 import { ManOutlined, WomanOutlined } from "@ant-design/icons";
+
+import { EQuize } from "common/types/types";
+import { Sex } from "./types";
 
 export const sexs: Sex[] = [
   {
-    label: 'Мужчина',
-    path: QuizeTypes.FOR_MEN,
+    label: "Мужчина",
+    path: EQuize.FOR_MEN,
     icon: <ManOutlined />,
   },
   {
-    label: 'Женщина',
-    path: QuizeTypes.FOR_WOMEN,
+    label: "Женщина",
+    path: EQuize.FOR_WOMEN,
     icon: <WomanOutlined />,
-  }
-]
+  },
+];

@@ -1,11 +1,11 @@
 import { Button, Form, Input } from "antd";
-import { TypeFormField } from "common/types/type";
-import Loader from "components/modules/Loader";
-import { memo, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, memo, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 
-import { TypeRootState } from "redux/ReduxStore";
+import { TFormField } from "common/types/types";
+import Loader from "components/modules/Loader";
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { stylistsThunks } from "redux/slicers/stylistsPageSlice";
 import { AdmPage, paths } from "../routes/constants";
 import { PageMethods } from "../types";
@@ -27,19 +27,17 @@ const validateMessages = {
 };
 /* eslint-enable no-template-curly-in-string */
 
-type Props = {
+type TProps = {
   method: PageMethods;
 };
 
-const StylistDetail: React.FC<Props> = (props) => {
+const StylistDetail: FC<TProps> = (props) => {
   const history = useHistory();
   const { id } = useParams() as any;
   const [loading, setLoading] = useState(false);
 
-  const dispatch = useDispatch();
-  const stylistsState = useSelector((state: TypeRootState) => ({
-    stylist: state.stylistsPage.stylist,
-  }));
+  const dispatch = useAppDispatch();
+  const { stylist } = useSelector((state: TRootState) => state.stylistsPage);
 
   const onFinish = async (payload: TypeEditStylistDto) => {
     setLoading(true);
@@ -56,19 +54,17 @@ const StylistDetail: React.FC<Props> = (props) => {
     if (id) {
       dispatch(stylistsThunks.getStylist(id));
     }
-  }, [dispatch, id]);
 
-  useEffect(() => {
     return () => {
       dispatch(stylistsThunks.clearStylist());
     };
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   function getPageTitle() {
     return id ? `Редактирование стилиста №${id}` : "Добавить стилиста";
   }
 
-  function getFormField(type: string, field: TypeFormField) {
+  function getFormField(type: string, field: TFormField) {
     switch (type) {
       case FULL_NAME:
       case LOGIN:
@@ -92,7 +88,7 @@ const StylistDetail: React.FC<Props> = (props) => {
     }
   }
 
-  const isFormVisible = (!!id && !!stylistsState.stylist.name) || props.method === PageMethods.CREATE;
+  const isFormVisible = (!!id && !!stylist.name) || props.method === PageMethods.CREATE;
 
   return (
     <div className={styles["detail"]}>
@@ -105,7 +101,7 @@ const StylistDetail: React.FC<Props> = (props) => {
           name="nest-messages"
           onFinish={onFinish}
           validateMessages={validateMessages}
-          initialValues={stylistsState.stylist}
+          initialValues={stylist}
         >
           {formFields.map((field) => (
             <div key={field.id} className={styles["detail__field"]}>
