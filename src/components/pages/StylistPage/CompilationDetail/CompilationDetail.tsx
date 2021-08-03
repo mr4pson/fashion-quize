@@ -52,7 +52,9 @@ const CompilationDetail: FC<TProps> = (props) => {
   }));
 
   const curTask = compilation.task ?? task;
-  const compilationIsNotEmpty = !!statuses && !!curTask;
+  const compilationIsNotEmpty = (!!statuses && !!compilation.id) || (!!taskId && !!task.id && !!statuses);
+
+  console.log(taskId, task, statuses);
 
   useEffect(() => {
     (async () => {
@@ -81,7 +83,10 @@ const CompilationDetail: FC<TProps> = (props) => {
       }
     })();
 
-    return () => dispatch(compilationsThunks.clearCompilation());
+    return () => {
+      dispatch(compilationsThunks.clearCompilation());
+      dispatch(tasksThunks.clearTask());
+    }
     // eslint-disable-next-line
   }, [dispatch, id, taskId]);
 

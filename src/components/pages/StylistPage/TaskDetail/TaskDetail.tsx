@@ -9,8 +9,17 @@ import { TFormField } from "common/types/types";
 import Loader from "components/modules/Loader";
 import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { tasksThunks } from "redux/slicers/tasksPageSlice";
-import { paths, StlPage } from "../routes/consts";
-import { BUTTON, COMMENT, CREATED_AT, DATE, formFields, STATUS, TYPE, UPDATED_AT } from "./consts";
+import { paths, StlPage, TASK_ID } from "../routes/consts";
+import {
+  BUTTON,
+  COMMENT,
+  CREATED_AT,
+  DATE,
+  formFields,
+  STATUS,
+  TYPE,
+  UPDATED_AT,
+} from "./consts";
 import styles from "./TaskDetail.module.scss";
 
 const layout = {
@@ -35,7 +44,9 @@ const TaskDetail: FC = () => {
   const [saveLoading, setSaveLoading] = useState(false);
   const history = useHistory();
 
-  const { task, types, statuses } = useSelector((state: TRootState) => state.tasksPage);
+  const { task, types, statuses } = useSelector(
+    (state: TRootState) => state.tasksPage
+  );
 
   const compilationId = task?.compilation?.id;
   const userName = task?.user?.name;
@@ -65,14 +76,22 @@ const TaskDetail: FC = () => {
       case UPDATED_AT:
       case DATE:
         return (
-          <Form.Item name={field.name} label={field.label} rules={[{ required: true, type: "string", max: 99 }]}>
+          <Form.Item
+            name={field.name}
+            label={field.label}
+            rules={[{ required: true, type: "string", max: 99 }]}
+          >
             <Input readOnly={field.readonly} />
           </Form.Item>
         );
       case STATUS:
       case TYPE:
         return (
-          <Form.Item name={field.name} label={field.label} rules={[{ required: true }]}>
+          <Form.Item
+            name={field.name}
+            label={field.label}
+            rules={[{ required: true }]}
+          >
             <Select open={field.readonly ? false : undefined}>
               {options
                 .map((type) => ({
@@ -80,7 +99,10 @@ const TaskDetail: FC = () => {
                   title: type.title,
                 }))
                 .map((option, index) => (
-                  <Option key={`task-${field.name}` + index} value={option.value}>
+                  <Option
+                    key={`task-${field.name}` + index}
+                    value={option.value}
+                  >
                     {option.title}
                   </Option>
                 ))}
@@ -97,7 +119,11 @@ const TaskDetail: FC = () => {
         );
       case COMMENT:
         return (
-          <Form.Item name={field.name} label={field.label} rules={[{ required: true }]}>
+          <Form.Item
+            name={field.name}
+            label={field.label}
+            rules={[{ required: true }]}
+          >
             <Input.TextArea readOnly={field.readonly} />
           </Form.Item>
         );
@@ -118,31 +144,45 @@ const TaskDetail: FC = () => {
     <div className={styles["detail"]}>
       <div className={styles["detail__header"]}>
         <h1>Изменение задачи №{id}</h1>
-      </div>
-      <div className={styles["link-rows"]}>
-        <div className={styles["link-row"]}>
-          <span>Подборка:</span>
-          <Link to={`${paths[StlPage.COMPILATIONS]}/${compilationId}`}>Подборка №{compilationId}</Link>
-        </div>
-        <div className={styles["link-row"]}>
-          <span>Пользователь:</span>
-          <Link to={"#"}>{userName}</Link>
-        </div>
+        {!compilationId && task?.id && types && statuses && (
+          <Link
+            className={styles["create-compilation-btn"]}
+            to={`${paths[StlPage.COMPILATIONS_CREATE].replace(TASK_ID, id)}`}
+          >
+            <Button type="primary">Создать подборку</Button>
+          </Link>
+        )}
       </div>
       {task.id && types && statuses && (
-        <Form
-          {...layout}
-          name="nest-messages"
-          onFinish={onFinish}
-          validateMessages={validateMessages}
-          initialValues={initialValues}
-        >
-          {formFields.map((field) => (
-            <div key={field.id} className={styles["detail__field"]}>
-              {getFormField(field.type, field)}
+        <>
+          {compilationId && (
+            <div className={styles["link-rows"]}>
+              <div className={styles["link-row"]}>
+                <span>Подборка:</span>
+                <Link to={`${paths[StlPage.COMPILATIONS]}/${compilationId}`}>
+                  Подборка №{compilationId}
+                </Link>
+              </div>
+              <div className={styles["link-row"]}>
+                <span>Пользователь:</span>
+                <Link to={"#"}>{userName}</Link>
+              </div>
             </div>
-          ))}
-        </Form>
+          )}
+          <Form
+            {...layout}
+            name="nest-messages"
+            onFinish={onFinish}
+            validateMessages={validateMessages}
+            initialValues={initialValues}
+          >
+            {formFields.map((field) => (
+              <div key={field.id} className={styles["detail__field"]}>
+                {getFormField(field.type, field)}
+              </div>
+            ))}
+          </Form>
+        </>
       )}
       {!(task.id && types && statuses) && <Loader />}
     </div>
