@@ -3,16 +3,16 @@ import moment from "moment";
 import { FC, memo } from "react";
 import { useHistory } from "react-router";
 
-import { getColumns } from "./constants";
+import { getColumns } from "./consts";
 import styles from "./TasksPage.module.scss";
 import { TypeTask } from "./types";
 
-type Props = {
+type TProps = {
   tasks: TypeTask[];
   loading: boolean;
 };
 
-const TasksPage: FC<Props> = (props) => {
+const TasksPage: FC<TProps> = (props) => {
   const history = useHistory();
   const columns = getColumns(styles, history);
 
@@ -28,7 +28,7 @@ const TasksPage: FC<Props> = (props) => {
       <div className={styles["table-top"]}>
         <h1 className={styles["table-top__title"]}>Список задач</h1>
       </div>
-      <Table columns={columns} dataSource={dataSource} loading={props.loading}/>
+      <Table columns={columns} dataSource={dataSource} loading={props.loading} />
     </>
   );
 };

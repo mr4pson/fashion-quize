@@ -3,18 +3,18 @@ import { StlPage } from "components/pages/StylistPage/routes/consts";
 import { UsrPage } from "components/pages/UserPage/routes/consts";
 import { Page } from "routes/constants";
 
-export enum userType {
-  USER = 'USER',
-  ADMIN = 'ADMIN',
-  STYLIST = 'STYLIST'
+export enum EUser {
+  USER = "USER",
+  ADMIN = "ADMIN",
+  STYLIST = "STYLIST",
 }
 
-export enum QuizeTypes {
+export enum EQuize {
   FOR_MEN = "for-men",
   FOR_WOMEN = "for-women",
 }
 
-export type TypeFormField = {
+export type TFormField = {
   id: string;
   type: string;
   name: string;
@@ -28,20 +28,20 @@ export type TypeSelectOption = {
   value: string | number;
 };
 
-export interface IStylistPage {
+export type TStylistPage = {
   type: StlPage | Page | AdmPage | UsrPage;
   path: string;
   exact?: boolean;
   component: JSX.Element;
-}
+};
 
-export interface IUserInfo {
+export type TUserInfo = {
   id: number;
   name: string;
   login: string;
   age: number;
   city: string;
-  role: userType;
+  role: EUser;
   expire: number;
   createdAt: string;
-}
+};

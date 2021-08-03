@@ -1,8 +1,7 @@
 import { Button } from "antd";
-import { TypeStylists } from "./types";
 
-export const EDIT = "EDIT";
-export const DELETE = "DELETE";
+const EDIT = "EDIT";
+const DELETE = "DELETE";
 
 export const actionButtons = [
   {
@@ -33,15 +32,10 @@ export const getColumns = (
       title: "Действие",
       dataIndex: "",
       key: "x",
-      render: (stylist: TypeStylists) => (
+      render: ({ id }) => (
         <>
           {actionButtons.map((button) => (
-            <Button
-              key={button.id}
-              onClick={getActionRow(button.type, +stylist.id)}
-              className={styles["action"]}
-              type="link"
-            >
+            <Button key={button.id} onClick={getActionRow(button.type, +id)} className={styles["action"]} type="link">
               {button.action}
             </Button>
           ))}

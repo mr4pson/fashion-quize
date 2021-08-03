@@ -1,25 +1,27 @@
 import { Modal, Tabs } from "antd";
-import { QuizeTypes } from "common/types/type";
-import React, { memo, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { TypeRootState } from "redux/ReduxStore";
+
+import { EQuize } from "common/types/types";
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { questionsThunks } from "redux/slicers/questionsPageSlice";
 import { AdmPage, paths } from "../routes/constants";
 import QuestionsPage from "./QuestionsPage";
 
 const { TabPane } = Tabs;
 
-const QuestionsPageContainer: React.FC = () => {
-  const dispatch = useDispatch();
+const QuestionsPageContainer: FC = () => {
   const history = useHistory();
   const { quizeType } = useParams() as any;
 
-  const { questions, loading } = useSelector((state: TypeRootState) => state.questionsPage);
+  const dispatch = useAppDispatch();
+  const { questions, loading } = useSelector((state: TRootState) => state.questionsPage);
+
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [questionId, setQuestionId] = useState<number | null>(null);
-  const [curQuizeType, setCurQuizeType] = useState<QuizeTypes>(quizeType);
+  const [curQuizeType, setCurQuizeType] = useState<EQuize>(quizeType);
 
   const showModal = () => {
     setVisible(true);
@@ -47,7 +49,7 @@ const QuestionsPageContainer: React.FC = () => {
     dispatch(questionsThunks.getQuestionsByQuizeType(quizeType));
     return () => {
       dispatch(questionsThunks.clearQuestions());
-    }
+    };
   }, [dispatch, quizeType]);
 
   const handleQuizeTypeChange = (tabKey) => {
@@ -58,7 +60,7 @@ const QuestionsPageContainer: React.FC = () => {
   return (
     <>
       <Tabs defaultActiveKey={quizeType} onChange={handleQuizeTypeChange}>
-        <TabPane tab="Опрос для мужчин" key={QuizeTypes.FOR_MEN}>
+        <TabPane tab="Опрос для мужчин" key={EQuize.FOR_MEN}>
           <QuestionsPage
             questions={questions}
             loading={loading}
@@ -66,7 +68,7 @@ const QuestionsPageContainer: React.FC = () => {
             quizeType={curQuizeType}
           />
         </TabPane>
-        <TabPane tab="Опрос для женщин" key={QuizeTypes.FOR_WOMEN}>
+        <TabPane tab="Опрос для женщин" key={EQuize.FOR_WOMEN}>
           <QuestionsPage
             questions={questions}
             loading={loading}
@@ -90,4 +92,4 @@ const QuestionsPageContainer: React.FC = () => {
   );
 };
 
-export default memo(QuestionsPageContainer);
+export default QuestionsPageContainer;

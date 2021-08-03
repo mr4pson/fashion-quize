@@ -1,13 +1,14 @@
 import { Modal } from "antd";
-import { memo, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { TypeRootState } from "redux/ReduxStore";
+import { FC, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { stylistsThunks } from "redux/slicers/stylistsPageSlice";
 import StylistsPage from "./StylistsPage";
 
-const StylistsPageContainer: React.FC = () => {
-  const dispatch = useDispatch();
-  const { stylists, loading } = useSelector((state: TypeRootState) => state.stylistsPage);
+const StylistsPageContainer: FC = () => {
+  const dispatch = useAppDispatch();
+  const { stylists, loading } = useSelector((state: TRootState) => state.stylistsPage);
 
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -37,9 +38,10 @@ const StylistsPageContainer: React.FC = () => {
 
   useEffect(() => {
     dispatch(stylistsThunks.getStylists());
+
     return () => {
       dispatch(stylistsThunks.clearStylists());
-    }
+    };
   }, [dispatch]);
 
   return (
@@ -60,4 +62,4 @@ const StylistsPageContainer: React.FC = () => {
   );
 };
 
-export default memo(StylistsPageContainer);
+export default StylistsPageContainer;

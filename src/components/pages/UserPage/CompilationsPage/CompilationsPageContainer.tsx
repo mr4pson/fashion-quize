@@ -1,15 +1,14 @@
-import React, { memo, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { TypeRootState, useAppDispatch } from "redux/ReduxStore";
+
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { compilationsThunks } from "redux/slicers/compilationsPageSlice";
 import CompilationsPage from "./CompilationsPage";
 
-const CompilationsPageContainer: React.FC = () => {
+const CompilationsPageContainer: FC = () => {
   const dispatch = useAppDispatch();
-  const { compilations, loading } = useSelector((state: TypeRootState) => ({
-    compilations: state.compilationsPage.compilations,
-    loading: state.compilationsPage.loading,
-  }));
+  const { compilations, loading } = useSelector((state: TRootState) => state.compilationsPage);
+
   useEffect(() => {
     dispatch(compilationsThunks.getUserCompilations());
 
@@ -21,4 +20,4 @@ const CompilationsPageContainer: React.FC = () => {
   return <CompilationsPage loading={loading} compilations={compilations} />;
 };
 
-export default memo(CompilationsPageContainer);
+export default CompilationsPageContainer;

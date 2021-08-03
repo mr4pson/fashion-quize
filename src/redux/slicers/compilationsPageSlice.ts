@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { axiosInstance } from "components/pages/AdminPage/constants";
+import { axiosInstance } from "components/pages/AdminPage/consts";
 import { TCompilation } from "components/pages/StylistPage/CompilationsPage/types";
 import { TypeDispatch } from "redux/ReduxStore";
 
 const compilationsPageSlice = createSlice({
-  name: "compilationsPageSlice",
+  name: "compilationsPage",
   initialState: {
     compilations: [] as TCompilation[],
     compilation: {} as TCompilation,

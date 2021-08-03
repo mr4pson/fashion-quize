@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { openNotification } from "common/helpers/common-helpers";
-import { axiosInstance } from "components/pages/AdminPage/constants";
+import { axiosInstance } from "components/pages/AdminPage/consts";
 import { TypeEditStylistDto } from "components/pages/AdminPage/StylistDetail/types";
 import { TypeStylists } from "components/pages/AdminPage/StylistsPage/types";
 import { TypeDispatch } from "redux/ReduxStore";
