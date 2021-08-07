@@ -4,6 +4,7 @@ import { FC, memo } from "react";
 import { useHistory } from "react-router";
 
 import { TypeDispatch, useAppDispatch } from "redux/ReduxStore";
+import { quizeThunks } from "redux/slicers/quizePageSlice";
 import { Page, paths } from "routes/constants";
 import styles from "./FieldPage.module.scss";
 
@@ -28,7 +29,15 @@ const FieldPage: FC<Props> = (props) => {
 
   const dispatch = useAppDispatch();
 
-  const onFinish = (form) => {
+  const onFinish = async (form) => {
+    // TODO: Вынести в enum type
+    if (props.type === 'email') {
+      const response: any = await dispatch(quizeThunks.checkEmail(form.field));
+      if (!response || !response.status) {
+        return;
+      }
+    }
+
     dispatch(props.thunk(form.field));
     history.push(paths[props.next]);
   };
