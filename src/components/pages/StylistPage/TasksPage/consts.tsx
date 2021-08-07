@@ -26,7 +26,7 @@ export const getColumns = (styles: any, history: any) => {
       title: "Подборка",
       dataIndex: "compilation",
       key: "compilation",
-      render: ({ id }) => <Link to={`${paths[StlPage.COMPILATIONS]}/${id}`}>{!!id && `Подборка №${id}`}</Link>,
+      render: (cmp) => <Link to={`${paths[StlPage.COMPILATIONS]}/${cmp?.id}`}>{!!cmp?.id && `Подборка №${cmp?.id}`}</Link>,
     },
     {
       title: "Дата создания",
