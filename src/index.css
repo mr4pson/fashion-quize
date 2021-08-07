@@ -98,3 +98,12 @@ a:hover {
 .ant-layout-header {
 	background: #fff;
 }
+
+.ant-image {
+  display: flex;
+  align-items: center;
+}
+
+img.ant-image-img {
+  height: auto!important;
+}

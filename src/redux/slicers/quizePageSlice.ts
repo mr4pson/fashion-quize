@@ -74,6 +74,9 @@ export const quizeThunks = {
   setCity: (payload: string) => async (dispatch: TypeDispatch) => {
     dispatch(setCity(payload));
   },
+  checkEmail: (payload: string) => async () => {
+    return await axiosInstance.get(`/api/auth/check-email/${payload}`);
+  },
   registrateUser: (payload: any) => async (dispatch: TypeDispatch) => {
     await axiosInstance.post("/api/auth/registrate", payload);
   },
