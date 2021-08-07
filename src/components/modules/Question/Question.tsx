@@ -25,7 +25,7 @@ const Question: FC<TProps> = (props) => {
     lineHeight: "30px",
   };
 
-  const getQuestion = (type: string) =>
+  const getQuestionBody = (type: string) =>
     ({
       [QuestionType.INPUT]: (
         <Form.Item name="answer" rules={[{ required: true }]}>
@@ -73,7 +73,7 @@ const Question: FC<TProps> = (props) => {
       <div className={styles["question"]}>
         <div style={{ backgroundImage: `url(${getImageUrl(image!)})` }} className={styles["question__image"]} />
         <div className={styles["question__description"]}>{description}</div>
-        <div className={styles["question__body"]}>{getQuestion(type)}</div>
+        <div className={styles["question__body"]}>{getQuestionBody(type)}</div>
       </div>
     </>
   );
