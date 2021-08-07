@@ -155,20 +155,20 @@ const TaskDetail: FC = () => {
       </div>
       {task.id && types && statuses && (
         <>
-          {compilationId && (
-            <div className={styles["link-rows"]}>
+          <div className={styles["link-rows"]}>
+            {compilationId && (
               <div className={styles["link-row"]}>
                 <span>Подборка:</span>
                 <Link to={`${paths[StlPage.COMPILATIONS]}/${compilationId}`}>
                   Подборка №{compilationId}
                 </Link>
               </div>
-              <div className={styles["link-row"]}>
-                <span>Пользователь:</span>
-                <Link to={"#"}>{userName}</Link>
-              </div>
+            )}
+            <div className={styles["link-row"]}>
+              <span>Пользователь:</span>
+              <Link to={`${paths[StlPage.USERS]}/${id}`}>{userName}</Link>
             </div>
-          )}
+          </div>
           <Form
             {...layout}
             name="nest-messages"

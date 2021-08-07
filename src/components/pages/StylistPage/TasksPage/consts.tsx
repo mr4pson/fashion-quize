@@ -29,6 +29,12 @@ export const getColumns = (styles: any, history: any) => {
       render: (cmp) => <Link to={`${paths[StlPage.COMPILATIONS]}/${cmp?.id}`}>{!!cmp?.id && `Подборка №${cmp?.id}`}</Link>,
     },
     {
+      title: "Пользователь",
+      dataIndex: "user",
+      key: "user",
+      render: ({ id, name }) => <Link to={`${paths[StlPage.USERS]}/${id}`}>{name}</Link>,
+    },
+    {
       title: "Дата создания",
       dataIndex: "createdAt",
       key: "createdAt",

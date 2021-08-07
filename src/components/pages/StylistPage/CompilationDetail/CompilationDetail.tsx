@@ -54,8 +54,6 @@ const CompilationDetail: FC<TProps> = (props) => {
   const curTask = compilation.task ?? task;
   const compilationIsNotEmpty = (!!statuses && !!compilation.id) || (!!taskId && !!task.id && !!statuses);
 
-  console.log(taskId, task, statuses);
-
   useEffect(() => {
     (async () => {
       await dispatch(tasksThunks.getTaskStatuses());
@@ -146,7 +144,7 @@ const CompilationDetail: FC<TProps> = (props) => {
             </div>
             <div className={styles["link-row"]}>
               <span>Пользователь:</span>
-              <Link to={"#"}>{curTask.user?.name}</Link>
+              <Link to={`${paths[StlPage.USERS]}/${curTask.user?.id}`}>{curTask.user?.name}</Link>
             </div>
           </div>
           <div className={styles["looks"]}>

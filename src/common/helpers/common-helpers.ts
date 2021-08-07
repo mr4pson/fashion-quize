@@ -55,6 +55,11 @@ export const errorResponseHandler = ({ error, logout }) => {
   }
 
   // if has response show the error
+  if (error.response && [409].includes(error.response.status)) {
+    openNotification("error", "Такой пользователь уже существует");
+  }
+
+  // if has response show the error
   if (error.response && [504, 500].includes(error.response.status)) {
     openNotification("error", "Ошибка сервера");
   }

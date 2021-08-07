@@ -30,7 +30,7 @@ export const getColumns = () => {
       title: "Пользователь",
       dataIndex: "user",
       key: "user",
-      render: (user: any) => <Link to={"#"}>{user.name}</Link>,
+      render: ({ id, name }) => <Link to={`${paths[StlPage.USERS]}/${id}`}>{name}</Link>,
     },
     {
       title: "Луки",
