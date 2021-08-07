@@ -37,7 +37,7 @@ const FieldPage: FC<Props> = (props) => {
     console.log(e);
   };
 
-  const getField = (type: string) =>
+  const getFieldBody = (type: string) =>
     ({
       text: (
         <Form.Item name="field" rules={[{ required: true }]}>
@@ -60,7 +60,7 @@ const FieldPage: FC<Props> = (props) => {
     <div className={styles["field-page"]}>
       <div className={styles["field-page__title"]}>{props.title}</div>
       <Form name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed} validateMessages={validateMessages}>
-        <div className={styles["field-page__body"]}>{getField(props.type)}</div>
+        <div className={styles["field-page__body"]}>{getFieldBody(props.type)}</div>
         <Button htmlType="submit" className={styles["next-button"]}>
           <RightOutlined />
         </Button>
