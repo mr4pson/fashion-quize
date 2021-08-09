@@ -1,0 +1,11 @@
+.table-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  &__title {
+    font-size: 28px;
+    text-align: center;
+    margin: 10px 0 20px;
+  }
+}

@@ -40,6 +40,12 @@ export const compilationsThunks = {
     dispatch(setCompilations(response?.data));
     dispatch(setLoading(false));
   },
+  getStylistCompilations: () => async (dispatch: TypeDispatch) => {
+    dispatch(setLoading(true));
+    const response = await axiosInstance.get("/api/compilations/stylist-compilations");
+    dispatch(setCompilations(response?.data));
+    dispatch(setLoading(false));
+  },
   setCompilation: (compilation: TCompilation) => (dispatch: TypeDispatch) => {
     dispatch(setCompilation(compilation));
   },

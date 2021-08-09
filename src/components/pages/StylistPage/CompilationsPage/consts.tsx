@@ -1,6 +1,6 @@
 import { getImageUrl } from "common/helpers/common-helpers";
 import { Link } from "react-router-dom";
-import { Image } from 'antd';
+import { Image } from "antd";
 
 import { paths, StlPage } from "../routes/consts";
 import { TaskStatus, TypeTask } from "../TasksPage/types";
@@ -30,7 +30,9 @@ export const getColumns = () => {
       title: "Пользователь",
       dataIndex: "user",
       key: "user",
-      render: ({ id, name }) => <Link to={`${paths[StlPage.USERS]}/${id}`}>{name}</Link>,
+      render: ({ id, name }) => (
+        <Link to={`${paths[StlPage.USERS]}/${id}`}>{name}</Link>
+      ),
     },
     {
       title: "Луки",
@@ -61,11 +63,16 @@ export const getColumns = () => {
       title: "Действие",
       dataIndex: "",
       key: "x",
-      render: (compilation: TCompilation) => (
-        <Link to={`${paths[StlPage.COMPILATIONS]}/${compilation.id}`}>
-          Изменить
-        </Link>
-      ),
+      render: (compilation: TCompilation) => {
+        if (compilation.task.status.title !== "Завершена") {
+          return (
+            <Link to={`${paths[StlPage.COMPILATIONS]}/${compilation.id}`}>
+              Изменить
+            </Link>
+          );
+        }
+        return;
+      },
     },
   ];
 };

@@ -4,6 +4,7 @@ import { EQuize } from "common/types/types";
 import { TypeBlock } from "components/pages/AdminPage/BlocksPage/type";
 import { axiosInstance } from "components/pages/AdminPage/consts";
 import { TypeQuestion } from "components/pages/QuizePage/types";
+import { ESexes } from "components/pages/StylistPage/TasksPage/types";
 import { TypeDispatch } from "redux/ReduxStore";
 
 const quizePageSlice = createSlice({
@@ -16,6 +17,7 @@ const quizePageSlice = createSlice({
     email: "" as string,
     age: 0 as number,
     city: "" as string,
+    sex: "" as ESexes,
   },
   reducers: {
     setStateAnswers: (state, action: PayloadAction<Object | {}>) => ({
@@ -41,6 +43,10 @@ const quizePageSlice = createSlice({
     setAge: (state, action: PayloadAction<number>) => ({
       ...state,
       age: action.payload,
+    }),
+    setSex: (state, action: PayloadAction<ESexes>) => ({
+      ...state,
+      sex: action.payload,
     }),
     setCity: (state, action: PayloadAction<string>) => ({
       ...state,
@@ -74,6 +80,9 @@ export const quizeThunks = {
   setCity: (payload: string) => async (dispatch: TypeDispatch) => {
     dispatch(setCity(payload));
   },
+  setSex: (payload: ESexes) => async (dispatch: TypeDispatch) => {
+    dispatch(setSex(payload));
+  },
   checkEmail: (payload: string) => async () => {
     return await axiosInstance.get(`/api/auth/check-email/${payload}`);
   },
@@ -82,5 +91,5 @@ export const quizeThunks = {
   },
 };
 
-export const { setStateAnswers, setQuestions, setEmail, setName, setBlocks, setAge, setCity } = quizePageSlice.actions;
+export const { setStateAnswers, setQuestions, setEmail, setName, setBlocks, setAge, setCity, setSex } = quizePageSlice.actions;
 export default quizePageSlice.reducer;

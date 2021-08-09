@@ -1,6 +1,7 @@
 import { Card, Descriptions } from "antd";
 import { getUserInfo } from "common/helpers/common-helpers";
 import useWindowDimensions from "common/hooks/useWindowDimensions";
+import { ESexes } from "components/pages/StylistPage/TasksPage/types";
 import moment from "moment";
 import React, { memo } from "react";
 import styles from "./ProfilePage.module.scss";
@@ -32,6 +33,7 @@ const ProfilePage: React.FC = () => {
           <Descriptions.Item label="Дата регистрации">
             {moment(userInfo?.createdAt).format("DD.MM.yyyy")}
           </Descriptions.Item>
+          <Descriptions.Item label="Пол">{userInfo?.sex === ESexes.MALE ? 'Мужской' : 'Женский'}</Descriptions.Item>
         </Descriptions>
       </div>
     </Card>

@@ -25,7 +25,7 @@ type TProps = {
 
 const QuizePage: FC<TProps> = (props) => {
   const dispatch = useAppDispatch();
-  const { questions, blocks, name, email, age, city } = useSelector((state: TRootState) => state.quizePage);
+  const { questions, blocks, name, email, age, city, sex } = useSelector((state: TRootState) => state.quizePage);
 
   const { questionNumber, quizeType } = useParams() as any;
   const questionsNumber = questions?.length;
@@ -60,6 +60,7 @@ const QuizePage: FC<TProps> = (props) => {
         email,
         age,
         city,
+        sex,
         data: JSON.stringify(answers),
       };
       await dispatch(quizeThunks.registrateUser(payload));

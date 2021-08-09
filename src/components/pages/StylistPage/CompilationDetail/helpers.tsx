@@ -69,7 +69,7 @@ export const handleAddItem = (
   setCurrentLookIndex(index);
 };
 
-export const getFormField = (type: string, field: TFormField, statuses: TaskStatus[], loading: boolean) =>
+export const getFormField = (type: string, field: TFormField, statuses: TaskStatus[], loading: boolean, compilation: TCompilation) =>
   ({
     STATUS: (
       <Form.Item name={field.name} label={field.label} rules={[{ required: true }]}>
@@ -88,7 +88,7 @@ export const getFormField = (type: string, field: TFormField, statuses: TaskStat
       </Form.Item>
     ),
     BUTTON: (
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+      compilation.task.status.title !== 'Завершена' && <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button loading={loading} type="primary" htmlType="submit">
           {field.label}
         </Button>

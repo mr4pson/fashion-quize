@@ -4,6 +4,8 @@ import CompilationsPageContainer from "../CompilationsPage/CompilationsPageConta
 import TaskDetailPage from "../TaskDetail";
 import TasksPageContainer from "../TasksPage/TasksPageContainer";
 import { PageMethods } from "../types";
+import UsersPageContainer from "../UsersPage/UsersPageContainer";
+import UserDetail from "../UserDetail/UserDetail";
 import { paths, StlPage } from "./consts";
 
 export function getStylistRoutes(): TStylistPage[] {
@@ -30,6 +32,17 @@ export function getStylistRoutes(): TStylistPage[] {
       type: StlPage.TASKS_EDIT,
       path: paths[StlPage.TASKS_EDIT],
       component: <TaskDetailPage />,
+    },
+    {
+      type: StlPage.USERS,
+      path: paths[StlPage.USERS],
+      component: <UsersPageContainer />,
+      exact: true,
+    },
+    {
+      type: StlPage.USERS_DETAIL,
+      path: paths[StlPage.USERS_DETAIL],
+      component: <UserDetail />,
     },
     {
       type: StlPage.COMPILATIONS_EDIT,

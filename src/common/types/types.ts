@@ -1,5 +1,6 @@
 import { AdmPage } from "components/pages/AdminPage/routes/constants";
 import { StlPage } from "components/pages/StylistPage/routes/consts";
+import { ESexes } from "components/pages/StylistPage/TasksPage/types";
 import { UsrPage } from "components/pages/UserPage/routes/consts";
 import { Page } from "routes/constants";
 
@@ -43,5 +44,6 @@ export type TUserInfo = {
   city: string;
   role: EUser;
   expire: number;
+  sex: ESexes;
   createdAt: string;
 };
