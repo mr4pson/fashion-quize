@@ -2,6 +2,7 @@ import { Button } from "antd";
 import { Link } from "react-router-dom";
 
 import { paths, StlPage } from "../routes/consts";
+import { TypeTask } from "./types";
 
 export const getColumns = (styles: any, history: any) => {
   const onEditClick = (id) => {
@@ -26,25 +27,35 @@ export const getColumns = (styles: any, history: any) => {
       title: "Подборка",
       dataIndex: "compilation",
       key: "compilation",
-      render: (cmp) => <Link to={`${paths[StlPage.COMPILATIONS]}/${cmp?.id}`}>{!!cmp?.id && `Подборка №${cmp?.id}`}</Link>,
+      render: (cmp) => (
+        <Link to={`${paths[StlPage.COMPILATIONS]}/${cmp?.id}`}>
+          {!!cmp?.id && `Подборка №${cmp?.id}`}
+        </Link>
+      ),
     },
     {
       title: "Пользователь",
       dataIndex: "user",
       key: "user",
-      render: ({ id, name }) => <Link to={`${paths[StlPage.USERS]}/${id}`}>{name}</Link>,
+      render: ({ id, name }) => (
+        <Link to={`${paths[StlPage.USERS]}/${id}`}>{name}</Link>
+      ),
     },
     {
       title: "Дата создания",
       dataIndex: "createdAt",
       key: "createdAt",
-      render: (createdAt: string) => <div className={styles["createdAt"]}>{createdAt}</div>,
+      render: (createdAt: string) => (
+        <div className={styles["createdAt"]}>{createdAt}</div>
+      ),
     },
     {
       title: "Дата изменения",
       dataIndex: "updatedAt",
       key: "updatedAt",
-      render: (updatedAt: string) => <div className={styles["updatedAt"]}>{updatedAt}</div>,
+      render: (updatedAt: string) => (
+        <div className={styles["updatedAt"]}>{updatedAt}</div>
+      ),
     },
     {
       title: "Исполнить до",
@@ -56,11 +67,14 @@ export const getColumns = (styles: any, history: any) => {
       title: "Действие",
       dataIndex: "id",
       key: "id",
-      render: (id) => (
-        <Button onClick={() => onEditClick(id)} type="link">
-          Изменить
-        </Button>
-      ),
+      render: (id, task: TypeTask) => {
+        if (task.status.title !== "Завершена") {
+          return <Button onClick={() => onEditClick(id)} type="link">
+            Изменить
+          </Button>;
+        }
+        return;
+      },
     },
   ];
 };

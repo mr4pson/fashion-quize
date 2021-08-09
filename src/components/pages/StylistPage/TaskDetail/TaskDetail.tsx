@@ -111,7 +111,7 @@ const TaskDetail: FC = () => {
         );
       case BUTTON:
         return (
-          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+          task.status.title !== 'Завершена' && <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button loading={saveLoading} type="primary" htmlType="submit">
               {field.label}
             </Button>
@@ -166,7 +166,7 @@ const TaskDetail: FC = () => {
             )}
             <div className={styles["link-row"]}>
               <span>Пользователь:</span>
-              <Link to={`${paths[StlPage.USERS]}/${id}`}>{userName}</Link>
+              <Link to={`${paths[StlPage.USERS]}/${task.user.id}`}>{userName}</Link>
             </div>
           </div>
           <Form

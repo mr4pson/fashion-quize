@@ -8,6 +8,7 @@ import questionsPageSlice from "./slicers/questionsPageSlice";
 import quizePageSlice from "./slicers/quizePageSlice";
 import stylistsPageSlice from "./slicers/stylistsPageSlice";
 import tasksPageSlice from "./slicers/tasksPageSlice";
+import usersPageSlice from "./slicers/usersPageSlice";
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     stylistsPage: stylistsPageSlice,
     tasksPage: tasksPageSlice,
     compilationsPage: compilationsPageSlice,
+    usersPage: usersPageSlice,
   },
 });
 

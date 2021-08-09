@@ -1,0 +1,9 @@
+.table-top {
+  display: flex;
+  align-items: center;
+  position: relative;
+  &__title {
+    font-size: 28px;
+    margin: 10px 0 20px;
+  }
+}

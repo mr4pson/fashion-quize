@@ -9,14 +9,22 @@ import { getImageUrl } from "common/helpers/common-helpers";
 import Loader from "components/modules/Loader";
 import { useUploadFile } from "hooks/useUploadFile";
 import { TRootState, useAppDispatch } from "redux/ReduxStore";
-import { compilationsThunks, setCompilation } from "redux/slicers/compilationsPageSlice";
+import {
+  compilationsThunks,
+  setCompilation,
+} from "redux/slicers/compilationsPageSlice";
 import { tasksThunks } from "redux/slicers/tasksPageSlice";
 import { TLookItem } from "../CompilationsPage/types";
 import { paths, StlPage } from "../routes/consts";
 import { PageMethods } from "../types";
 import styles from "./CompilationDetail.module.scss";
 import { formFields, layout } from "./consts";
-import { getFormField, handleAddItem, handleDelItem, handleEditItemName } from "./helpers";
+import {
+  getFormField,
+  handleAddItem,
+  handleDelItem,
+  handleEditItemName,
+} from "./helpers";
 import { TStatus } from "./types";
 
 /* eslint-disable no-template-curly-in-string */
@@ -52,7 +60,8 @@ const CompilationDetail: FC<TProps> = (props) => {
   }));
 
   const curTask = compilation.task ?? task;
-  const compilationIsNotEmpty = (!!statuses && !!compilation.id) || (!!taskId && !!task.id && !!statuses);
+  const compilationIsNotEmpty =
+    (!!statuses && !!compilation.id) || (!!taskId && !!task.id && !!statuses);
 
   useEffect(() => {
     (async () => {
@@ -84,7 +93,7 @@ const CompilationDetail: FC<TProps> = (props) => {
     return () => {
       dispatch(compilationsThunks.clearCompilation());
       dispatch(tasksThunks.clearTask());
-    }
+    };
     // eslint-disable-next-line
   }, [dispatch, id, taskId]);
 
@@ -109,11 +118,16 @@ const CompilationDetail: FC<TProps> = (props) => {
   };
 
   const onFinish = async (status: TStatus) => {
-    const payloadForUpdate: any = { status: status.status, looks: JSON.stringify(compilation.looks) };
+    const payloadForUpdate: any = {
+      status: status.status,
+      looks: JSON.stringify(compilation.looks),
+    };
 
     setLoading(true);
     if (id) {
-      await dispatch(compilationsThunks.updateCompilation(id, payloadForUpdate));
+      await dispatch(
+        compilationsThunks.updateCompilation(id, payloadForUpdate)
+      );
     }
     if (taskId) {
       payloadForUpdate.taskId = taskId;
@@ -124,9 +138,16 @@ const CompilationDetail: FC<TProps> = (props) => {
   };
 
   let initialValues;
-  if (curTask?.status && compilationIsNotEmpty) {
+  if (curTask?.status && compilation?.id) {
     initialValues = {
-      status: curTask.status.id,
+      status: curTask?.status.id,
+    };
+  } else {
+    const inProcessStatus = statuses.find(
+      (status) => status.title === "В обработке"
+    );
+    initialValues = {
+      status: inProcessStatus ? inProcessStatus?.id : curTask.status?.id,
     };
   }
 
@@ -140,11 +161,15 @@ const CompilationDetail: FC<TProps> = (props) => {
           <div className={styles["link-rows"]}>
             <div className={styles["link-row"]}>
               <span>Задача:</span>
-              <Link to={`${paths[StlPage.TASKS]}/${curTask.id}`}>Задача №{curTask.id}</Link>
+              <Link to={`${paths[StlPage.TASKS]}/${curTask.id}`}>
+                Задача №{curTask.id}
+              </Link>
             </div>
             <div className={styles["link-row"]}>
               <span>Пользователь:</span>
-              <Link to={`${paths[StlPage.USERS]}/${curTask.user?.id}`}>{curTask.user?.name}</Link>
+              <Link to={`${paths[StlPage.USERS]}/${curTask.user?.id}`}>
+                {curTask.user?.name}
+              </Link>
             </div>
           </div>
           <div className={styles["looks"]}>
@@ -164,30 +189,62 @@ const CompilationDetail: FC<TProps> = (props) => {
 
               {compilation.looks?.map((look, lookIndex) => (
                 <div className={styles["look"]} key={"look" + lookIndex}>
-                  {look.items.map((lookItem: TLookItem, lookItemIndex: number) => (
-                    <div className={styles["look-item"]} key={"look-item" + lookItemIndex}>
+                  {look.items.map(
+                    (lookItem: TLookItem, lookItemIndex: number) => (
                       <div
-                        style={{ backgroundImage: `url(${getImageUrl(lookItem.photo)})` }}
-                        className={styles["look-item__photo"]}
-                        onClick={() => handleDelItem(compilation, lookIndex!, lookItemIndex, dispatch, setCompilation)}
+                        className={styles["look-item"]}
+                        key={"look-item" + lookItemIndex}
                       >
-                        <MinusOutlined className={styles["look-item__backdrop"]} />
-                      </div>
-                      <div className={styles["look-item__name"]}>
-                        <Input
-                          bordered={false}
-                          value={lookItem.name}
-                          onChange={(e) =>
-                            handleEditItemName(e, compilation, lookIndex, lookItemIndex, dispatch, setCompilation)
+                        <div
+                          style={{
+                            backgroundImage: `url(${getImageUrl(
+                              lookItem.photo
+                            )})`,
+                          }}
+                          className={styles["look-item__photo"]}
+                          onClick={() =>
+                            handleDelItem(
+                              compilation,
+                              lookIndex!,
+                              lookItemIndex,
+                              dispatch,
+                              setCompilation
+                            )
                           }
-                        />
+                        >
+                          <MinusOutlined
+                            className={styles["look-item__backdrop"]}
+                          />
+                        </div>
+                        <div className={styles["look-item__name"]}>
+                          <Input
+                            bordered={false}
+                            value={lookItem.name}
+                            onChange={(e) =>
+                              handleEditItemName(
+                                e,
+                                compilation,
+                                lookIndex,
+                                lookItemIndex,
+                                dispatch,
+                                setCompilation
+                              )
+                            }
+                          />
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  )}
                   {look.items.length < 5 && (
                     <Button
                       className={styles["look-add-btn"]}
-                      onClick={() => handleAddItem(lookIndex, inputFileRef, setCurrentLookIndex)}
+                      onClick={() =>
+                        handleAddItem(
+                          lookIndex,
+                          inputFileRef,
+                          setCurrentLookIndex
+                        )
+                      }
                     >
                       +
                     </Button>
@@ -205,7 +262,7 @@ const CompilationDetail: FC<TProps> = (props) => {
           >
             {formFields.map((field) => (
               <div className={styles["detail__field"]} key={field.id}>
-                {getFormField(field.type, field, statuses, loading)}
+                {getFormField(field.type, field, statuses, loading, compilation)}
               </div>
             ))}
           </Form>

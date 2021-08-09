@@ -11,6 +11,8 @@ export enum AdmPage {
   STYLISTS_CREATE = "STYLISTS_CREATE",
   STYLISTS_EDIT = "STYLISTS_EDIT",
   ANSWERS = "ANSWERS",
+  USERS = "USERS",
+  USERS_DETAIL = "USERS_DETAIL",
 }
 
 export const QUIZE_TYPE = ":quizeType";
@@ -29,4 +31,6 @@ export const paths = {
   [AdmPage.STYLISTS_CREATE]: `/admin/stylists/create`,
   [AdmPage.STYLISTS_EDIT]: `/admin/stylists/edit/${ID}`,
   [AdmPage.ANSWERS]: "/admin/answers",
+  [AdmPage.USERS]: "/admin/users",
+  [AdmPage.USERS_DETAIL]: `/admin/users/${ID}`
 };

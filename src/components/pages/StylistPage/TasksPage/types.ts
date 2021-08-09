@@ -1,5 +1,10 @@
 import { TCompilation } from "../CompilationsPage/types";
 
+export enum ESexes {
+  MALE = "MALE",
+  FEMALE = "FEMALE"
+};
+
 export type TypeTask = {
   id: number;
   date: string;
@@ -18,6 +23,9 @@ export type TUser = {
   login: string;
   name: string;
   roles: string;
+  city: string;
+  sex: ESexes;
+  age: number;
   createdAt: Date;
   updatedAt: Date;
   // answers: any[];

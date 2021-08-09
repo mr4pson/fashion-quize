@@ -22,6 +22,7 @@ export function getUserInfo(): TUserInfo | null {
     name: jwtInfo.name,
     login: jwtInfo.login,
     age: jwtInfo.age,
+    sex: jwtInfo.sex,
     city: jwtInfo.city,
     role: roles[0] as EUser,
     expire: jwtInfo.exp,

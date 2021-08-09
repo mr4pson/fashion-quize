@@ -1,4 +1,4 @@
-import { FileSearchOutlined, PieChartOutlined, QuestionCircleOutlined, TeamOutlined } from "@ant-design/icons";
+import { FileSearchOutlined, PieChartOutlined, QuestionCircleOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 import { getJwtPair } from "common/helpers/auth-helpers";
@@ -9,7 +9,8 @@ export const getSelectedKey = (location: string) => {
   if (location.includes(paths[AdmPage.BLOCKS])) return "1";
   if (location.includes(paths[AdmPage.QUESTIONS])) return "2";
   if (location.includes(paths[AdmPage.ANSWERS])) return "3";
-  if (location.includes(paths[AdmPage.STYLISTS])) return "4";
+  if (location.includes(paths[AdmPage.STYLISTS])) return "4"
+  if (location.includes(paths[AdmPage.USERS])) return "5";;
   return "1";
 };
 
@@ -37,6 +38,12 @@ export const menuItems = [
     icon: <TeamOutlined />,
     title: "Стилисты",
     route: paths[AdmPage.STYLISTS],
+  },
+  {
+    key: "5",
+    icon: <UserOutlined />,
+    title: "Пользователи",
+    route: paths[AdmPage.USERS],
   },
 ];
 

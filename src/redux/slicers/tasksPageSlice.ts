@@ -51,6 +51,12 @@ export const tasksThunks = {
     dispatch(setTasks(response?.data));
     dispatch(setLoading(false));
   },
+  getStylistTasks: () => async (dispatch: TypeDispatch) => {
+    dispatch(setLoading(true));
+    const response = await axiosInstance.get("/api/tasks/stylist-tasks");
+    dispatch(setTasks(response?.data));
+    dispatch(setLoading(false));
+  },
   clearTasks: () => (dispatch: TypeDispatch) => {
     dispatch(setTasks([]));
   },

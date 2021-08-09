@@ -1,6 +1,8 @@
+import { TypeTask } from "../TasksPage/types";
+
 export type TCompilation = {
   id: number;
-  task: any;
+  task: TypeTask;
   looks: TLook[];
 };
 

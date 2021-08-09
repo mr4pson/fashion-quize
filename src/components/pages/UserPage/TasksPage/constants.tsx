@@ -1,5 +1,8 @@
 import { Button } from "antd";
-import { TaskStatus, TaskType } from "components/pages/StylistPage/TasksPage/types";
+import {
+  TaskStatus,
+  TaskType,
+} from "components/pages/StylistPage/TasksPage/types";
 
 export const getColumns = (styles: any, onTaskCancel: (id: number) => void) => {
   return [
@@ -12,7 +15,7 @@ export const getColumns = (styles: any, onTaskCancel: (id: number) => void) => {
         <div className={styles["type"]}>{type?.title}</div>
       ),
     },
-    { 
+    {
       title: "Статус",
       dataIndex: "status",
       key: "status",
@@ -20,7 +23,7 @@ export const getColumns = (styles: any, onTaskCancel: (id: number) => void) => {
         <div className={styles["status"]}>{status?.title}</div>
       ),
     },
-    { 
+    {
       title: "Дата создания",
       dataIndex: "createdAt",
       key: "createdAt",
@@ -28,7 +31,7 @@ export const getColumns = (styles: any, onTaskCancel: (id: number) => void) => {
         <div className={styles["createdAt"]}>{createdAt}</div>
       ),
     },
-    { 
+    {
       title: "Дата изменения",
       dataIndex: "updatedAt",
       key: "updatedAt",
@@ -40,22 +43,22 @@ export const getColumns = (styles: any, onTaskCancel: (id: number) => void) => {
       title: "Исполнить до",
       dataIndex: "date",
       key: "date",
-      render: (date) => (
-        <div>{date}</div>
-      )
+      render: (date) => <div>{date}</div>,
     },
     {
       title: "Действие",
       dataIndex: "id",
       key: "id",
-      render: (id) => (
-        <Button
-          onClick={() => onTaskCancel(id)}
-          type="link"
-        >
-          Отменить
-        </Button>
-      )
+      render: (id, task) => {
+        if (task.status.title !== "Завершена") {
+          return (
+            <Button onClick={() => onTaskCancel(id)} type="link">
+              Отменить
+            </Button>
+          );
+        }
+        return;
+      },
     },
   ];
-}
+};

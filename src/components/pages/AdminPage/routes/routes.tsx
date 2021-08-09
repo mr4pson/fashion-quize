@@ -1,3 +1,4 @@
+import UserDetail from "components/pages/StylistPage/UserDetail";
 import AnswersPage from "../AnswersPage";
 import BlockDetail from "../BlockDetail";
 import BlocksPage from "../BlocksPage";
@@ -6,6 +7,7 @@ import QuestionsPageContainer from "../QuestionsPage";
 import StylistDetail from "../StylistDetail";
 import StylistsPageContainer from "../StylistsPage/StylistsPageContainer";
 import { PageMethods } from "../types";
+import UsersPageContainer from "../UsersPage/UsersPageContainer";
 import { AdmPage, paths } from "./constants";
 import { TypeAdmRoute } from "./type";
 
@@ -72,6 +74,17 @@ export function getAdmRoutes(): TypeAdmRoute[] {
       type: AdmPage.ANSWERS,
       path: paths[AdmPage.ANSWERS],
       component: <AnswersPage />,
+    },
+    {
+      type: AdmPage.USERS,
+      path: paths[AdmPage.USERS],
+      component: <UsersPageContainer />,
+      exact: true,
+    },
+    {
+      type: AdmPage.USERS_DETAIL,
+      path: paths[AdmPage.USERS_DETAIL],
+      component: <UserDetail />,
     },
   ];
 }

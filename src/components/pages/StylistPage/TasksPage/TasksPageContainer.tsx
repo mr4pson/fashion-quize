@@ -10,7 +10,7 @@ const TasksPageContainer: FC = () => {
   const { loading, tasks } = useSelector((state: TRootState) => state.tasksPage);
 
   useEffect(() => {
-    dispatch(tasksThunks.getTasks());
+    dispatch(tasksThunks.getStylistTasks());
 
     return () => dispatch(tasksThunks.clearTasks());
   }, [dispatch]);

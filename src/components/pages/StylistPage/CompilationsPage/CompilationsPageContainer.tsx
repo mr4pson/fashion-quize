@@ -10,7 +10,7 @@ const CompilationsPageContainer: FC = () => {
   const { compilations, loading } = useSelector((state: TRootState) => state.compilationsPage);
 
   useEffect(() => {
-    dispatch(compilationsThunks.getCompilations());
+    dispatch(compilationsThunks.getStylistCompilations());
 
     return () => dispatch(compilationsThunks.clearCompilations());
   }, [dispatch]);
