@@ -22,6 +22,7 @@ type Props = {
   thunk: (payload: any) => (dispatch: TypeDispatch) => Promise<void>;
   type: string;
   title: string;
+  image: string;
 };
 
 const FieldPage: FC<Props> = (props) => {
@@ -68,6 +69,7 @@ const FieldPage: FC<Props> = (props) => {
   return (
     <div className={styles["field-page"]}>
       <div className={styles["field-page__title"]}>{props.title}</div>
+      <div className={styles["field-page__image"]} style={{ backgroundImage: `url(${props.image})` }}></div>
       <Form name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed} validateMessages={validateMessages}>
         <div className={styles["field-page__body"]}>{getFieldBody(props.type)}</div>
         <Button htmlType="submit" className={styles["next-button"]}>

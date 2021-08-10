@@ -29,25 +29,57 @@ export function getAppRoutes(): TypeAppRoute[] {
     {
       type: Page.NAME_INPUT,
       path: paths[Page.NAME_INPUT],
-      component: <FieldPage next={Page.EMAIL_INPUT} type={'text'} thunk={quizeThunks.setName} title={'Введите ваше имя'}/>,
+      component: (
+        <FieldPage
+          next={Page.EMAIL_INPUT}
+          type={"text"}
+          thunk={quizeThunks.setName}
+          title={"Введите ваше имя"}
+          image={'/que1.png'}
+        />
+      ),
       exact: true,
     },
     {
       type: Page.EMAIL_INPUT,
       path: paths[Page.EMAIL_INPUT],
-      component: <FieldPage next={Page.AGE_INPUT} type={'email'} thunk={quizeThunks.setEmail} title={'Введите ваш email'}/>,
+      component: (
+        <FieldPage
+          next={Page.AGE_INPUT}
+          type={"email"}
+          thunk={quizeThunks.setEmail}
+          title={"Введите ваш email"}
+          image={'/que4.png'}
+        />
+      ),
       exact: true,
     },
     {
       type: Page.AGE_INPUT,
       path: paths[Page.AGE_INPUT],
-      component: <FieldPage next={Page.CITY_INPUT} type={'number'} thunk={quizeThunks.setAge} title={'Введите ваш возраст'}/>,
+      component: (
+        <FieldPage
+          next={Page.CITY_INPUT}
+          type={"number"}
+          thunk={quizeThunks.setAge}
+          title={"Введите ваш возраст"}
+          image={'/que2.png'}
+        />
+      ),
       exact: true,
     },
     {
       type: Page.CITY_INPUT,
       path: paths[Page.CITY_INPUT],
-      component: <FieldPage next={Page.QUIZE_SEX} type={'text'} thunk={quizeThunks.setCity} title={'Введите ваш город'}/>,
+      component: (
+        <FieldPage
+          next={Page.QUIZE_SEX}
+          type={"text"}
+          thunk={quizeThunks.setCity}
+          title={"Введите ваш город"}
+          image={'/que3.png'}
+        />
+      ),
       exact: true,
     },
     {
