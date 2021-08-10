@@ -1,6 +1,12 @@
-import { PieChartOutlined, QuestionCircleOutlined, TeamOutlined, UserOutlined, SolutionOutlined } from "@ant-design/icons";
+import {
+  FileSearchOutlined,
+  PieChartOutlined,
+  QuestionCircleOutlined,
+  SolutionOutlined,
+  TeamOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import axios from "axios";
-
 import { getJwtPair } from "common/helpers/auth-helpers";
 import { EQuize } from "common/types/types";
 import { AdmPage, paths } from "./routes/constants";
@@ -10,7 +16,8 @@ export const getSelectedKey = (location: string) => {
   if (location.includes(paths[AdmPage.QUESTIONS])) return "2";
   if (location.includes(paths[AdmPage.STYLISTS])) return "3";
   if (location.includes(paths[AdmPage.TASKS])) return "4";
-  if (location.includes(paths[AdmPage.USERS])) return "5";
+  if (location.includes(paths[AdmPage.COMPILATIONS])) return "5";
+  if (location.includes(paths[AdmPage.USERS])) return "6";
   return "1";
 };
 
@@ -41,6 +48,12 @@ export const menuItems = [
   },
   {
     key: "5",
+    icon: <FileSearchOutlined />,
+    title: "Подборки",
+    route: paths[AdmPage.COMPILATIONS],
+  },
+  {
+    key: "6",
     icon: <UserOutlined />,
     title: "Пользователи",
     route: paths[AdmPage.USERS],

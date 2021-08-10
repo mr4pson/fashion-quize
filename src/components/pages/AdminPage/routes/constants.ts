@@ -40,6 +40,6 @@ export const paths = {
   [AdmPage.USERS_DETAIL]: `/admin/users/${ID}`,
   [AdmPage.TASKS]: "/admin/tasks",
   [AdmPage.TASKS_DETAIL]: `/admin/tasks/${ID}`,
-  [AdmPage.COMPILATIONS]: "/admin/tasks",
-  [AdmPage.COMPILATIONS_DETAIL]: `/admin/tasks/${ID}`,
+  [AdmPage.COMPILATIONS]: "/admin/compilations",
+  [AdmPage.COMPILATIONS_DETAIL]: `/admin/compilations/${ID}`,
 };
