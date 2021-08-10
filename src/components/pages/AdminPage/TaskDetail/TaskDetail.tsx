@@ -14,9 +14,7 @@ const TaskDetail: FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams() as any;
 
-  const { task, types, statuses } = useSelector(
-    (state: TRootState) => state.tasksPage
-  );
+  const { task, types, statuses } = useSelector((state: TRootState) => state.tasksPage);
 
   const compilationId = task?.compilation?.id;
   const userName = task?.user?.name;
@@ -38,11 +36,11 @@ const TaskDetail: FC = () => {
       </div>
       {task.id && types && statuses && (
         <Descriptions size="default" column={2}>
-          {compilationId && <Descriptions.Item label="Подборка">
-            <Link to={`${paths[AdmPage.COMPILATIONS]}/${compilationId}`}>
-              Подборка №{compilationId}
-            </Link>
-          </Descriptions.Item>}
+          {compilationId && (
+            <Descriptions.Item label="Подборка">
+              <Link to={`${paths[AdmPage.COMPILATIONS]}/${compilationId}`}>Подборка №{compilationId}</Link>
+            </Descriptions.Item>
+          )}
           <Descriptions.Item label="Пользователь">
             <Link to={`${paths[AdmPage.USERS]}/${task.user.id}`}>{userName}</Link>
           </Descriptions.Item>

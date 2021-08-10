@@ -34,9 +34,9 @@ const AdminPage: FC = () => {
   })();
 
   useEffect(() => {
-    const takedKey = getSelectedKey(location.pathname);
+    const key = getSelectedKey(location.pathname);
 
-    setSelectedKey(takedKey);
+    setSelectedKey(key);
   }, [location.pathname]);
 
   return (
@@ -51,7 +51,7 @@ const AdminPage: FC = () => {
         <div className={styles["layout__logo"]}>
           <LogoSvg />
         </div>
-        <Menu theme="dark" defaultSelectedKeys={[selectedKey]} mode="inline">
+        <Menu theme="dark" selectedKeys={[selectedKey]} mode="inline">
           {menuItems.map((item) => (
             <Menu.Item
               key={item.key}
