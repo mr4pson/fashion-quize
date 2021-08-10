@@ -1,4 +1,3 @@
-import UserDetail from "components/pages/StylistPage/UserDetail";
 import AnswersPage from "../AnswersPage";
 import BlockDetail from "../BlockDetail";
 import BlocksPage from "../BlocksPage";
@@ -6,7 +5,10 @@ import QuestionDetail from "../QuestionDetail";
 import QuestionsPageContainer from "../QuestionsPage";
 import StylistDetail from "../StylistDetail";
 import StylistsPageContainer from "../StylistsPage/StylistsPageContainer";
+import TaskDetail from "../TaskDetail";
+import TasksPageContainer from "../TasksPage/TasksPageContainer";
 import { PageMethods } from "../types";
+import UserDetail from "../UserDetail";
 import UsersPageContainer from "../UsersPage/UsersPageContainer";
 import { AdmPage, paths } from "./constants";
 import { TypeAdmRoute } from "./type";
@@ -85,6 +87,17 @@ export function getAdmRoutes(): TypeAdmRoute[] {
       type: AdmPage.USERS_DETAIL,
       path: paths[AdmPage.USERS_DETAIL],
       component: <UserDetail />,
+    },
+    {
+      type: AdmPage.TASKS,
+      path: paths[AdmPage.TASKS],
+      component: <TasksPageContainer />,
+      exact: true,
+    },
+    {
+      type: AdmPage.TASKS_DETAIL,
+      path: paths[AdmPage.TASKS_DETAIL],
+      component: <TaskDetail />,
     },
   ];
 }

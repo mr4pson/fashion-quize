@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { paths, StlPage } from "../routes/consts";
+import { ESexes } from "../TasksPage/types";
 
 export const getColumns = (history: any) => {
 
@@ -10,6 +11,12 @@ export const getColumns = (history: any) => {
       dataIndex: "name",
       key: "name",
       render: (name) => <div>{name}</div>,
+    },
+    {
+      title: "Пол",
+      dataIndex: "sex",
+      key: "sex",
+      render: (sex) => <div>{sex === ESexes.MALE ? 'Мужской' : 'Женский'}</div>,
     },
     {
       title: "Город",

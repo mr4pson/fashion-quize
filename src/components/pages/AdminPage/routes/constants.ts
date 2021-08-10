@@ -13,9 +13,14 @@ export enum AdmPage {
   ANSWERS = "ANSWERS",
   USERS = "USERS",
   USERS_DETAIL = "USERS_DETAIL",
+  TASKS = "TASKS",
+  TASKS_DETAIL = "TASKS_DETAIL",
+  COMPILATIONS = "COMPILATIONS",
+  COMPILATIONS_DETAIL = "COMPILATIONS_DETAIL",
 }
 
 export const QUIZE_TYPE = ":quizeType";
+export const TASK_ID = ":taskId";
 export const ID = ":id";
 
 export const paths = {
@@ -32,5 +37,9 @@ export const paths = {
   [AdmPage.STYLISTS_EDIT]: `/admin/stylists/edit/${ID}`,
   [AdmPage.ANSWERS]: "/admin/answers",
   [AdmPage.USERS]: "/admin/users",
-  [AdmPage.USERS_DETAIL]: `/admin/users/${ID}`
+  [AdmPage.USERS_DETAIL]: `/admin/users/${ID}`,
+  [AdmPage.TASKS]: "/admin/tasks",
+  [AdmPage.TASKS_DETAIL]: `/admin/tasks/${ID}`,
+  [AdmPage.COMPILATIONS]: "/admin/tasks",
+  [AdmPage.COMPILATIONS_DETAIL]: `/admin/tasks/${ID}`,
 };

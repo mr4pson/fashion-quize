@@ -1,4 +1,4 @@
-import { TCompilation } from "../CompilationsPage/types";
+import { TCompilation } from "components/pages/StylistPage/CompilationsPage/types";
 
 export enum ESexes {
   MALE = "MALE",
