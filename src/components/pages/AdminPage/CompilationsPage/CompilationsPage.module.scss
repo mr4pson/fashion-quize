@@ -1,0 +1,56 @@
+.color {
+  display: flex;
+  align-items: center;
+
+  &__box {
+    margin-left: 10px;
+    height: 10px;
+    width: 10px;
+  }
+}
+
+.action {
+  padding: 0;
+  margin-right: 6px;
+}
+
+.table-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &__title {
+    font-size: 28px;
+    text-align: center;
+    margin: 10px 0 20px;
+  }
+
+  &__btn {
+    position: absolute;
+    right: 0;
+  }
+}
+
+.look {
+  display: flex;
+}
+
+.look-item {
+  width: 100px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+
+  &__photo {
+    height: 80px;
+  }
+
+  &__name {
+    text-align: center;
+    line-height: 16px;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

@@ -1,6 +1,8 @@
 import AnswersPage from "../AnswersPage";
 import BlockDetail from "../BlockDetail";
 import BlocksPage from "../BlocksPage";
+import CompilationDetail from "../CompilationDetail";
+import CompilationsPageContainer from "../CompilationsPage/CompilationsPageContainer";
 import QuestionDetail from "../QuestionDetail";
 import QuestionsPageContainer from "../QuestionsPage";
 import StylistDetail from "../StylistDetail";
@@ -98,6 +100,17 @@ export function getAdmRoutes(): TypeAdmRoute[] {
       type: AdmPage.TASKS_DETAIL,
       path: paths[AdmPage.TASKS_DETAIL],
       component: <TaskDetail />,
+    },
+    {
+      type: AdmPage.COMPILATIONS,
+      path: paths[AdmPage.COMPILATIONS],
+      component: <CompilationsPageContainer />,
+      exact: true,
+    },
+    {
+      type: AdmPage.COMPILATIONS_DETAIL,
+      path: paths[AdmPage.COMPILATIONS_DETAIL],
+      component: <CompilationDetail />,
     },
   ];
 }

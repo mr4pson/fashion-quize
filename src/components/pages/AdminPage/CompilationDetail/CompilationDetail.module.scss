@@ -1,0 +1,39 @@
+.detail {
+  margin: 0 auto;
+
+  &__header {
+    margin: 10px 0 20px;
+
+    h1 {
+      font-size: 28px;
+    }
+  }
+}
+
+.looks {
+  margin-bottom: 10px;
+
+  &__header {
+    font-size: 22px;
+    text-align: center;
+  }
+}
+
+.look {
+  display: flex;
+}
+
+.look-item {
+  width: 100px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+
+  &__photo {
+    height: 80px;
+  }
+
+  &__name {
+    text-align: center;
+    line-height: 16px;
+  }
+}
