@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, InputNumber, Select } from "antd";
 import { FC, memo, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
@@ -9,7 +9,7 @@ import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { stylistsThunks } from "redux/slicers/stylistsPageSlice";
 import { AdmPage, paths } from "../routes/constants";
 import { PageMethods } from "../types";
-import { AGE, BUTTON, CITY, formFields, FULL_NAME, LOGIN } from "./constants";
+import { AGE, BUTTON, CITY, formFields, FULL_NAME, LOGIN, SEX, sexOptions } from "./constants";
 import styles from "./StylistDetail.module.scss";
 import { TypeEditStylistDto } from "./types";
 
@@ -68,11 +68,36 @@ const StylistDetail: FC<TProps> = (props) => {
     switch (type) {
       case FULL_NAME:
       case LOGIN:
-      case AGE:
       case CITY:
         return (
           <Form.Item name={[field.name]} label={field.label} rules={[{ required: true, type: "string", max: 99 }]}>
             <Input />
+          </Form.Item>
+        );
+      case AGE:
+        return (
+          <Form.Item name={[field.name]} label={field.label} rules={[{ required: true }]}>
+            <InputNumber className={styles['age-input']} type="number" max={99} min={6} />
+          </Form.Item>
+        );
+      case SEX:
+        return (
+          <Form.Item
+            name={field.name}
+            label={field.label}
+            rules={[{ required: true }]}
+          >
+            <Select open={field.readonly ? false : undefined}>
+              {sexOptions
+                .map((option, index) => (
+                  <Select.Option
+                    key={`sex-${field.name}` + index}
+                    value={option.value}
+                  >
+                    {option.title}
+                  </Select.Option>
+                ))}
+            </Select>
           </Form.Item>
         );
       case BUTTON:

@@ -1,3 +1,4 @@
+import { ESexes } from "components/pages/StylistPage/TasksPage/types";
 import { Link } from "react-router-dom";
 import { AdmPage, paths } from "../routes/constants";
 
@@ -10,6 +11,12 @@ export const getColumns = (history: any) => {
       dataIndex: "name",
       key: "name",
       render: (name) => <div>{name}</div>,
+    },
+    {
+      title: "Пол",
+      dataIndex: "sex",
+      key: "sex",
+      render: (sex) => <div>{sex === ESexes.MALE ? 'Мужской' : 'Женский'}</div>,
     },
     {
       title: "Город",
