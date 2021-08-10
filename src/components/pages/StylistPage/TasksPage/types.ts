@@ -29,7 +29,7 @@ export type TUser = {
   createdAt: Date;
   updatedAt: Date;
   tasks?: TypeTask[];
-  // answers: any[];
+  answers?: TAnswer[];
 };
 
 export type TaskStatus = {
@@ -41,3 +41,8 @@ export type TaskType = {
   id: number;
   title: string;
 };
+
+export type TAnswer = {
+  data: string;
+  id: number;
+}

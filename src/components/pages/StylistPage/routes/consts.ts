@@ -7,6 +7,7 @@ export enum StlPage {
   COMPILATIONS_CREATE = "COMPILATIONS_CREATE",
   USERS = "USERS",
   USERS_DETAIL = "USERS_DETAIL",
+  QUIZE = "QUIZE",
 }
 
 export const ID = ":id";
@@ -20,5 +21,6 @@ export const paths = {
   [StlPage.COMPILATIONS_EDIT]: `/stylist/compilations/${ID}`,
   [StlPage.COMPILATIONS_CREATE]: `/stylist/compilations/create/${TASK_ID}`,
   [StlPage.USERS]: "/stylist/users",
-  [StlPage.USERS_DETAIL]: `/stylist/users/${ID}`
+  [StlPage.USERS_DETAIL]: `/stylist/users/${ID}`,
+  [StlPage.QUIZE]: `/stylist/quize/${ID}`
 };

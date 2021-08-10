@@ -7,6 +7,7 @@ import { PageMethods } from "../types";
 import UsersPageContainer from "../UsersPage/UsersPageContainer";
 import UserDetail from "../UserDetail/UserDetail";
 import { paths, StlPage } from "./consts";
+import QuizePage from "../QuizePage";
 
 export function getStylistRoutes(): TStylistPage[] {
   return [
@@ -43,6 +44,11 @@ export function getStylistRoutes(): TStylistPage[] {
       type: StlPage.USERS_DETAIL,
       path: paths[StlPage.USERS_DETAIL],
       component: <UserDetail />,
+    },
+    {
+      type: StlPage.QUIZE,
+      path: paths[StlPage.QUIZE],
+      component: <QuizePage />,
     },
     {
       type: StlPage.COMPILATIONS_EDIT,

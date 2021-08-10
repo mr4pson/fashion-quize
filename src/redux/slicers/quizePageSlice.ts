@@ -4,7 +4,7 @@ import { EQuize } from "common/types/types";
 import { TypeBlock } from "components/pages/AdminPage/BlocksPage/type";
 import { axiosInstance } from "components/pages/AdminPage/consts";
 import { TypeQuestion } from "components/pages/QuizePage/types";
-import { ESexes } from "components/pages/StylistPage/TasksPage/types";
+import { ESexes, TUser } from "components/pages/StylistPage/TasksPage/types";
 import { TypeDispatch } from "redux/ReduxStore";
 
 const quizePageSlice = createSlice({
@@ -18,6 +18,7 @@ const quizePageSlice = createSlice({
     age: 0 as number,
     city: "" as string,
     sex: "" as ESexes,
+    user: {} as TUser,
   },
   reducers: {
     setStateAnswers: (state, action: PayloadAction<Object | {}>) => ({
@@ -52,14 +53,14 @@ const quizePageSlice = createSlice({
       ...state,
       city: action.payload,
     }),
+    setUser: (state, action: PayloadAction<TUser>) => ({
+      ...state,
+      user: action.payload,
+    })
   },
 });
 
 export const quizeThunks = {
-  // getQuestions: (): TypeThunk => async (dispatch) => {
-  //   const response = await axiosInstance.get('/api/questions');
-  //   dispatch(actions.setQuestions(response?.data));
-  // },
   getQuestionsByQuizeType: (quizeType: EQuize) => async (dispatch: TypeDispatch) => {
     const response = await axiosInstance.get(`/api/questions/byQuizeType/${quizeType}`);
     dispatch(setQuestions(response?.data));
@@ -67,6 +68,11 @@ export const quizeThunks = {
   getQuestionBlocks: () => async (dispatch: TypeDispatch) => {
     const response = await axiosInstance.get(`/api/blocks`);
     dispatch(setBlocks(response?.data));
+  },
+  getAnswers: (id: number) => async (dispatch: TypeDispatch) => {
+    const response = await axiosInstance.get(`/api/answers/${id}`);
+    await dispatch(setStateAnswers(JSON.parse(response?.data.data)));
+    dispatch(setUser(response?.data.user));
   },
   setEmail: (payload: string) => async (dispatch: TypeDispatch) => {
     dispatch(setEmail(payload));
@@ -89,7 +95,13 @@ export const quizeThunks = {
   registrateUser: (payload: any) => async (dispatch: TypeDispatch) => {
     await axiosInstance.post("/api/auth/registrate", payload);
   },
+  clearAnswers: () => (dispatch: TypeDispatch) => {
+    dispatch(setStateAnswers({} as Object));
+  },
+  clearUser: () => (dispatch: TypeDispatch) => {
+    dispatch(setUser({} as TUser));
+  },
 };
 
-export const { setStateAnswers, setQuestions, setEmail, setName, setBlocks, setAge, setCity, setSex } = quizePageSlice.actions;
+export const { setStateAnswers, setQuestions, setEmail, setName, setBlocks, setAge, setCity, setSex, setUser } = quizePageSlice.actions;
 export default quizePageSlice.reducer;

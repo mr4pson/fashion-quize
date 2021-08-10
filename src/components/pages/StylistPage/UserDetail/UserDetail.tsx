@@ -10,6 +10,8 @@ import { usersThunks } from "redux/slicers/usersPageSlice";
 import { ESexes } from "../TasksPage/types";
 import { getColumns } from "./consts";
 import styles from "./UserDetail.module.scss";
+import { Link } from "react-router-dom";
+import { ID, paths, StlPage } from "../routes/consts";
 
 
 const UserDetail: FC = () => {
@@ -42,6 +44,13 @@ const UserDetail: FC = () => {
               {moment(user?.createdAt).format("DD.MM.yyyy")}
             </Descriptions.Item>
             <Descriptions.Item label="Пол">{user?.sex === ESexes.MALE ? 'Мужской' : 'Женский'}</Descriptions.Item>
+            <Descriptions.Item label="Анкета">
+              <Link
+                to={`${paths[StlPage.QUIZE].replace(ID, user.answers![0]?.id.toString())}`}
+              >
+                Перейти к анкете
+              </Link>
+            </Descriptions.Item>
           </Descriptions>
           <h2>Список задач</h2>
           <Table columns={getColumns(styles)} dataSource={user.tasks} loading={loading} />
