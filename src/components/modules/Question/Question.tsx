@@ -9,6 +9,7 @@ const { TextArea } = Input;
 
 type TProps = {
   question: TypeQuestion;
+  color: string | undefined;
 };
 
 const Question: FC<TProps> = (props) => {
@@ -29,20 +30,37 @@ const Question: FC<TProps> = (props) => {
     ({
       [QuestionType.INPUT]: (
         <Form.Item name="answer" rules={[{ required: true }]}>
-          <Input className={styles["question__input"]} maxLength={70} />
+          <div
+            style={{ color: props.color }}
+            className={styles["question__item"]}
+          >
+            <Input className={styles["question__input"]} maxLength={70} />
+          </div>
         </Form.Item>
       ),
       [QuestionType.TEXT]: (
         <Form.Item name="answer" rules={[{ required: true }]}>
-          <TextArea className={styles["question__text"]} />
+          <div
+            style={{ color: props.color }}
+            className={styles["question__item"]}
+          >
+            <TextArea className={styles["question__text"]} />
+          </div>
         </Form.Item>
       ),
       [QuestionType.SINGLE_OPTION]: (
-        <Form.Item name="answer" rules={[{ required: true, message: "Необходимо выбрать пункт!" }]}>
+        <Form.Item
+          name="answer"
+          rules={[{ required: true, message: "Необходимо выбрать пункт!" }]}
+        >
           <Radio.Group>
             {optionList &&
               optionList.map((option, index) => (
-                <Radio key={index} style={radioStyle} value={option}>
+                <Radio
+                  key={index}
+                  style={{ ...radioStyle, color: props.color }}
+                  value={option}
+                >
                   {option}
                 </Radio>
               ))}
@@ -50,13 +68,23 @@ const Question: FC<TProps> = (props) => {
         </Form.Item>
       ),
       [QuestionType.MULTIPLE_OPTION]: (
-        <Form.Item name="answer" rules={[{ required: true, message: "Необходимо выбрать хотябы один пункт!" }]}>
+        <Form.Item
+          name="answer"
+          rules={[
+            {
+              required: true,
+              message: "Необходимо выбрать хотябы один пункт!",
+            },
+          ]}
+        >
           <Checkbox.Group style={{ width: "100%" }}>
             {optionList &&
               optionList.map((option, index) => (
                 <Row key={index}>
                   <Col span={24}>
-                    <Checkbox value={option}>{option}</Checkbox>
+                    <Checkbox style={{ color: props.color }} value={option}>
+                      {option}
+                    </Checkbox>
                   </Col>
                 </Row>
               ))}
@@ -71,7 +99,10 @@ const Question: FC<TProps> = (props) => {
         <h1 className={styles["block__title"]}>{block.title}</h1>
       </div>
       <div className={styles["question"]}>
-        <div style={{ backgroundImage: `url(${getImageUrl(image!)})` }} className={styles["question__image"]} />
+        <div
+          style={{ backgroundImage: `url(${getImageUrl(image!)})` }}
+          className={styles["question__image"]}
+        />
         <div className={styles["question__description"]}>{description}</div>
         <div className={styles["question__body"]}>{getQuestionBody(type)}</div>
       </div>

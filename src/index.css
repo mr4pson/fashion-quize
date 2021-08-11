@@ -9,8 +9,12 @@ body {
   margin: auto;
 }
 
+.ant-radio {
+  color: currentColor;
+}
+
 .ant-radio-wrapper {
-  color: #000 !important;
+  color: #000;
   margin-bottom: 15px !important;
 }
 
@@ -27,13 +31,19 @@ body {
   margin-bottom: 5px;
   line-height: auto !important;
 }
+.ant-checkbox {
+  color: currentColor;
+}
+
+.quize-page .ant-checkbox-wrapper > span:last-child {
+  color: #000;
+}
 
 .ant-checkbox-group .ant-row {
   margin-bottom: 20px;
 }
 
 .ant-checkbox-wrapper span {
-  color: #000;
   font-size: 16px;
   line-height: 16px;
 }
@@ -52,8 +62,8 @@ body {
 }
 
 .quize-page .ant-checkbox-checked .ant-checkbox-inner {
-	background-color: #9de1ac;
-	border-color: #9de1ac;
+	background-color: currentColor;
+	border-color: currentColor;
 }
 
 .quize-page .ant-checkbox-checked .ant-checkbox-inner::after {
@@ -68,7 +78,7 @@ body {
 	left: 4px;
 	width: 14px;
 	height: 14px;
-	background-color: #9de1ac;
+	background-color: currentColor;
 }
 
 .quize-page .ant-radio-inner {
@@ -77,11 +87,14 @@ body {
 }
 
 .ant-radio-checked .ant-radio-inner {
-	border-color: #9de1ac;
+	border-color: currentColor;
 }
 
 .quize-page .ant-radio-wrapper span {
 	display: inline-block;
+}
+.quize-page .ant-radio-wrapper > span:last-child {
+  color: #000;
 }
 
 .ant-dropdown-menu-title-content .ant-btn {
@@ -102,6 +115,7 @@ a:hover {
 .ant-image {
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
 img.ant-image-img {

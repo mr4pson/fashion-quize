@@ -24,8 +24,8 @@
     &__input {
         font-size: 20px;
         padding: 10px 10px;
-        border: 3px solid #9de1ac;
         border-radius: 10px;
+        border-right-width: 3px !important;
     }
     &__image {
         width: 200px;
@@ -37,15 +37,39 @@
         background-position: center;
         background-repeat: no-repeat;
     }
+    &__item {
+        border: 3px solid currentColor!important;
+        border-radius: 10px!important;
+    }
     &__text {
         font-size: 20px!important;
         padding: 10px 10px!important;
-        border: 3px solid #9de1ac!important;
         border-radius: 10px!important;
+        border: none!important;
         min-height: 70px !important;
     }
     &__body {
         max-width: 600px;
         margin: 40px auto;
+    }
+}
+
+textarea.question__text, textarea.question__input {
+    color: #000!important;
+    &:hover {
+        border-right-width: 3px !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .block {
+        &__title {
+            font-size: 32px;
+        }
+    }
+    .question {
+        &__description {
+            font-size: 28px;
+        }
     }
 }

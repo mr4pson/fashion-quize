@@ -52,3 +52,30 @@ input.field__input {
     border-right-width: 3px !important;
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .field-page {
+    &__title {
+      font-size: 32px;
+    }
+  }
+  button.next-button {
+    font-size: 28px;
+    height: 50px;
+    width: 50px;
+    right: 5px;
+    top: 13px;
+    background: currentColor;
+    padding: 4px 13px;
+    border: none;
+    span {
+      color: #fff;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+      background: currentColor;
+    }
+  }
+}

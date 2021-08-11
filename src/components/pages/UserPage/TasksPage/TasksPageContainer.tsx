@@ -49,7 +49,7 @@ const TasksPageContainer: FC = () => {
       <TasksPage loading={loading} tasks={tasks} onTaskCancel={onTaskCancel} />
       <Modal
         title="Отмена задачи"
-        okText="Удалить"
+        okText="Подтвердить"
         cancelText="Отменить"
         visible={visible}
         confirmLoading={confirmLoading}

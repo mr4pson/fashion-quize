@@ -20,9 +20,9 @@ export const getColumns = (styles) => {
       dataIndex: "task",
       key: "task",
       render: (task: TypeTask) => (
-        <Link to={`${paths[UsrPage.TASKS]}/${task.id}`}>
-          {!!task.id && `Задача №${task.id}`}
-        </Link>
+        // <Link to={`${paths[UsrPage.TASKS]}/${task.id}`}>
+          !!task.id && `Задача №${task.id}`
+        // </Link>
       ),
     },
     {
