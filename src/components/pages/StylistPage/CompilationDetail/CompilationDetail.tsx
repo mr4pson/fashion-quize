@@ -144,7 +144,7 @@ const CompilationDetail: FC<TProps> = (props) => {
     };
   } else {
     const inProcessStatus = statuses.find(
-      (status) => status.title === "В обработке"
+      (status) => status.title === "На рассмотрении"
     );
     initialValues = {
       status: inProcessStatus ? inProcessStatus?.id : curTask.status?.id,

@@ -22,6 +22,7 @@ type Props = {
   thunk: (payload: any) => (dispatch: TypeDispatch) => Promise<void>;
   type: string;
   title: string;
+  image: string;
 };
 
 const FieldPage: FC<Props> = (props) => {
@@ -31,7 +32,7 @@ const FieldPage: FC<Props> = (props) => {
 
   const onFinish = async (form) => {
     // TODO: Вынести в enum type
-    if (props.type === 'email') {
+    if (props.type === "email") {
       const response: any = await dispatch(quizeThunks.checkEmail(form.field));
       if (!response || !response.status) {
         return;
@@ -50,7 +51,11 @@ const FieldPage: FC<Props> = (props) => {
     ({
       text: (
         <Form.Item name="field" rules={[{ required: true }]}>
-          <Input type={props.type} className={styles["field__input"]} maxLength={70} />
+          <Input
+            type={props.type}
+            className={styles["field__input"]}
+            maxLength={70}
+          />
         </Form.Item>
       ),
       email: (
@@ -60,20 +65,38 @@ const FieldPage: FC<Props> = (props) => {
       ),
       number: (
         <Form.Item name="field" rules={[{ required: true }]}>
-          <Input type={props.type} className={styles["field__input"]} min={6} max={100} />
+          <Input
+            type={props.type}
+            className={styles["field__input"]}
+            min={6}
+            max={100}
+          />
         </Form.Item>
       ),
     }[type]);
 
   return (
     <div className={styles["field-page"]}>
-      <div className={styles["field-page__title"]}>{props.title}</div>
-      <Form name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed} validateMessages={validateMessages}>
-        <div className={styles["field-page__body"]}>{getFieldBody(props.type)}</div>
-        <Button htmlType="submit" className={styles["next-button"]}>
-          <RightOutlined />
-        </Button>
-      </Form>
+      <div className="container">
+        <div className={styles["field-page__title"]}>{props.title}</div>
+        <div
+          className={styles["field-page__image"]}
+          style={{ backgroundImage: `url(${props.image})` }}
+        ></div>
+        <Form
+          name="basic"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          validateMessages={validateMessages}
+        >
+          <div className={styles["field-page__body"]}>
+            {getFieldBody(props.type)}
+          </div>
+          <Button htmlType="submit" className={styles["next-button"]}>
+            <RightOutlined />
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 };

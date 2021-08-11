@@ -1,9 +1,10 @@
 import { Button } from "antd";
 import Dropdown from "antd/lib/dropdown";
 import Menu from "antd/lib/menu";
+import classNames from "classnames";
 import { getUserInfo } from "common/helpers/common-helpers";
 import { useAuth } from "hooks/useAuth";
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { useHistory } from "react-router";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
@@ -17,14 +18,32 @@ const Header: React.FC = () => {
   const { logout } = useAuth(history);
   const location = useLocation();
   const userInfo = getUserInfo();
+  const [expanded, setExpanded] = useState(false);
 
   const checkIfMenuItemActive = (menuItem: TypeMenuItem) => {
     return location.pathname.indexOf(menuItem.path) !== -1;
   };
 
+  const handleExpandMobileMenu = () => {
+    setExpanded((prevState) => !prevState);
+  };
+
+  const getMobileMenuClassNames = () => {
+    return classNames({
+      [styles["mobile-menu"]]: true,
+      [styles["mobile-menu--expanded"]]: expanded,
+    });
+  };
+
+  const getMobileMenuBackdropClassNames = () => {
+    return classNames({
+      [styles["mobile-menu-backdrop"]]: true,
+      [styles["mobile-menu-backdrop--active"]]: expanded,
+    });
+  };
+
   return (
     <div className={styles["header"]}>
-      <button className={styles["navbar-toggle"]}></button>
       <Link
         className={styles["logo"]}
         style={{
@@ -35,6 +54,10 @@ const Header: React.FC = () => {
       >
         Eyelish
       </Link>
+      <button
+        className={styles["navbar-toggle"]}
+        onClick={handleExpandMobileMenu}
+      ></button>
       <nav className={styles["nav"]}>
         {menuItems.map((item, index) => (
           <span key={index}>
@@ -66,6 +89,38 @@ const Header: React.FC = () => {
           </Dropdown>
         </span>
       </nav>
+      <div
+        onClick={handleExpandMobileMenu}
+        className={getMobileMenuBackdropClassNames()}
+      ></div>
+      <div className={getMobileMenuClassNames()}>
+        <div className={styles["mobile-menu__inner"]}>
+          <ul className={styles["menu-list"]}>
+            <li className={styles["user-info"]}>
+              <div className={styles["user-info__name"]}>{userInfo?.name}</div>
+              <div className={styles["user-info__photo"]}></div>
+            </li>
+            {menuItems.map((item, index) => (
+              <li key={`mob-${index}`}>
+                <Link
+                  className={
+                    checkIfMenuItemActive(item) ? styles["active"] : ""
+                  }
+                  to={item.path}
+                  onClick={handleExpandMobileMenu}
+                >
+                  {item.title}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Button type="link" onClick={logout}>
+                Выйти
+              </Button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };

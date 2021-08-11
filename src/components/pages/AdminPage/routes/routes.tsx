@@ -1,4 +1,3 @@
-import AnswersPage from "../AnswersPage";
 import BlockDetail from "../BlockDetail";
 import BlocksPage from "../BlocksPage";
 import CompilationDetail from "../CompilationDetail";
@@ -14,6 +13,7 @@ import UserDetail from "../UserDetail";
 import UsersPageContainer from "../UsersPage/UsersPageContainer";
 import { AdmPage, paths } from "./constants";
 import { TypeAdmRoute } from "./type";
+import QuizePage from "../QuizePage";
 
 export function getAdmRoutes(): TypeAdmRoute[] {
   return [
@@ -75,9 +75,9 @@ export function getAdmRoutes(): TypeAdmRoute[] {
       component: <StylistDetail method={PageMethods.UPDATE} />,
     },
     {
-      type: AdmPage.ANSWERS,
-      path: paths[AdmPage.ANSWERS],
-      component: <AnswersPage />,
+      type: AdmPage.QUIZE,
+      path: paths[AdmPage.QUIZE],
+      component: <QuizePage />,
     },
     {
       type: AdmPage.USERS,

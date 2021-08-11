@@ -5,12 +5,13 @@ import moment from "moment";
 import { FC, memo, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { usersThunks } from "redux/slicers/usersPageSlice";
+import { AdmPage, ID, paths } from "../routes/constants";
 import { ESexes } from "../TasksPage/types";
 import { getColumns } from "./consts";
 import styles from "./UserDetail.module.scss";
-
 
 const UserDetail: FC = () => {
   const dispatch = useAppDispatch();
@@ -41,10 +42,23 @@ const UserDetail: FC = () => {
             <Descriptions.Item label="Дата регистрации">
               {moment(user?.createdAt).format("DD.MM.yyyy")}
             </Descriptions.Item>
-            <Descriptions.Item label="Пол">{user?.sex === ESexes.MALE ? 'Мужской' : 'Женский'}</Descriptions.Item>
+            <Descriptions.Item label="Пол">
+              {user?.sex === ESexes.MALE ? "Мужской" : "Женский"}
+            </Descriptions.Item>
+            <Descriptions.Item label="Анкета">
+              <Link
+                to={`${paths[AdmPage.QUIZE].replace(ID, user.answers![0]?.id.toString())}`}
+              >
+                Перейти к анкете
+              </Link>
+            </Descriptions.Item>
           </Descriptions>
           <h2>Список задач</h2>
-          <Table columns={getColumns(styles)} dataSource={user.tasks} loading={loading} />
+          <Table
+            columns={getColumns(styles)}
+            dataSource={user.tasks}
+            loading={loading}
+          />
         </>
       )}
       {!user.id && <Loader />}

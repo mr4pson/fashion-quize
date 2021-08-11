@@ -25,7 +25,9 @@ type TProps = {
 
 const QuizePage: FC<TProps> = (props) => {
   const dispatch = useAppDispatch();
-  const { questions, blocks, name, email, age, city, sex } = useSelector((state: TRootState) => state.quizePage);
+  const { questions, blocks, name, email, age, city, sex } = useSelector(
+    (state: TRootState) => state.quizePage
+  );
 
   const { questionNumber, quizeType } = useParams() as any;
   const questionsNumber = questions?.length;
@@ -76,7 +78,12 @@ const QuizePage: FC<TProps> = (props) => {
   };
 
   const initialValue = { answer: props.answers[question?.id] };
-  const formProps = { name: "basic", ref: formRef, initialValues: initialValue, validateMessages: validateMessages };
+  const formProps = {
+    name: "basic",
+    ref: formRef,
+    initialValues: initialValue,
+    validateMessages: validateMessages,
+  };
 
   return (
     <div className={classNames(styles["quize-page"], "quize-page")}>
@@ -84,62 +91,33 @@ const QuizePage: FC<TProps> = (props) => {
       <Form {...formProps} onFinish={onFinish} onFinishFailed={onFinishFailed}>
         <div className="container">
           {+questionNumber !== -1 ? (
-            <Question question={question} />
+            <Question color={question?.block?.color} question={question} />
           ) : (
-            <div className={styles["quize-page__no-questions"]}>Такого вопроса не существует.</div>
+            <div className={styles["quize-page__no-questions"]}>
+              Такого вопроса не существует.
+            </div>
           )}
         </div>
         <div
           style={{ color: question?.block?.color }}
-          className={classNames(styles["quize-page__sidebar"], styles["sidebar"])}
+          className={classNames( 
+            styles["quize-page__sidebar"],
+            styles["sidebar"]
+          )}
         >
-          {/* <div className={styles["sidebar__number"]}>
-            <span>{questionNumber}</span>
-          </div> */}
           <div className={styles["progress"]}>
             {blocks?.map((block) => (
               <div key={block.id} className={styles["progress__item"]}></div>
             ))}
           </div>
         </div>
-        <Button htmlType="submit" className={styles["next-button"]}>
+        <Button
+          style={{ color: question?.block?.color }}
+          htmlType="submit"
+          className={styles["next-button"]}
+        >
           <RightOutlined />
         </Button>
-        {/* <div
-          className={classNames(
-            styles["quize-page__nav"],
-            styles["navigation"]
-          )}
-        >
-          <div className={styles["container"]}> */}
-        {/* <div className={styles["navgation__prev-btn"]}>
-              {questionNumber > 1 ? (
-                <Link to={getPrevQuestionLink(questionNumber, quizeType)}>
-                  <Button
-                    type="primary"
-                    danger
-                    className={styles["navgation__quize-btn"]}
-                  >
-                    Назад
-                  </Button>
-                </Link>
-              ) : (
-                ""
-              )}
-            </div> */}
-
-        {/* <div className={styles["navgation__next-btn"]}>
-              <Button
-                htmlType="submit"
-                type="primary"
-                danger
-                className={styles["navgation__quize-btn"]}
-              >
-                {questionNumber < questionsNumber ? "Далее" : "Сдать"}
-              </Button>
-            </div> */}
-        {/* </div>
-        </div> */}
       </Form>
     </div>
   );
