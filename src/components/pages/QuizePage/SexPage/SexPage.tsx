@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import { Page, paths, QUESTION_NUMBER, QUIZE_TYPE } from "routes/constants";
 import { sexs } from "./constants";
 import styles from "./SexPage.module.scss";
@@ -16,6 +16,10 @@ const SexPage: React.FC = () => {
     dispatch(setSex(sex.value));
     history.push(paths[Page.QUIZE_ROUTE].replace(QUIZE_TYPE, sex.path).replace(QUESTION_NUMBER, '1'));
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <div className={styles["sex-page"]}>
       <div className={styles["sex-page__title"]}>Выберите ваш пол</div>

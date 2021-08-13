@@ -4,6 +4,7 @@ import { FC, memo } from "react";
 import { getImageUrl } from "common/helpers/common-helpers";
 import { QuestionType, TypeQuestion } from "components/pages/QuizePage/types";
 import styles from "./Question.module.scss";
+import { useEffect } from "react";
 
 const { TextArea } = Input;
 
@@ -13,6 +14,9 @@ type TProps = {
 };
 
 const Question: FC<TProps> = (props) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   if (!props.question?.block) {
     return <></>;
   }
@@ -99,10 +103,7 @@ const Question: FC<TProps> = (props) => {
         <h1 className={styles["block__title"]}>{block.title}</h1>
       </div>
       <div className={styles["question"]}>
-        <div
-          style={{ backgroundImage: `url(${getImageUrl(image!)})` }}
-          className={styles["question__image"]}
-        />
+        <img alt="" className={styles["question__image"]} src={getImageUrl(image!)}/>
         <div className={styles["question__description"]}>{description}</div>
         <div className={styles["question__body"]}>{getQuestionBody(type)}</div>
       </div>

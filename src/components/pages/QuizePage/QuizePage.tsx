@@ -88,8 +88,13 @@ const QuizePage: FC<TProps> = (props) => {
   return (
     <div className={classNames(styles["quize-page"], "quize-page")}>
       {/* <Header /> */}
-      <Form {...formProps} onFinish={onFinish} onFinishFailed={onFinishFailed}>
-        <div className="container">
+      <Form
+        className={styles["quize-page__form"]}
+        {...formProps}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+      >
+        <div className={classNames("container", styles['container'])}>
           {+questionNumber !== -1 ? (
             <Question color={question?.block?.color} question={question} />
           ) : (
@@ -100,7 +105,7 @@ const QuizePage: FC<TProps> = (props) => {
         </div>
         <div
           style={{ color: question?.block?.color }}
-          className={classNames( 
+          className={classNames(
             styles["quize-page__sidebar"],
             styles["sidebar"]
           )}
@@ -117,6 +122,7 @@ const QuizePage: FC<TProps> = (props) => {
           className={styles["next-button"]}
         >
           <RightOutlined />
+          <div>Далее</div>
         </Button>
       </Form>
     </div>

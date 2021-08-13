@@ -3,6 +3,7 @@
     color: #000;
     min-height: 100vh;
     padding-bottom: 20px;
+    display: flex;
     &__nav {
         position: fixed;
         bottom: 0;
@@ -20,6 +21,17 @@
         padding-top: 70px;
         font-size: 16px;
     }
+    &__form {
+        display: flex;
+        font-size: 100%;
+        width: 100%;
+        position: relative;
+        padding-bottom: 50px!important;
+    }
+    .container {
+        height: 100%;
+        width: 100%;
+    }
 }
 .sidebar {
     position: fixed;
@@ -29,6 +41,8 @@
     display: flex;
     align-items: center;
     color: #F5F5F5;
+    padding-bottom: 10px;
+    background: #fff;
     &::before {
         top: 0;
         right: 18px;
@@ -66,6 +80,9 @@ button.next-button {
     &:hover, &:active, &:focus {
         border-color: currentColor!important;
     }
+    div {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -75,7 +92,7 @@ button.next-button {
         left: 0;
         top: 0px;
         &::before {
-            top: 38px;
+            top: 23px;
             left: 0;
             height: 4px;
             width: 100vw;
@@ -83,7 +100,7 @@ button.next-button {
         .progress {
             display: flex;
             width: 100vw;
-            margin-top: 25px;
+            margin-top: 10px;
             margin-left: 5px;
             &__item {
                 width: 29px;
@@ -94,15 +111,23 @@ button.next-button {
         }
     }
     button.next-button {
-        font-size: 28px;
+        position: absolute;
+        bottom: 0;
+        top: auto;
+        padding: 0 62px;
+        left: 18px;
+        width: calc(100% - 34px);
         height: 50px;
-        width: 50px;
-        right: 5px;
-        top: 13px;
-        background: currentColor;
-        padding: 4px 13px;
         border: none;
+        border-radius: 5px;
+        background: currentColor;
+
         span {
+            display: none;
+        }
+        div {
+            font-size: 18px;
+            display: block;
             color: #fff;
         }
         &:hover, &:focus, &:active {
