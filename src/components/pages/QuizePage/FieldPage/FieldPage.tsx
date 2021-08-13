@@ -1,5 +1,6 @@
 import { RightOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
+import { useEffect } from "react";
 import { FC, memo } from "react";
 import { useHistory } from "react-router";
 
@@ -75,6 +76,10 @@ const FieldPage: FC<Props> = (props) => {
       ),
     }[type]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
   return (
     <div className={styles["field-page"]}>
       <div className="container">
@@ -94,6 +99,7 @@ const FieldPage: FC<Props> = (props) => {
           </div>
           <Button htmlType="submit" className={styles["next-button"]}>
             <RightOutlined />
+            <div>Далее</div>
           </Button>
         </Form>
       </div>

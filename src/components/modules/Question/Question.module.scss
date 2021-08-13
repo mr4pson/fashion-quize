@@ -29,13 +29,10 @@
     }
     &__image {
         width: 200px;
-        height: 200px;
         margin: auto;
+        display: block;
         background: #fff;
         margin-bottom: 20px;
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
     }
     &__item {
         border: 3px solid currentColor!important;
@@ -62,6 +59,11 @@ textarea.question__text, textarea.question__input {
 }
 
 @media only screen and (max-width: 767px) {
+    .question {
+        &__image {
+            width: 150px;
+        }
+    }
     .block {
         &__title {
             font-size: 32px;

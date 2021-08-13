@@ -1,4 +1,5 @@
 .field-page {
+  padding-bottom: 80px;
   &__title {
     padding-top: 110px;
     color: #000;
@@ -36,6 +37,9 @@ button.next-button {
   right: 10px;
   top: calc(50% - 55px);
   cursor: pointer;
+  div {
+    display: none;
+  }
 }
 
 input.field__input {
@@ -58,17 +62,30 @@ input.field__input {
     &__title {
       font-size: 32px;
     }
+    &__image {
+      width: 150px;
+    }
+    position: relative;
   }
   button.next-button {
-    font-size: 28px;
+    position: absolute;
+    bottom: 15px;
+    top: auto;
+    padding: 0 62px;
+    left: 18px;
+    width: calc(100% - 34px);
     height: 50px;
-    width: 50px;
-    right: 5px;
-    top: 13px;
-    background: currentColor;
-    padding: 4px 13px;
     border: none;
+    border-radius: 5px;
+    background: currentColor;
+    
+
     span {
+      display: none;
+    }
+    div {
+      font-size: 18px;
+      display: block;
       color: #fff;
     }
     &:hover,
