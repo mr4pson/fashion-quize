@@ -126,3 +126,7 @@ a:hover {
 img.ant-image-img {
   height: auto!important;
 }
+
+.rating-modal .ant-modal-body {
+  padding: 0;
+}

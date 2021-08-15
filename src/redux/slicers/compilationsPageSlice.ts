@@ -68,6 +68,9 @@ export const compilationsThunks = {
     await axiosInstance.put(`/api/compilations/${id}`, payload);
     dispatch(setCompilation({} as TCompilation));
   },
+  rateCompilation: (payload: any) => async () => {
+    await axiosInstance.post(`/api/compilations/rate`, payload);
+  },
 };
 
 export const { setCompilations, setCompilation, setLoading } = compilationsPageSlice.actions;

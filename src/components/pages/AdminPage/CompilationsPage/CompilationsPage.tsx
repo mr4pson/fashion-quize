@@ -11,7 +11,7 @@ type TProps = {
 };
 
 const CompilationsPage: FC<TProps> = (props) => {
-  const columns = getColumns();
+  const columns = getColumns(styles);
   const dataSource = props.compilations?.map((compilation) => ({
     ...compilation,
     key: compilation.id,

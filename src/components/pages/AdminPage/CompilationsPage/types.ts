@@ -8,6 +8,7 @@ export type TCompilation = {
 export type TLook = {
   id?: number;
   items: TLookItem[];
+  selected?: boolean;
 };
 
 export type TLookItem = {

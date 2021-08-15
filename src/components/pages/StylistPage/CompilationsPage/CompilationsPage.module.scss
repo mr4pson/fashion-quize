@@ -34,6 +34,10 @@
 
 .look {
   display: flex;
+  padding: 5px;
+  &--selected {
+    background: #e2ffeb;
+  }
 }
 
 .look-item {

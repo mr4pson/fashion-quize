@@ -34,11 +34,15 @@
 
 .look {
   display: flex;
+  margin-bottom: 10px;
+  padding: 5px;
+  &--selected {
+    background: #e2ffeb;
+  }
 }
 
 .look-item {
   width: 100px;
-  margin-bottom: 10px;
   margin-right: 10px;
 
   &__photo {
