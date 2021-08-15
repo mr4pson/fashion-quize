@@ -1,12 +1,27 @@
-import { Link } from "react-router-dom";
-import { Image } from 'antd';
+import { Button, Image } from "antd";
 
-import { TCompilation, TLook } from "components/pages/StylistPage/CompilationsPage/types";
-import { TaskStatus, TypeTask } from "components/pages/StylistPage/TasksPage/types";
-import { paths, UsrPage,  } from "../routes/consts";
+import {
+  TCompilation,
+  TLook,
+} from "components/pages/StylistPage/CompilationsPage/types";
+import {
+  TaskStatus,
+  TypeTask,
+} from "components/pages/StylistPage/TasksPage/types";
 import { getImageUrl } from "common/helpers/common-helpers";
+import classNames from "classnames";
 
-export const getColumns = (styles) => {
+export const checkIfRateIsAccessible = (taskTitle) =>
+  !["Подтверждена пользователем", "В пути", "Завершена"].includes(taskTitle);
+
+export const getColumns = (styles, showModal: (id: number) => void) => {
+  const getLookClassNames = (isSelected) => {
+    return classNames({
+      [styles["look"]]: true,
+      [styles["look--selected"]]: isSelected,
+    })
+  }
+
   return [
     { title: "ID", dataIndex: "key", key: "key" },
     {
@@ -19,11 +34,10 @@ export const getColumns = (styles) => {
       title: "Задача",
       dataIndex: "task",
       key: "task",
-      render: (task: TypeTask) => (
+      render: (task: TypeTask) =>
         // <Link to={`${paths[UsrPage.TASKS]}/${task.id}`}>
-          !!task.id && `Задача №${task.id}`
+        !!task.id && `Задача №${task.id}`,
         // </Link>
-      ),
     },
     {
       title: "Луки",
@@ -33,7 +47,7 @@ export const getColumns = (styles) => {
         <div>
           {!!looks?.length &&
             looks.map((look) => (
-              <div className={styles["look"]} key={look.id}>
+              <div className={getLookClassNames(look.selected)} key={look.id}>
                 {look.items.map((item) => (
                   <div className={styles["look-item"]} key={item.id}>
                     <Image
@@ -55,10 +69,16 @@ export const getColumns = (styles) => {
       dataIndex: "",
       key: "x",
       render: (compilation: TCompilation) => (
-        <Link to={`${paths[UsrPage.COMPILATIONS]}/${compilation.id}`}>
-          Изменить
-        </Link>
+        <>
+          {checkIfRateIsAccessible(compilation.task.status.title) && (
+            <Button type="link" onClick={() => showModal(compilation.id)}>
+              Выбрать подборки
+            </Button>
+          )}
+        </>
       ),
     },
   ];
 };
+
+export const initialSelectedLooks = [false, false, false];

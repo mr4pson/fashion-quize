@@ -1,7 +1,18 @@
 .user-page {
   &__body {
     padding-top: 80px;
-    height: 100vh;
+    min-height: 100vh;
+    padding-bottom: 30px;
     background: #f0f2f5;
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+  .user-page {
+    &__body {
+      padding-top: 65px;
+      padding-bottom: 15px;
+    }
   }
 }

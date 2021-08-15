@@ -6,8 +6,16 @@ import { paths, StlPage } from "../routes/consts";
 import { TaskStatus, TypeTask } from "../TasksPage/types";
 import styles from "./CompilationsPage.module.scss";
 import { TCompilation, TLook } from "./types";
+import classNames from "classnames";
 
 export const getColumns = () => {
+  const getLookClassNames = (isSelected) => {
+    return classNames({
+      [styles["look"]]: true,
+      [styles["look--selected"]]: isSelected,
+    })
+  }
+
   return [
     { title: "ID", dataIndex: "key", key: "key" },
     {
@@ -42,7 +50,7 @@ export const getColumns = () => {
         <>
           {!!looks?.length &&
             looks.map((look) => (
-              <div className={styles["look"]} key={look.id}>
+              <div className={getLookClassNames(look.selected)} key={look.id}>
                 {look.items.map((item) => (
                   <div className={styles["look-item"]} key={item.id}>
                     <Image

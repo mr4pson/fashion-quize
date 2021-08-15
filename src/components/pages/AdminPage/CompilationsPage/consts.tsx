@@ -1,11 +1,18 @@
 import { Image } from "antd";
+import classNames from "classnames";
 import { getImageUrl } from "common/helpers/common-helpers";
 import { Link } from "react-router-dom";
 import { AdmPage, paths } from "../routes/constants";
-import styles from "./CompilationsPage.module.scss";
 import { TCompilation, TLook } from "./types";
 
-export const getColumns = () => {
+export const getColumns = (styles) => {
+  const getLookClassNames = (isSelected) => {
+    return classNames({
+      [styles["look"]]: true,
+      [styles["look--selected"]]: isSelected,
+    })
+  }
+
   return [
     { title: "ID", dataIndex: "key", key: "key" },
     {
@@ -34,7 +41,7 @@ export const getColumns = () => {
         <>
           {!!looks?.length &&
             looks.map((look) => (
-              <div className={styles["look"]} key={look.id}>
+              <div className={getLookClassNames(look.selected)} key={look.id}>
                 {look.items.map((item) => (
                   <div className={styles["look-item"]} key={item.id}>
                     <Image
