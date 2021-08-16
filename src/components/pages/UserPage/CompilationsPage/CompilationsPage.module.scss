@@ -11,8 +11,22 @@
   display: flex;
   margin-bottom: 10px;
   padding: 5px;
-  &--selected {
-    background: #e2ffeb;
+  border-bottom: 1px dashed #ccc;
+  position: relative;
+  &__selected-icon, &__not-selected-icon {
+    position: absolute;
+    right: 3px;
+    top: 0px;
+    font-size: 22px;
+    z-index: 100;
+    background: #fff;
+    border-radius: 50%;
+  }
+  &__selected-icon {
+    color: green!important;
+  }
+  &__not-selected-icon {
+    color: red!important;
   }
 }
 
@@ -40,11 +54,24 @@
   width: 100%;
   border-right: 1px dashed #e4e4e4;
   padding: 5px 0;
+  position: relative;
   &:last-child {
     border: none;
   }
-  &--selected {
-    background: #d0ffdf;
+  &__selected-icon, &__not-selected-icon {
+    position: absolute;
+    right: 3px;
+    top: 0px;
+    font-size: 22px;
+    z-index: 100;
+    background: #fff;
+    border-radius: 50%;
+  }
+  &__selected-icon {
+    color: green!important;
+  }
+  &__not-selected-icon {
+    color: red!important;
   }
 }
 
@@ -64,9 +91,12 @@
 }
 
 .compilation {
-  background: #f9f9f9;
   padding: 5px 10px;
   margin-bottom: 10px;
+  box-shadow: 1px 1px 7px -2px #ccc;
+  border-radius: 7px;
+  margin-left: -10px;
+  margin-right: -10px;
   &__id {
     font-size: 28px;
     font-weight: bold;
@@ -80,7 +110,6 @@
     align-items: center;
   }
   &__looks {
-    margin-top: 10px;
     display: flex;
     margin-left: -5px;
     margin-right: -5px;
