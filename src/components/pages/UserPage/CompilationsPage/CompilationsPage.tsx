@@ -8,7 +8,12 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import { useAppDispatch } from "redux/ReduxStore";
 import { compilationsThunks } from "redux/slicers/compilationsPageSlice";
 import styles from "./CompilationsPage.module.scss";
-import { checkIfRateIsAccessible, getColumns, initialSelectedLooks } from "./constants";
+import {
+  checkIfRateIsAccessible,
+  getColumns,
+  initialSelectedLooks,
+} from "./constants";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 type TProps = {
   compilations: TCompilation[];
@@ -58,8 +63,8 @@ const CompilationsPage: React.FC<TProps> = (props) => {
     return classNames({
       [styles["mobile-look"]]: true,
       [styles["mobile-look--selected"]]: isSelected,
-    })
-  }
+    });
+  };
 
   const handleChangeSelectedLooks = (index) => {
     const selLooks = [...props.selectedLooks];
@@ -100,7 +105,7 @@ const CompilationsPage: React.FC<TProps> = (props) => {
         bordered={false}
       >
         <div className={styles["mobile-compilations"]}>
-          {props.compilations.map((compilation) => (
+          {props.compilations?.map((compilation) => (
             <div
               key={"compilation" + compilation.id}
               className={styles["compilation"]}
@@ -117,7 +122,22 @@ const CompilationsPage: React.FC<TProps> = (props) => {
               <div className={styles["compilation__looks"]}>
                 {compilation.looks?.length &&
                   compilation.looks.map((look) => (
-                    <div className={getMobileLookClassNames(look.selected)} key={look.id}>
+                    <div
+                      className={getMobileLookClassNames(look.selected)}
+                      key={look.id}
+                    >
+                      {look.selected === true && (
+                        <CheckCircleOutlined
+                          className={styles["mobile-look__selected-icon"]}
+                        />
+                      )}
+                      {look.selected === false && (
+                        <CloseCircleOutlined
+                          className={
+                            styles["mobile-look__not-selected-icon"]
+                          }
+                        />
+                      )}
                       {look.items.map((item) => (
                         <div
                           className={styles["mobile-look-item"]}

@@ -1,15 +1,16 @@
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { Button, Image } from "antd";
-
+import classNames from "classnames";
+import { getImageUrl } from "common/helpers/common-helpers";
 import {
   TCompilation,
-  TLook,
+  TLook
 } from "components/pages/StylistPage/CompilationsPage/types";
 import {
   TaskStatus,
-  TypeTask,
+  TypeTask
 } from "components/pages/StylistPage/TasksPage/types";
-import { getImageUrl } from "common/helpers/common-helpers";
-import classNames from "classnames";
+
 
 export const checkIfRateIsAccessible = (taskTitle) =>
   !["Подтверждена пользователем", "В пути", "Завершена"].includes(taskTitle);
@@ -19,8 +20,8 @@ export const getColumns = (styles, showModal: (id: number) => void) => {
     return classNames({
       [styles["look"]]: true,
       [styles["look--selected"]]: isSelected,
-    })
-  }
+    });
+  };
 
   return [
     { title: "ID", dataIndex: "key", key: "key" },
@@ -37,7 +38,7 @@ export const getColumns = (styles, showModal: (id: number) => void) => {
       render: (task: TypeTask) =>
         // <Link to={`${paths[UsrPage.TASKS]}/${task.id}`}>
         !!task.id && `Задача №${task.id}`,
-        // </Link>
+      // </Link>
     },
     {
       title: "Луки",
@@ -48,6 +49,16 @@ export const getColumns = (styles, showModal: (id: number) => void) => {
           {!!looks?.length &&
             looks.map((look) => (
               <div className={getLookClassNames(look.selected)} key={look.id}>
+                {look.selected === true && (
+                  <CheckCircleOutlined
+                    className={styles["mobile-look__selected-icon"]}
+                  />
+                )}
+                {look.selected === false && (
+                  <CloseCircleOutlined
+                    className={styles["mobile-look__not-selected-icon"]}
+                  />
+                )}
                 {look.items.map((item) => (
                   <div className={styles["look-item"]} key={item.id}>
                     <Image
