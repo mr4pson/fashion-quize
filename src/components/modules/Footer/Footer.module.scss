@@ -1,0 +1,11 @@
+.footer {
+  padding: 13px 0;
+  background: #101010;
+  width: 100%;
+  &__logo {
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #fff;
+  }
+}

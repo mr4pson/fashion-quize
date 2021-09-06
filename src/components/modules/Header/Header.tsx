@@ -7,9 +7,14 @@ function Header(): JSX.Element {
     return (
         <div className={styles['header']}>
             <div className="container">
-                <Link to={paths[Page.HOME]}>
-                    <div className={styles['header__logo']}>Fashion quize</div>
-                </Link>
+                <div className={styles['header__content']}>
+                    <Link to={paths[Page.HOME]}>
+                        <div className={styles['header__logo']}>Eyelish</div>
+                    </Link>
+                    <Link to={paths[Page.LOGIN]}>
+                        <div className={styles['header__login-btn']}>Войти</div>
+                    </Link>
+                </div>
             </div>
         </div>
     )
