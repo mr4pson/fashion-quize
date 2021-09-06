@@ -1,6 +1,11 @@
 body {
   margin: 0;
-  font-family: "Montserrat", sans-serif !important;
+  color: #101010;
+  font-family: "inter", sans-serif !important;
+}
+
+input, button, select, optgroup, textarea {
+  font-family: "inter", sans-serif !important;
 }
 
 #root {
@@ -129,4 +134,8 @@ img.ant-image-img {
 
 .rating-modal .ant-modal-body {
   padding: 0;
+}
+
+#basic_password {
+  background-color: #F2F3F4!important;
 }
