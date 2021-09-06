@@ -139,3 +139,7 @@ img.ant-image-img {
 #basic_password {
   background-color: #F2F3F4!important;
 }
+
+#basic_password::placeholder {
+  color: #858585!important;
+}
