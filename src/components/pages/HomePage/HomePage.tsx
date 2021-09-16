@@ -67,7 +67,7 @@ function HomePage(): JSX.Element {
                             <div className={styles['work-example__info']}>
                                 <div className={styles['work-example__top']}></div>
                                 <div className={styles['work-example__title']}>Создание задачи</div>
-                                <div className={styles['work-example__desc']}>После заполнения анкеты вы сможете создавать задачи для стилистов, следить за прогрессом и выбирать подборки, а также давать обратную связь. <br/> Все в одном месте.</div>
+                                <div className={styles['work-example__desc']}>После заполнения анкеты вы сможете создавать задачи для стилистов, следить за прогрессом и выбирать подборки, а также давать обратную связь. <br/> Все в одном месте.</div>
                             </div>
                         </div>
                         <div className={classNames(styles['work-example'], styles['work-example--left'])}>
