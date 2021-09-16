@@ -149,13 +149,13 @@
     margin-top: 52px;
     display: flex;
     &__image {
-        max-width: 304px;
-        width: 100%;
+        min-width: 304px;
         height: 240px;
         background-color: #ccc;
     }
     &__info {
         margin-left: 95px;
+        width: 100%;
     }
     &__top {
         margin-top: 24px;
@@ -251,6 +251,8 @@
         margin-top: 38px;
         background-image: url(./images/all-types-section.png);
         height: 320px;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 }
 
@@ -291,5 +293,162 @@
         font-weight: bold;
         text-align: center;
         margin-bottom: 30px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .compilation-section {
+        margin-bottom: 15px;
+        &__content {
+            display: block;
+        }
+        &__left {
+            max-width: inherit;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        &__desc {
+            margin-top: 25px;
+            br {
+                &:last-child {
+                    display: none;
+                }
+            }
+        }
+        &__btn-wrap {
+            // left: calc(50% - 192px);
+            left: calc(50% - 153px);
+            bottom: 13px;
+        }
+        &__right {
+            height: 280px;
+            background-size: cover;
+        }
+        &__btn-white {
+            width: 185px;
+        }
+        &__btn-black {
+            width: 120px;
+        }
+        &__title {
+            margin-top: 75px;
+            font-size: 30px;
+            line-height: 34px;
+        }
+    }
+    .receive-section {
+        &__content {
+            padding-top: 25px;
+            padding-bottom: 25px;
+            display: block;
+        }
+        &__title {
+            text-align: center;
+            font-size: 30px;
+        }
+    }
+    .how-work-section {
+        margin-top: 35px;
+        margin-bottom: 40px;
+        &__title {
+            text-align: center;
+            font-size: 30px;
+            br {
+                display: none;
+            }
+        }
+    }
+    .work-example {
+        margin-top: 45px;
+        display: block;
+        &__info {
+            margin-left: 0;
+        }
+        &__top {
+            margin-top: 35px;
+            margin-left: 45px;
+        }
+        &__title {
+            margin-top: 24px;
+        }
+        &__desc {
+            margin-top: 15px;
+        }
+        &--right {
+            .work-example__top {
+                margin-left: 0;
+                margin-right: 45px;
+            }
+            .work-example__title {
+                text-align: right;
+            }
+            .work-example__desc {
+                text-align: right;
+                br {
+                    display: none;
+                }
+            }
+        }
+    }
+    .all-types-section {
+        padding-bottom: 15px;
+        &__title {
+            font-size: 30px;
+            line-height: 34px;
+            text-align: center;
+        }
+        &__line {
+            width: 100%;
+            margin: 20px auto;
+        }
+        &__desc {
+            width: 100%;
+            line-height: 28px;
+            font-size: 22px;
+            text-align: center;
+            br {
+                display: none;
+            }
+        }
+        &__image {
+            height: 200px;
+            background-size: cover;
+        }
+    }
+    .try-quize-section {
+        padding: 30px 0 35px;
+        &__btn {
+            margin: 20px auto 0;
+            width: 100%;
+        }
+    }
+    .q-and-a {
+        padding: 30px 0;
+        &__content {
+            padding: 30px 20px 40px 50px;
+        }
+        &__title {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@media only screen and (max-width: 980px) {
+    .compilation-section {
+        &__right {
+            background-position: center;
+        }
+    }
+    .receive-section {
+        &__right {
+            margin-right: 0;
+        }
+    }
+}
+
+@media only screen and (max-width: 815px) {
+    .receive-section {
+        min-height: 400px;
     }
 }
