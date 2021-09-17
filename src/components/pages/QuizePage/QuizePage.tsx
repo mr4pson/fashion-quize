@@ -86,6 +86,27 @@ const QuizePage: FC<TProps> = (props) => {
     validateMessages: validateMessages,
   };
 
+  const blocksQuestionIds: { [key: number]: number[] } = questions.reduce(
+    (accum: any, { id, block }) => {
+      const blockId = block?.id as number;
+
+      if (!accum[blockId]) {
+        accum[blockId] = [];
+      }
+      accum[blockId].push(id);
+
+      return accum;
+    },
+    {}
+  );
+
+  const getBlockProgress = (id): string => {
+    const BlockAnswers = blocksQuestionIds[id]?.filter((queId) =>
+      Object.keys(props.answers).includes(queId.toString())
+    );
+    return `${(BlockAnswers?.length / +blocksQuestionIds[id]?.length) * 100}%`;
+  };
+
   return (
     <div className={classNames(styles["quize-page"], "quize-page")}>
       <Header />
@@ -95,7 +116,7 @@ const QuizePage: FC<TProps> = (props) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
-        <div className={classNames("container", styles['container'])}>
+        <div className={classNames("container", styles["container"])}>
           {+questionNumber !== -1 ? (
             <>
               <Question color={question?.block?.color} question={question} />
@@ -122,7 +143,12 @@ const QuizePage: FC<TProps> = (props) => {
         >
           <div className={styles["progress"]}>
             {blocks?.map((block) => (
-              <div key={block.id} className={styles["progress__item"]}></div>
+              <div key={block.id} className={styles["progress__item"]}>
+                <div
+                  style={{ color: question?.block?.color, width: getBlockProgress(block.id) }}
+                  className={styles["progress__value"]}
+                ></div>
+              </div>
             ))}
           </div>
         </div>
