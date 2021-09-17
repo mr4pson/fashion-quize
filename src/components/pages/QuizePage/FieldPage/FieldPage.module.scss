@@ -27,18 +27,22 @@
 }
 
 button.next-button {
-  position: fixed;
-  font-size: 65px;
-  color: #9de1ac;
-  height: 120px;
-  width: 120px;
-  border: 3px solid;
-  border-radius: 50%;
-  right: 10px;
-  top: calc(50% - 55px);
-  cursor: pointer;
-  div {
-    display: none;
+  top: auto;
+  padding: 0 62px;
+  width: 300px;
+  margin: auto;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  background: #9de1ac;
+  font-size: 18px;
+  display: block;
+  span {
+      color: #fff;
+  }
+  &:hover, &:focus, &:active {
+      text-decoration: none;
+      background: #9de1ac;
   }
 }
 
@@ -69,7 +73,7 @@ input.field__input {
   }
   button.next-button {
     position: absolute;
-    bottom: 15px;
+    bottom: 0;
     top: auto;
     padding: 0 62px;
     left: 18px;
@@ -77,22 +81,10 @@ input.field__input {
     height: 50px;
     border: none;
     border-radius: 5px;
-    background: currentColor;
-    
+    background: #9de1ac;
 
     span {
-      display: none;
-    }
-    div {
-      font-size: 18px;
-      display: block;
-      color: #fff;
-    }
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: none;
-      background: currentColor;
+        color: #fff;
     }
   }
 }

@@ -7,6 +7,7 @@ import { useHistory } from "react-router";
 import { Sex } from "./types";
 import { useAppDispatch } from "redux/ReduxStore";
 import { setSex } from "redux/slicers/quizePageSlice";
+import Header from "components/modules/Header";
 
 const SexPage: React.FC = () => {
   const history = useHistory();
@@ -22,6 +23,7 @@ const SexPage: React.FC = () => {
   });
   return (
     <div className={styles["sex-page"]}>
+      <Header />
       <div className={styles["sex-page__title"]}>Выберите ваш пол</div>
       <div className={styles["sex-page__body"]}>
         {sexs.map((sex) => (

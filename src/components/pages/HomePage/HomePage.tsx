@@ -12,7 +12,7 @@ import QandAItem from './QandAItem';
 function HomePage(): JSX.Element {
     return (
         <>
-            <Header></Header>
+            <Header/>
             <div className={styles['home-page']}>
                 <div className={styles['compilation-section']}>
                     <div className="container">
@@ -117,7 +117,7 @@ function HomePage(): JSX.Element {
                         <div className={styles['q-and-a__content']}>
                             <div className={styles['q-and-a__title']}>Q&A</div>
                             <div className={styles['q-and-a__items']}>
-                                {qandAItems.map((qandAItem) => <QandAItem item={qandAItem} />)}
+                                {qandAItems.map((qandAItem, index) => <QandAItem key={`q-and-a-${index}`} item={qandAItem} />)}
                             </div>
                         </div>
                     </div>

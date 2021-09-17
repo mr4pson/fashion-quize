@@ -4,14 +4,16 @@
     font-size: 36px;
     height: 80px;
     box-sizing: border-box;
-    padding-top: 10px;
+    padding-top: 110px;
+    font-weight: 500;
   }
   &__body {
     display: flex;
+    margin-top: 110px;
   }
   &__item {
-    width: calc(50vw - 9px);
-    height: 100vh;
+    width: 50vw;
+    height: calc(100vh - 220px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,8 +48,12 @@
     &__title {
       font-size: 32px;
     }
+    &__body {
+      margin-top: 70px;
+    }
     &__item {
       width: 50vw;
+      height: calc(100vh - 180px);
     }
     .sex-item {
       &__title {

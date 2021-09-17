@@ -1,6 +1,7 @@
 import { RightOutlined } from "@ant-design/icons";
 import { Button, Form, FormInstance } from "antd";
 import classNames from "classnames";
+import Header from "components/modules/Header";
 import Question from "components/modules/Question/Question";
 import { FC, memo, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
@@ -87,7 +88,7 @@ const QuizePage: FC<TProps> = (props) => {
 
   return (
     <div className={classNames(styles["quize-page"], "quize-page")}>
-      {/* <Header /> */}
+      <Header />
       <Form
         className={styles["quize-page__form"]}
         {...formProps}
@@ -96,7 +97,16 @@ const QuizePage: FC<TProps> = (props) => {
       >
         <div className={classNames("container", styles['container'])}>
           {+questionNumber !== -1 ? (
-            <Question color={question?.block?.color} question={question} />
+            <>
+              <Question color={question?.block?.color} question={question} />
+              <Button
+                style={{ color: question?.block?.color }}
+                htmlType="submit"
+                className={styles["next-button"]}
+              >
+                Далее
+              </Button>
+            </>
           ) : (
             <div className={styles["quize-page__no-questions"]}>
               Такого вопроса не существует.
@@ -116,14 +126,6 @@ const QuizePage: FC<TProps> = (props) => {
             ))}
           </div>
         </div>
-        <Button
-          style={{ color: question?.block?.color }}
-          htmlType="submit"
-          className={styles["next-button"]}
-        >
-          <RightOutlined />
-          <div>Далее</div>
-        </Button>
       </Form>
     </div>
   );

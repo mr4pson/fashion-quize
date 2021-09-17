@@ -23,7 +23,6 @@
     }
     &__form {
         display: flex;
-        font-size: 100%;
         width: 100%;
         position: relative;
         padding-bottom: 50px!important;
@@ -66,31 +65,36 @@
 }
 
 button.next-button {
-    position: fixed;
-    font-size: 65px;
-    color: #9de1ac;
-    height: 120px;
-    width: 120px;
-    border: 3px solid;
-    border-radius: 50%;
-    right: 10px;
-    top: calc(50% - 55px);
-    cursor: pointer;
-    transition: top 0s;
-    &:hover, &:active, &:focus {
-        border-color: currentColor!important;
+    top: auto;
+    padding: 0 62px;
+    width: 300px;
+    margin: auto;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background: currentColor;
+    font-size: 18px;
+    display: block;
+    span {
+        color: #fff;
     }
-    div {
-        display: none;
+    &:hover, &:focus, &:active {
+        text-decoration: none;
+        background: currentColor;
     }
 }
 
 @media only screen and (max-width: 768px) {
+    .quize-page {
+        .container {
+            height: auto;
+        }
+    }
     .sidebar {
         color: #9de1ac;
         height: auto;
         left: 0;
-        top: 0px;
+        top: 55px;
         &::before {
             top: 23px;
             left: 0;
@@ -123,16 +127,7 @@ button.next-button {
         background: currentColor;
 
         span {
-            display: none;
-        }
-        div {
-            font-size: 18px;
-            display: block;
             color: #fff;
-        }
-        &:hover, &:focus, &:active {
-            text-decoration: none;
-            background: currentColor;
         }
     }
 }
