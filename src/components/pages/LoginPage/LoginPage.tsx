@@ -20,56 +20,56 @@ function LoginPage() {
   return (
     <>
       <Header />
-      <div className={styles["login-page"]}>
-        <div className={styles["login-page__card"]}>
-          <h1 className={styles["login-page__title"]}>Авторизация</h1>
-          <Form
-            name="basic"
-            className={styles['login-page__form']}
-            initialValues={{ remember: true }}
-            onFinish={login}
-            onFinishFailed={onFinishFailed}
-          >
-            <Form.Item
-              name="login"
-              rules={[{ required: true, message: "Введите ваш логин" }]}
+      <div className="container">
+        <div className={styles["login-page"]}>
+          <div className={styles["login-page__card"]}>
+            <h1 className={styles["login-page__title"]}>Авторизация</h1>
+            <Form
+              name="basic"
+              className={styles["login-page__form"]}
+              initialValues={{ remember: true }}
+              onFinish={login}
+              onFinishFailed={onFinishFailed}
             >
-              <Input
-                className={styles["login-page__input"]}
-                placeholder="Логин"
-              />
-            </Form.Item>
+              <Form.Item
+                name="login"
+                rules={[{ required: true, message: "Введите ваш логин" }]}
+              >
+                <Input
+                  className={styles["login-page__input"]}
+                  placeholder="Логин"
+                />
+              </Form.Item>
 
-            <Form.Item
-              name="password"
-              rules={[{ required: true, message: "Введите ваш пароль" }]}
-            >
-              <Input.Password
-                className={classNames(
-                  styles["login-page__input"],
-                  styles["password-wrap"]
-                )}
-                minLength={6}
-                maxLength={20}
-                placeholder="Пароль"
-              />
-            </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[{ required: true, message: "Введите ваш пароль" }]}
+              >
+                <Input.Password
+                  className={classNames(
+                    styles["login-page__input"],
+                    styles["password-wrap"]
+                  )}
+                  minLength={6}
+                  maxLength={20}
+                  placeholder="Пароль"
+                />
+              </Form.Item>
 
-            <div className={styles['forgot-pass']}>
-              <span>Забыли пароль?</span>
-              <Link to={paths[Page.RESET_PASSWORD]}>
-                Восстановите его
-              </Link>
-            </div>
-
-            <Form.Item>
-              <div className={styles["login-btn-wrap"]}>
-                <Button type="primary" htmlType="submit">
-                  Войти
-                </Button>
+              <div className={styles["forgot-pass"]}>
+                <span>Забыли пароль?</span>
+                <Link to={paths[Page.RESET_PASSWORD]}>Восстановите его</Link>
               </div>
-            </Form.Item>
-          </Form>
+
+              <Form.Item>
+                <div className={styles["login-btn-wrap"]}>
+                  <Button type="primary" htmlType="submit">
+                    Войти
+                  </Button>
+                </div>
+              </Form.Item>
+            </Form>
+          </div>
         </div>
       </div>
       <Footer />

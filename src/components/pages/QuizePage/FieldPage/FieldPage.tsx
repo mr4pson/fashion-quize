@@ -8,6 +8,7 @@ import { TypeDispatch, useAppDispatch } from "redux/ReduxStore";
 import { quizeThunks } from "redux/slicers/quizePageSlice";
 import { Page, paths } from "routes/constants";
 import styles from "./FieldPage.module.scss";
+import Header from "components/modules/Header";
 
 /* eslint-disable no-template-curly-in-string */
 const validateMessages = {
@@ -82,6 +83,7 @@ const FieldPage: FC<Props> = (props) => {
 
   return (
     <div className={styles["field-page"]}>
+      <Header />
       <div className="container">
         <div className={styles["field-page__title"]}>{props.title}</div>
         <div
@@ -98,8 +100,7 @@ const FieldPage: FC<Props> = (props) => {
             {getFieldBody(props.type)}
           </div>
           <Button htmlType="submit" className={styles["next-button"]}>
-            <RightOutlined />
-            <div>Далее</div>
+            Далее
           </Button>
         </Form>
       </div>
