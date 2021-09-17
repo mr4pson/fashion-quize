@@ -38,7 +38,7 @@ const Question: FC<TProps> = (props) => {
             style={{ color: props.color }}
             className={styles["question__item"]}
           >
-            <Input className={styles["question__input"]} maxLength={70} />
+            <Input autoFocus className={styles["question__input"]} maxLength={70} />
           </div>
         </Form.Item>
       ),
@@ -48,7 +48,7 @@ const Question: FC<TProps> = (props) => {
             style={{ color: props.color }}
             className={styles["question__item"]}
           >
-            <TextArea className={styles["question__text"]} />
+            <TextArea autoFocus className={styles["question__text"]} />
           </div>
         </Form.Item>
       ),
