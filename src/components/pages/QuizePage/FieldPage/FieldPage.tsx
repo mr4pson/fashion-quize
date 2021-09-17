@@ -54,6 +54,7 @@ const FieldPage: FC<Props> = (props) => {
       text: (
         <Form.Item name="field" rules={[{ required: true }]}>
           <Input
+            autoFocus
             type={props.type}
             className={styles["field__input"]}
             maxLength={70}
@@ -62,12 +63,17 @@ const FieldPage: FC<Props> = (props) => {
       ),
       email: (
         <Form.Item name="field" rules={[{ required: true, type: "email" }]}>
-          <Input type={props.type} className={styles["field__input"]} />
+          <Input
+            autoFocus
+            type={props.type}
+            className={styles["field__input"]}
+          />
         </Form.Item>
       ),
       number: (
         <Form.Item name="field" rules={[{ required: true }]}>
           <Input
+            autoFocus
             type={props.type}
             className={styles["field__input"]}
             min={6}
