@@ -10,7 +10,7 @@ import { useHistory, useParams } from "react-router";
 import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { quizeThunks, setStateAnswers } from "redux/slicers/quizePageSlice";
 import { Page, paths } from "routes/constants";
-import { getNextQuestionLink } from "./helper";
+import { getNextQuestionLink, hexToRgb } from "./helper";
 import styles from "./QuizePage.module.scss";
 import { TypeQuestion } from "./types";
 
@@ -143,7 +143,7 @@ const QuizePage: FC<TProps> = (props) => {
         >
           <div className={styles["progress"]}>
             {blocks?.map((block) => (
-              <div key={block.id} className={styles["progress__item"]}>
+              <div style={{ color: hexToRgb(question?.block?.color)}} key={block.id} className={styles["progress__item"]}>
                 <div
                   style={{ color: question?.block?.color, width: getBlockProgress(block.id) }}
                   className={styles["progress__value"]}
