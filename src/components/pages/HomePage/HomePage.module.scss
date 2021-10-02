@@ -154,6 +154,8 @@
         min-width: 304px;
         height: 240px;
         background-color: #ccc;
+        background-size: cover;
+        background-position: center;
     }
     &__info {
         margin-left: 95px;
@@ -184,6 +186,9 @@
         font-weight: 300;
     }
     &:nth-child(2) {
+        .work-example__image {
+            background-image: url(./images/test-pass.jpg);
+        }
         .work-example__top {
             &::before {
                 content: "01";
@@ -191,6 +196,9 @@
         }
     }
     &:nth-child(3) {
+        .work-example__image {
+            background-image: url(./images/task-creating.jpg);
+        }
         .work-example__top {
             &::before {
                 content: "02";
@@ -318,13 +326,12 @@
             }
         }
         &__btn-wrap {
-            // left: calc(50% - 192px);
             left: calc(50% - 153px);
             bottom: 13px;
         }
         &__right {
             height: 235px;
-            background-size: 375px;
+            background-size: 375px; 
         }
         &__btn-white {
             width: 185px;
@@ -448,7 +455,6 @@
     .compilation-section {
         &__right {
             background-position: center;
-            // background-image: url(./images/compilation-section-img-mini.jpg);
         }
     }
     .receive-section {

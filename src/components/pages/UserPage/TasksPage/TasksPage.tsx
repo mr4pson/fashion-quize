@@ -33,9 +33,9 @@ const TasksPage: React.FC<Props> = (props) => {
     <Card
       loading={props.loading}
       title={
-        <div className={styles['header']}>
-          <h2 className={styles['title']}>Список задач</h2>
-          <Button type={"primary"} onClick={handleAddTask}>Добавить</Button>
+        <div className={styles['page-header']}>
+          <h2 className={styles['page-header__title']}>Список задач</h2>
+          <Button className={styles['page-header__btn']} type={"primary"} onClick={handleAddTask}>Добавить</Button>
         </div>
       }
       bordered={false}

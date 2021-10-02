@@ -2,6 +2,7 @@ import { TFormField } from "common/types/types";
 
 const TYPE = "TYPE";
 const DATE = "DATE";
+const TIME = "TIME";
 const COMMENT = "COMMENT";
 
 export const formFields: TFormField[] = [
@@ -12,13 +13,19 @@ export const formFields: TFormField[] = [
     label: "Тип",
   },
   {
-    id: "5",
+    id: "2",
     type: DATE,
     name: "date",
-    label: "Исполнить до",
+    label: "Дата исполнения",
   },
   {
-    id: "6",
+    id: "3",
+    type: TIME,
+    name: "time",
+    label: "Время исполнения",
+  },
+  {
+    id: "4",
     type: COMMENT,
     name: "comment",
     label: "Комментарий",
