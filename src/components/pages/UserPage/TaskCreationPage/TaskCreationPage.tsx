@@ -24,9 +24,7 @@ const datePicker = {
 };
 
 const timePicker = {
-  showTime: {
-    format: "HH:mm"
-  },
+  format: "HH:mm",
   locale: locale,
 };
 
@@ -97,6 +95,7 @@ export const TaskCreationPage: FC = () => {
       const payload = {
         ...formData,
         date: formData.date.format("DD.MM.YYYY"),
+        time: formData.time.format("hh:mm"),
       };
       await dispatch(tasksThunks.createTask(payload));
       history.push(paths[UsrPage.TASKS]);

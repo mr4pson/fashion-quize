@@ -3,6 +3,7 @@ export const STATUS = "STATUS";
 export const CREATED_AT = "CREATED_AT";
 export const UPDATED_AT = "UPDATED_AT";
 export const DATE = "DATE";
+export const TIME = "TIME";
 export const COMMENT = "COMMENT";
 export const BUTTON = "BUTTON";
 
@@ -38,18 +39,25 @@ export const formFields = [
     id: "5",
     type: DATE,
     name: "date",
-    label: "Исполнить до",
+    label: "Дата исполнения",
     readonly: true,
   },
   {
     id: "6",
+    type: DATE,
+    name: "time",
+    label: "Время исполненения",
+    readonly: true,
+  },
+  {
+    id: "7",
     type: COMMENT,
     name: "comment",
     label: "Комментарий",
     readonly: true,
   },
   {
-    id: "7",
+    id: "8",
     type: BUTTON,
     name: "button",
     label: "Сохранить",

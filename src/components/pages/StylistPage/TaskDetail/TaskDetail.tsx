@@ -17,6 +17,7 @@ import {
   DATE,
   formFields,
   STATUS,
+  TIME,
   TYPE,
   UPDATED_AT,
 } from "./consts";
@@ -75,6 +76,16 @@ const TaskDetail: FC = () => {
       case CREATED_AT:
       case UPDATED_AT:
       case DATE:
+        return (
+          <Form.Item
+            name={field.name}
+            label={field.label}
+            rules={[{ required: true, type: "string", max: 99 }]}
+          >
+            <Input readOnly={field.readonly} />
+          </Form.Item>
+        );
+      case TIME:
         return (
           <Form.Item
             name={field.name}

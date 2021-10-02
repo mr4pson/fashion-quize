@@ -45,10 +45,16 @@ export const getColumns = (styles: any) => {
       ),
     },
     {
-      title: "Исполнить до",
+      title: "Дата исполнения",
       dataIndex: "date",
       key: "date",
       render: (date) => <div>{date}</div>,
+    },
+    {
+      title: "Время исполнения",
+      dataIndex: "time",
+      key: "time",
+      render: (time) => <div>{time}</div>,
     },
     {
       title: "Действие",
