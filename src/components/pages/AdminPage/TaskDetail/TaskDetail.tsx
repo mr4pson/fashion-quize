@@ -47,7 +47,8 @@ const TaskDetail: FC = () => {
           <Descriptions.Item label="Статус">{task.status.title}</Descriptions.Item>
           <Descriptions.Item label="Тип">{task.type.title}</Descriptions.Item>
           <Descriptions.Item label="Создана">{moment(task.createdAt).format("DD.MM.yyyy hh:mm:ss")}</Descriptions.Item>
-          <Descriptions.Item label="Исполнить до">{task.date}</Descriptions.Item>
+          <Descriptions.Item label="Дата исполнения">{task.date}</Descriptions.Item>
+          <Descriptions.Item label="Время исполнения">{task.time}</Descriptions.Item>
           <Descriptions.Item label="Комментарий">{task.comment}</Descriptions.Item>
         </Descriptions>
       )}

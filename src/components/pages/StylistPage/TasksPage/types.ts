@@ -8,6 +8,7 @@ export enum ESexes {
 export type TypeTask = {
   id: number;
   date: string;
+  time: string;
   type: TaskType;
   status: TaskStatus;
   compilation: TCompilation;
