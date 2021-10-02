@@ -8,6 +8,7 @@ import React, { memo, useState } from "react";
 import { useHistory } from "react-router";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
+import { Page } from "routes/constants";
 import { paths, UsrPage } from "../routes/consts";
 import { menuItems } from "./constants";
 import styles from "./Header.module.scss";
@@ -44,84 +45,100 @@ const Header: React.FC = () => {
 
   return (
     <div className={styles["header"]}>
-      <Link
-        className={styles["logo"]}
-        style={{
-          backgroundImage:
-            "url('https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg')",
-        }}
-        to={paths[UsrPage.PROFILE]}
-      >
-        Eyelish
-      </Link>
-      <button
-        className={styles["navbar-toggle"]}
-        onClick={handleExpandMobileMenu}
-      ></button>
-      <nav className={styles["nav"]}>
-        {menuItems.map((item, index) => (
-          <span key={index}>
-            <Link
-              className={checkIfMenuItemActive(item) ? styles["active"] : ""}
-              to={item.path}
-            >
-              {item.title}
-            </Link>
-          </span>
-        ))}
-        <span>
-          <Dropdown
-            overlay={
-              <Menu>
-                <Menu.Item key={1}>
-                  <Button type="link" onClick={logout}>
-                    Выйти
-                  </Button>
-                </Menu.Item>
-              </Menu>
-            }
-            placement="bottomCenter"
-          >
-            <div className={styles["user-info"]}>
-              <div className={styles["user-info__name"]}>{userInfo?.name}</div>
-              <div className={styles["user-info__photo"]}></div>
-            </div>
-          </Dropdown>
-        </span>
-      </nav>
-      <div
-        onClick={handleExpandMobileMenu}
-        className={getMobileMenuBackdropClassNames()}
-      ></div>
-      <div className={getMobileMenuClassNames()}>
-        <div className={styles["mobile-menu__inner"]}>
-          <ul className={styles["menu-list"]}>
-            <li className={styles["user-info"]}>
-              <div className={styles["user-info__name"]}>{userInfo?.name}</div>
-              <div className={styles["user-info__photo"]}></div>
-            </li>
+      <div className="container">
+        <div className={styles["header__content"]}>
+          <Link to={paths[Page.HOME]}>
+            <div className={styles["header__logo"]}>Eyelish</div>
+          </Link>
+          <button
+            className={styles["navbar-toggle"]}
+            onClick={handleExpandMobileMenu}
+          ></button>
+          <nav className={styles["nav"]}>
             {menuItems.map((item, index) => (
-              <li key={`mob-${index}`}>
+              <span key={index}>
                 <Link
                   className={
                     checkIfMenuItemActive(item) ? styles["active"] : ""
                   }
                   to={item.path}
-                  onClick={handleExpandMobileMenu}
                 >
                   {item.title}
                 </Link>
-              </li>
+              </span>
             ))}
-            <li>
-              <Button type="link" onClick={logout}>
-                Выйти
-              </Button>
-            </li>
-          </ul>
+            <span>
+              <Dropdown
+                overlay={
+                  <Menu>
+                    <Menu.Item key={1}>
+                      <Button type="link" onClick={logout}>
+                        Выйти
+                      </Button>
+                    </Menu.Item>
+                  </Menu>
+                }
+                placement="bottomCenter"
+              >
+                <div className={styles["user-info"]}>
+                  <div className={styles["user-info__name"]}>
+                    {userInfo?.name}
+                  </div>
+                  <div className={styles["user-info__photo"]}></div>
+                </div>
+              </Dropdown>
+            </span>
+          </nav>
+          <div
+            onClick={handleExpandMobileMenu}
+            className={getMobileMenuBackdropClassNames()}
+          ></div>
+          <div className={getMobileMenuClassNames()}>
+            <div className={styles["mobile-menu__inner"]}>
+              <ul className={styles["menu-list"]}>
+                <li className={styles["user-info"]}>
+                  <div className={styles["user-info__name"]}>
+                    {userInfo?.name}
+                  </div>
+                  <div className={styles["user-info__photo"]}></div>
+                </li>
+                {menuItems.map((item, index) => (
+                  <li key={`mob-${index}`}>
+                    <Link
+                      className={
+                        checkIfMenuItemActive(item) ? styles["active"] : ""
+                      }
+                      to={item.path}
+                      onClick={handleExpandMobileMenu}
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Button type="link" onClick={logout}>
+                    Выйти
+                  </Button>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    // <div className={styles["header"]}>
+    //   <Link
+    //     className={styles["logo"]}
+    //     style={{
+    //       backgroundImage:
+    //         "url('https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg')",
+    //     }}
+    //     to={paths[UsrPage.PROFILE]}
+    //   >
+    //     Eyelish
+    //   </Link>
+
+    // </div>
   );
 };
 

@@ -1,18 +1,16 @@
-import { RightOutlined } from "@ant-design/icons";
 import { Button, Form, FormInstance } from "antd";
 import classNames from "classnames";
-import Header from "components/modules/Header";
 import Question from "components/modules/Question/Question";
 import { FC, memo, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-
 import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { quizeThunks, setStateAnswers } from "redux/slicers/quizePageSlice";
 import { Page, paths } from "routes/constants";
 import { getNextQuestionLink, hexToRgb } from "./helper";
 import styles from "./QuizePage.module.scss";
 import { TypeQuestion } from "./types";
+
 
 /* eslint-disable no-template-curly-in-string */
 const validateMessages = {
@@ -52,6 +50,12 @@ const QuizePage: FC<TProps> = (props) => {
     }
   }, [dispatch, questionNumber, questions]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(quizeThunks.clearAnswers());
+    };
+  }, [dispatch]);
+
   const onFinish = async () => {
     const formValue = formRef.current?.getFieldsValue();
     const answers = { ...props.answers, [question.id]: formValue.answer };
@@ -67,6 +71,7 @@ const QuizePage: FC<TProps> = (props) => {
         data: JSON.stringify(answers),
       };
       await dispatch(quizeThunks.registrateUser(payload));
+
       history.push(paths[Page.COMPLETE]);
       return;
     }
@@ -109,7 +114,6 @@ const QuizePage: FC<TProps> = (props) => {
 
   return (
     <div className={classNames(styles["quize-page"], "quize-page")}>
-      <Header />
       <Form
         className={styles["quize-page__form"]}
         {...formProps}

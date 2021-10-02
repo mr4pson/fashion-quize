@@ -1,4 +1,4 @@
-import { Button, Card, DatePicker, Form, Input, Select } from "antd";
+import { Button, Card, DatePicker, Form, Input, Select, TimePicker } from "antd";
 import locale from "antd/es/date-picker/locale/ru_RU";
 import "moment/locale/ru";
 import { FC, memo, useEffect, useState } from "react";
@@ -11,16 +11,23 @@ import { tasksThunks } from "redux/slicers/tasksPageSlice";
 import { paths, UsrPage } from "../routes/consts";
 import { formFields } from "./constants";
 import styles from "./TaskCreationPage.module.scss";
+import moment from "moment";
 
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
 
-const picker = {
-  showTime: true,
+const datePicker = {
   locale: locale,
   disabledDate: (date: moment.Moment) => date.toDate() < new Date(),
+};
+
+const timePicker = {
+  showTime: {
+    format: "HH:mm"
+  },
+  locale: locale,
 };
 
 /* eslint-disable no-template-curly-in-string */
@@ -49,7 +56,12 @@ export const TaskCreationPage: FC = () => {
     return {
       DATE: (
         <Form.Item rules={[{ required: true }]} name={field.name} label={field.label}>
-          <DatePicker className={styles["date-picker"]} {...picker} />
+          <DatePicker className={styles["date-picker"]} {...datePicker} />
+        </Form.Item>
+      ),
+      TIME: (
+        <Form.Item rules={[{ required: true }]} name={field.name} label={field.label}>
+          <TimePicker className={styles["time-picker"]} {...timePicker} />
         </Form.Item>
       ),
       TYPE: (
@@ -72,9 +84,9 @@ export const TaskCreationPage: FC = () => {
   };
 
   const getCreationTitle = () => (
-    <div className={styles["header"]}>
-      <h2 className={styles["title"]}>Создание задачи</h2>
-      <Button type="primary" htmlType="submit" loading={saveLoading}>
+    <div className={styles["page-header"]}>
+      <h2 className={styles["page-header__title"]}>Создани задачи</h2>
+      <Button className={styles["page-header__btn"]} type="primary" htmlType="submit" loading={saveLoading}>
         Добавить
       </Button>
     </div>

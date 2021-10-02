@@ -1,17 +1,29 @@
-.header {
+.page-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-.title {
-  margin: 0;
+  &__title {
+    margin: 0;
+    line-height: 26px;
+  }
+  &__btn {
+    background: #101010!important;
+    border: none!important;
+    padding: 7px 25px!important;
+    height: auto!important;
+    &:hover {
+      background: #101010!important;
+    }
+  }
 }
 .date-picker {
   width: 100%;
 }
 
 @media only screen and (max-width: 768px) {
-  .title {
-    font-size: 20px;
+  .page-header {
+    &__title {
+      font-size: 20px;
+    }
   }
 }
