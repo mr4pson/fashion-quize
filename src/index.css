@@ -144,6 +144,14 @@ img.ant-image-img {
   color: #858585!important;
 }
 
+.ant-btn-link {
+  color: #4569d4;
+}
+
+.ant-pagination-item-active {
+  color: #4569d4;
+}
+
 @media (max-width: 480px) {
   .ant-calendar-range {
       width: 320px;
