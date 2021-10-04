@@ -30,6 +30,7 @@
     .container {
         height: 100%;
         width: 100%;
+        padding-left: 70px;
     }
 }
 .sidebar {
@@ -111,6 +112,7 @@ button.next-button {
     .quize-page {
         .container {
             height: auto;
+            padding-left: 0;
         }
     }
     .sidebar {

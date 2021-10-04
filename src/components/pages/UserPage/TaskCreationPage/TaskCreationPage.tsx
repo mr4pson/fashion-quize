@@ -1,4 +1,12 @@
-import { Button, Card, DatePicker, Form, Input, Select, TimePicker } from "antd";
+import {
+  Button,
+  Card,
+  DatePicker,
+  Form,
+  Input,
+  Select,
+  TimePicker,
+} from "antd";
 import locale from "antd/es/date-picker/locale/ru_RU";
 import "moment/locale/ru";
 import { FC, memo, useEffect, useState } from "react";
@@ -39,7 +47,9 @@ export const TaskCreationPage: FC = () => {
   const [saveLoading, setSaveLoading] = useState(false);
 
   const dispatch = useAppDispatch();
-  const { types, loading } = useSelector((state: TRootState) => state.tasksPage);
+  const { types, loading } = useSelector(
+    (state: TRootState) => state.tasksPage
+  );
 
   useEffect(() => {
     (async () => {
@@ -49,24 +59,42 @@ export const TaskCreationPage: FC = () => {
   }, [dispatch]);
 
   const getFormField = (type: string, field: TFormField) => {
-    const options = types.map((type) => ({ value: type.id, title: type.title }));
+    const options = types.map((type) => ({
+      value: type.id,
+      title: type.title,
+    }));
 
     return {
       DATE: (
-        <Form.Item rules={[{ required: true }]} name={field.name} label={field.label}>
+        <Form.Item
+          rules={[{ required: true }]}
+          name={field.name}
+          label={field.label}
+        >
           <DatePicker className={styles["date-picker"]} {...datePicker} />
         </Form.Item>
       ),
       TIME: (
-        <Form.Item rules={[{ required: true }]} name={field.name} label={field.label}>
+        <Form.Item
+          rules={[{ required: true }]}
+          name={field.name}
+          label={field.label}
+        >
           <TimePicker className={styles["time-picker"]} {...timePicker} />
         </Form.Item>
       ),
       TYPE: (
-        <Form.Item rules={[{ required: true }]} name={field.name} label={field.label}>
+        <Form.Item
+          rules={[{ required: true }]}
+          name={field.name}
+          label={field.label}
+        >
           <Select>
             {options.map((option, index) => (
-              <Select.Option key={`task-${field.name}` + index} value={option.value}>
+              <Select.Option
+                key={`task-${field.name}` + index}
+                value={option.value}
+              >
                 {option.title}
               </Select.Option>
             ))}
@@ -83,9 +111,14 @@ export const TaskCreationPage: FC = () => {
 
   const getCreationTitle = () => (
     <div className={styles["page-header"]}>
-      <h2 className={styles["page-header__title"]}>Создани задачи</h2>
-      <Button className={styles["page-header__btn"]} type="primary" htmlType="submit" loading={saveLoading}>
-        Добавить
+      <h2 className={styles["page-header__title"]}>Создание задачи</h2>
+      <Button
+        className={styles["page-header__btn"]}
+        type="primary"
+        htmlType="submit"
+        loading={saveLoading}
+      >
+        Создать
       </Button>
     </div>
   );
@@ -103,7 +136,12 @@ export const TaskCreationPage: FC = () => {
   };
 
   return (
-    <Form name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} {...layout}>
+    <Form
+      name="nest-messages"
+      onFinish={onFinish}
+      validateMessages={validateMessages}
+      {...layout}
+    >
       <Card bordered={false} loading={loading} title={getCreationTitle()}>
         {formFields.map((field) => (
           <div className={styles["detail__field"]} key={field.id}>
