@@ -1,0 +1,42 @@
+.task-card {
+  background: #fff;
+  border-radius: 7px;
+
+  &__header {
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #E8E8E8;
+  }
+  &__info {
+    display: flex;
+    align-items: center;
+    width: 150px;
+  }
+
+  &__body {
+    position: relative;
+    padding: 25px 15px;
+    padding-bottom: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.skeleton {
+  width: 100%!important;
+  display: flex!important;
+  align-items: center;
+}
+
+.task-feature {
+  &__title {
+    margin-top: 8px;
+  }
+  &__value {
+    margin-top: 5px;
+    width: 100px !important;
+  }
+}

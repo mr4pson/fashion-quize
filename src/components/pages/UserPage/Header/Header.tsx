@@ -47,7 +47,7 @@ const Header: React.FC = () => {
     <div className={styles["header"]}>
       <div className="container">
         <div className={styles["header__content"]}>
-          <Link to={paths[Page.HOME]}>
+          <Link to={paths[UsrPage.TASKS]}>
             <div className={styles["header__logo"]}>Eyelish</div>
           </Link>
           <button

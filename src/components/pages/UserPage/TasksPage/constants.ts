@@ -1,0 +1,1 @@
+export const TASK_CARD_SKELETON_NUMBER = 3;

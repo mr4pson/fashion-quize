@@ -1,4 +1,5 @@
 import { Modal } from "antd";
+import Footer from "components/modules/Footer";
 import { FC, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -12,22 +13,24 @@ const TasksPageContainer: FC = () => {
   const [taskId, setTaskId] = useState<number | null>(null);
 
   const dispatch = useAppDispatch();
-  const { tasks, loading } = useSelector((state: TRootState) => state.tasksPage);
+  const { isIncreasePageBtnVisible, visibleTasks, loading } = useSelector(
+    (state: TRootState) => state.tasksPage
+  );
 
-  const showModal = () => {
+  const showModal = (): void => {
     setVisible(true);
   };
 
-  const onTaskCancel = (id: number) => {
+  const onTaskCancel = (id: number): void => {
     setTaskId(id);
     showModal();
   };
 
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     setVisible(false);
   };
 
-  const handleDelete = () => {
+  const handleDelete = (): void => {
     setConfirmLoading(true);
 
     dispatch(tasksThunks.cancelTask(taskId!));
@@ -36,17 +39,29 @@ const TasksPageContainer: FC = () => {
     setConfirmLoading(false);
   };
 
+  const handleIncreaseTaskPage = (): void => {
+
+    dispatch(tasksThunks.increaseTaskPage());
+  }
+
   useEffect(() => {
     dispatch(tasksThunks.getUserTasks());
 
     return () => {
       dispatch(tasksThunks.clearTasks());
+      dispatch(tasksThunks.resetPageNumber());
     };
   }, [dispatch]);
 
   return (
     <>
-      <TasksPage loading={loading} tasks={tasks} onTaskCancel={onTaskCancel} />
+      <TasksPage
+        loading={loading}
+        tasks={visibleTasks}
+        isIncreasePageBtnVisible={isIncreasePageBtnVisible}
+        onTaskCancel={onTaskCancel}
+        increaseTaskPage={handleIncreaseTaskPage}
+      />
       <Modal
         title="Отмена задачи"
         okText="Подтвердить"

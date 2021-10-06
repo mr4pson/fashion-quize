@@ -1,24 +1,27 @@
-import { Button, Card, Table } from "antd";
+import { Button } from "antd";
 import { TypeTask } from "components/pages/StylistPage/TasksPage/types";
 import moment from "moment";
 import React, { memo } from "react";
-import { getColumns } from "./constants";
 import styles from "./TasksPage.module.scss";
-import PerfectScrollbar from "react-perfect-scrollbar";
 import { useHistory } from "react-router";
 import { paths, UsrPage } from "../routes/consts";
+import TaskCard from "./TaskCard";
+import PageHeader from "../common/PageHeader";
+import TaskCardSkeleton from "./TaskCardSkeleton";
+import { TASK_CARD_SKELETON_NUMBER } from "./constants";
 
 type Props = {
-  onTaskCancel: (id: number) => void;
   tasks: TypeTask[];
   loading: boolean;
+  isIncreasePageBtnVisible: boolean;
+  onTaskCancel: (id: number) => void;
+  increaseTaskPage: () => void;
 };
 
 const TasksPage: React.FC<Props> = (props) => {
   const history = useHistory();
-  const columns = getColumns(styles, props.onTaskCancel);
 
-  const dataSource = props.tasks?.map((task) => ({
+  const tasks = props.tasks?.map((task) => ({
     ...task,
     key: task.id,
     updatedAt: moment(task.updatedAt).format("DD.MM.YYYY HH:mm:ss"),
@@ -27,23 +30,42 @@ const TasksPage: React.FC<Props> = (props) => {
 
   const handleAddTask = () => {
     history.push(paths[UsrPage.TASKS_CREATE]);
-  }
+  };
 
   return (
-    <Card
-      loading={props.loading}
-      title={
-        <div className={styles['page-header']}>
-          <h2 className={styles['page-header__title']}>Список задач</h2>
-          <Button className={styles['page-header__btn']} type={"primary"} onClick={handleAddTask}>Добавить</Button>
-        </div>
-      }
-      bordered={false}
-    >
-      <PerfectScrollbar>
-        <Table columns={columns} dataSource={dataSource} />
-      </PerfectScrollbar>
-    </Card>
+    <div className={styles["tasks-page"]}>
+      <PageHeader
+        title={"Список задач"}
+        btnTitle={"Добавить"}
+        handleBtnClick={handleAddTask}
+      />
+      <div className={styles["tasks-page__body"]}>
+        {tasks.length > 0 &&
+          tasks.map((task, index) => (
+            <TaskCard
+              key={`task-${index}`}
+              task={task}
+              onTaskCancel={props.onTaskCancel}
+            />
+          ))}
+        {tasks.length === 0 && !props.loading && (
+          <div className={styles["tasks-page__no-data"]}>Список задач пуст</div>
+        )}
+        {props.loading &&
+          [...Array(TASK_CARD_SKELETON_NUMBER)].map((index) => (
+            <TaskCardSkeleton key={`skeleton-${index}`} />
+          ))}
+        {props.isIncreasePageBtnVisible && (
+          <Button
+            className={styles["tasks-page__show-more-btn"]}
+            type={"link"}
+            onClick={props.increaseTaskPage}
+          >
+            Показать больше
+          </Button>
+        )}
+      </div>
+    </div>
   );
 };
 
