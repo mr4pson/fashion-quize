@@ -23,17 +23,6 @@
   }
 }
 
-.task-feature {
-  &__title {
-    color: #A4A4A4;
-    text-align: center;
-  }
-  &__value {
-    text-align: center;
-    color: #404040;
-  }
-}
-
 @media only screen and (max-width: 990px) {
   .tasks-page {
     &__body {
