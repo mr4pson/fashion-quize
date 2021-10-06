@@ -1,25 +1,51 @@
-.page-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  &__title {
-    margin: 0;
+.tasks-page {
+  font-family: 'Ubuntu', sans-serif;
+  padding-bottom: 60px;
+  &__body {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    position: relative;
   }
-  &__btn {
-    background: #101010!important;
-    border: none!important;
-    padding: 7px 25px!important;
-    height: auto!important;
-    &:hover {
-      background: #101010!important;
+  &__show-more-btn {
+    position: absolute!important;
+    bottom: -45px;
+    left: calc(50% - 75px);
+  }
+  &__no-data {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+    color: #868686;
+    font-size: 16px;
+  }
+}
+
+.task-feature {
+  &__title {
+    color: #A4A4A4;
+    text-align: center;
+  }
+  &__value {
+    text-align: center;
+    color: #404040;
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  .tasks-page {
+    &__body {
+      grid-template-columns: 1fr 1fr;
     }
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .page-header {
-    &__title {
-      font-size: 20px;
+  .tasks-page {
+    &__body {
+      grid-template-columns: 1fr;
     }
   }
 }

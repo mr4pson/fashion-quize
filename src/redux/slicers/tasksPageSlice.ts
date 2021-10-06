@@ -5,10 +5,15 @@ import { axiosInstance } from "components/pages/AdminPage/consts";
 import { TaskStatus, TaskType, TypeTask } from "components/pages/StylistPage/TasksPage/types";
 import { TypeDispatch } from "redux/ReduxStore";
 
+const itemsNumber = 9;
+
 const tasksPageSlice = createSlice({
   name: "tasksPage",
   initialState: {
     tasks: [] as TypeTask[],
+    visibleTasks: [] as TypeTask[],
+    isIncreasePageBtnVisible: false,
+    page: 0,
     task: {} as TypeTask,
     types: [] as TaskType[],
     statuses: [] as TaskStatus[],
@@ -17,7 +22,24 @@ const tasksPageSlice = createSlice({
   reducers: {
     setTasks: (state, action: PayloadAction<TypeTask[]>) => ({
       ...state,
-      tasks: action.payload,
+      tasks: action.payload.reverse(),
+    }),
+    increasePageNumber: (state) => {
+      const currentPage = state.page + 1;
+      const visibleTasks = state.tasks.slice(0, currentPage * itemsNumber);
+      const isIncreasePageBtnVisible = visibleTasks.length < state.tasks.length;
+      return {
+        ...state,
+        page: currentPage,
+        visibleTasks,
+        isIncreasePageBtnVisible,
+      }
+    },
+    resetPageNumber: (state) => ({
+      ...state,
+      visibleTasks: [],
+      page: 0,
+      isIncreasePageBtnVisible: false,
     }),
     setTask: (state, action: PayloadAction<TypeTask>) => ({
       ...state,
@@ -48,7 +70,8 @@ export const tasksThunks = {
   getUserTasks: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
     const response = await axiosInstance.get("/api/tasks/user-tasks");
-    dispatch(setTasks(response?.data));
+    await dispatch(setTasks(response?.data));
+    dispatch(increasePageNumber());
     dispatch(setLoading(false));
   },
   getStylistTasks: () => async (dispatch: TypeDispatch) => {
@@ -56,6 +79,12 @@ export const tasksThunks = {
     const response = await axiosInstance.get("/api/tasks/stylist-tasks");
     dispatch(setTasks(response?.data));
     dispatch(setLoading(false));
+  },
+  increaseTaskPage: () => async (dispatch: TypeDispatch) => {
+    dispatch(increasePageNumber());
+  },
+  resetPageNumber: () => async (dispatch: TypeDispatch) => {
+    dispatch(resetPageNumber());
   },
   clearTasks: () => (dispatch: TypeDispatch) => {
     dispatch(setTasks([]));
@@ -102,5 +131,5 @@ export const tasksThunks = {
   },
 };
 
-export const { setTasks, setTask, setTaskStatuses, setTaskTypes, setLoading } = tasksPageSlice.actions;
+export const { setTasks, setTask, setTaskStatuses, setTaskTypes, setLoading, increasePageNumber, resetPageNumber } = tasksPageSlice.actions;
 export default tasksPageSlice.reducer;

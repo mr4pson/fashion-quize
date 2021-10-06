@@ -144,12 +144,25 @@ img.ant-image-img {
   color: #858585!important;
 }
 
+.ant-btn {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.ant-btn.ant-btn-primary {
+  color: #fff;
+}
+
 .ant-btn-link {
   color: #4569d4;
 }
 
+
 .ant-pagination-item-active {
   color: #4569d4;
+}
+
+.task-card .ant-skeleton-element .ant-skeleton-input-sm {
+  height: 17px;
 }
 
 @media (max-width: 480px) {
@@ -159,4 +172,8 @@ img.ant-image-img {
   .ant-calendar-range-part {
       width: 100%;
   }
+}
+
+.ant-skeleton.ant-skeleton-active .ant-skeleton-input, .ant-skeleton.ant-skeleton-active .ant-skeleton-button {
+  background-image: linear-gradient(90deg, rgb(240 242 245) 25%, rgb(247 249 252) 37%, rgb(242 244 247) 63%);
 }

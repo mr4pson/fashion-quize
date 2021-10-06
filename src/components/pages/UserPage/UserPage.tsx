@@ -7,6 +7,7 @@ import { EUser } from "common/types/types";
 import Header from "./Header";
 import UserRoutes from "./routes/UsrRoutes";
 import styles from "./UserPage.module.scss";
+import Footer from "components/modules/Footer";
 
 const UserPage: FC = () => {
   const history = useHistory();
@@ -27,6 +28,7 @@ const UserPage: FC = () => {
           <UserRoutes />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

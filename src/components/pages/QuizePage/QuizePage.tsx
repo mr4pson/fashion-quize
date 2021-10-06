@@ -92,15 +92,15 @@ const QuizePage: FC<TProps> = (props) => {
   };
 
   const blocksQuestionIds: { [key: number]: number[] } = questions.reduce(
-    (accum: any, { id, block }) => {
+    (ids: any, { id, block }) => {
       const blockId = block?.id as number;
 
-      if (!accum[blockId]) {
-        accum[blockId] = [];
+      if (!ids[blockId]) {
+        ids[blockId] = [];
       }
-      accum[blockId].push(id);
+      ids[blockId].push(id);
 
-      return accum;
+      return ids;
     },
     {}
   );
