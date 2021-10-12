@@ -3,8 +3,8 @@ import styles from "./PageHeader.module.scss";
 
 type Props = {
   title: string;
-  btnTitle: string;
-  handleBtnClick: () => void;
+  btnTitle?: string;
+  handleBtnClick?: () => void;
 };
 
 const PageHeader: React.FC<Props> = ({ title, btnTitle, handleBtnClick }) => {

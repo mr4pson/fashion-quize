@@ -1,132 +1,26 @@
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.title {
-  margin: 0;
-}
-
-.look {
-  display: flex;
-  margin-bottom: 10px;
-  padding: 5px;
-  border-bottom: 1px dashed #ccc;
-  position: relative;
-  &__selected-icon, &__not-selected-icon {
+.compilations-page {
+  font-family: 'Ubuntu', sans-serif;
+  padding-bottom: 60px;
+  &__body {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    position: relative;
+  }
+  &__show-more-btn {
+    position: absolute!important;
+    bottom: -45px;
+    left: calc(50% - 75px);
+  }
+  &__no-data {
     position: absolute;
-    right: 3px;
-    top: 0px;
-    font-size: 22px;
-    z-index: 100;
-    background: #fff;
-    border-radius: 50%;
-  }
-  &__selected-icon {
-    color: green!important;
-  }
-  &__not-selected-icon {
-    color: red!important;
-  }
-}
-
-.look-item,
-.mobile-look-item {
-  width: 100px;
-  margin-bottom: 0;
-  margin-right: 10px;
-  &__photo {
-    height: 80px;
-  }
-  &__name {
     text-align: center;
-    line-height: 16px;
-  }
-  &:last-child {
-    margin-right: 0;
-  }
-}
-
-
-.mobile-look {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border-right: 1px dashed #e4e4e4;
-  padding: 5px 0;
-  position: relative;
-  &:last-child {
-    border: none;
-  }
-  &__selected-icon, &__not-selected-icon {
-    position: absolute;
-    right: 3px;
-    top: 0px;
-    font-size: 22px;
-    z-index: 100;
-    background: #fff;
-    border-radius: 50%;
-  }
-  &__selected-icon {
-    color: green!important;
-  }
-  &__not-selected-icon {
-    color: red!important;
-  }
-}
-
-.mobile-look-item {
-  width: auto;
-  margin-bottom: 5x;
-  margin-right: 0;
-  & > div:first-child {
-    margin: auto;
-  }
-  &__name {
-    margin-top: 5px;
-  }
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.compilation {
-  padding: 5px 10px;
-  margin-bottom: 10px;
-  box-shadow: 1px 1px 7px -2px #ccc;
-  border-radius: 7px;
-  margin-left: -10px;
-  margin-right: -10px;
-  &__id {
-    font-size: 28px;
-    font-weight: bold;
-  }
-  &__status {
-    font-weight: bold;
-  }
-  &__head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  &__looks {
-    display: flex;
-    margin-left: -5px;
-    margin-right: -5px;
-  }
-  &__rate {
-    text-align: center;
-  }
-  &__rate-btn {
-    padding: 7px 70px;
     width: 100%;
-    height: auto;
-    margin: 20px 0 10px;
+    padding: 5px;
+    color: #868686;
+    font-size: 16px;
   }
-}
-
-.mobile-compilations {
-  display: none;
 }
 
 .rating {
@@ -149,17 +43,5 @@
     &--active {
       background: #10b210;
     }
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .title {
-    font-size: 20px;
-  }
-  .desktop-compilations {
-    display: none;
-  }
-  .mobile-compilations {
-    display: block;
   }
 }

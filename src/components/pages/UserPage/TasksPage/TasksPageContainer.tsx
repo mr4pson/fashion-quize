@@ -1,5 +1,4 @@
 import { Modal } from "antd";
-import Footer from "components/modules/Footer";
 import { FC, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -40,7 +39,6 @@ const TasksPageContainer: FC = () => {
   };
 
   const handleIncreaseTaskPage = (): void => {
-
     dispatch(tasksThunks.increaseTaskPage());
   }
 

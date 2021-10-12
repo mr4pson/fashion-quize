@@ -22,7 +22,7 @@ const StylistRoute: React.FC<Props> = ({ path, exact, children }) => {
       // TODO change to diff default
       <Redirect
         to={{
-          pathname: paths[UsrPage.PROFILE],
+          pathname: paths[UsrPage.TASKS],
         }}
       />
     );

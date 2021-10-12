@@ -1,0 +1,68 @@
+.compilation-card-skeleton {
+  background: #fff;
+  border-radius: 7px;
+
+  &__header {
+    padding: 12px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #E8E8E8;
+  }
+  &__info {
+    display: flex;
+    align-items: center;
+    width: 150px;
+  }
+  &__type {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  &__date {
+    font-size: 14px;
+    color: #A4A4A4;
+  }
+  &__status {
+    font-size: 14px;
+    border-radius: 12px;
+    &--on-way {
+      color: #379456;
+      background-color: #CCFFDD;
+    }
+  }
+
+  &__body {
+    position: relative;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &--finished {
+      padding-bottom: 5px;
+    }
+  }
+  
+  &__looks {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  
+  &__look {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.skeleton, .skeleton-look-item {
+  width: 100%!important;
+  display: flex!important;
+  align-items: center;
+}
+
+.skeleton-look-item {
+  width: 60px!important;
+  height: 60px!important;
+}

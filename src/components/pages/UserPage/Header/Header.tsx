@@ -8,7 +8,6 @@ import React, { memo, useState } from "react";
 import { useHistory } from "react-router";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
-import { Page } from "routes/constants";
 import { paths, UsrPage } from "../routes/consts";
 import { menuItems } from "./constants";
 import styles from "./Header.module.scss";

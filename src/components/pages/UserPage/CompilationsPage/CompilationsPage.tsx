@@ -1,40 +1,35 @@
-import { Button, Card, Image, Modal, Table } from "antd";
+import { Modal } from "antd";
 import classNames from "classnames";
-import { getImageUrl } from "common/helpers/common-helpers";
 import { TCompilation } from "components/pages/StylistPage/CompilationsPage/types";
-import React, { memo } from "react";
-import { useState } from "react";
-import PerfectScrollbar from "react-perfect-scrollbar";
+import React, { memo, useState } from "react";
 import { useAppDispatch } from "redux/ReduxStore";
 import { compilationsThunks } from "redux/slicers/compilationsPageSlice";
+import IncreasePageButton from "../common/IncreasePageButton";
+import PageHeader from "../common/PageHeader";
+import CompilationCard from "./CompilationCard";
+import CompilationCardSkeleton from "./CompilationCardSkeleton";
 import styles from "./CompilationsPage.module.scss";
 import {
-  checkIfRateIsAccessible,
-  getColumns,
+  COMPILATION_CARD_SKELETON_NUMBER,
   initialSelectedLooks,
 } from "./constants";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 type TProps = {
   compilations: TCompilation[];
   loading: boolean;
   visible: boolean;
-  setVisible: any;
   selectedLooks: boolean[];
-  setSelectedLooks: any;
+  isIncreasePageBtnVisible: boolean;
   currentCompilation: TCompilation | undefined;
-  setCurrentCompilation: any;
+  increaseCompilationPage: () => void;
+  setVisible: (visibility) => void;
+  setSelectedLooks: (selectedLooks: boolean[]) => void;
+  setCurrentCompilation: (compilation: TCompilation | undefined) => void;
 };
 
 const CompilationsPage: React.FC<TProps> = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
-  const dataSource = props.compilations?.map((compilation) => ({
-    ...compilation,
-    key: compilation.id,
-    status: compilation.task.status,
-    user: compilation.task.user,
-  }));
 
   const showModal = (id: number): void => {
     props.setSelectedLooks(initialSelectedLooks);
@@ -46,8 +41,6 @@ const CompilationsPage: React.FC<TProps> = (props) => {
     props.setCurrentCompilation(compilation);
   };
 
-  const columns = getColumns(styles, showModal);
-
   const handleCancel = () => {
     props.setVisible(false);
   };
@@ -56,13 +49,6 @@ const CompilationsPage: React.FC<TProps> = (props) => {
     return classNames({
       [styles["rating__item"]]: true,
       [styles["rating__item--active"]]: isSelected,
-    });
-  };
-
-  const getMobileLookClassNames = (isSelected) => {
-    return classNames({
-      [styles["mobile-look"]]: true,
-      [styles["mobile-look--selected"]]: isSelected,
     });
   };
 
@@ -95,86 +81,30 @@ const CompilationsPage: React.FC<TProps> = (props) => {
 
   return (
     <>
-      <Card
-        loading={props.loading}
-        title={
-          <div className={styles["header"]}>
-            <h2 className={styles["title"]}>Список Подборок</h2>
-          </div>
-        }
-        bordered={false}
-      >
-        <div className={styles["mobile-compilations"]}>
-          {props.compilations?.map((compilation) => (
-            <div
-              key={"compilation" + compilation.id}
-              className={styles["compilation"]}
-            >
-              <div className={styles["compilation__head"]}>
-                <div className={styles["compilation__id"]}>
-                  {compilation.id}
-                </div>
-                <div className={styles["compilation__status"]}>
-                  {compilation.task.status.title}
-                </div>
-                {/* <div className={styles["compilation__task"]}><b>ID задачи:</b> {task.id}</div> */}
-              </div>
-              <div className={styles["compilation__looks"]}>
-                {compilation.looks?.length &&
-                  compilation.looks.map((look) => (
-                    <div
-                      className={getMobileLookClassNames(look.selected)}
-                      key={look.id}
-                    >
-                      {look.selected === true && (
-                        <CheckCircleOutlined
-                          className={styles["mobile-look__selected-icon"]}
-                        />
-                      )}
-                      {look.selected === false && (
-                        <CloseCircleOutlined
-                          className={
-                            styles["mobile-look__not-selected-icon"]
-                          }
-                        />
-                      )}
-                      {look.items.map((item) => (
-                        <div
-                          className={styles["mobile-look-item"]}
-                          key={item.id}
-                        >
-                          <Image
-                            className={styles["mobile-look-item__photo"]}
-                            width={86}
-                            height={75}
-                            src={getImageUrl(item.photo)}
-                          />
-                          <div className={styles["mobile-look-item__name"]}>
-                            {item.name}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-              </div>
-              {checkIfRateIsAccessible(compilation.task.status.title) && (
-                <div className={styles["compilation__rate"]}>
-                  <Button
-                    className={styles["compilation__rate-btn"]}
-                    type="primary"
-                    onClick={() => showModal(compilation.id)}
-                  >
-                    Выбрать подборки
-                  </Button>
-                </div>
-              )}
-            </div>
+      <div className={styles["compilations-page"]}>
+        <PageHeader title={"Список подборок"} />
+        <div className={styles["compilations-page__body"]}>
+          {props.compilations?.map((compilation, index) => (
+            <CompilationCard
+              key={`compilation-card-${index}`}
+              compilation={compilation}
+              showModal={showModal}
+            />
           ))}
+          {props.compilations.length === 0 && !props.loading && (
+            <div className={styles["tasks-page__no-data"]}>
+              Список подборок пуст
+            </div>
+          )}
+          {props.loading &&
+            [...Array(COMPILATION_CARD_SKELETON_NUMBER)].map((num, index) => (
+              <CompilationCardSkeleton key={`skeleton-${index}`} />
+            ))}
+          {props.isIncreasePageBtnVisible && (
+            <IncreasePageButton onClick={props.increaseCompilationPage} />
+          )}
         </div>
-        <PerfectScrollbar className={styles["desktop-compilations"]}>
-          <Table columns={columns} dataSource={dataSource} />
-        </PerfectScrollbar>
-      </Card>
+      </div>
       <Modal
         title="Выберите понравившиеся подборки"
         visible={props.visible}

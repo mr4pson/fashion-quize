@@ -1,0 +1,57 @@
+.look {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin-left: -10px;
+  margin-right: -10px;
+  transition: all 0.3s;
+  cursor: pointer;
+  &__index {
+    font-family: "Ubuntu", sans-serif;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    font-size: 15px;
+    background: #101010;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 19px;
+    line-height: 10px;
+    height: 19px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    &--selected {
+      background-color: #379456;
+    }
+    &--not-selected {
+      background-color: #d1d1d1;
+    }
+  }
+  &:hover {
+    background: #fafafa;
+  }
+}
+
+.look-item {
+  &__photo {
+    width: 60px;
+    height: 60px;
+    background-color: #eeeeee;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .look-item {
+    &__photo {
+      width: 80px;
+      height: 80px;
+    }
+  }
+}
