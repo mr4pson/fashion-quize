@@ -44,7 +44,7 @@ const validateMessages = {
 
 export const TaskCreationPage: FC = () => {
   const history = useHistory();
-  const [saveLoading, setSaveLoading] = useState(false);
+  const [saveLoading] = useState(false);
 
   const dispatch = useAppDispatch();
   const { types, loading } = useSelector(

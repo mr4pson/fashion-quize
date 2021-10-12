@@ -4,10 +4,15 @@ import { axiosInstance } from "components/pages/AdminPage/consts";
 import { TCompilation } from "components/pages/StylistPage/CompilationsPage/types";
 import { TypeDispatch } from "redux/ReduxStore";
 
+const itemsNumber = 3;
+
 const compilationsPageSlice = createSlice({
   name: "compilationsPage",
   initialState: {
     compilations: [] as TCompilation[],
+    visibleCompilations: [] as TCompilation[],
+    isIncreasePageBtnVisible: false,
+    page: 0,
     compilation: {} as TCompilation,
     loading: false as boolean,
   },
@@ -15,6 +20,23 @@ const compilationsPageSlice = createSlice({
     setCompilations: (state, action: PayloadAction<TCompilation[]>) => ({
       ...state,
       compilations: action.payload,
+    }),
+    increasePageNumber: (state) => {
+      const currentPage = state.page + 1;
+      const visibleCompilations = state.compilations.slice(0, currentPage * itemsNumber);
+      const isIncreasePageBtnVisible = visibleCompilations.length < state.compilations.length;
+      return {
+        ...state,
+        page: currentPage,
+        visibleCompilations,
+        isIncreasePageBtnVisible,
+      }
+    },
+    resetPageNumber: (state) => ({
+      ...state,
+      visibleCompilations: [],
+      page: 0,
+      isIncreasePageBtnVisible: false,
     }),
     setCompilation: (state, action: PayloadAction<TCompilation>) => ({
       ...state,
@@ -37,7 +59,8 @@ export const compilationsThunks = {
   getUserCompilations: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
     const response = await axiosInstance.get("/api/compilations/user-compilations");
-    dispatch(setCompilations(response?.data));
+    await dispatch(setCompilations(response?.data));
+    dispatch(increasePageNumber());
     dispatch(setLoading(false));
   },
   getStylistCompilations: () => async (dispatch: TypeDispatch) => {
@@ -46,10 +69,17 @@ export const compilationsThunks = {
     dispatch(setCompilations(response?.data));
     dispatch(setLoading(false));
   },
+  increaseCompilationPage: () => async (dispatch: TypeDispatch) => {
+    dispatch(increasePageNumber());
+  },
+  resetPageNumber: () => async (dispatch: TypeDispatch) => {
+    dispatch(resetPageNumber());
+  },
   setCompilation: (compilation: TCompilation) => (dispatch: TypeDispatch) => {
     dispatch(setCompilation(compilation));
   },
   clearCompilations: () => (dispatch: TypeDispatch) => {
+    console.log(123123);
     dispatch(setCompilations([]));
   },
   getCompilation: (id: number) => async (dispatch: TypeDispatch) => {
@@ -73,5 +103,5 @@ export const compilationsThunks = {
   },
 };
 
-export const { setCompilations, setCompilation, setLoading } = compilationsPageSlice.actions;
+export const { setCompilations, setCompilation, setLoading, increasePageNumber, resetPageNumber } = compilationsPageSlice.actions;
 export default compilationsPageSlice.reducer;

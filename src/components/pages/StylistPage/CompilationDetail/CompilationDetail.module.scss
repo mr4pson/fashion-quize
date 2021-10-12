@@ -44,9 +44,10 @@
 
   &__photo {
     height: 80px;
-    background: #ccc;
+    background-image: #ccc;
+    background-size: cover;
     background-position: center;
-    background-size: contain;
+    background-repeat: no-repeat;
     cursor: pointer;
   }
 

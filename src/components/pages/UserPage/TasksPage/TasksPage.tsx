@@ -9,6 +9,7 @@ import TaskCard from "./TaskCard";
 import PageHeader from "../common/PageHeader";
 import TaskCardSkeleton from "./TaskCardSkeleton";
 import { TASK_CARD_SKELETON_NUMBER } from "./constants";
+import IncreasePageButton from "../common/IncreasePageButton";
 
 type Props = {
   tasks: TypeTask[];
@@ -52,17 +53,11 @@ const TasksPage: React.FC<Props> = (props) => {
           <div className={styles["tasks-page__no-data"]}>Список задач пуст</div>
         )}
         {props.loading &&
-          [...Array(TASK_CARD_SKELETON_NUMBER)].map((index) => (
+          [...Array(TASK_CARD_SKELETON_NUMBER)].map((num, index) => (
             <TaskCardSkeleton key={`skeleton-${index}`} />
           ))}
         {props.isIncreasePageBtnVisible && (
-          <Button
-            className={styles["tasks-page__show-more-btn"]}
-            type={"link"}
-            onClick={props.increaseTaskPage}
-          >
-            Показать больше
-          </Button>
+          <IncreasePageButton onClick={props.increaseTaskPage} />
         )}
       </div>
     </div>

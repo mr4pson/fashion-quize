@@ -1,4 +1,3 @@
-import { RightOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { useEffect } from "react";
 import { FC, memo } from "react";

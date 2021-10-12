@@ -9,31 +9,38 @@ import { initialSelectedLooks } from "./constants";
 
 const CompilationsPageContainer: FC = () => {
   const dispatch = useAppDispatch();
-  const { compilations, loading } = useSelector(
+  const { isIncreasePageBtnVisible, visibleCompilations, loading } = useSelector(
     (state: TRootState) => state.compilationsPage
   );
   const [visible, setVisible] = useState(false);
   const [selectedLooks, setSelectedLooks] = useState(initialSelectedLooks);
   const [currentCompilation, setCurrentCompilation] = useState<TCompilation>();
+  
+  const handleIncreaseCompilationPage = (): void => {
+    dispatch(compilationsThunks.increaseCompilationPage());
+  }
 
   useEffect(() => {
     dispatch(compilationsThunks.getUserCompilations());
 
     return () => {
-      compilationsThunks.clearCompilations();
+      dispatch(compilationsThunks.clearCompilations());
+      dispatch(compilationsThunks.resetPageNumber());
     };
   }, [dispatch]);
 
   return (
     <CompilationsPage
       visible={visible}
-      setVisible={setVisible}
       selectedLooks={selectedLooks}
-      setSelectedLooks={setSelectedLooks}
       currentCompilation={currentCompilation}
-      setCurrentCompilation={setCurrentCompilation}
       loading={loading}
-      compilations={compilations}
+      compilations={visibleCompilations}
+      isIncreasePageBtnVisible={isIncreasePageBtnVisible}
+      setVisible={setVisible}
+      setSelectedLooks={setSelectedLooks}
+      increaseCompilationPage={handleIncreaseCompilationPage}
+      setCurrentCompilation={setCurrentCompilation}
     />
   );
 };
