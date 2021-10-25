@@ -14,6 +14,8 @@ const compilationsPageSlice = createSlice({
     isIncreasePageBtnVisible: false,
     page: 0,
     compilation: {} as TCompilation,
+    activeCompilation: {} as TCompilation,
+    activeLookIndex: -1,
     loading: false as boolean,
   },
   reducers: {
@@ -41,6 +43,14 @@ const compilationsPageSlice = createSlice({
     setCompilation: (state, action: PayloadAction<TCompilation>) => ({
       ...state,
       compilation: action.payload,
+    }),
+    setActiveCompilation: (state, action: PayloadAction<TCompilation>) => ({
+      ...state,
+      activeCompilation: action.payload,
+    }),
+    setActiveLookIndex: (state, action: PayloadAction<number>) => ({
+      ...state,
+      activeLookIndex: action.payload,
     }),
     setLoading: (state, action: PayloadAction<boolean>) => ({
       ...state,
@@ -78,8 +88,14 @@ export const compilationsThunks = {
   setCompilation: (compilation: TCompilation) => (dispatch: TypeDispatch) => {
     dispatch(setCompilation(compilation));
   },
+  setActiveCompilationAndLookIndex: (compilation: TCompilation, lookIndex: number) => (dispatch: TypeDispatch) => {
+    dispatch(setActiveLookIndex(lookIndex));
+    dispatch(setActiveCompilation(compilation));
+  },
+  clearActiveCompilation: () => (dispatch: TypeDispatch) => {
+    dispatch(setActiveCompilation({} as TCompilation));
+  },
   clearCompilations: () => (dispatch: TypeDispatch) => {
-    console.log(123123);
     dispatch(setCompilations([]));
   },
   getCompilation: (id: number) => async (dispatch: TypeDispatch) => {
@@ -103,5 +119,5 @@ export const compilationsThunks = {
   },
 };
 
-export const { setCompilations, setCompilation, setLoading, increasePageNumber, resetPageNumber } = compilationsPageSlice.actions;
+export const { setCompilations, setCompilation, setLoading, increasePageNumber, resetPageNumber, setActiveCompilation, setActiveLookIndex } = compilationsPageSlice.actions;
 export default compilationsPageSlice.reducer;

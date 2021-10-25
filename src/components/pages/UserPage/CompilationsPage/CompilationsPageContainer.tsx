@@ -9,7 +9,7 @@ import { initialSelectedLooks } from "./constants";
 
 const CompilationsPageContainer: FC = () => {
   const dispatch = useAppDispatch();
-  const { isIncreasePageBtnVisible, visibleCompilations, loading } = useSelector(
+  const { activeCompilation, activeLookIndex , isIncreasePageBtnVisible, visibleCompilations, loading } = useSelector(
     (state: TRootState) => state.compilationsPage
   );
   const [visible, setVisible] = useState(false);
@@ -36,6 +36,8 @@ const CompilationsPageContainer: FC = () => {
       currentCompilation={currentCompilation}
       loading={loading}
       compilations={visibleCompilations}
+      activeCompilation={activeCompilation}
+      activeLookIndex={activeLookIndex}
       isIncreasePageBtnVisible={isIncreasePageBtnVisible}
       setVisible={setVisible}
       setSelectedLooks={setSelectedLooks}
