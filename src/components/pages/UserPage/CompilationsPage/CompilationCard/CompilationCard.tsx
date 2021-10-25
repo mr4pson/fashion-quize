@@ -48,7 +48,12 @@ const CompilationCard: React.FC<Props> = ({ compilation, showModal }) => {
         <div className={styles["compilation-card__looks"]}>
           {compilation.looks?.length &&
             compilation.looks.map((look, index) => (
-              <Look key={`look-${index}`} look={look} index={index + 1} />
+              <Look
+                key={`look-${index}`}
+                compilation={compilation}
+                look={look}
+                index={index}
+              />
             ))}
         </div>
         {checkIfRateIsAccessible(compilation.task.status.title) && (

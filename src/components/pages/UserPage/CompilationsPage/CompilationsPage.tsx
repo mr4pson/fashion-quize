@@ -1,11 +1,11 @@
 import { Modal } from "antd";
-import classNames from "classnames";
 import { TCompilation } from "components/pages/StylistPage/CompilationsPage/types";
 import React, { memo, useState } from "react";
 import { useAppDispatch } from "redux/ReduxStore";
 import { compilationsThunks } from "redux/slicers/compilationsPageSlice";
 import IncreasePageButton from "../common/IncreasePageButton";
 import PageHeader from "../common/PageHeader";
+import ImageSlider from "../ImageSlider";
 import CompilationCard from "./CompilationCard";
 import CompilationCardSkeleton from "./CompilationCardSkeleton";
 import styles from "./CompilationsPage.module.scss";
@@ -13,6 +13,7 @@ import {
   COMPILATION_CARD_SKELETON_NUMBER,
   initialSelectedLooks,
 } from "./constants";
+import { getRatingClassNames } from "./helpers";
 
 type TProps = {
   compilations: TCompilation[];
@@ -21,6 +22,8 @@ type TProps = {
   selectedLooks: boolean[];
   isIncreasePageBtnVisible: boolean;
   currentCompilation: TCompilation | undefined;
+  activeCompilation: TCompilation;
+  activeLookIndex: number;
   increaseCompilationPage: () => void;
   setVisible: (visibility) => void;
   setSelectedLooks: (selectedLooks: boolean[]) => void;
@@ -41,15 +44,8 @@ const CompilationsPage: React.FC<TProps> = (props) => {
     props.setCurrentCompilation(compilation);
   };
 
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     props.setVisible(false);
-  };
-
-  const getClassNames = (isSelected) => {
-    return classNames({
-      [styles["rating__item"]]: true,
-      [styles["rating__item--active"]]: isSelected,
-    });
   };
 
   const handleChangeSelectedLooks = (index) => {
@@ -74,7 +70,9 @@ const CompilationsPage: React.FC<TProps> = (props) => {
 
     setIsLoading(true);
     await dispatch(compilationsThunks.rateCompilation(payload));
+
     setIsLoading(false);
+
     dispatch(compilationsThunks.getUserCompilations());
     props.setVisible(false);
   };
@@ -119,7 +117,7 @@ const CompilationsPage: React.FC<TProps> = (props) => {
           {props.selectedLooks.map((isSelected, index) => (
             <div
               key={"rating" + index}
-              className={getClassNames(isSelected)}
+              className={getRatingClassNames(isSelected, styles)}
               onClick={() => handleChangeSelectedLooks(index)}
             >
               {index + 1}
@@ -127,6 +125,12 @@ const CompilationsPage: React.FC<TProps> = (props) => {
           ))}
         </div>
       </Modal>
+      {Object.keys(props.activeCompilation).length ? (
+        <ImageSlider
+          activeLookIndex={props.activeLookIndex}
+          compilation={props.activeCompilation}
+        />
+      ) : <></>}
     </>
   );
 };
