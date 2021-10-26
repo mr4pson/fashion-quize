@@ -75,6 +75,7 @@ export const ImageSlider: React.FC<Props> = ({
     document.addEventListener("keydown", escFunction, false);
     setTimeout(() => {
       changeSliderOpacity(sliderStyleFeatures, setSliderStyleFeatures);
+      handleImageNavigation(0, sliderBodyRef, sliderImageHeight);
     });
     return () => {
       window.removeEventListener("resize", handleWindowResize);
