@@ -65,10 +65,10 @@ export const ImageSlider: React.FC<Props> = ({
   };
 
   const escFunction = (event): void => {
-    if(event.keyCode === 27) {
+    if (event.keyCode === 27) {
       handleCloseClick(dispatch);
     }
-  }
+  };
 
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
@@ -181,17 +181,21 @@ export const ImageSlider: React.FC<Props> = ({
             {activeLookIndex + 1}
           </div>
           {sliderItems.map((slierItem, index) => (
-            <div
-              key={`collection-item-${index}`}
-              onClick={() =>
-                handleImageNavigation(index, sliderBodyRef, sliderImageHeight)
-              }
-              style={{ backgroundImage: `url(${getImageUrl(slierItem.photo)}` }}
-              className={getCollectionItemClassNames(
-                index === activeItemIndex,
-                styles
+            <div className={styles["collection__item-wrapper"]}>
+              {index === activeItemIndex && (
+                <div className={styles["collection__item--active"]}></div>
               )}
-            ></div>
+              <div
+                key={`collection-item-${index}`}
+                className={styles["collection__item"]}
+                style={{
+                  backgroundImage: `url(${getImageUrl(slierItem.photo)}`,
+                }}
+                onClick={() =>
+                  handleImageNavigation(index, sliderBodyRef, sliderImageHeight)
+                }
+              ></div>
+            </div>
           ))}
         </div>
       </div>

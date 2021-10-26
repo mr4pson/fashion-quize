@@ -117,6 +117,7 @@
     height: 22px;
     border-radius: 50%;
     box-sizing: border-box;
+    z-index: 10;
     &--selected {
       background-color: #379456;
     }
@@ -124,21 +125,31 @@
       background-color: #d1d1d1;
     }
   }
+  &__item-wrapper {
+    position: relative;
+    margin-left: 8px;
+    &:nth-child(2) {
+      margin-left: 0;
+    }
+  }
   &__item {
+    position: relative;
     width: 56px;
     height: 56px;
     background: #fff;
     border-radius: 7px;
-    margin-left: 8px;
     box-sizing: content-box;
     background-size: cover;
     background-position: center;
     cursor: pointer;
-    &:nth-child(2) {
-      margin-left: 0;
-    }
     &--active {
-      outline: 2px solid #317fda;
+      top: -2px;
+      left: -2px;
+      background: #317fda;
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      border-radius: 7px;
     }
   }
 }

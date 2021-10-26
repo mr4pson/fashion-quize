@@ -10,6 +10,11 @@ import "antd/dist/antd.css";
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import './index.css';
 
+import * as smoothscroll from 'smoothscroll-polyfill';
+
+// kick off the polyfill!
+smoothscroll.polyfill();
+
 ReactDOM.render(
   <ConfigProvider locale={ruRU}>
   <Provider store={store}>
