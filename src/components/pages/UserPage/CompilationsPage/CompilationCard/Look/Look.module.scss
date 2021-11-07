@@ -8,7 +8,8 @@
   margin-right: -10px;
   transition: all 0.3s;
   cursor: pointer;
-  &__index {
+  &__index,
+  &__price {
     font-family: "Ubuntu", sans-serif;
     position: absolute;
     top: 0px;
@@ -34,6 +35,14 @@
   &:hover {
     background: #fafafa;
   }
+}
+
+.look__price {
+  left: auto;
+  right: 0;
+  width: fit-content;
+  padding: 0 5px;
+  border-radius: 8px;
 }
 
 .look-item {

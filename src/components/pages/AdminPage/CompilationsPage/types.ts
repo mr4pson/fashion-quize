@@ -1,6 +1,8 @@
+import { TypeTask } from "../TasksPage/types";
+
 export type TCompilation = {
   id: number;
-  task: any;
+  task: TypeTask;
   looks: TLook[];
   createdAt: string;
 };
@@ -15,4 +17,5 @@ export type TLookItem = {
   id?: number;
   name: string;
   photo: string;
+  price: number;
 };

@@ -29,14 +29,24 @@
   margin-right: 10px;
 
   &__photo {
-    height: 80px;
+    height: 100px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
 
-  &__name {
+  &__name, &__price {
     text-align: center;
     line-height: 16px;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  &__name {
+    margin-top: 5px;
+  }
+
+  &__price {
+    font-weight: 500;
   }
 }

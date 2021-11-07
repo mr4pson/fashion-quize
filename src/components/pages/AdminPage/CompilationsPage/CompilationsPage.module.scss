@@ -37,7 +37,8 @@
   margin-bottom: 10px;
   padding: 5px;
   position: relative;
-  &__selected-icon, &__not-selected-icon {
+  &__selected-icon,
+  &__not-selected-icon {
     position: absolute;
     right: 3px;
     top: 0px;
@@ -47,26 +48,33 @@
     border-radius: 50%;
   }
   &__selected-icon {
-    color: green!important;
+    color: green !important;
   }
   &__not-selected-icon {
-    color: red!important;
+    color: red !important;
   }
 }
 
 .look-item {
   width: 100px;
+  margin-bottom: 10px;
   margin-right: 10px;
-
   &__photo {
     height: 80px;
   }
-
-  &__name {
+  &__name,
+  &__price {
     text-align: center;
     line-height: 16px;
+    margin-top: 5px;
   }
-
+  &__name {
+    font-size: 16px;
+    margin-bottom: 7px;
+  }
+  &__price {
+    font-weight: 500;
+  }
   &:last-child {
     margin-right: 0;
   }
