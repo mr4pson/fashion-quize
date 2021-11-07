@@ -23,7 +23,7 @@ import {
   getFormField,
   handleAddItem,
   handleDelItem,
-  handleEditItemName,
+  handleEditItemParam,
 } from "./helpers";
 import { TStatus } from "./types";
 
@@ -138,6 +138,7 @@ const CompilationDetail: FC<TProps> = (props) => {
   };
 
   let initialValues;
+
   if (curTask?.status && compilation?.id) {
     initialValues = {
       status: curTask?.status.id,
@@ -218,12 +219,32 @@ const CompilationDetail: FC<TProps> = (props) => {
                         </div>
                         <div className={styles["look-item__name"]}>
                           <Input
+                            className={styles["look-item__input"]}
                             bordered={false}
                             value={lookItem.name}
                             onChange={(e) =>
-                              handleEditItemName(
+                              handleEditItemParam(
                                 e,
                                 compilation,
+                                "name",
+                                lookIndex,
+                                lookItemIndex,
+                                dispatch,
+                                setCompilation
+                              )
+                            }
+                          />
+                        </div>
+                        <div className={styles["look-item__price"]}>
+                          <Input
+                            className={styles["look-item__input"]}
+                            bordered={false}
+                            value={lookItem.price}
+                            onChange={(e) =>
+                              handleEditItemParam(
+                                e,
+                                compilation,
+                                "price",
                                 lookIndex,
                                 lookItemIndex,
                                 dispatch,
@@ -262,7 +283,13 @@ const CompilationDetail: FC<TProps> = (props) => {
           >
             {formFields.map((field) => (
               <div className={styles["detail__field"]} key={field.id}>
-                {getFormField(field.type, field, statuses, loading, compilation)}
+                {getFormField(
+                  field.type,
+                  field,
+                  statuses,
+                  loading,
+                  compilation
+                )}
               </div>
             ))}
           </Form>

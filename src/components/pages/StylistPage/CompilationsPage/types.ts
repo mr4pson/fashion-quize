@@ -17,4 +17,5 @@ export type TLookItem = {
   id?: number;
   name: string;
   photo: string;
+  price: number;
 };

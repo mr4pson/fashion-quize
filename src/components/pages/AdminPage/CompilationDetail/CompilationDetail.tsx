@@ -15,7 +15,9 @@ const ProfilePage: FC = () => {
   const { id } = useParams() as any;
 
   const dispatch = useAppDispatch();
-  const { compilation } = useSelector((state: TRootState) => state.compilationsPage);
+  const { compilation } = useSelector(
+    (state: TRootState) => state.compilationsPage
+  );
 
   const taskId = compilation.task?.id;
   const userName = compilation.task?.user?.name;
@@ -37,13 +39,19 @@ const ProfilePage: FC = () => {
         <Descriptions size="default" column={2}>
           {taskId && (
             <Descriptions.Item label="Задача">
-              <Link to={`${paths[AdmPage.TASKS]}/${taskId}`}>Задача №{taskId}</Link>
+              <Link to={`${paths[AdmPage.TASKS]}/${taskId}`}>
+                Задача №{taskId}
+              </Link>
             </Descriptions.Item>
           )}
           <Descriptions.Item label="Пользователь">
-            <Link to={`${paths[AdmPage.USERS]}/${compilation.task.user.id}`}>{userName}</Link>
+            <Link to={`${paths[AdmPage.USERS]}/${compilation.task.user.id}`}>
+              {userName}
+            </Link>
           </Descriptions.Item>
-          <Descriptions.Item label="Статус">{compilation.task.status.title}</Descriptions.Item>
+          <Descriptions.Item label="Статус">
+            {compilation.task.status.title}
+          </Descriptions.Item>
           <Descriptions.Item label="Создана">
             {moment(compilation.createdAt).format("DD.MM.yyyy hh:mm:ss")}
           </Descriptions.Item>
@@ -51,10 +59,16 @@ const ProfilePage: FC = () => {
       )}
       {compilation.looks?.map((look, lookIndex) => (
         <div className={styles["look"]} key={"look" + lookIndex}>
-          {look.items.map(({ id, photo, name }) => (
+          {look.items.map(({ id, photo, name, price }) => (
             <div className={styles["look-item"]} key={id}>
-              <Image className={styles["look-item__photo"]} width={100} height={80} src={getImageUrl(photo)} />
+              <Image
+                className={styles["look-item__photo"]}
+                width={100}
+                height={100}
+                src={getImageUrl(photo)}
+              />
               <div className={styles["look-item__name"]}>{name}</div>
+              <div className={styles["look-item__price"]}>{price} ₽</div>
             </div>
           ))}
         </div>

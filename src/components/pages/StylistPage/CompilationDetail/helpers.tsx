@@ -5,9 +5,10 @@ import { TCompilation } from "../CompilationsPage/types";
 import { TaskStatus } from "../TasksPage/types";
 import { layout } from "./consts";
 
-export const handleEditItemName = (
+export const handleEditItemParam = (
   e,
   compilation: TCompilation,
+  fieldName: string,
   lookIndex?: number,
   lookItemIndex?: number,
   dispatch?: any,
@@ -24,8 +25,10 @@ export const handleEditItemName = (
             if (lookItemIndex === lookItemI) {
               return {
                 id: lookItem.id,
-                name: e.currentTarget.value,
                 photo: lookItem.photo,
+                price: lookItem.price,
+                name: lookItem.name,
+                [fieldName]: e.currentTarget.value,
               };
             }
             return lookItem;
@@ -51,7 +54,12 @@ export const handleDelItem = (
     task: compilation.task,
     looks: compilation.looks.map((look, lookI) => {
       if (lookIndex === lookI) {
-        return { id: look.id, items: look.items.filter((item, lookItemI) => lookItemIndex !== lookItemI) };
+        return {
+          id: look.id,
+          items: look.items.filter(
+            (item, lookItemI) => lookItemIndex !== lookItemI
+          ),
+        };
       }
       return look;
     }),
@@ -69,10 +77,20 @@ export const handleAddItem = (
   setCurrentLookIndex(index);
 };
 
-export const getFormField = (type: string, field: TFormField, statuses: TaskStatus[], loading: boolean, compilation: TCompilation) =>
+export const getFormField = (
+  type: string,
+  field: TFormField,
+  statuses: TaskStatus[],
+  loading: boolean,
+  compilation: TCompilation
+) =>
   ({
     STATUS: (
-      <Form.Item name={field.name} label={field.label} rules={[{ required: true }]}>
+      <Form.Item
+        name={field.name}
+        label={field.label}
+        rules={[{ required: true }]}
+      >
         <Select open={field.readonly ? false : undefined}>
           {statuses
             .map((type) => ({
@@ -80,15 +98,18 @@ export const getFormField = (type: string, field: TFormField, statuses: TaskStat
               title: type.title,
             }))
             .map((option, index) => (
-              <Select.Option key={`task-${field.name}` + index} value={option.value}>
+              <Select.Option
+                key={`task-${field.name}` + index}
+                value={option.value}
+              >
                 {option.title}
               </Select.Option>
             ))}
         </Select>
       </Form.Item>
     ),
-    BUTTON: (
-      compilation.task?.status.title !== 'Завершена' && <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+    BUTTON: compilation.task?.status.title !== "Завершена" && (
+      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button loading={loading} type="primary" htmlType="submit">
           {field.label}
         </Button>

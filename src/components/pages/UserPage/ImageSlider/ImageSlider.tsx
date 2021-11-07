@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import { getImageUrl } from "common/helpers/common-helpers";
+import { getImageUrl, numberWithSpaces } from "common/helpers/common-helpers";
+import { useOnClickOutside } from "common/hooks/useOnClickOutside";
 import { TCompilation } from "components/pages/StylistPage/CompilationsPage/types";
 import * as React from "react";
 import { memo, useEffect, useRef, useState } from "react";
@@ -8,12 +9,11 @@ import { SliderDirectionEnum } from "./constants";
 import {
   changeSliderOpacity,
   computeSliderScale,
-  getCollectionItemClassNames,
   getLookIndexClassNames,
   getSliderImageHeight,
   handleCloseClick,
   handleImageNavigation,
-  handleSliderControlClick,
+  handleSliderControlClick
 } from "./helpers";
 import { ReactComponent as ArrowLeftSvg } from "./icons/arrow-left.svg";
 import { ReactComponent as ArrowRightSvg } from "./icons/arrow-right.svg";
@@ -83,6 +83,8 @@ export const ImageSlider: React.FC<Props> = ({
     };
   }, []);
 
+  useOnClickOutside("slider-item", () => handleCloseClick(dispatch));
+
   return (
     <div
       className={styles["slider"]}
@@ -91,6 +93,7 @@ export const ImageSlider: React.FC<Props> = ({
       }}
     >
       <button
+        id="slider-item"
         className={styles["slider__close"]}
         onClick={() => handleCloseClick(dispatch)}
       >
@@ -105,7 +108,7 @@ export const ImageSlider: React.FC<Props> = ({
           className={styles["slider__content"]}
           style={{ transform: `scale(${sliderStyleFeatures})` }}
         >
-          {sliderItems.map((slierItem, index) => (
+          {sliderItems.map((sliderItem, index) => (
             <div
               key={`slider-item-${index}`}
               className={styles["slider-item"]}
@@ -118,24 +121,27 @@ export const ImageSlider: React.FC<Props> = ({
                 ),
               }}
             >
-              <div className={styles["slider-item__header"]}>
+              <div id="slider-item" className={styles["slider-item__header"]}>
                 <div className={styles["slider-item__title"]}>
-                  {slierItem.name}
+                  {sliderItem.name}
                 </div>
-                <div className={styles["slider-item__price"]}>15 000 ₽</div>
+                <div className={styles["slider-item__price"]}>
+                  {numberWithSpaces(sliderItem.price)} ₽
+                </div>
               </div>
               <div
+                id="slider-item"
                 className={styles["slider-item__content"]}
                 style={{
-                  backgroundImage: `url(${getImageUrl(slierItem.photo)}`,
+                  backgroundImage: `url(${getImageUrl(sliderItem.photo)}`,
                 }}
               ></div>
             </div>
           ))}
         </div>
       </div>
-      <div className={styles["slider__footer"]}>
-        <div className={styles["slider__controls"]}>
+      <div id="slider-item" className={styles["slider__footer"]}>
+        <div id="slider-item" className={styles["slider__controls"]}>
           {activeLookIndex !== 0 && (
             <button
               className={classNames(
@@ -153,7 +159,7 @@ export const ImageSlider: React.FC<Props> = ({
                 )
               }
             >
-              <ArrowLeftSvg />
+              <ArrowLeftSvg id="slider-item" />
             </button>
           )}
           {activeLookIndex !== 2 && (
@@ -173,20 +179,24 @@ export const ImageSlider: React.FC<Props> = ({
                 )
               }
             >
-              <ArrowRightSvg />
+              <ArrowRightSvg id="slider-item" />
             </button>
           )}
         </div>
-        <div className={styles["collection"]}>
+        <div id="slider-item" className={styles["collection"]}>
           <div className={getLookIndexClassNames(look.selected, styles)}>
             {activeLookIndex + 1}
           </div>
           {sliderItems.map((slierItem, index) => (
-            <div className={styles["collection__item-wrapper"]}>
+            <div
+              key={`collection-item-${index}`}
+              className={styles["collection__item-wrapper"]}
+            >
               {index === activeItemIndex && (
                 <div className={styles["collection__item--active"]}></div>
               )}
               <div
+                id="slider-item"
                 key={`collection-item-${index}`}
                 className={styles["collection__item"]}
                 style={{

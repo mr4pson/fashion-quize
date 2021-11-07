@@ -68,6 +68,9 @@ export const getColumns = (styles) => {
                       src={getImageUrl(item.photo)}
                     />
                     <div className={styles["look-item__name"]}>{item.name}</div>
+                    <div className={styles["look-item__price"]}>
+                      {item.price} ₽
+                    </div>
                   </div>
                 ))}
               </div>
