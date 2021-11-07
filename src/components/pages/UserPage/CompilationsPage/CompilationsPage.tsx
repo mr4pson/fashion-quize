@@ -94,7 +94,7 @@ const CompilationsPage: React.FC<TProps> = (props) => {
               Список подборок пуст
             </div>
           )}
-          {props.loading &&
+          {
             [...Array(COMPILATION_CARD_SKELETON_NUMBER)].map((num, index) => (
               <CompilationCardSkeleton key={`skeleton-${index}`} />
             ))}

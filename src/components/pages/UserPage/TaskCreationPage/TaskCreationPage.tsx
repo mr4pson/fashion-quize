@@ -20,6 +20,7 @@ import { paths, UsrPage } from "../routes/consts";
 import { formFields } from "./constants";
 import styles from "./TaskCreationPage.module.scss";
 import moment from "moment";
+import PageHeader from "../common/PageHeader";
 
 const layout = {
   labelCol: { span: 8 },
@@ -142,13 +143,18 @@ export const TaskCreationPage: FC = () => {
       validateMessages={validateMessages}
       {...layout}
     >
-      <Card bordered={false} loading={loading} title={getCreationTitle()}>
+      <PageHeader
+        title={"Создание задачи"}
+        btnTitle={"Создать"}
+        buttonType={"submit"}
+      />
+      {/* <Card bordered={false} loading={loading} title={getCreationTitle()}> */}
         {formFields.map((field) => (
           <div className={styles["detail__field"]} key={field.id}>
             {getFormField(field.type, field)}
           </div>
         ))}
-      </Card>
+      {/* </Card> */}
     </Form>
   );
 };
