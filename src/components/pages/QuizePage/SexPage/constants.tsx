@@ -2,19 +2,21 @@ import { ManOutlined, WomanOutlined } from "@ant-design/icons";
 
 import { EQuize } from "common/types/types";
 import { ESexes } from "components/pages/StylistPage/TasksPage/types";
-import { Sex } from "./types";
+import { ISex } from "./types";
 
-export const sexs: Sex[] = [
+export const sexsDefault: ISex[] = [
   {
-    label: "Мужчина",
+    label: "Мужской",
     path: EQuize.FOR_MEN,
     icon: <ManOutlined />,
     value: ESexes.MALE,
+    isActive: false,
   },
   {
-    label: "Женщина",
+    label: "Женский",
     path: EQuize.FOR_WOMEN,
     icon: <WomanOutlined />,
     value: ESexes.FEMALE,
+    isActive: false,
   },
 ];
