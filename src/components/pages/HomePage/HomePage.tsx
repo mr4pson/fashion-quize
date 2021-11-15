@@ -5,7 +5,7 @@ import { memo } from 'react';
 import { Link } from "react-router-dom";
 import { ReactComponent as RightArrow } from './../../../assets/icons/right-arrow.svg';
 import { qandAItems } from './constants';
-import { getLinkToNameInput } from './helper';
+import { getLinkToQiuze } from './helper';
 import styles from './HomePage.module.scss';
 import QandAItem from './QandAItem';
 
@@ -22,7 +22,7 @@ function HomePage(): JSX.Element {
                                 <div className={styles['compilation-section__desc']}>Персональные подборки для вашего гардероба от стилистов за 1990₽. <br/>Для любых целей. <br/>И всё онлайн.</div>
                             </div>
                             <div className={styles['compilation-section__right']}></div>
-                            <Link to={getLinkToNameInput()}>
+                            <Link to={getLinkToQiuze()}>
                                 <div className={styles['compilation-section__btn-wrap']}>
                                     <div className={styles['compilation-section__btn-white']}>Обнови свой гардероб</div>
                                     <div className={styles['compilation-section__btn-black']}>
@@ -86,7 +86,7 @@ function HomePage(): JSX.Element {
                                 <div className={styles['work-example__desc']}>Бесплатно доставим образы в удобное для вас время. Покупайте только то, что вам нравится. При покупке комплекта, из общей суммы вычитается стоимость подбора образов. Доставка и возврат бесплатны, платите только за работу стилиста.</div>
                             </div>
                         </div>
-                        <Link to={getLinkToNameInput()}>
+                        <Link to={getLinkToQiuze()}>
                             <button className={styles['how-work-section__quize-btn']}>
                                 <span>Заполнить анкету</span>
                                 <RightArrow className={styles['icon']} />
@@ -105,7 +105,7 @@ function HomePage(): JSX.Element {
                 <div className={styles['try-quize-section']}>
                     <div className="container">
                         <div className={styles['try-quize-section__title']}>Заполните анкету и получите первую подборку образов от вашего онлайн стилиста</div>
-                        <Link to={getLinkToNameInput()}>
+                        <Link to={getLinkToQiuze()}>
                             <button className={styles['try-quize-section__btn']}>
                                 Попробовать
                             </button>

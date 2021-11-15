@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { EQuize } from "common/types/types";
 import { TypeBlock } from "components/pages/AdminPage/BlocksPage/type";
 import { axiosInstance } from "components/pages/AdminPage/consts";
+import { TBaseFields } from "components/pages/QuizePage/BaseForm/types";
 import { TypeQuestion } from "components/pages/QuizePage/types";
 import { ESexes, TUser } from "components/pages/StylistPage/TasksPage/types";
 import { TypeDispatch } from "redux/ReduxStore";
@@ -13,10 +14,7 @@ const quizePageSlice = createSlice({
     answers: {} as Object | {},
     questions: [] as TypeQuestion[],
     blocks: [] as TypeBlock[],
-    name: "" as string,
-    email: "" as string,
-    age: 0 as number,
-    city: "" as string,
+    baseFields: {} as TBaseFields,
     sex: "" as ESexes,
     user: {} as TUser,
   },
@@ -33,25 +31,13 @@ const quizePageSlice = createSlice({
       ...state,
       blocks: action.payload,
     }),
-    setName: (state, action: PayloadAction<string>) => ({
+    setBaseFields: (state, action: PayloadAction<TBaseFields>) => ({
       ...state,
-      name: action.payload,
-    }),
-    setEmail: (state, action: PayloadAction<string>) => ({
-      ...state,
-      email: action.payload,
-    }),
-    setAge: (state, action: PayloadAction<number>) => ({
-      ...state,
-      age: action.payload,
+      baseFields: action.payload,
     }),
     setSex: (state, action: PayloadAction<ESexes>) => ({
       ...state,
       sex: action.payload,
-    }),
-    setCity: (state, action: PayloadAction<string>) => ({
-      ...state,
-      city: action.payload,
     }),
     setUser: (state, action: PayloadAction<TUser>) => ({
       ...state,
@@ -74,17 +60,8 @@ export const quizeThunks = {
     await dispatch(setStateAnswers(JSON.parse(response?.data.data)));
     dispatch(setUser(response?.data.user));
   },
-  setEmail: (payload: string) => async (dispatch: TypeDispatch) => {
-    dispatch(setEmail(payload));
-  },
-  setName: (payload: string) => async (dispatch: TypeDispatch) => {
-    dispatch(setName(payload));
-  },
-  setAge: (payload: number) => async (dispatch: TypeDispatch) => {
-    dispatch(setAge(payload));
-  },
-  setCity: (payload: string) => async (dispatch: TypeDispatch) => {
-    dispatch(setCity(payload));
+  setBaseFields: (payload: TBaseFields) => async (dispatch: TypeDispatch) => {
+    dispatch(setBaseFields(payload));
   },
   setSex: (payload: ESexes) => async (dispatch: TypeDispatch) => {
     dispatch(setSex(payload));
@@ -103,5 +80,5 @@ export const quizeThunks = {
   },
 };
 
-export const { setStateAnswers, setQuestions, setEmail, setName, setBlocks, setAge, setCity, setSex, setUser } = quizePageSlice.actions;
+export const { setStateAnswers, setQuestions, setBaseFields, setBlocks, setSex, setUser } = quizePageSlice.actions;
 export default quizePageSlice.reducer;

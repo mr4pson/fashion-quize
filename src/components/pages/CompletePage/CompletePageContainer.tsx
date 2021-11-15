@@ -6,7 +6,8 @@ import { TRootState } from "redux/ReduxStore";
 import CompletePage from "./CompletePage";
 
 const CompletePageContainer: FC = () => {
-  const { email, name } = useSelector((state: TRootState) => state.quizePage);
+  // const { email, name } = useSelector((state: TRootState) => state.quizePage);
+  const { email, name } = { email: "", name: "" };
 
   return (
     <>

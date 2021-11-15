@@ -1,9 +1,5 @@
-import { Page, paths } from "routes/constants";
+import { paths, QzPage } from "../QuizePage/routes/constants";
 
-export const getLinkToFisrtQuestion = () => {
-    return paths[Page.QUIZE] + '/' + 1;
-}
-
-export const getLinkToNameInput = () => {
-    return paths[Page.NAME_INPUT];
+export const getLinkToQiuze = () => {
+    return paths[QzPage.BASE];
 }

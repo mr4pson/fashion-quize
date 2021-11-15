@@ -1,64 +1,77 @@
 .sex-page {
-  &__title {
-    text-align: center;
-    font-size: 36px;
-    height: 80px;
-    box-sizing: border-box;
-    padding-top: 110px;
-    font-weight: 500;
-  }
   &__body {
     display: flex;
-    margin-top: 110px;
+    justify-content: center;
+    margin-top: 50px;
   }
   &__item {
-    width: 50vw;
-    height: calc(100vh - 220px);
+    position: relative;
+    width: 250px;
+    height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s;
+    border-radius: 5px;
+    color: #B0B9C9;
+    background: #F0F6FB;
     &:hover {
-      background-color: #f2f2ff;
+      opacity: 0.8;
     }
-  }
-  .sex-item {
-    &__wrapper {
+    &:last-child {
+      margin-left: 32px;
     }
-    &__icon {
-      text-align: center;
-      font-size: 160px;
-    }
-    &__title {
-      font-size: 36px;
-      text-align: center;
-    }
-  }
-}
-.for-men {
-  color: #9d2fb1;
-}
-.for-women {
-  color: #4d4dca;
-}
 
-@media only screen and (max-width: 768px) {
-  .sex-page {
-    &__title {
-      font-size: 32px;
+    &--for-women {
+      .sex-item {
+        &__icon {
+          font-size: 180px;
+        }
+      }
     }
-    &__body {
-      margin-top: 70px;
-    }
-    &__item {
-      width: 50vw;
-      height: calc(100vh - 180px);
-    }
-    .sex-item {
-      &__title {
-        font-size: 32px;
+    &--active {
+      background: #33495C;
+      .sex-item {
+        &__title {
+          color: #fff;
+        }
       }
     }
   }
+  &__submit-btn {
+    background: #101010 !important;
+    color: #fff !important;
+    width: 220px;
+    height: 48px !important;
+    border-radius: 7px !important;
+    display: block !important;
+    margin: 60px auto 0 !important;
+    &:hover, &:active {
+      border: none !important;
+    }
+    &:disabled {
+      background:#686868 !important;
+    }
+  }
+}
+.sex-item {
+  &__icon {
+    text-align: center;
+    font-size: 200px;
+    margin-top: -40px;
+  }
+  &__title {
+    width: 100%;
+    position: absolute;
+    bottom: 25px;
+    right: 0;
+    color: #000;
+    font-size: 18px;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+
 }

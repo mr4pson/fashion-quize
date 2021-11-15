@@ -33,7 +33,7 @@ input, button, select, optgroup, textarea {
 }
 
 .ant-form label {
-  font-size: 16px !important;
+  /* font-size: 16px !important; */
   display: flex !important;
   align-items: center;
   white-space: unset;
@@ -67,8 +67,8 @@ input, button, select, optgroup, textarea {
 }
 
 .quize-page .ant-checkbox-inner {
-	width: 26px;
-	height: 26px;
+	width: 24px;
+	height: 24px;
 }
 
 .quize-page .ant-checkbox-checked .ant-checkbox-inner {
@@ -77,10 +77,17 @@ input, button, select, optgroup, textarea {
 }
 
 .quize-page .ant-checkbox-checked .ant-checkbox-inner::after {
-  transform: rotate(45deg) scale(1.6) translate(-7%, -50%);
+  transform: rotate(45deg) scale(1.6) translate(-20%, -50%);
 }
 .quize-page .ant-checkbox-wrapper span {
 	display: inline-block;
+}
+.quize-page .ant-checkbox-checked::after {
+  border: none;
+}
+
+.ant-checkbox-input + .ant-checkbox-inner {
+  border-color: #000 !important;
 }
 
 .quize-page .ant-radio-inner::after {
@@ -89,6 +96,10 @@ input, button, select, optgroup, textarea {
 	width: 14px;
 	height: 14px;
 	background-color: currentColor;
+}
+
+.quize-page .ant-form-item-required::before, .quize-page .ant-form-item-required::after {
+  display: none !important;
 }
 
 .quize-page .ant-radio-inner {
@@ -176,4 +187,10 @@ img.ant-image-img {
 
 .ant-skeleton.ant-skeleton-active .ant-skeleton-input, .ant-skeleton.ant-skeleton-active .ant-skeleton-button {
   background-image: linear-gradient(90deg, rgb(240 242 245) 25%, rgb(247 249 252) 37%, rgb(242 244 247) 63%);
+}
+
+#basic_phone {
+  padding: 15px 11px !important;
+  border-radius: 5px !important;
+  font-size: 18px !important;
 }

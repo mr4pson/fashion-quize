@@ -1,21 +1,18 @@
-import { Button, Form, FormInstance } from "antd";
 import classNames from "classnames";
-import Question from "components/modules/Question/Question";
-import { FC, memo, useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
-import { TRootState, useAppDispatch } from "redux/ReduxStore";
-import { quizeThunks, setStateAnswers } from "redux/slicers/quizePageSlice";
-import { Page, paths } from "routes/constants";
-import { getNextQuestionLink, hexToRgb } from "./helper";
+import Footer from "components/modules/Footer";
+import { FC, memo } from "react";
+import { useLocation } from "react-router";
+import QuizeHeader from "./QuizeHeader";
+import { TQuizeHeaderConfig } from "./QuizeHeader/types";
 import styles from "./QuizePage.module.scss";
-import { TypeQuestion } from "./types";
+import { paths, QzPage } from "./routes/constants";
+import QuizeRoutes from "./routes/QuizeRoutes";
 
 
 /* eslint-disable no-template-curly-in-string */
-const validateMessages = {
-  required: "Необходимо заполнить поле!",
-};
+// const validateMessages = {
+//   required: "Необходимо заполнить поле!",
+// };
 /* eslint-enable no-template-curly-in-string */
 
 type TProps = {
@@ -23,98 +20,132 @@ type TProps = {
 };
 
 const QuizePage: FC<TProps> = (props) => {
-  const dispatch = useAppDispatch();
-  const { questions, blocks, name, email, age, city, sex } = useSelector(
-    (state: TRootState) => state.quizePage
-  );
+  const location = useLocation();
+  // const dispatch = useAppDispatch();
+  // const { questions, blocks, name, email, age, city, sex } = useSelector(
+  //   (state: TRootState) => state.quizePage
+  // );
 
-  const { questionNumber, quizeType } = useParams() as any;
-  const questionsNumber = questions?.length;
+  // const { questionNumber, quizeType } = useParams() as any;
+  // const questionsNumber = questions?.length;
 
-  const [question, setQuestion] = useState<TypeQuestion>({} as TypeQuestion);
-  const formRef = useRef<FormInstance>(null);
-  const history = useHistory();
+  // const [question, setQuestion] = useState<TypeQuestion>({} as TypeQuestion);
+  // const formRef = useRef<FormInstance>(null);
+  // const history = useHistory();
 
-  useEffect(() => {
-    formRef.current?.resetFields();
-  });
+  // useEffect(() => {
+  //   formRef.current?.resetFields();
+  // });
 
-  useEffect(() => {
-    dispatch(quizeThunks.getQuestionsByQuizeType(quizeType));
-    dispatch(quizeThunks.getQuestionBlocks());
-  }, [dispatch, quizeType]);
+  // useEffect(() => {
+  //   dispatch(quizeThunks.getQuestionsByQuizeType(quizeType));
+  //   dispatch(quizeThunks.getQuestionBlocks());
+  // }, [dispatch, quizeType]);
 
-  useEffect(() => {
-    if (questions?.length) {
-      setQuestion(questions[questionNumber - 1]);
+  // useEffect(() => {
+  //   if (questions?.length) {
+  //     setQuestion(questions[questionNumber - 1]);
+  //   }
+  // }, [dispatch, questionNumber, questions]);
+
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(quizeThunks.clearAnswers());
+  //   };
+  // }, [dispatch]);
+
+  // const onFinish = async () => {
+  //   const formValue = formRef.current?.getFieldsValue();
+  //   const answers = { ...props.answers, [question.id]: formValue.answer };
+  //   dispatch(setStateAnswers(answers));
+
+  //   if (+questionNumber === questionsNumber) {
+  //     const payload = {
+  //       name,
+  //       email,
+  //       age,
+  //       city,
+  //       sex,
+  //       data: JSON.stringify(answers),
+  //     };
+  //     await dispatch(quizeThunks.registrateUser(payload));
+
+  //     history.push(paths[Page.COMPLETE]);
+  //     return;
+  //   }
+
+  //   history.push(getNextQuestionLink(+questionNumber, quizeType));
+  // };
+
+  // const onFinishFailed = (errorInfo: any) => {
+  //   console.log("Failed:", errorInfo);
+  // };
+
+  // const initialValue = { answer: props.answers[question?.id] };
+  // const formProps = {
+  //   name: "basic",
+  //   ref: formRef,
+  //   initialValues: initialValue,
+  //   validateMessages: validateMessages,
+  // };
+
+  // const blocksQuestionIds: { [key: number]: number[] } = questions.reduce(
+  //   (ids: any, { id, block }) => {
+  //     const blockId = block?.id as number;
+
+  //     if (!ids[blockId]) {
+  //       ids[blockId] = [];
+  //     }
+  //     ids[blockId].push(id);
+
+  //     return ids;
+  //   },
+  //   {}
+  // );
+
+  // const getBlockProgress = (id): string => {
+  //   const BlockAnswers = blocksQuestionIds[id]?.filter((queId) =>
+  //     Object.keys(props.answers).includes(queId.toString())
+  //   );
+  //   return `${(BlockAnswers?.length / +blocksQuestionIds[id]?.length) * 100}%`;
+  // };
+
+  console.log(location);
+  const getQuizeHeaderConfig = (): TQuizeHeaderConfig => {
+    let config = {} as TQuizeHeaderConfig;
+    switch (location.pathname) {
+      case paths[QzPage.BASE]:
+        config = {
+          title: "Ваши данные",
+          description: "Укажите ваши основные идентификационные данные",
+          backUrl: undefined,
+          currentSectionNumber: 1,
+        };
+        break;
+      case paths[QzPage.SEX]:
+        config = {
+          title: "Выберите ваш пол",
+          description: undefined,
+          backUrl: paths[QzPage.BASE],
+          currentSectionNumber: 2,
+        };
+        break;
     }
-  }, [dispatch, questionNumber, questions]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(quizeThunks.clearAnswers());
-    };
-  }, [dispatch]);
-
-  const onFinish = async () => {
-    const formValue = formRef.current?.getFieldsValue();
-    const answers = { ...props.answers, [question.id]: formValue.answer };
-    dispatch(setStateAnswers(answers));
-
-    if (+questionNumber === questionsNumber) {
-      const payload = {
-        name,
-        email,
-        age,
-        city,
-        sex,
-        data: JSON.stringify(answers),
-      };
-      await dispatch(quizeThunks.registrateUser(payload));
-
-      history.push(paths[Page.COMPLETE]);
-      return;
-    }
-
-    history.push(getNextQuestionLink(+questionNumber, quizeType));
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
-  const initialValue = { answer: props.answers[question?.id] };
-  const formProps = {
-    name: "basic",
-    ref: formRef,
-    initialValues: initialValue,
-    validateMessages: validateMessages,
-  };
-
-  const blocksQuestionIds: { [key: number]: number[] } = questions.reduce(
-    (ids: any, { id, block }) => {
-      const blockId = block?.id as number;
-
-      if (!ids[blockId]) {
-        ids[blockId] = [];
-      }
-      ids[blockId].push(id);
-
-      return ids;
-    },
-    {}
-  );
-
-  const getBlockProgress = (id): string => {
-    const BlockAnswers = blocksQuestionIds[id]?.filter((queId) =>
-      Object.keys(props.answers).includes(queId.toString())
-    );
-    return `${(BlockAnswers?.length / +blocksQuestionIds[id]?.length) * 100}%`;
-  };
+    return config;
+  }
 
   return (
-    <div className={classNames(styles["quize-page"], "quize-page")}>
-      <Form
+    <>
+      <div className={classNames(styles["quize-page"], "quize-page")}>
+        <div className={classNames("container", styles["container"])}>
+          <div className={styles["quize-page__blank"]}>
+            <QuizeHeader
+              {...getQuizeHeaderConfig()}
+            />
+            <QuizeRoutes />
+          </div>
+        </div>
+        {/* <Form
         className={styles["quize-page__form"]}
         {...formProps}
         onFinish={onFinish}
@@ -156,8 +187,10 @@ const QuizePage: FC<TProps> = (props) => {
             ))}
           </div>
         </div>
-      </Form>
-    </div>
+      </Form> */}
+      </div>
+      <Footer />
+    </>
   );
 };
 

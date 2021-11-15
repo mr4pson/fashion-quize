@@ -1,4 +1,5 @@
 import { AdmPage } from "components/pages/AdminPage/routes/constants";
+import { QzPage } from "components/pages/QuizePage/routes/constants";
 import { StlPage } from "components/pages/StylistPage/routes/consts";
 import { ESexes } from "components/pages/StylistPage/TasksPage/types";
 import { UsrPage } from "components/pages/UserPage/routes/consts";
@@ -30,7 +31,7 @@ export type TypeSelectOption = {
 };
 
 export type TStylistPage = {
-  type: StlPage | Page | AdmPage | UsrPage;
+  type: StlPage | Page | AdmPage | UsrPage | QzPage;
   path: string;
   exact?: boolean;
   component: JSX.Element;
