@@ -1,116 +1,51 @@
 import classNames from "classnames";
+import { EQuize } from "common/types/types";
 import Footer from "components/modules/Footer";
-import { FC, memo } from "react";
+import Header from "components/modules/Header";
+import { FC, memo, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
+import { quizeThunks } from "redux/slicers/quizePageSlice";
+import { checkIfHeaderVisible, getPrevQuestionLink } from "./helper";
 import QuizeHeader from "./QuizeHeader";
 import { TQuizeHeaderConfig } from "./QuizeHeader/types";
 import styles from "./QuizePage.module.scss";
 import { paths, QzPage } from "./routes/constants";
 import QuizeRoutes from "./routes/QuizeRoutes";
 
+type TProps = {};
 
-/* eslint-disable no-template-curly-in-string */
-// const validateMessages = {
-//   required: "Необходимо заполнить поле!",
-// };
-/* eslint-enable no-template-curly-in-string */
-
-type TProps = {
-  answers: Object | {};
-};
-
-const QuizePage: FC<TProps> = (props) => {
+const QuizePage: FC<TProps> = () => {
   const location = useLocation();
-  // const dispatch = useAppDispatch();
-  // const { questions, blocks, name, email, age, city, sex } = useSelector(
-  //   (state: TRootState) => state.quizePage
-  // );
+  const dispatch = useAppDispatch();
+  const { blocks } = useSelector((state: TRootState) => state.quizePage);
 
-  // const { questionNumber, quizeType } = useParams() as any;
-  // const questionsNumber = questions?.length;
+  const pathSections = location.pathname.split("/");
+  const quizeType = pathSections[2] as EQuize;
+  const sectionNumber = +pathSections[3];
+  const currentBlock = blocks[sectionNumber - 1];
 
-  // const [question, setQuestion] = useState<TypeQuestion>({} as TypeQuestion);
-  // const formRef = useRef<FormInstance>(null);
-  // const history = useHistory();
+  useEffect(() => {
+    if (quizeType && currentBlock) {
+      dispatch(quizeThunks.getQuestionBlocksByQuizeType(quizeType));
+      return;
+    }
+    dispatch(quizeThunks.getQuestionBlocksByQuizeType(EQuize.FOR_WOMEN));
+  }, [dispatch, quizeType]);
 
-  // useEffect(() => {
-  //   formRef.current?.resetFields();
-  // });
+  useEffect(() => {
+    if (currentBlock) {
+      dispatch(quizeThunks.setCurrentBlock(currentBlock));
+    }
+  }, [dispatch, blocks, currentBlock]);
 
-  // useEffect(() => {
-  //   dispatch(quizeThunks.getQuestionsByQuizeType(quizeType));
-  //   dispatch(quizeThunks.getQuestionBlocks());
-  // }, [dispatch, quizeType]);
+  useEffect(() => {
+    return () => {
+      dispatch(quizeThunks.clearAnswers());
+    };
+  }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (questions?.length) {
-  //     setQuestion(questions[questionNumber - 1]);
-  //   }
-  // }, [dispatch, questionNumber, questions]);
-
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(quizeThunks.clearAnswers());
-  //   };
-  // }, [dispatch]);
-
-  // const onFinish = async () => {
-  //   const formValue = formRef.current?.getFieldsValue();
-  //   const answers = { ...props.answers, [question.id]: formValue.answer };
-  //   dispatch(setStateAnswers(answers));
-
-  //   if (+questionNumber === questionsNumber) {
-  //     const payload = {
-  //       name,
-  //       email,
-  //       age,
-  //       city,
-  //       sex,
-  //       data: JSON.stringify(answers),
-  //     };
-  //     await dispatch(quizeThunks.registrateUser(payload));
-
-  //     history.push(paths[Page.COMPLETE]);
-  //     return;
-  //   }
-
-  //   history.push(getNextQuestionLink(+questionNumber, quizeType));
-  // };
-
-  // const onFinishFailed = (errorInfo: any) => {
-  //   console.log("Failed:", errorInfo);
-  // };
-
-  // const initialValue = { answer: props.answers[question?.id] };
-  // const formProps = {
-  //   name: "basic",
-  //   ref: formRef,
-  //   initialValues: initialValue,
-  //   validateMessages: validateMessages,
-  // };
-
-  // const blocksQuestionIds: { [key: number]: number[] } = questions.reduce(
-  //   (ids: any, { id, block }) => {
-  //     const blockId = block?.id as number;
-
-  //     if (!ids[blockId]) {
-  //       ids[blockId] = [];
-  //     }
-  //     ids[blockId].push(id);
-
-  //     return ids;
-  //   },
-  //   {}
-  // );
-
-  // const getBlockProgress = (id): string => {
-  //   const BlockAnswers = blocksQuestionIds[id]?.filter((queId) =>
-  //     Object.keys(props.answers).includes(queId.toString())
-  //   );
-  //   return `${(BlockAnswers?.length / +blocksQuestionIds[id]?.length) * 100}%`;
-  // };
-
-  console.log(location);
   const getQuizeHeaderConfig = (): TQuizeHeaderConfig => {
     let config = {} as TQuizeHeaderConfig;
     switch (location.pathname) {
@@ -120,6 +55,7 @@ const QuizePage: FC<TProps> = (props) => {
           description: "Укажите ваши основные идентификационные данные",
           backUrl: undefined,
           currentSectionNumber: 1,
+          sectionLength: blocks.length + 2,
         };
         break;
       case paths[QzPage.SEX]:
@@ -128,66 +64,37 @@ const QuizePage: FC<TProps> = (props) => {
           description: undefined,
           backUrl: paths[QzPage.BASE],
           currentSectionNumber: 2,
+          sectionLength: blocks.length + 2,
+        };
+        break;
+      default:
+        config = {
+          title: currentBlock?.title,
+          description: undefined,
+          backUrl:
+            sectionNumber === 1
+              ? paths[QzPage.SEX]
+              : getPrevQuestionLink(sectionNumber, quizeType),
+          currentSectionNumber: sectionNumber + 2,
+          sectionLength: blocks.length + 2,
         };
         break;
     }
     return config;
-  }
+  };
 
   return (
     <>
+      <Header />
       <div className={classNames(styles["quize-page"], "quize-page")}>
         <div className={classNames("container", styles["container"])}>
           <div className={styles["quize-page__blank"]}>
-            <QuizeHeader
-              {...getQuizeHeaderConfig()}
-            />
+            {checkIfHeaderVisible(location) && (
+              <QuizeHeader {...getQuizeHeaderConfig()} />
+            )}
             <QuizeRoutes />
           </div>
         </div>
-        {/* <Form
-        className={styles["quize-page__form"]}
-        {...formProps}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
-        <div className={classNames("container", styles["container"])}>
-          {+questionNumber !== -1 ? (
-            <>
-              <Question color={question?.block?.color} question={question} />
-              <Button
-                style={{ color: question?.block?.color }}
-                htmlType="submit"
-                className={styles["next-button"]}
-              >
-                Далее
-              </Button>
-            </>
-          ) : (
-            <div className={styles["quize-page__no-questions"]}>
-              Такого вопроса не существует.
-            </div>
-          )}
-        </div>
-        <div
-          style={{ color: question?.block?.color }}
-          className={classNames(
-            styles["quize-page__sidebar"],
-            styles["sidebar"]
-          )}
-        >
-          <div className={styles["progress"]}>
-            {blocks?.map((block) => (
-              <div style={{ color: hexToRgb(question?.block?.color)}} key={block.id} className={styles["progress__item"]}>
-                <div
-                  style={{ color: question?.block?.color, width: getBlockProgress(block.id) }}
-                  className={styles["progress__value"]}
-                ></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Form> */}
       </div>
       <Footer />
     </>

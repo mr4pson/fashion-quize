@@ -3,14 +3,16 @@ export enum QzPage {
   BASE = "BASE",
   SEX = "SEX",
   ROUTE = "ROUTE",
+  COMPLETE = "COMPLETE"
 }
 
 export const QUIZE_TYPE = ":quizeType";
-export const QUESTION_NUMBER = ":questionNumber";
+export const SECTION_NUMBER = ":sectionNumber";
 
 export const paths = {
   [QzPage.EMPTY]: "/quize",
   [QzPage.BASE]: "/quize/base",
   [QzPage.SEX]: "/quize/sex",
-  [QzPage.ROUTE]: `/quize/${QUIZE_TYPE}/${QUESTION_NUMBER}`,
+  [QzPage.COMPLETE]: "/quize/complete",
+  [QzPage.ROUTE]: `/quize/${QUIZE_TYPE}/${SECTION_NUMBER}`,
 };

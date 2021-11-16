@@ -12,6 +12,7 @@ const QuizeHeader: FC<Props> = ({
   description,
   backUrl,
   currentSectionNumber,
+  sectionLength,
 }) => {
   return (
     <div className={styles["quize-header"]}>
@@ -33,7 +34,7 @@ const QuizeHeader: FC<Props> = ({
       <div className={styles["quize-header__progress"]}>
         <b>{currentSectionNumber}</b>
         <span>/</span>
-        <span>9</span>
+        <span>{ sectionLength }</span>
       </div>
     </div>
   );

@@ -22,5 +22,11 @@ export const fields = [
     placeholder: 'Адрес электронной почты',
     type: 'email',
     message: "Неправильный email"
+  },
+  {
+    name: 'age',
+    placeholder: 'Ваш возраст',
+    type: 'number',
+    message: "Введите ваш возраст"
   }
 ];

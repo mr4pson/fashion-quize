@@ -34,7 +34,7 @@ input, button, select, optgroup, textarea {
 
 .ant-form label {
   /* font-size: 16px !important; */
-  display: flex !important;
+  display: inline-block !important;
   align-items: center;
   white-space: unset;
   height: auto !important;
@@ -49,13 +49,25 @@ input, button, select, optgroup, textarea {
   color: #000;
 }
 
+.quize-page .ant-checkbox-group .ant-row {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
 .ant-checkbox-group .ant-row {
   margin-bottom: 20px;
 }
 
-.ant-checkbox-wrapper span {
+.quize-page .ant-checkbox-wrapper {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-checkbox-wrapper > span:nth-child(2) {
   font-size: 16px;
   line-height: 16px;
+  margin-top: 4px;
 }
 
 .ant-layout .ant-layout-sider {
@@ -96,19 +108,32 @@ input, button, select, optgroup, textarea {
 	width: 14px;
 	height: 14px;
 	background-color: currentColor;
+  display: none;
 }
 
 .quize-page .ant-form-item-required::before, .quize-page .ant-form-item-required::after {
   display: none !important;
 }
 
-.quize-page .ant-radio-inner {
-	width: 24px;
-	height: 24px;
+.quize-page .ant-radio .ant-radio-inner {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+  border-color: #000;
+}
+
+.quize-page .ant-radio-checked .ant-radio-inner {
+  border-width: 6px;
 }
 
 .ant-radio-checked .ant-radio-inner {
 	border-color: currentColor;
+}
+
+.ant-radio-wrapper > span:nth-child(2) {
+  font-size: 16px;
+  line-height: 16px;
+  margin-top: 4px;
 }
 
 .quize-page .ant-radio-wrapper span {

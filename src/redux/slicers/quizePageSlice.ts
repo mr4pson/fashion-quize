@@ -14,6 +14,7 @@ const quizePageSlice = createSlice({
     answers: {} as Object | {},
     questions: [] as TypeQuestion[],
     blocks: [] as TypeBlock[],
+    currentBlock: {} as TypeBlock,
     baseFields: {} as TBaseFields,
     sex: "" as ESexes,
     user: {} as TUser,
@@ -30,6 +31,10 @@ const quizePageSlice = createSlice({
     setBlocks: (state, action: PayloadAction<TypeBlock[]>) => ({
       ...state,
       blocks: action.payload,
+    }),
+    setCurrentBlock: (state, action: PayloadAction<TypeBlock>) => ({
+      ...state,
+      currentBlock: action.payload,
     }),
     setBaseFields: (state, action: PayloadAction<TBaseFields>) => ({
       ...state,
@@ -55,6 +60,10 @@ export const quizeThunks = {
     const response = await axiosInstance.get(`/api/blocks`);
     dispatch(setBlocks(response?.data));
   },
+  getQuestionBlocksByQuizeType: (quizeType: EQuize) => async (dispatch: TypeDispatch) => {
+    const response = await axiosInstance.get(`/api/blocks/filterQuestionsByQuizeType/${quizeType}`);
+    dispatch(setBlocks(response?.data));
+  },
   getAnswers: (id: number) => async (dispatch: TypeDispatch) => {
     const response = await axiosInstance.get(`/api/answers/${id}`);
     await dispatch(setStateAnswers(JSON.parse(response?.data.data)));
@@ -62,6 +71,9 @@ export const quizeThunks = {
   },
   setBaseFields: (payload: TBaseFields) => async (dispatch: TypeDispatch) => {
     dispatch(setBaseFields(payload));
+  },
+  setCurrentBlock: (payload: TypeBlock) => async (dispatch: TypeDispatch) => {
+    dispatch(setCurrentBlock(payload));
   },
   setSex: (payload: ESexes) => async (dispatch: TypeDispatch) => {
     dispatch(setSex(payload));
@@ -80,5 +92,5 @@ export const quizeThunks = {
   },
 };
 
-export const { setStateAnswers, setQuestions, setBaseFields, setBlocks, setSex, setUser } = quizePageSlice.actions;
+export const { setStateAnswers, setQuestions, setBaseFields, setCurrentBlock, setBlocks, setSex, setUser } = quizePageSlice.actions;
 export default quizePageSlice.reducer;

@@ -1,8 +1,7 @@
 import AdminPage from "components/pages/AdminPage";
-import CompletePageContainer from "components/pages/CompletePage/CompletePageContainer";
 import HomePage from "components/pages/HomePage";
 import LoginPage from "components/pages/LoginPage/LoginPage";
-import QuizePageContainer from "components/pages/QuizePage/QuizePageContainer";
+import QuizePage from "components/pages/QuizePage/QuizePage";
 import ResetPasswordPage from "components/pages/ResetPasswordPage/ResetPasswordPage";
 import StylistPage from "components/pages/StylistPage";
 import UserPage from "components/pages/UserPage";
@@ -20,12 +19,7 @@ export function getAppRoutes(): TypeAppRoute[] {
     {
       type: Page.QUIZE,
       path: paths[Page.QUIZE],
-      component: <QuizePageContainer />,
-    },
-    {
-      type: Page.COMPLETE,
-      path: paths[Page.COMPLETE],
-      component: <CompletePageContainer />,
+      component: <QuizePage />,
     },
     {
       type: Page.ADMIN,

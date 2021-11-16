@@ -1,12 +1,11 @@
 import { Button } from "antd";
-import { ESexes } from "components/pages/StylistPage/TasksPage/types";
 import { memo, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useAppDispatch } from "redux/ReduxStore";
 import { setSex } from "redux/slicers/quizePageSlice";
 import {
   paths,
-  QUESTION_NUMBER,
+  SECTION_NUMBER,
   QUIZE_TYPE,
   QzPage,
 } from "../routes/constants";
@@ -45,7 +44,7 @@ const SexPage: React.FC = () => {
     history.push(
       paths[QzPage.ROUTE]
         .replace(QUIZE_TYPE, activeSex.path)
-        .replace(QUESTION_NUMBER, "1")
+        .replace(SECTION_NUMBER, "1")
     );
   };
 
