@@ -1,4 +1,3 @@
-import Header from "components/modules/Header";
 import { FC } from "react";
 import { useSelector } from "react-redux";
 
@@ -6,13 +5,11 @@ import { TRootState } from "redux/ReduxStore";
 import CompletePage from "./CompletePage";
 
 const CompletePageContainer: FC = () => {
-  // const { email, name } = useSelector((state: TRootState) => state.quizePage);
-  const { email, name } = { email: "", name: "" };
+  const { baseFields } = useSelector((state: TRootState) => state.quizePage);
 
   return (
     <>
-      <Header />
-      <CompletePage email={email} name={name} />
+      <CompletePage email={baseFields.email} name={baseFields.name} />
     </>
   );
 };
