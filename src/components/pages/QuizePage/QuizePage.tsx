@@ -57,7 +57,7 @@ const QuizePage: FC<TProps> = () => {
           description: "Укажите ваши основные идентификационные данные",
           backUrl: undefined,
           currentSectionNumber: 1,
-          sectionLength: blocks.length + 2,
+          sectionLength: blocks?.length + 2,
         };
         break;
       case paths[QzPage.SEX]:
@@ -66,7 +66,7 @@ const QuizePage: FC<TProps> = () => {
           description: undefined,
           backUrl: paths[QzPage.BASE],
           currentSectionNumber: 2,
-          sectionLength: blocks.length + 2,
+          sectionLength: blocks?.length + 2,
         };
         break;
       default:
@@ -78,7 +78,7 @@ const QuizePage: FC<TProps> = () => {
               ? paths[QzPage.SEX]
               : getPrevQuestionLink(sectionNumber ?? 0, quizeType),
           currentSectionNumber: (sectionNumber ?? 0) + 2,
-          sectionLength: blocks.length + 2,
+          sectionLength: blocks?.length + 2,
         };
         break;
     }
