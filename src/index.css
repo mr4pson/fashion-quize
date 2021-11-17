@@ -47,6 +47,7 @@ input, button, select, optgroup, textarea {
 
 .quize-page .ant-checkbox-wrapper > span:last-child {
   color: #000;
+  display: inline !important;
 }
 
 .quize-page .ant-checkbox-group .ant-row {
@@ -59,9 +60,9 @@ input, button, select, optgroup, textarea {
 }
 
 .quize-page .ant-checkbox-wrapper {
-  display: flex !important;
+  /* display: flex !important;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .ant-checkbox-wrapper > span:nth-child(2) {
@@ -91,7 +92,7 @@ input, button, select, optgroup, textarea {
 .quize-page .ant-checkbox-checked .ant-checkbox-inner::after {
   transform: rotate(45deg) scale(1.6) translate(-20%, -50%);
 }
-.quize-page .ant-checkbox-wrapper span {
+.quize-page .ant-checkbox-wrapper span:first-child span {
 	display: inline-block;
 }
 .quize-page .ant-checkbox-checked::after {
@@ -141,6 +142,11 @@ input, button, select, optgroup, textarea {
 }
 .quize-page .ant-radio-wrapper > span:last-child {
   color: #000;
+  display: inline !important;
+}
+
+.quize-page .ant-radio-wrapper::after {
+  display: none;
 }
 
 .ant-dropdown-menu-title-content .ant-btn {
@@ -218,4 +224,10 @@ img.ant-image-img {
   padding: 15px 11px !important;
   border-radius: 5px !important;
   font-size: 18px !important;
+}
+
+@media only screen and (max-width: 768px) {
+  #basic_phone {
+    font-size: 16px !important;
+  }
 }

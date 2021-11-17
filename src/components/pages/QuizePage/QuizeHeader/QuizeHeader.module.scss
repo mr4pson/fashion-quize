@@ -45,3 +45,14 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .quize-header {
+    &__info {
+      margin-top: 40px;
+    }
+    &__title {
+      line-height: 32px;
+    }
+  }
+}

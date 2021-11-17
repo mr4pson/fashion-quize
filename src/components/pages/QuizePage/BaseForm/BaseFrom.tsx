@@ -2,8 +2,9 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { MaskedInput } from "antd-mask-input";
 import classNames from "classnames";
 import { FC, memo, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { useAppDispatch } from "redux/ReduxStore";
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { quizeThunks } from "redux/slicers/quizePageSlice";
 import { paths, QzPage } from "../routes/constants";
 import styles from "./BaseForm.module.scss";
@@ -23,6 +24,9 @@ type Props = {};
 
 const BaseForm: FC<Props> = (props) => {
   const [isAgreedWithPolicy, setIsAgreedWithPolicy] = useState(false);
+  const { baseFields } = useSelector(
+    (state: TRootState) => state.quizePage
+  );
   const history = useHistory();
 
   const dispatch = useAppDispatch();
@@ -47,7 +51,7 @@ const BaseForm: FC<Props> = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  });
+  }, []);
 
   return (
     <div className={styles["base-page"]}>
@@ -56,6 +60,7 @@ const BaseForm: FC<Props> = (props) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         validateMessages={validateMessages}
+        initialValues={baseFields}
       >
         <div className={styles["base-page__body"]}>
           {fields.map((field, index) => (

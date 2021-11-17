@@ -86,6 +86,8 @@ export const quizeThunks = {
   },
   clearAnswers: () => (dispatch: TypeDispatch) => {
     dispatch(setStateAnswers({} as Object));
+    dispatch(setBaseFields({} as TBaseFields));
+    dispatch(setSex("" as ESexes));
   },
   clearUser: () => (dispatch: TypeDispatch) => {
     dispatch(setUser({} as TUser));

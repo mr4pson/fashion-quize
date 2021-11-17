@@ -34,6 +34,7 @@
     font-size: 16px;
     color: #A7A7A8;
     font-weight: 300;
+    display: inline !important;
     button {
       margin-left: 5px;
       padding: 0 !important;
@@ -42,5 +43,23 @@
   }
   &:nth-child(2n) {
     margin-left: 18px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .base-page {
+    margin-top: 20px;
+  }
+  .form-item {
+    display: block !important;
+    width: 100%;
+    margin-left: 0 !important;
+    margin-bottom: 15px !important;
+    &__input {
+      font-size: 16px !important;
+    }
+    &__checkbox {
+      font-size: 14px !important;
+    }
   }
 }
