@@ -99,6 +99,10 @@ input, button, select, optgroup, textarea {
   border: none;
 }
 
+.quize-page .ant-checkbox-wrapper:after {
+  display: none;
+}
+
 .ant-checkbox-input + .ant-checkbox-inner {
   border-color: #000 !important;
 }
@@ -140,6 +144,7 @@ input, button, select, optgroup, textarea {
 .quize-page .ant-radio-wrapper span {
 	display: inline-block;
 }
+
 .quize-page .ant-radio-wrapper > span:last-child {
   color: #000;
   display: inline !important;
