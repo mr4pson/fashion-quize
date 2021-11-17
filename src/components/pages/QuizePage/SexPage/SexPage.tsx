@@ -53,7 +53,7 @@ const SexPage: React.FC = () => {
     return () => {
       setSexs(sexsDefault);
     }
-  });
+  }, []);
 
   return (
     <div className={styles["sex-page"]}>

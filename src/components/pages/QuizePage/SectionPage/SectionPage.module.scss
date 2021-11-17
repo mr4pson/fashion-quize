@@ -22,6 +22,7 @@
   &__label {
     font-family: 'Ubuntu', sans-serif !important;
     font-size: 18px !important;
+    line-height: 24px;
     font-weight: bold;
     white-space: break-spaces !important;
     text-align: left;
@@ -60,10 +61,31 @@
   &--single-option {
     display: block !important;
     label {
-      margin-bottom: 0 !important;
+      margin-bottom: 5px !important;
     }
   }
   &--multiple-option {
     display: block !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .section-page {
+    margin-top: 20px;
+  }
+  .form-item {
+    display: block !important;
+    width: 100%;
+    margin-left: 0 !important;
+    margin-bottom: 15px !important;
+    &__label {
+      line-height: 22px;
+    }
+    &__input {
+      font-size: 16px !important;
+    }
+    &__checkbox {
+      font-size: 14px !important;
+    }
   }
 }

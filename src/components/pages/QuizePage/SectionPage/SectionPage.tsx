@@ -1,4 +1,5 @@
 import { Button, Checkbox, Col, Form, Input, Radio, Row } from "antd";
+import React from "react";
 import { FC, memo, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
@@ -7,7 +8,11 @@ import { quizeThunks, setStateAnswers } from "redux/slicers/quizePageSlice";
 import { getNextQuestionLink } from "../helper";
 import { paths, QzPage } from "../routes/constants";
 import { QuestionType } from "../types";
-import { checkIfSingleInput, getFormItemClassNames, getQuestionOptions } from "./helpers";
+import {
+  checkIfSingleInput,
+  getFormItemClassNames,
+  getQuestionOptions,
+} from "./helpers";
 import styles from "./SectionPage.module.scss";
 
 /* eslint-disable no-template-curly-in-string */
@@ -38,6 +43,7 @@ const SectionPage: FC<Props> = (props) => {
       };
 
       await dispatch(quizeThunks.registrateUser(payload));
+      dispatch(quizeThunks.clearAnswers());
 
       history.push(paths[QzPage.COMPLETE]);
       return;
@@ -52,7 +58,7 @@ const SectionPage: FC<Props> = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  });
+  }, [currentBlock]);
 
   return (
     <div className={styles["section-page"]}>
@@ -64,10 +70,9 @@ const SectionPage: FC<Props> = (props) => {
       >
         <div className={styles["section-page__body"]}>
           {currentBlock.questions?.map((question, index) => (
-            <>
+            <React.Fragment key={index}>
               {question.type === QuestionType.INPUT && (
                 <Form.Item
-                  key={`field-${index}`}
                   style={{
                     marginLeft: checkIfSingleInput(currentBlock, index)
                       ? "0px"
@@ -91,7 +96,6 @@ const SectionPage: FC<Props> = (props) => {
               )}
               {question.type === QuestionType.TEXT && (
                 <Form.Item
-                  key={`field-${index}`}
                   className={getFormItemClassNames(question.type, styles)}
                   label={
                     <label className={styles["form-item__label"]}>
@@ -110,7 +114,6 @@ const SectionPage: FC<Props> = (props) => {
               )}
               {question.type === QuestionType.SINGLE_OPTION && (
                 <Form.Item
-                  key={`field-${index}`}
                   className={getFormItemClassNames(question.type, styles)}
                   label={
                     <label className={styles["form-item__label"]}>
@@ -141,7 +144,6 @@ const SectionPage: FC<Props> = (props) => {
               )}
               {question.type === QuestionType.MULTIPLE_OPTION && (
                 <Form.Item
-                  key={`field-${index}`}
                   className={getFormItemClassNames(question.type, styles)}
                   label={
                     <label className={styles["form-item__label"]}>
@@ -158,8 +160,8 @@ const SectionPage: FC<Props> = (props) => {
                   <Checkbox.Group style={{ width: "100%" }}>
                     {question.options &&
                       getQuestionOptions(question.options).map(
-                        (option, index) => (
-                          <Row key={index}>
+                        (option, optionIndex) => (
+                          <Row key={`option-${index}-${optionIndex}`}>
                             <Col span={24}>
                               <Checkbox value={option}>{option}</Checkbox>
                             </Col>
@@ -169,7 +171,7 @@ const SectionPage: FC<Props> = (props) => {
                   </Checkbox.Group>
                 </Form.Item>
               )}
-            </>
+            </React.Fragment>
           ))}
           <Button
             htmlType="submit"
