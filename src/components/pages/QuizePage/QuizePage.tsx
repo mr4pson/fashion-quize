@@ -23,8 +23,10 @@ const QuizePage: FC<TProps> = () => {
 
   const pathSections = location.pathname.split("/");
   const quizeType = pathSections[2] as EQuize;
-  const sectionNumber = +pathSections[3];
-  const currentBlock = blocks[sectionNumber - 1];
+  const sectionNumber = Number.isNaN(+pathSections[3])
+    ? undefined
+    : +pathSections[3];
+  const currentBlock = sectionNumber ? blocks[sectionNumber - 1] : undefined;
 
   useEffect(() => {
     if (quizeType && currentBlock) {
@@ -74,8 +76,8 @@ const QuizePage: FC<TProps> = () => {
           backUrl:
             sectionNumber === 1
               ? paths[QzPage.SEX]
-              : getPrevQuestionLink(sectionNumber, quizeType),
-          currentSectionNumber: sectionNumber + 2,
+              : getPrevQuestionLink(sectionNumber ?? 0, quizeType),
+          currentSectionNumber: (sectionNumber ?? 0) + 2,
           sectionLength: blocks.length + 2,
         };
         break;

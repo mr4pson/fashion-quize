@@ -1,5 +1,5 @@
 export type TQuizeHeaderConfig = {
-  title: string;
+  title?: string;
   currentSectionNumber: number;
   sectionLength: number;
   description?: string;
