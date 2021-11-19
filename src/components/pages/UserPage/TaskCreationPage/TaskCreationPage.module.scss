@@ -1,29 +1,88 @@
-.page-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  &__title {
-    margin: 0;
-    line-height: 26px;
+.task-creation-page {
+  background: #F3F3F3;
+  padding-bottom: 30px;
+  .container {
+      height: 100%;
   }
-  &__btn {
-    background: #101010!important;
-    border: none!important;
-    padding: 7px 25px!important;
-    height: auto!important;
-    &:hover {
-      background: #101010!important;
+  &__blank {
+      margin-top: 30px;
+      background: #fff;
+      height: 90%;
+      border-radius: 7px;
+      box-sizing: border-box;
+      padding: 50px 85px 50px;
+      position: relative;
+  }
+}
+
+
+.task-creation-form {
+  margin-top: 40px;
+  &__submit-btn {
+    background: #101010 !important;
+    color: #fff !important;
+    width: 220px;
+    height: 48px !important;
+    border-radius: 7px !important;
+    display: block !important;
+    margin: 20px auto 0 !important;
+    &:hover, &:active {
+      border: none !important;
+    }
+    &:disabled {
+      background:#686868 !important;
     }
   }
 }
-.date-picker {
-  width: 100%;
+
+.form-item {
+  display: inline-block !important;
+  width: calc(50% - 9px);
+  &__label {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 18px !important;
+    font-weight: bold;
+  }
+  &__input {
+    padding: 15px 11px !important;
+    border-radius: 5px !important;
+    font-size: 18px !important;
+  }
+  &:nth-child(2n) {
+    margin-left: 18px;
+  }
 }
 
 @media only screen and (max-width: 768px) {
-  .page-header {
-    &__title {
-      font-size: 20px;
+  .base-page {
+    margin-top: 20px;
+  }
+  .form-item {
+    display: block !important;
+    width: 100%;
+    margin-left: 0 !important;
+    margin-bottom: 15px !important;
+    &__input {
+      font-size: 16px !important;
     }
+    &__checkbox {
+      font-size: 14px !important;
+    }
+  }
+  .task-creation-page {
+    &__blank {
+        padding: 30px;
+    }
+  }
+  .task-creation-form {
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 990px) {
+  .task-creation-page {
+      &__blank {
+          padding: 60px;
+      }
   }
 }

@@ -1,32 +1,35 @@
 import { TFormField } from "common/types/types";
 
-const TYPE = "TYPE";
-const DATE = "DATE";
-const TIME = "TIME";
-const COMMENT = "COMMENT";
+export enum FieldTypes {
+  TYPE = "TYPE",
+  DATE = "DATE",
+  TIME = "TIME",
+  COMMENT = "COMMENT",
+}
+
 
 export const formFields: TFormField[] = [
   {
     id: "1",
-    type: TYPE,
+    type: FieldTypes.TYPE,
     name: "type",
     label: "Тип",
   },
   {
     id: "2",
-    type: DATE,
+    type: FieldTypes.DATE,
     name: "date",
     label: "Дата исполнения",
   },
   {
     id: "3",
-    type: TIME,
+    type: FieldTypes.TIME,
     name: "time",
     label: "Время исполнения",
   },
   {
     id: "4",
-    type: COMMENT,
+    type: FieldTypes.COMMENT,
     name: "comment",
     label: "Комментарий",
   },
