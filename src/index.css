@@ -116,8 +116,15 @@ input, button, select, optgroup, textarea {
   display: none;
 }
 
-.quize-page .ant-form-item-required::before, .quize-page .ant-form-item-required::after {
+.quize-page .ant-form-item-required::before, .quize-page .ant-form-item-required::after, .task-creation-page .ant-form-item-required::before, .task-creation-page .ant-form-item-required::after {
   display: none !important;
+}
+
+.task-creation-page .ant-select .ant-select-selector {
+  height: 60px;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 14px 12px;
 }
 
 .quize-page .ant-radio .ant-radio-inner {
@@ -234,5 +241,12 @@ img.ant-image-img {
 @media only screen and (max-width: 768px) {
   #basic_phone {
     font-size: 16px !important;
+  }
+  .task-creation-page .ant-select .ant-select-selector {
+    height: 57px;
+    font-size: 16px;
+  }
+  .task-creation-page .quize-header__info {
+    margin-top: 0;
   }
 }

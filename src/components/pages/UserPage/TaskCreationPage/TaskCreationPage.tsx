@@ -1,40 +1,21 @@
 import {
-  Button,
-  Card,
-  DatePicker,
-  Form,
+  Button, Form,
   Input,
-  Select,
-  TimePicker,
+  Select
 } from "antd";
-import locale from "antd/es/date-picker/locale/ru_RU";
+import classNames from "classnames";
+import QuizeHeader from "components/pages/QuizePage/QuizeHeader";
+import { TQuizeHeaderConfig } from "components/pages/QuizePage/QuizeHeader/types";
 import "moment/locale/ru";
-import { FC, memo, useEffect, useState } from "react";
+import React, { FC, memo, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-
-import { TFormField } from "common/types/types";
 import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { tasksThunks } from "redux/slicers/tasksPageSlice";
 import { paths, UsrPage } from "../routes/consts";
-import { formFields } from "./constants";
+import { FieldTypes, formFields } from "./constants";
 import styles from "./TaskCreationPage.module.scss";
-import moment from "moment";
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-
-const datePicker = {
-  locale: locale,
-  disabledDate: (date: moment.Moment) => date.toDate() < new Date(),
-};
-
-const timePicker = {
-  format: "HH:mm",
-  locale: locale,
-};
 
 /* eslint-disable no-template-curly-in-string */
 const validateMessages = {
@@ -58,98 +39,122 @@ export const TaskCreationPage: FC = () => {
     })();
   }, [dispatch]);
 
-  const getFormField = (type: string, field: TFormField) => {
-    const options = types.map((type) => ({
-      value: type.id,
-      title: type.title,
-    }));
-
-    return {
-      DATE: (
-        <Form.Item
-          rules={[{ required: true }]}
-          name={field.name}
-          label={field.label}
-        >
-          <DatePicker className={styles["date-picker"]} {...datePicker} />
-        </Form.Item>
-      ),
-      TIME: (
-        <Form.Item
-          rules={[{ required: true }]}
-          name={field.name}
-          label={field.label}
-        >
-          <TimePicker className={styles["time-picker"]} {...timePicker} />
-        </Form.Item>
-      ),
-      TYPE: (
-        <Form.Item
-          rules={[{ required: true }]}
-          name={field.name}
-          label={field.label}
-        >
-          <Select>
-            {options.map((option, index) => (
-              <Select.Option
-                key={`task-${field.name}` + index}
-                value={option.value}
-              >
-                {option.title}
-              </Select.Option>
-            ))}
-          </Select>
-        </Form.Item>
-      ),
-      COMMENT: (
-        <Form.Item name={field.name} label={field.label}>
-          <Input.TextArea />
-        </Form.Item>
-      ),
-    }[type];
-  };
-
-  const getCreationTitle = () => (
-    <div className={styles["page-header"]}>
-      <h2 className={styles["page-header__title"]}>Создание задачи</h2>
-      <Button
-        className={styles["page-header__btn"]}
-        type="primary"
-        htmlType="submit"
-        loading={saveLoading}
-      >
-        Создать
-      </Button>
-    </div>
-  );
-
   const onFinish = async (formData) => {
-    if (formData.date) {
-      const payload = {
-        ...formData,
-        date: formData.date.format("DD.MM.YYYY"),
-        time: formData.time.format("hh:mm"),
-      };
-      await dispatch(tasksThunks.createTask(payload));
-      history.push(paths[UsrPage.TASKS]);
-    }
+    const payload = {
+      ...formData,
+    };
+    await dispatch(tasksThunks.createTask(payload));
+    history.push(paths[UsrPage.TASKS]);
   };
+
+  const onFinishFailed = (e) => {
+    console.log(e);
+  };
+
+  const headerConfig: TQuizeHeaderConfig = {
+    title: "Создание задачи",
+    currentSectionNumber: undefined,
+    sectionLength: undefined,
+    description: "Укажите что и когда вы хотели бы опробовать",
+    backUrl: undefined,
+  };
+
+  const options = types.map((type) => ({
+    value: type.id,
+    title: type.title,
+  }));
 
   return (
-    <Form
-      name="nest-messages"
-      onFinish={onFinish}
-      validateMessages={validateMessages}
-      {...layout}
+    <div
+      className={classNames(styles["task-creation-page"], "task-creation-page")}
     >
-      <Card bordered={false} loading={loading} title={getCreationTitle()}>
-        {formFields.map((field) => (
-          <div className={styles["detail__field"]} key={field.id}>
-            {getFormField(field.type, field)}
+      <div className={classNames("container", styles["container"])}>
+        <div className={styles["task-creation-page__blank"]}>
+          <QuizeHeader {...headerConfig} />
+          <div className={styles["task-creation-form"]}>
+            <Form
+              name="basic"
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              validateMessages={validateMessages}
+            >
+              <div className={styles["task-creation-form__body"]}>
+                {formFields.map((field, index) => (
+                  <React.Fragment key={index}>
+                    {field.type === FieldTypes.TYPE && (
+                      <Form.Item
+                        key={`field-${index}`}
+                        className={classNames(
+                          styles["task-creation-form__form-item"],
+                          styles["form-item"]
+                        )}
+                        label={
+                          <label
+                            className={styles["form-item__label"]}
+                            htmlFor={field.name}
+                          >
+                            {field.label}
+                          </label>
+                        }
+                        name={field.name}
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
+                      >
+                        <Select>
+                          {options.map((option, index) => (
+                            <Select.Option
+                              key={`task-${field.name}` + index}
+                              value={option.value}
+                            >
+                              {option.title}
+                            </Select.Option>
+                          ))}
+                        </Select>
+                      </Form.Item>
+                    )}
+                    {field.type !== FieldTypes.TYPE && (
+                      <Form.Item
+                        key={`field-${index}`}
+                        className={classNames(
+                          styles["task-creation-form__form-item"],
+                          styles["form-item"]
+                        )}
+                        label={
+                          <label
+                            className={styles["form-item__label"]}
+                            htmlFor={field.name}
+                          >
+                            {field.label}
+                          </label>
+                        }
+                        name={field.name}
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
+                      >
+                        <Input className={styles["form-item__input"]} />
+                      </Form.Item>
+                    )}
+                  </React.Fragment>
+                ))}
+                <Button
+                  htmlType="submit"
+                  className={styles["task-creation-form__submit-btn"]}
+                  loading={saveLoading}
+                >
+                  Создать
+                </Button>
+              </div>
+            </Form>
           </div>
-        ))}
-      </Card>
-    </Form>
+        </div>
+      </div>
+    </div>
   );
 };
 
