@@ -151,11 +151,7 @@
     margin-top: 52px;
     display: flex;
     &__image {
-        min-width: 440px;
-        height: 343px;
-        background-color: #ccc;
-        background-size: cover;
-        background-position: center;
+        max-width: 440px;
         border-radius: 7px;
     }
     &__info {
@@ -188,7 +184,7 @@
     }
     &:nth-child(2) {
         .work-example__image {
-            background-image: url(./images/quize-input.jpg);
+            // background-image: url(./images/quize-input.jpg);
         }
         .work-example__top {
             &::before {
@@ -409,9 +405,8 @@
             margin-top: 15px;
         }
         &__image {
-            min-width: 340px;
+            max-width: 100%;
             margin: auto;
-            height: 269px;
         }
         &--right {
             .work-example__top {

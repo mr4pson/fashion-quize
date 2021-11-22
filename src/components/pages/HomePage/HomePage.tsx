@@ -55,7 +55,7 @@ function HomePage(): JSX.Element {
                     <div className="container">
                         <div className={styles['how-work-section__title']}>Что вас ждет<br/> впереди</div>
                         <div className={classNames(styles['work-example'], styles['work-example--left'])}>
-                            <div className={styles['work-example__image']}></div>
+                            <img className={styles['work-example__image']} src={"./assets/images/quize-input.jpg"} alt="" />
                             <div className={styles['work-example__info']}>
                                 <div className={styles['work-example__top']}></div>
                                 <div className={styles['work-example__title']}>Заполнение анкеты</div>
@@ -63,7 +63,7 @@ function HomePage(): JSX.Element {
                             </div>
                         </div>
                         <div className={classNames(styles['work-example'], styles['work-example--right'])}>
-                            <div className={styles['work-example__image']}></div>
+                            <img className={styles['work-example__image']} src={"./assets/images/task-creation.jpg"} alt="" />
                             <div className={styles['work-example__info']}>
                                 <div className={styles['work-example__top']}></div>
                                 <div className={styles['work-example__title']}>Создание задачи</div>
@@ -71,7 +71,7 @@ function HomePage(): JSX.Element {
                             </div>
                         </div>
                         <div className={classNames(styles['work-example'], styles['work-example--left'])}>
-                            <div className={styles['work-example__image']}></div>
+                            <img className={styles['work-example__image']} src={"./assets/images/stylists-job.jpg"} alt="" />
                             <div className={styles['work-example__info']}>
                                 <div className={styles['work-example__top']}></div>
                                 <div className={styles['work-example__title']}>Работа стилистов</div>
@@ -79,7 +79,7 @@ function HomePage(): JSX.Element {
                             </div>
                         </div>
                         <div className={classNames(styles['work-example'], styles['work-example--right'])}>
-                            <div className={styles['work-example__image']}></div>
+                            <img className={styles['work-example__image']} src={"./assets/images/look-selection.jpg"} alt="" />
                             <div className={styles['work-example__info']}>
                                 <div className={styles['work-example__top']}></div>
                                 <div className={styles['work-example__title']}>Выбор понравившихся образов</div>
@@ -87,7 +87,7 @@ function HomePage(): JSX.Element {
                             </div>
                         </div>
                         <div className={classNames(styles['work-example'], styles['work-example--left'])}>
-                            <div className={styles['work-example__image']}></div>
+                            <img className={styles['work-example__image']} src={"./assets/images/delivery-and-payment.jpg"} alt="" />
                             <div className={styles['work-example__info']}>
                                 <div className={styles['work-example__top']}></div>
                                 <div className={styles['work-example__title']}>Доставка и оплата</div>
