@@ -24,7 +24,9 @@ export function useAuth(history: History<unknown> | string[]): TypeUseAuthHookRe
         },
         { withCredentials: true }
       );
-      setJwtPair(tokenData.accessToken);
+      if (tokenData.accessToken) {
+        setJwtPair(tokenData.accessToken);
+      }
       const userInfo = getUserInfo();
       if (userInfo?.role) {
         message.success({ content: "Авторизация прошла успешно", key: "auth" });

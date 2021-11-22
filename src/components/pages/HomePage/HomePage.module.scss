@@ -156,6 +156,7 @@
         background-color: #ccc;
         background-size: cover;
         background-position: center;
+        border-radius: 7px;
     }
     &__info {
         margin-left: 95px;
@@ -216,6 +217,9 @@
         }
     }
     &:nth-child(5) {
+        .work-example__image {
+            background-image: url(./images/look-selection.jpg);
+        }
         .work-example__top {
             &::before {
                 content: "04";
@@ -223,6 +227,9 @@
         }
     }
     &:nth-child(6) {
+        .work-example__image {
+            background-image: url(./images/delivery-and-payment.jpg);
+        }
         .work-example__top {
             &::before {
                 content: "05";
