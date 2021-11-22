@@ -1,19 +1,23 @@
+import { Radio } from "antd";
 import classNames from "classnames";
 import { getImageUrl, numberWithSpaces } from "common/helpers/common-helpers";
 import { useOnClickOutside } from "common/hooks/useOnClickOutside";
+import { TLook } from "components/pages/AdminPage/CompilationsPage/types";
 import { TCompilation } from "components/pages/StylistPage/CompilationsPage/types";
 import * as React from "react";
 import { memo, useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "redux/ReduxStore";
-import { SliderDirectionEnum } from "./constants";
+import { compilationsThunks } from "redux/slicers/compilationsPageSlice";
+import { MAX_LOOK_INDEX, SliderDirectionEnum } from "./constants";
 import {
   changeSliderOpacity,
+  checkIfAllLooksSelected,
   computeSliderScale,
   getLookIndexClassNames,
   getSliderImageHeight,
   handleCloseClick,
   handleImageNavigation,
-  handleSliderControlClick
+  handleSliderControlClick,
 } from "./helpers";
 import { ReactComponent as ArrowLeftSvg } from "./icons/arrow-left.svg";
 import { ReactComponent as ArrowRightSvg } from "./icons/arrow-right.svg";
@@ -38,9 +42,12 @@ export const ImageSlider: React.FC<Props> = ({
     getSliderImageHeight()
   );
 
+  const [look, setLook] = useState<TLook>(compilation.looks[activeLookIndex]);
+
+  // console.log(compilation);
+
   const sliderBodyRef = useRef(null);
 
-  const look = compilation.looks[activeLookIndex];
   const sliderItems = look.items;
 
   const handleScroll = (e): void => {
@@ -70,6 +77,50 @@ export const ImageSlider: React.FC<Props> = ({
     }
   };
 
+  const handleLookSelectionChange = async (e) => {
+    setLook({
+      ...compilation.looks[activeLookIndex],
+      selected: e.target.value,
+    });
+
+    const looks = [...compilation.looks];
+    looks[activeLookIndex] = {
+      ...looks[activeLookIndex],
+      selected: e.target.value,
+    };
+
+
+    const payload = {
+      taskId: compilation.task.id,
+      looks: JSON.stringify(looks),
+    };
+
+    const currentCompilation = { ...compilation, looks: looks };
+
+    await dispatch(compilationsThunks.rateCompilation(payload));
+    dispatch(compilationsThunks.getUserCompilations());
+
+    if (activeLookIndex !== MAX_LOOK_INDEX) {
+      handleSliderControlClick(
+        SliderDirectionEnum.RIGHT,
+        currentCompilation,
+        activeLookIndex,
+        sliderBodyRef,
+        sliderImageHeight,
+        dispatch
+      );
+      return;
+    }
+    if (activeLookIndex === MAX_LOOK_INDEX) {
+      handleCloseClick(dispatch);
+    }
+  };
+
+  useEffect(() => {
+    console.log(compilation.looks);
+    setLook(compilation.looks[activeLookIndex]);
+  }, [activeLookIndex, compilation]);
+
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
     document.addEventListener("keydown", escFunction, false);
@@ -83,7 +134,7 @@ export const ImageSlider: React.FC<Props> = ({
     };
   }, []);
 
-  useOnClickOutside("slider-item", () => handleCloseClick(dispatch));
+  // useOnClickOutside("slider-item", () => handleCloseClick(dispatch));
 
   return (
     <div
@@ -139,6 +190,32 @@ export const ImageSlider: React.FC<Props> = ({
             </div>
           ))}
         </div>
+        {!checkIfAllLooksSelected(compilation.looks) && (
+          <div className={styles["selection"]}>
+            <h2 className={styles["selection__title"]}>
+              Вам понравился образ?
+            </h2>
+            <Radio.Group
+              value={look.selected}
+              className={styles["selection__actions"]}
+              size="large"
+              onChange={handleLookSelectionChange}
+            >
+              <Radio.Button
+                className={styles["selection__action-item"]}
+                value={true}
+              >
+                Да
+              </Radio.Button>
+              <Radio.Button
+                className={styles["selection__action-item"]}
+                value={false}
+              >
+                Нет
+              </Radio.Button>
+            </Radio.Group>
+          </div>
+        )}
       </div>
       <div id="slider-item" className={styles["slider__footer"]}>
         <div id="slider-item" className={styles["slider__controls"]}>
@@ -162,7 +239,7 @@ export const ImageSlider: React.FC<Props> = ({
               <ArrowLeftSvg id="slider-item" />
             </button>
           )}
-          {activeLookIndex !== 2 && (
+          {activeLookIndex !== MAX_LOOK_INDEX && (
             <button
               className={classNames(
                 styles["slider__control-btn"],

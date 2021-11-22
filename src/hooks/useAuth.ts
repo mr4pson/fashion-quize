@@ -4,7 +4,6 @@ import { useState } from "react";
 
 import { getLoginError, removeJwtPair, setJwtPair } from "common/helpers/auth-helpers";
 import { getUserInfo, openNotification } from "common/helpers/common-helpers";
-// import { getUserInfo } from "components/common/commonHelper";
 import { EUser } from "common/types/types";
 import { History } from "history";
 import { Page, paths } from "routes/constants";
@@ -25,7 +24,6 @@ export function useAuth(history: History<unknown> | string[]): TypeUseAuthHookRe
         },
         { withCredentials: true }
       );
-      localStorage.setItem("password", password);
       setJwtPair(tokenData.accessToken);
       const userInfo = getUserInfo();
       if (userInfo?.role) {
@@ -47,15 +45,14 @@ export function useAuth(history: History<unknown> | string[]): TypeUseAuthHookRe
           break;
       }
       return {};
-    } catch ({ response }) {
-      console.log(response);
-      if (response?.status === 401) {
+    } catch (error: any) {
+      if (error.response?.status === 401) {
         openNotification("error", "Неправильный логин или пароль");
       } else {
         openNotification("error", "Внутрення ошибка сервера");
       }
       message.destroy("auth");
-      return { error: getLoginError(response) };
+      return { error: getLoginError(error.response) };
     } finally {
       setLoading(false);
     }

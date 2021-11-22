@@ -92,7 +92,7 @@ const BaseForm: FC<Props> = (props) => {
               {field.name === "phone" ? (
                 <MaskedInput mask="+7(111)-111-11-11" />
               ) : (
-                <Input className={styles["form-item__input"]} />
+                <Input type={field.type} className={styles["form-item__input"]} />
               )}
             </Form.Item>
           ))}

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { TCompilation } from "components/pages/StylistPage/CompilationsPage/types";
+import { TCompilation, TLook } from "components/pages/StylistPage/CompilationsPage/types";
 import { TypeDispatch } from "redux/ReduxStore";
 import { compilationsThunks } from "redux/slicers/compilationsPageSlice";
 import { DESKTOP_SLIDER_IMAGE_HEIGHT, MOBILE_SLIDER_IMAGE_HEIGHT, SliderDirectionEnum } from "./constants";
@@ -86,4 +86,10 @@ export const handleSliderControlClick = (
     )
   );
   handleImageNavigation(0, sliderBodyRef, sliderImageHeight);
+};
+
+export const checkIfAllLooksSelected = (looks: any) => {
+  return looks.reduce((accum, currentValue) => {
+    return accum && currentValue.selected !== null && currentValue.selected !== undefined;
+  }, true);
 };

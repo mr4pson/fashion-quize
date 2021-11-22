@@ -1,8 +1,4 @@
-import {
-  Button, Form,
-  Input,
-  Select
-} from "antd";
+import { Button, Form, Input, Select } from "antd";
 import classNames from "classnames";
 import QuizeHeader from "components/pages/QuizePage/QuizeHeader";
 import { TQuizeHeaderConfig } from "components/pages/QuizePage/QuizeHeader/types";
@@ -15,7 +11,6 @@ import { tasksThunks } from "redux/slicers/tasksPageSlice";
 import { paths, UsrPage } from "../routes/consts";
 import { FieldTypes, formFields } from "./constants";
 import styles from "./TaskCreationPage.module.scss";
-
 
 /* eslint-disable no-template-curly-in-string */
 const validateMessages = {
@@ -59,7 +54,7 @@ export const TaskCreationPage: FC = () => {
     backUrl: undefined,
   };
 
-  const options = types.map((type) => ({
+  const options = types?.map((type) => ({
     value: type.id,
     title: type.title,
   }));
@@ -115,7 +110,59 @@ export const TaskCreationPage: FC = () => {
                         </Select>
                       </Form.Item>
                     )}
-                    {field.type !== FieldTypes.TYPE && (
+                    {field.type === FieldTypes.COMMENT && (
+                      <Form.Item
+                        key={`field-${index}`}
+                        className={classNames(
+                          styles["task-creation-form__form-item"],
+                          styles["form-item"]
+                        )}
+                        label={
+                          <label
+                            className={styles["form-item__label"]}
+                            htmlFor={field.name}
+                          >
+                            {field.label}
+                          </label>
+                        }
+                        name={field.name}
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
+                      >
+                        <Input.TextArea
+                          className={styles["form-item__input"]}
+                        />
+                      </Form.Item>
+                    )}
+                    {field.type === FieldTypes.DATE && (
+                      <Form.Item
+                        key={`field-${index}`}
+                        className={classNames(
+                          styles["task-creation-form__form-item"],
+                          styles["form-item"]
+                        )}
+                        label={
+                          <label
+                            className={styles["form-item__label"]}
+                            htmlFor={field.name}
+                          >
+                            {field.label}
+                          </label>
+                        }
+                        name={field.name}
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
+                      >
+                        <Input className={styles["form-item__input"]} />
+                      </Form.Item>
+                    )}
+                    {field.type === FieldTypes.TIME && (
                       <Form.Item
                         key={`field-${index}`}
                         className={classNames(

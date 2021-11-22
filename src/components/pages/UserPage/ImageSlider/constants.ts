@@ -5,3 +5,5 @@ export enum SliderDirectionEnum {
   LEFT = "LEFT",
   RIGHT = "RIGHT"
 }
+
+export const MAX_LOOK_INDEX = 2;

@@ -1,4 +1,3 @@
-import { Button } from "antd";
 import classNames from "classnames";
 import { TCompilation } from "components/pages/StylistPage/CompilationsPage/types";
 import moment from "moment";
@@ -10,10 +9,9 @@ import Look from "./Look";
 
 type Props = {
   compilation: TCompilation;
-  showModal: (id: number) => void;
 };
 
-const CompilationCard: React.FC<Props> = ({ compilation, showModal }) => {
+const CompilationCard: React.FC<Props> = ({ compilation }) => {
   return (
     <div className={styles["compilation-card"]}>
       <div className={styles["compilation-card__header"]}>
@@ -56,15 +54,6 @@ const CompilationCard: React.FC<Props> = ({ compilation, showModal }) => {
               />
             ))}
         </div>
-        {checkIfRateIsAccessible(compilation.task.status.title) && (
-          <Button
-            className={styles["compilation-card__rate-btn"]}
-            type="link"
-            onClick={() => showModal(compilation.id)}
-          >
-            Выбрать подборки
-          </Button>
-        )}
       </div>
     </div>
   );
