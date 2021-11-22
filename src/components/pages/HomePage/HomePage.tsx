@@ -19,7 +19,7 @@ function HomePage(): JSX.Element {
                         <div className={styles['compilation-section__content']}>
                             <div className={styles['compilation-section__left']}>
                                 <div className={styles['compilation-section__title']}>Подбор и доставка стильных образов</div>
-                                <div className={styles['compilation-section__desc']}>Персональные подборки для вашего гардероба от стилистов за 1990₽. <br/>Для любых целей. <br/>И всё онлайн.</div>
+                                <div className={styles['compilation-section__desc']}>Персональные подборки для вашего гардероба от стилистов. <br/>Для любых целей. <br/>И всё онлайн.</div>
                             </div>
                             <div className={styles['compilation-section__right']}></div>
                             <Link to={getLinkToQiuze()}>
@@ -38,14 +38,14 @@ function HomePage(): JSX.Element {
                     <div className="container">
                         <div className={styles['receive-section__content']}>
                             <div className={styles['receive-section__left']}>
-                                <div className={styles['receive-section__title']}>Что вы получаете</div>
+                                <div className={styles['receive-section__title']}>Как мы работаем</div>
                                 <ul className={styles['receive-section__items']}>
-                                    <li>3 подборки одежды</li>
-                                    <li>5 вещей + 1 аксессуар в каждой подборке</li>
-                                    <li>Персональные рекомендации от стилиста</li>
+                                    <li>Вы проходите анкету</li>
+                                    <li>Наши стилисты подбирают вам готовые образа</li>
+                                    <li>Вы отбираете те, что вам понравились</li>
                                     <li>Платите только за услуги стилиста, доставка и возврат — бесплатно</li>
                                 </ul>
-                                <div className={styles['receive-section__price']}>Стоимость услуги — <span>1990₽</span></div>
+                                <div className={styles['receive-section__price']}>Стоимость услуги — <span>1490₽</span></div>
                             </div>
                             <div className={styles['receive-section__right']}></div>
                         </div>
@@ -53,13 +53,13 @@ function HomePage(): JSX.Element {
                 </div>
                 <div className={styles['how-work-section']}>
                     <div className="container">
-                        <div className={styles['how-work-section__title']}>Как работает<br/> наш сервис</div>
+                        <div className={styles['how-work-section__title']}>Что вас ждет<br/> впереди</div>
                         <div className={classNames(styles['work-example'], styles['work-example--left'])}>
                             <div className={styles['work-example__image']}></div>
                             <div className={styles['work-example__info']}>
                                 <div className={styles['work-example__top']}></div>
                                 <div className={styles['work-example__title']}>Заполнение анкеты</div>
-                                <div className={styles['work-example__desc']}>Анкета нужна, чтобы мы познакомились с вами и смогли наиболее точно подобрать подходящие вещи для ваших целей. На заполнение уйдет 15-20 минут. Это быстрее, чем поход в магазин или на прием к стилисту.</div>
+                                <div className={styles['work-example__desc']}>Анкета нужна, чтобы мы познакомились с вами и смогли наиболее точно подобрать подходящие вещи для ваших целей. На заполнение уйдет 5-7 минут. Это быстрее, чем поход в магазин или на прием к стилисту. После прохождения опроса вы автоматически регистрируетесь и получаете письмо с паролем на почту.</div>
                             </div>
                         </div>
                         <div className={classNames(styles['work-example'], styles['work-example--right'])}>
@@ -67,23 +67,31 @@ function HomePage(): JSX.Element {
                             <div className={styles['work-example__info']}>
                                 <div className={styles['work-example__top']}></div>
                                 <div className={styles['work-example__title']}>Создание задачи</div>
-                                <div className={styles['work-example__desc']}>После заполнения анкеты вы сможете создавать задачи для стилистов, следить за прогрессом и выбирать подборки, а также давать обратную связь. <br/> Все в одном месте.</div>
+                                <div className={styles['work-example__desc']}>После регистрации вы сможете создавать задачи для стилистов: выбериать тип задачи, дату и время исполнения и оставлять комментарий с пожеланиями.</div>
                             </div>
                         </div>
                         <div className={classNames(styles['work-example'], styles['work-example--left'])}>
                             <div className={styles['work-example__image']}></div>
                             <div className={styles['work-example__info']}>
                                 <div className={styles['work-example__top']}></div>
-                                <div className={styles['work-example__title']}>Выбор персональных подборок</div>
-                                <div className={styles['work-example__desc']}>Вы сможете выбрать какие подборки хотите примерить, а какие нет. Если не понравится ни одна из подборок - разберемся в ситуации и дадим скидку на следующие образы.</div>
+                                <div className={styles['work-example__title']}>Работа стилистов</div>
+                                <div className={styles['work-example__desc']}>Наши стилисты подберут вам 3 образа. Каждый образ - это 5 вещей. Мы сообщим вам на почту как только образы будут готовы. Затем вы сможете увидеть эти на странице подборок в самом верху.</div>
                             </div>
                         </div>
                         <div className={classNames(styles['work-example'], styles['work-example--right'])}>
                             <div className={styles['work-example__image']}></div>
                             <div className={styles['work-example__info']}>
                                 <div className={styles['work-example__top']}></div>
-                                <div className={styles['work-example__title']}>Доставка и примерка</div>
-                                <div className={styles['work-example__desc']}>Бесплатно доставим образы в удобное для вас время. Покупайте только то, что вам нравится. При покупке комплекта, из общей суммы вычитается стоимость подбора образов. Доставка и возврат бесплатны, платите только за работу стилиста.</div>
+                                <div className={styles['work-example__title']}>Выбор понравившихся образов</div>
+                                <div className={styles['work-example__desc']}>Вы изучаете образы и выбирате то, что понравилось.</div>
+                            </div>
+                        </div>
+                        <div className={classNames(styles['work-example'], styles['work-example--left'])}>
+                            <div className={styles['work-example__image']}></div>
+                            <div className={styles['work-example__info']}>
+                                <div className={styles['work-example__top']}></div>
+                                <div className={styles['work-example__title']}>Доставка и оплата</div>
+                                <div className={styles['work-example__desc']}>Наш курьер доставит понравившиеся вам образы в указанное в задаче время. У вас будет 1 день на примерку, после чего наш курьер заберет то, что вам не подошло и примет оплату.</div>
                             </div>
                         </div>
                         <Link to={getLinkToQiuze()}>

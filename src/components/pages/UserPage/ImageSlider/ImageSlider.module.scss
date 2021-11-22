@@ -156,6 +156,33 @@
   }
 }
 
+.selection {
+  margin-top: 20px;
+  &__title {
+    text-align: center;
+    font-size: 26px;
+    color: #fff;
+  }
+  &__actions {
+    margin-top: 20px !important;
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+  }
+  &__action-item {
+    width: 100px !important;
+    text-align: center;
+    padding: 5px 10px !important;
+    height: auto !important;
+    &:first-child {
+      border-radius: 5px 0 0 5px !important;
+    }
+    &:last-child {
+      border-radius:  0 5px 5px 0 !important;
+    }
+  }
+}
+
 @media only screen and (max-width: 769px) {
   .slider {
     &__close {

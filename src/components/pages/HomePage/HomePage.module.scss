@@ -151,8 +151,8 @@
     margin-top: 52px;
     display: flex;
     &__image {
-        min-width: 304px;
-        height: 233px;
+        min-width: 440px;
+        height: 343px;
         background-color: #ccc;
         background-size: cover;
         background-position: center;
@@ -187,7 +187,7 @@
     }
     &:nth-child(2) {
         .work-example__image {
-            background-image: url(./images/test-pass.jpg);
+            background-image: url(./images/quize-input.jpg);
         }
         .work-example__top {
             &::before {
@@ -197,7 +197,7 @@
     }
     &:nth-child(3) {
         .work-example__image {
-            background-image: url(./images/task-creating.jpg);
+            background-image: url(./images/task-creation.jpg);
         }
         .work-example__top {
             &::before {
@@ -206,6 +206,9 @@
         }
     }
     &:nth-child(4) {
+        .work-example__image {
+            background-image: url(./images/stylists-job.jpg);
+        }
         .work-example__top {
             &::before {
                 content: "03";
@@ -216,6 +219,13 @@
         .work-example__top {
             &::before {
                 content: "04";
+            }
+        }
+    }
+    &:nth-child(6) {
+        .work-example__top {
+            &::before {
+                content: "05";
             }
         }
     }
@@ -392,9 +402,9 @@
             margin-top: 15px;
         }
         &__image {
-            width: 340px;
+            min-width: 340px;
             margin: auto;
-            height: 261px;
+            height: 269px;
         }
         &--right {
             .work-example__top {

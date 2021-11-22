@@ -25,8 +25,8 @@ const compilationsPageSlice = createSlice({
     }),
     increasePageNumber: (state) => {
       const currentPage = state.page + 1;
-      const visibleCompilations = state.compilations.slice(0, currentPage * itemsNumber);
-      const isIncreasePageBtnVisible = visibleCompilations.length < state.compilations.length;
+      const visibleCompilations = state.compilations?.slice(0, currentPage * itemsNumber);
+      const isIncreasePageBtnVisible = visibleCompilations?.length < state.compilations?.length;
       return {
         ...state,
         page: currentPage,
