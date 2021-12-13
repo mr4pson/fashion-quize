@@ -49,6 +49,13 @@
     font-size: 18px !important;
     height: 60px !important;
   }
+  &__date {
+    padding: 15px 11px !important;
+    border-radius: 5px !important;
+    font-size: 18px !important;
+    height: 60px !important;
+    width: 100% !important;
+  }
   &:nth-child(2n) {
     margin-left: 18px;
   }

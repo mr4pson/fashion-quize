@@ -1,7 +1,9 @@
-import { Button, Form, Input, Select } from "antd";
+import { Button, DatePicker, Form, Input, Select } from "antd";
+import { MaskedInput } from "antd-mask-input";
 import classNames from "classnames";
 import QuizeHeader from "components/pages/QuizePage/QuizeHeader";
 import { TQuizeHeaderConfig } from "components/pages/QuizePage/QuizeHeader/types";
+import moment from "moment";
 import "moment/locale/ru";
 import React, { FC, memo, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -10,6 +12,7 @@ import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { tasksThunks } from "redux/slicers/tasksPageSlice";
 import { paths, UsrPage } from "../routes/consts";
 import { FieldTypes, formFields } from "./constants";
+import { handleTimeChange } from "./helpers";
 import styles from "./TaskCreationPage.module.scss";
 
 /* eslint-disable no-template-curly-in-string */
@@ -23,9 +26,8 @@ export const TaskCreationPage: FC = () => {
   const [saveLoading] = useState(false);
 
   const dispatch = useAppDispatch();
-  const { types, loading } = useSelector(
-    (state: TRootState) => state.tasksPage
-  );
+  const { types } = useSelector((state: TRootState) => state.tasksPage);
+  const [form] = Form.useForm();
 
   useEffect(() => {
     (async () => {
@@ -37,6 +39,7 @@ export const TaskCreationPage: FC = () => {
   const onFinish = async (formData) => {
     const payload = {
       ...formData,
+      date: moment(formData.date).format("DD.MM.YYYY")
     };
     await dispatch(tasksThunks.createTask(payload));
     history.push(paths[UsrPage.TASKS]);
@@ -69,14 +72,15 @@ export const TaskCreationPage: FC = () => {
           <div className={styles["task-creation-form"]}>
             <Form
               name="basic"
+              form={form}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               validateMessages={validateMessages}
             >
               <div className={styles["task-creation-form__body"]}>
-                {formFields.map((field, index) => (
+                {formFields.map(({ type, label, name }, index) => (
                   <React.Fragment key={index}>
-                    {field.type === FieldTypes.TYPE && (
+                    {type === FieldTypes.TYPE && (
                       <Form.Item
                         key={`field-${index}`}
                         className={classNames(
@@ -86,12 +90,12 @@ export const TaskCreationPage: FC = () => {
                         label={
                           <label
                             className={styles["form-item__label"]}
-                            htmlFor={field.name}
+                            htmlFor={name}
                           >
-                            {field.label}
+                            {label}
                           </label>
                         }
-                        name={field.name}
+                        name={name}
                         rules={[
                           {
                             required: true,
@@ -99,18 +103,18 @@ export const TaskCreationPage: FC = () => {
                         ]}
                       >
                         <Select>
-                          {options.map((option, index) => (
+                          {options.map(({ value, title }, index) => (
                             <Select.Option
-                              key={`task-${field.name}` + index}
-                              value={option.value}
+                              key={`task-${name}` + index}
+                              value={value}
                             >
-                              {option.title}
+                              {title}
                             </Select.Option>
                           ))}
                         </Select>
                       </Form.Item>
                     )}
-                    {field.type === FieldTypes.COMMENT && (
+                    {type === FieldTypes.COMMENT && (
                       <Form.Item
                         key={`field-${index}`}
                         className={classNames(
@@ -120,12 +124,12 @@ export const TaskCreationPage: FC = () => {
                         label={
                           <label
                             className={styles["form-item__label"]}
-                            htmlFor={field.name}
+                            htmlFor={name}
                           >
-                            {field.label}
+                            {label}
                           </label>
                         }
-                        name={field.name}
+                        name={name}
                         rules={[
                           {
                             required: true,
@@ -137,7 +141,7 @@ export const TaskCreationPage: FC = () => {
                         />
                       </Form.Item>
                     )}
-                    {field.type === FieldTypes.DATE && (
+                    {type === FieldTypes.DATE && (
                       <Form.Item
                         key={`field-${index}`}
                         className={classNames(
@@ -147,22 +151,25 @@ export const TaskCreationPage: FC = () => {
                         label={
                           <label
                             className={styles["form-item__label"]}
-                            htmlFor={field.name}
+                            htmlFor={name}
                           >
-                            {field.label}
+                            {label}
                           </label>
                         }
-                        name={field.name}
+                        name={name}
                         rules={[
                           {
                             required: true,
                           },
                         ]}
                       >
-                        <Input className={styles["form-item__input"]} />
+                        <DatePicker
+                          format={"DD.MM.YYYY"}
+                          className={styles["form-item__date"]}
+                        />
                       </Form.Item>
                     )}
-                    {field.type === FieldTypes.TIME && (
+                    {type === FieldTypes.TIME && (
                       <Form.Item
                         key={`field-${index}`}
                         className={classNames(
@@ -172,19 +179,23 @@ export const TaskCreationPage: FC = () => {
                         label={
                           <label
                             className={styles["form-item__label"]}
-                            htmlFor={field.name}
+                            htmlFor={name}
                           >
-                            {field.label}
+                            {label}
                           </label>
                         }
-                        name={field.name}
+                        name={name}
                         rules={[
                           {
                             required: true,
                           },
                         ]}
                       >
-                        <Input className={styles["form-item__input"]} />
+                        <MaskedInput
+                          className={styles["form-item__input"]}
+                          mask="11:11"
+                          onChange={(e) => handleTimeChange(e, form)}
+                        />
                       </Form.Item>
                     )}
                   </React.Fragment>
