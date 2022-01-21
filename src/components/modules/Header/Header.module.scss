@@ -1,24 +1,35 @@
 .header {
-    padding: 13px 0;
+    padding: 7.5px 0;
     position: fixed;
-    background: #fff;
+    background: #000;
     width: 100%;
     z-index: 100;
+
     &__content {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
+
     &__logo {
-        font-family: 'Ubuntu', sans-serif;
-        font-size: 24px;
-        font-weight: 500;
-        color: #101010;
+        margin-bottom: -10px;
     }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__links {
+        width: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-right: 80px;
+    }
+
     &__login-btn {
-        font-family: 'Inter', sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        color: #101010;
+
     }
 }

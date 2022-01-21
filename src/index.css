@@ -1,11 +1,11 @@
 body {
   margin: 0;
   color: #101010;
-  font-family: "inter", sans-serif !important;
+  font-family: "inter", sans-serif;
 }
 
 input, button, select, optgroup, textarea {
-  font-family: "inter", sans-serif !important;
+  font-family: "inter", sans-serif;
 }
 
 #root {
@@ -14,7 +14,7 @@ input, button, select, optgroup, textarea {
 }
 
 .container {
-  max-width: 1170px;
+  max-width: 1250px;
   padding: 0 15px;
   margin: auto;
 }
