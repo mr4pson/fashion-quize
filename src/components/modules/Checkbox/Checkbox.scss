@@ -1,0 +1,46 @@
+.cbox {
+  display: flex;
+  align-items: center;
+
+  &__fld,
+  &__lbl {
+    cursor: pointer;
+  }
+
+  &__fld {
+    height: 16px;
+    width: 16px;
+
+    appearance: none;
+    background: #ffffff;
+    border: 1px solid #110e2b;
+    border-radius: 2px;
+
+    &:checked {
+      background: #110e2b url("../../../assets/icons/ic-check.svg");
+      border: 0;
+    }
+  }
+
+  &__lbl {
+    font-family: Montserrat;
+
+    &-sm {
+      margin-left: 12px;
+
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    &-md {
+      margin-left: 20px;
+
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+
+  &:focus-visible {
+    outline: 0;
+  }
+}
