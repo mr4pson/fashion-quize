@@ -1,17 +1,17 @@
 import { FC, memo, useEffect, useState } from "react";
 
-import { CMixin } from ".";
+import { FStyle } from "styles";
+import { CScheme } from ".";
 import "./Checkbox.scss";
 
 type TProps = {
   name: string;
 
-  color?: string;
   label?: string;
-  mixin?: CMixin;
+  mixin?: (CScheme | FStyle)[];
 };
 
-const Checkbox: FC<TProps> = ({ name, color, label, mixin = "" }) => {
+const Checkbox: FC<TProps> = ({ name, label, mixin = [] }) => {
   const [checked, setChecked] = useState(false);
   const onChange = () => setChecked((prevState) => !prevState);
 
@@ -20,9 +20,9 @@ const Checkbox: FC<TProps> = ({ name, color, label, mixin = "" }) => {
   }, [checked]);
 
   return (
-    <div className="cbox">
+    <div className={`cbox ${mixin.join(" ")}`}>
       <input className="cbox__fld" type="checkbox" id={name} {...{ name, checked, onChange }} />
-      {label && <label className={`cbox__lbl ${mixin}`} htmlFor={name} style={{ color }}>{label}</label>}
+      {label && <label htmlFor={name}>{label}</label>}
     </div>
   );
 };
