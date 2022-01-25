@@ -3,7 +3,7 @@ import { TQandAItem } from "./types";
 export const qandAItems: TQandAItem[] = [
   {
     title: 'Что такое Eyelish?',
-    description: 'Сервис онлайн шопинга со стилистами',
+    description: 'Eyelish - это сервис онлайн шопинга со стилистами',
   },
   {
     title: 'Нужна ли подписка?',

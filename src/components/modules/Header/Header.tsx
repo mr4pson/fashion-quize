@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { Page, paths } from 'routes/constants';
 import Button, { ButtonTypes } from '../Button';
@@ -6,10 +6,28 @@ import { ReactComponent as Logo } from './../../../assets/icons/logo.svg';
 import { ReactComponent as FbIcon } from './../../../assets/icons/ic-fb.svg';
 import { ReactComponent as InstIcon} from './../../../assets/icons/ic-inst.svg';
 import styles from './Header.module.scss';
+import classNames from 'classnames';
 
 function Header(): JSX.Element {
+    const [isActive, setIsActive] = useState<boolean>(false);
+
+    useEffect(() => {
+        const onScroll = () => setIsActive(!!window.pageYOffset);
+
+        window.removeEventListener('scroll', onScroll);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
+    const getClassNames = (isActive: boolean) => {
+        return classNames({
+            [styles["header"]]: true,
+            [styles["header--active"]]: isActive,
+        });
+    };
+
     return (
-        <div className={styles['header']}>
+        <div className={getClassNames(isActive)}>
             <div className="container">
                 <div className={styles['header__content']}>
                     <Link to={paths[Page.HOME]}>
@@ -17,8 +35,8 @@ function Header(): JSX.Element {
                     </Link>
                     <div className={styles['header__actions']}>
                         <div className={styles['header__links']}>
-                            <InstIcon />
-                            <FbIcon />
+                            <InstIcon className={styles['header__link']} />
+                            <FbIcon className={styles['header__link']} />
                         </div>
                         <Link to={paths[Page.LOGIN]}>
                             <Button type={ButtonTypes.SECONDARY} className={styles['header__login-btn']}>Войти</Button>
