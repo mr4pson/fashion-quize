@@ -1,2 +1,2 @@
 export { default as Checkbox } from "./Checkbox";
-export * from "./mixin";
+export * from "./scheme";

@@ -2,23 +2,11 @@
   position: relative;
   width: 408px;
 
-  font-family: Montserrat;
-  font-size: 16px;
-  line-height: 24px;
-
   color: #110e2b;
 
   &__lbl {
-    cursor: pointer;
-
     display: inline-block;
     margin-bottom: 8px;
-
-    &_disabled {
-      cursor: default;
-
-      color: #6f7374 !important;
-    }
   }
 
   &__fld {
