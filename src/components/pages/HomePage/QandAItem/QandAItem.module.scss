@@ -1,54 +1,53 @@
 .q-and-a-item {
-  position: relative;
-  margin-top: 34px;
-  &__title {
-    font-size: 24px;
-    line-height: 24px;
+  $self: &;
+
+  &__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 34px;
+    max-width: 628px;
+    background: #FFFFFF;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 16px 32px;
     cursor: pointer;
   }
+
+  &__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 500;
+  }
+
   &__desc {
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     line-height: 24px;
+    color: #101010;
     display: none;
+    margin: 24px 32px;
+    max-width: 628px;
   }
+
   &__expand-btn {
-    position: absolute;
     background: none;
     border: none;
-    width: 20px;
-    height: 20px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
     cursor: pointer;
-    top: 1px;
-    left: -25px;
-    &::before {
-      content: "";
-      display: block;
-      width: 2px;
-      height: 20px;
-      background: #101010;
-      position: absolute;
-      top: 0;
-    }
-    &::after {
-      content: "";
-      display: block;
-      width: 20px;
-      height: 2px;
-      background: #101010;
-      margin-top: -10px;
-      margin-left: -9px;
-      position: absolute;
-      bottom: 9px;
-    }
   }
+
   &--active {
-    .q-and-a-item__desc {
+    #{ $self }__desc {
       display: block;
     }
-    .q-and-a-item__expand-btn {
-      &::before {
-        display: none;
-      }
+
+    #{ $self }__expand-btn {
+      transform: rotate(180deg);
     }
   }
 }
@@ -57,6 +56,7 @@
 @media only screen and (max-width: 768px) {
   .q-and-a-item {
     margin-top: 25px;
+
     &__title {
         font-size: 20px;
         line-height: 22px;

@@ -6,10 +6,10 @@ import classNames from "classnames";
 type Props = {
   type: ButtonTypes;
   children: React.ReactNode;
-  className: string;
+  className?: string;
 };
 
-const Button: React.FC<Props> = ({ children, className, type }) => {
+const Button: React.FC<Props> = ({ children, className = "", type }) => {
   const getClassNames = (type: ButtonTypes) => {
     return classNames({
       [className]: true,

@@ -1,24 +1,13 @@
 .home-page {
-
+    background: #FCFDFF;
 }
+
 .compilation-section {
     height: 800px;
     background-color: #fff;
     background-image: url(./images/main-section.jpg);
     background-size: cover;
     background-position: center;
-
-    &__left {
-        max-width: 320px;
-    }
-
-    &__right {
-        background-image: url(./images/compilation-section-img.jpg);
-        height: 400px;
-        width: 100%;
-        background-position: center right;
-        background-repeat: no-repeat;
-    }
 
     &__title {
         padding-top: 256px;
@@ -146,204 +135,289 @@
 }
 
 .how-work-section {
-    margin-top: 64px;
+    margin-top: 60px;
     margin-bottom: 79px;
-    &__title {
-        font-size: 36px;
-        font-weight: bold;
-        line-height: 32px;
+    overflow: hidden;
+
+    &__container {
+        position: relative;
     }
-    &__quize-btn {
-        width: 304px;
-        height: 54px;
-        margin: 48px auto;
-        font-size: 16px;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #101010;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        span {
-            margin-right: 7px;
-        }
-        .icon {
-            margin-top: 1px;
+
+    &__title {
+        font-family: 'Cormorant', serif;
+        font-size: 40px;
+        font-weight: bold;
+        line-height: 48px;
+        color: #110E2B;
+        text-align: center;
+    }
+
+    &--light {
+        background: #fcfdff;
+    }
+
+    &--dark {
+        background: #110e2b;
+        padding-bottom: 93px;
+        margin-bottom: 0;
+
+        .work-example {
+            $self: &;
+
+            &__number {
+                color: #F6CEB4;
+            }
+
+            &__title {
+                color: #FFFFFF;
+            }
+        
+            &__desc {
+                color: #FFFFFF;
+                border-left-color: #f6ceb4;
+            }
+
+            &__image {
+                position: relative;
+            }
+
+            &:nth-child(1) {
+                margin-top: 95px;
+
+                .work-example__info {
+                    margin-top: 115px;
+                }
+
+                .work-example__image {
+                    background-image: url(./images/delivery-and-payment.jpg);
+                }
+                
+                .work-example__popup-image {
+                    position: absolute;
+                    right: -294px;
+                    top: 261px;
+                    background-image: url(./images/bag.png);
+                    width: 362px;
+                    height: 241px;
+                }
+            }
+        
+            &:nth-child(2) {
+                flex-direction: row-reverse;
+                height: auto;
+                margin-top: 193px;
+
+                .work-example__image {
+                    position: relative;
+                    right: auto;
+                    background-image: url(./images/feedback.jpg);  
+                }
+
+                .work-example__desc {
+                    padding-bottom: 0;
+                }
+            }
         }
     }
 }
 
 .work-example {
-    margin-top: 52px;
+    $self: &;
+    margin-top: 127px;
     display: flex;
+
     &__image {
-        max-width: 440px;
-        border-radius: 7px;
+        width: 400px;
+        height: 448px;
+        border-radius: 16px;
+        background-size: cover;
     }
+
     &__info {
-        margin-left: 95px;
+        margin-left: 265px;
         width: 100%;
+        max-width: 596px;
+        margin-top: 56px;
     }
-    &__top {
-        margin-top: 24px;
-        height: 1px;
-        background: #101010;
-        position: relative;
-        &::before {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            position: absolute;
-            left: -45px;
-            top: -18px;
-        }
-    }
-    &__title {
-        font-size: 24px;
+
+    &__number {
+        font-family: 'Cormorant', serif;
         font-weight: bold;
-        margin-top: 24px;
+        font-size: 64px;
+        line-height: 56px;
+        color: #8498CD;
+        letter-spacing: -4px;
     }
+
+    &__title {
+        font-family: 'Cormorant', serif;
+        font-size: 32px;
+        font-weight: bold;
+        margin-top: 16px;
+        color: #110E2B;
+    }
+
     &__desc {
+        font-family: 'Montserrat', sans-serif;
         font-size: 16px;
-        letter-spacing: 1px;
-        font-weight: 300;
+        color: #110E2B;
+        line-height: 24px;
+        padding-left: 23px;
+        border-left: 2px solid #8498CD;
+        margin-top: 25px;
     }
+
     &:nth-child(2) {
-        .work-example__image {
-            // background-image: url(./images/quize-input.jpg);
+        flex-direction: row;
+        height: 448px;
+        margin-top: 48px;
+
+        #{ $self }__image {
+            position: absolute;
+            right: -120px;
+            background-image: url(./images/quize-input.jpg);
         }
-        .work-example__top {
-            &::before {
-                content: "01";
-            }
+
+        #{ $self }__popup-image {
+            position: absolute;
+            left: -360px;
+            top: 100px;
+            background-image: url(./images/laptop.png);
+            width: 518px;
+            height: 288px;
+        }
+
+        #{ $self }__desc {
+            padding-bottom: 50px;
         }
     }
+
     &:nth-child(3) {
-        .work-example__image {
+        #{ $self }__info {
+            margin-top: 105px;
+        }
+
+        #{ $self }__image {
+            position: relative;
             background-image: url(./images/task-creation.jpg);
         }
-        .work-example__top {
-            &::before {
-                content: "02";
-            }
+
+        #{ $self }__popup-image {
+            position: absolute;
+            right: -126px;
+            top: 143px;
+            background-image: url(./images/iphone.png);
+            width: 210px;
+            height: 400px;
         }
     }
-    &:nth-child(4) {
-        .work-example__image {
-            background-image: url(./images/stylists-job.jpg);
-        }
-        .work-example__top {
-            &::before {
-                content: "03";
-            }
-        }
-    }
-    &:nth-child(5) {
-        .work-example__image {
-            background-image: url(./images/look-selection.jpg);
-        }
-        .work-example__top {
-            &::before {
-                content: "04";
-            }
-        }
-    }
-    &:nth-child(6) {
-        .work-example__image {
-            background-image: url(./images/delivery-and-payment.jpg);
-        }
-        .work-example__top {
-            &::before {
-                content: "05";
-            }
-        }
-    }
+
     &--right {
         flex-direction: row-reverse;
-        .work-example__info {
+        justify-content: space-between;
+
+        #{ $self }__info {
             margin-left: 0;
             margin-right: 95px;
         }
-        .work-example__top {
+
+        #{ $self }__top {
             &::before {
                 left: auto;
                 right: -45px;
             }
         }
     }
+
+    &__quize-btn {
+        margin-top: 42px;
+    }
 }
 
 .all-types-section {
-    padding-bottom: 103px;
-    &__title {
-        max-width: 590px;
-        font-size: 36px;
+    height: 376px;
+    background-image: url(./images/all-types-section.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 96px 387px;
+
+    &__card {
+        background-color: #F6CEB4;
+        border-radius: 8px;
+        padding: 24px 31px;
+        max-width: 343px;
+    }
+
+    &__card-content {
+        position: relative;
+        padding-left: 16px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
         line-height: 32px;
-        font-weight: bold;
+
+        &::before {
+            content: "";
+            left: 0px;
+            position: absolute;
+            height: 100%;
+            width: 2px;
+            background: #000;
+            border-radius: 1px;
+        }
     }
-    &__line {
-        width: 60%;
-        margin: 38px 0 15px auto;
-        height: 1px;
-        background: #101010;
-    }
-    &__desc {
-        width: 60%;
-        font-size: 24px;
-        letter-spacing: 1px;
-        font-weight: 300;
-        margin: 0 0 0 auto;
-        text-align: left;
-        line-height: 24px;
-    }
-    &__image {
-        margin-top: 38px;
-        background-image: url(./images/all-types-section.png);
-        height: 320px;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
+
 }
 
 .try-quize-section {
-    background: #F5F5F5;
-    padding: 64px 0;
+    background: #110E2B;
+    padding: 41px 0;
+    border: 2px solid #F6CEB4;
+    border-radius: 16px;
+    margin-top: 52px;
+
     &__title {
-        font-size: 24px;
-        line-height: 32px;
+        font-family: 'Cormorant', serif;
+        font-size: 40px;
+        line-height: 48px;
         font-weight: bold;
         text-align: center;
-        max-width: 590px;
-        margin: auto;
+        color: #FFFFFF;
     }
-    &__btn {
-        cursor: pointer;
-        background: #101010;
-        margin: 55px auto 0;
-        color: #fff;
-        border: none;
-        font-size: 16px;
-        height: 54px;
-        width: 464px;
+
+    &__btn-wrap {
+        margin: 45px auto 0;
         display: flex;
-        align-items: center;
         justify-content: center;
     }
 }
 
 .q-and-a {
     padding: 80px 0 64px;
+    overflow: hidden;
+
+    &__container {
+        position: relative;
+    }
+
     &__content {
-        border: 1px solid #F5F5F5;
         padding: 32px 80px 60px;
     }
+
     &__title {
-        font-size: 32px;
+        font-family: 'Cormorant', serif;
+        font-size: 56px;
         font-weight: bold;
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
+    }
+
+    &__image {
+        position: absolute;
+        width: 429px;
+        height: 496px;
+        bottom: -64px;
+        right: -56px;
+        background-image: url(./images/q-and-a.png);
     }
 }
 

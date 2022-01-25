@@ -4,7 +4,6 @@ import Footer from "components/modules/Footer";
 import Header from "components/modules/Header";
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import { ReactComponent as RightArrow } from "./../../../assets/icons/right-arrow.svg";
 import { ReactComponent as StepsIcon } from "./../../../assets/icons/steps.svg";
 import { qandAItems } from "./constants";
 import { getLinkToQiuze } from "./helper";
@@ -70,82 +69,64 @@ function HomePage(): JSX.Element {
             </div>
           </div>
         </div>
-        <div className={styles["how-work-section"]}>
-          <div className="container">
-            <div className={styles["how-work-section__title"]}>
-              Что вас ждет
-              <br /> впереди
-            </div>
+        <div
+          className={classNames(
+            styles["how-work-section"],
+            styles["how-work-section--light"]
+          )}
+        >
+          <div
+            className={classNames(
+              "container",
+              styles["how-work-section__container"]
+            )}
+          >
+            <h3 className={styles["how-work-section__title"]}>
+              Что вас ждет впереди?
+            </h3>
             <div
               className={classNames(
                 styles["work-example"],
-                styles["work-example--left"]
+                styles["work-example--right"]
               )}
             >
-              <img
-                className={styles["work-example__image"]}
-                src={"./assets/images/quize-input.jpg"}
-                alt=""
-              />
+              <div className={styles["work-example__image"]}>
+                <div className={styles["work-example__popup-image"]}></div>
+              </div>
               <div className={styles["work-example__info"]}>
-                <div className={styles["work-example__top"]}></div>
+                <div className={styles["work-example__number"]}>01.</div>
                 <div className={styles["work-example__title"]}>
                   Заполнение анкеты
                 </div>
                 <div className={styles["work-example__desc"]}>
                   Анкета нужна, чтобы мы познакомились с вами и смогли наиболее
-                  точно подобрать подходящие вещи для ваших целей. На заполнение
-                  уйдет 5-7 минут. Это быстрее, чем поход по магазинам или
-                  встреча со стилистом. После прохождения опроса вы
-                  автоматически регистрируетесь и получаете письмо с паролем на
-                  почту.
+                  точно подобрать подходящие вещи для ваших целей. <br />
+                  На заполнение уйдет 5-7 минут. Это быстрее, чем поход <br />{" "}
+                  по магазинам или встреча со стилистом. После прохождения{" "}
+                  <br /> опроса вы автоматически регистрируетесь и получаете{" "}
+                  <br /> письмо с паролем на почту.
                 </div>
               </div>
             </div>
             <div
               className={classNames(
                 styles["work-example"],
-                styles["work-example--right"]
+                styles["work-example--left"]
               )}
             >
-              <img
-                className={styles["work-example__image"]}
-                src={"./assets/images/task-creation.jpg"}
-                alt=""
-              />
+              <div className={styles["work-example__image"]}>
+                <div className={styles["work-example__popup-image"]}></div>
+              </div>
               <div className={styles["work-example__info"]}>
-                <div className={styles["work-example__top"]}></div>
+                <div className={styles["work-example__number"]}>02.</div>
                 <div className={styles["work-example__title"]}>
                   Создание задачи
                 </div>
                 <div className={styles["work-example__desc"]}>
-                  После регистрации вы сможете создавать конкретные задачи для
-                  стилистов: выбирать тип задачи, дату и время исполнения. А
-                  также оставлять комментарий с пожеланиями.{" "}
-                </div>
-              </div>
-            </div>
-            <div
-              className={classNames(
-                styles["work-example"],
-                styles["work-example--left"]
-              )}
-            >
-              <img
-                className={styles["work-example__image"]}
-                src={"./assets/images/stylists-job.jpg"}
-                alt=""
-              />
-              <div className={styles["work-example__info"]}>
-                <div className={styles["work-example__top"]}></div>
-                <div className={styles["work-example__title"]}>
-                  Работа стилистов
-                </div>
-                <div className={styles["work-example__desc"]}>
-                  Стилисты подберут вам 3 образа. В каждом 5 вещей, включая
-                  обувь и аксессуары. Как только образы будут готовы, вам придет
-                  уведомление на почту, в приложении вы сможете увидеть их на
-                  странице подборок.
+                  После регистрации вы сможете создавать конкретные задачи{" "}
+                  <br /> для стилистов: выбирать тип задачи, дату и время
+                  исполнения. <br /> А также оставлять комментарий с
+                  пожеланиями.{" "}
                 </div>
               </div>
             </div>
@@ -155,34 +136,46 @@ function HomePage(): JSX.Element {
                 styles["work-example--right"]
               )}
             >
-              <img
-                className={styles["work-example__image"]}
-                src={"./assets/images/look-selection.jpg"}
-                alt=""
-              />
+              <div className={styles["work-example__image"]}></div>
               <div className={styles["work-example__info"]}>
-                <div className={styles["work-example__top"]}></div>
+                <div className={styles["work-example__number"]}>03.</div>
                 <div className={styles["work-example__title"]}>
-                  Выбор понравившихся образов
+                  Работа стилистов
                 </div>
                 <div className={styles["work-example__desc"]}>
-                  Вы изучаете образы и выбираете вещи, которые вам понравились.
+                  Стилисты подберут вам <b>3 образа</b>. В каждом 5 вещей,
+                  включая обувь и аксессуары. <br /> Как только образы будут
+                  готовы, вам придет уведомление на почту. В приложении вы
+                  сможете увидеть их на странице подборок <br /> и выбрать
+                  понравившиеся.
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div
+          className={classNames(
+            styles["how-work-section"],
+            styles["how-work-section--dark"]
+          )}
+        >
+          <div
+            className={classNames(
+              "container",
+              styles["how-work-section__container"]
+            )}
+          >
             <div
               className={classNames(
                 styles["work-example"],
                 styles["work-example--left"]
               )}
             >
-              <img
-                className={styles["work-example__image"]}
-                src={"./assets/images/delivery-and-payment.jpg"}
-                alt=""
-              />
+              <div className={styles["work-example__image"]}>
+                <div className={styles["work-example__popup-image"]}></div>
+              </div>
               <div className={styles["work-example__info"]}>
-                <div className={styles["work-example__top"]}></div>
+                <div className={styles["work-example__number"]}>04.</div>
                 <div className={styles["work-example__title"]}>
                   Доставка и оплата
                 </div>
@@ -197,13 +190,9 @@ function HomePage(): JSX.Element {
                 styles["work-example--right"]
               )}
             >
-              <img
-                className={styles["work-example__image"]}
-                src={"./assets/images/feedback.jpg"}
-                alt=""
-              />
+              <div className={styles["work-example__image"]}></div>
               <div className={styles["work-example__info"]}>
-                <div className={styles["work-example__top"]}></div>
+                <div className={styles["work-example__number"]}>05.</div>
                 <div className={styles["work-example__title"]}>
                   Обратная связь
                 </div>
@@ -214,43 +203,45 @@ function HomePage(): JSX.Element {
                   нем ощущаете. С каждым новым комментарием стилист будет лучше
                   знать ваши предпочтения и собирать образы быстрее!
                 </div>
+                <Link to={getLinkToQiuze()}>
+                  <Button
+                    type={ButtonTypes.PRIMARY}
+                    className={styles["work-example__quize-btn"]}
+                  >
+                    Заполнить анкету
+                  </Button>
+                </Link>
               </div>
             </div>
-            <Link to={getLinkToQiuze()}>
-              <button className={styles["how-work-section__quize-btn"]}>
-                <span>Заполнить анкету</span>
-                <RightArrow className={styles["icon"]} />
-              </button>
-            </Link>
           </div>
         </div>
         <div className={styles["all-types-section"]}>
           <div className="container">
-            <div className={styles["all-types-section__title"]}>
-              Подбираем гардероб для всех, даже если вы не такой как все
+            <div className={styles["all-types-section__card"]}>
+              <div className={styles["all-types-section__card-content"]}>
+                Подберем образы любых типов: <br /> +size, petite и для
+                беременных
+              </div>
             </div>
-            <div className={styles["all-types-section__line"]}></div>
-            <div className={styles["all-types-section__desc"]}>
-              Подберем образы любых типов: <br /> +size, petite и для беременных
-            </div>
-            <div className={styles["all-types-section__image"]}></div>
           </div>
         </div>
-        <div className={styles["try-quize-section"]}>
-          <div className="container">
-            <div className={styles["try-quize-section__title"]}>
-              Заполните анкету и получите первую подборку образов от вашего
-              онлайн стилиста
+        <div className="container">
+          <div className={styles["try-quize-section"]}>
+            <h3 className={styles["try-quize-section__title"]}>
+              Заполните анкету и получите первую подборку <br /> образов от
+              вашего онлайн стилиста
+            </h3>
+            <div className={styles["try-quize-section__btn-wrap"]}>
+              <Link to={getLinkToQiuze()}>
+                <Button type={ButtonTypes.PRIMARY}>Заполнить анкету</Button>
+              </Link>
             </div>
-            <Link to={getLinkToQiuze()}>
-              <button className={styles["try-quize-section__btn"]}>
-                Попробовать
-              </button>
-            </Link>
           </div>
         </div>
         <div className={styles["q-and-a"]}>
-          <div className="container">
+          <div
+            className={classNames("container", styles["q-and-a__container"])}
+          >
             <div className={styles["q-and-a__content"]}>
               <div className={styles["q-and-a__title"]}>Вопросы & Ответы</div>
               <div className={styles["q-and-a__items"]}>
@@ -258,6 +249,7 @@ function HomePage(): JSX.Element {
                   <QandAItem key={`q-and-a-${index}`} item={qandAItem} />
                 ))}
               </div>
+              <div className={styles["q-and-a__image"]}></div>
             </div>
           </div>
         </div>
