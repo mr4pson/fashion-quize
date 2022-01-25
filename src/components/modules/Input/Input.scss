@@ -13,7 +13,7 @@
     height: 40px;
     padding: 8px 40px 8px 16px;
 
-    background: #f2f0f0;
+    background-color: #f2f0f0;
     border: 1px solid #f2f0f0;
     border-radius: 8px;
 
@@ -23,7 +23,7 @@
   }
 
   &:focus-visible {
-    background: #ffffff;
+    background-color: #ffffff;
     border: 1px solid #6f7374;
     outline: 0;
   }
@@ -42,13 +42,20 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-  background: url("../../../assets/icons/ic-calendar.svg");
+  background-image: url("../../../assets/icons/ic-calendar.svg");
 }
 
 input[type="search"]::-webkit-search-cancel-button {
-  background: url("../../../assets/icons/ic-cross.svg");
+  background-image: url("../../../assets/icons/ic-cross.svg");
 }
 
 input[type="time"]::-webkit-calendar-picker-indicator {
-  background: url("../../../assets/icons/ic-time.svg");
+  background-image: url("../../../assets/icons/ic-time.svg");
+}
+
+select {
+  appearance: none;
+  background-image: url("../../../assets/icons/ic-chevron-down.svg");
+  background-position: calc(100% - 16px);
+  background-repeat: no-repeat;
 }

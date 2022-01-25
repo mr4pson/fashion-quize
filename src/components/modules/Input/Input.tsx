@@ -1,6 +1,5 @@
 import { ChangeEvent, FC, memo, useEffect, useState } from "react";
 
-import { FStyle } from "styles";
 import "./Input.scss";
 
 type HTMLInputTypeAttribute =
@@ -19,6 +18,7 @@ type HTMLInputTypeAttribute =
   | "range"
   | "reset"
   | "search"
+  | "select"
   | "submit"
   | "tel"
   | "text"
@@ -30,24 +30,37 @@ type HTMLInputTypeAttribute =
 type TProps = {
   name: string;
   type?: HTMLInputTypeAttribute;
-  mixin?: FStyle[];
+  options?: (string | number | readonly string[])[];
   disabled?: boolean;
 
   label?: string;
 };
 
-const Input: FC<TProps> = ({ name, type = "search", mixin = [], disabled, label }) => {
-  const [value, setValue] = useState("");
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value);
+const Input: FC<TProps> = ({ name, type = "search", options = [], disabled, label }) => {
+  const initValue = type === "select" ? options[0] : "";
+  const [value, setValue] = useState(initValue);
+  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => setValue(e.currentTarget.value);
 
   useEffect(() => {
     value && console.log(`input ${name}:`, value);
   }, [value]);
 
   return (
-    <div className={`inp ${mixin.join(" ")}`}>
-      {label && <label className="inp__lbl" htmlFor={name}>{label}</label>}
-      <input className="inp inp__fld" autoComplete="off" id={name} {...{ name, type, disabled, value, onChange }} />
+    <div className="inp text-md">
+      {label && (
+        <label className="inp__lbl" htmlFor={name}>
+          {label}
+        </label>
+      )}
+      {type === "select" ? (
+        <select className="inp inp__fld" id={name} {...{ name, disabled, value, onChange }}>
+          {options.map((val, idx) => (
+            <option key={idx}>{val}</option>
+          ))}
+        </select>
+      ) : (
+        <input className="inp inp__fld" autoComplete="off" id={name} {...{ name, type, disabled, value, onChange }} />
+      )}
     </div>
   );
 };
