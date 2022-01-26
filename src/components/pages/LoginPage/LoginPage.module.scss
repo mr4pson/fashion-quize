@@ -1,61 +1,56 @@
 .login-page {
-  padding-top: 100px;
-  height: 100vh;
   display: flex;
   justify-content: center;
-  &__card {
-    max-width: 528px;
-    width: 100%;
-  }
+  padding-top: 96px;
+
+  height: 100vh;
+
+  background-color: #110e2b;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+
+  height: fit-content;
+  width: 624px;
+
+  background-color: #ffffff;
+  border-radius: 16px;
+
   &__title {
-    font-size: 34px;
-    font-weight: 500;
-    text-align: center;
+    margin-bottom: 32px;
+
+    font-family: Cormorant;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 40px;
+
+    color: #110e2b;
   }
+
   &__form {
-    margin-top: 65px!important;
-  }
-  &__input {
-    margin-top: 10px;
-    height: 60px;
-    padding: 4px 22px!important;
-    border: none!important;
-    background-color: #F2F3F4!important;
-    border-bottom: 1px solid #000!important;
-    box-shadow: none!important;
-    &:focus {
-      outline: none!important;
-      box-shadow: none!important;
-    }
-    &::placeholder {
-      color: #858585!important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+
+    gap: 24px;
+
+    &-btn {
+      margin-top: 40px;
     }
   }
-}
 
-.password-wrap {
-  margin-bottom: 0;
-}
+  &__reset-pass {
+    font-family: Montserrat;
+    font-size: 16px;
+    line-height: 24px;
 
-.forgot-pass {
-  font-size: 16px;
-  padding: 15px 0 25px;
-  margin-bottom: 10px;
-  a {
-    color: #258BD4;
-    margin-left: 5px;
-  }
-}
+    color: #6f7374;
 
-.login-btn-wrap {
-  text-align: center;
-  button {
-    font-size: 20px;
-    background: #111010;
-    width: 100%;
-    height: 54px;
-    &:focus, &:active, &:hover {
-      background: #111010;
-    }
+    cursor: pointer;
   }
 }

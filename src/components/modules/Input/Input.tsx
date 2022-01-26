@@ -32,11 +32,12 @@ type TProps = {
   type?: HTMLInputTypeAttribute;
   options?: (string | number | readonly string[])[];
   disabled?: boolean;
+  required?: boolean;
 
   label?: string;
 };
 
-const Input: FC<TProps> = ({ name, type = "search", options = [], disabled, label }) => {
+const Input: FC<TProps> = ({ name, type = "search", options = [], disabled, required, label }) => {
   const initValue = type === "select" ? options[0] : "";
   const [value, setValue] = useState(initValue);
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => setValue(e.currentTarget.value);
@@ -46,20 +47,26 @@ const Input: FC<TProps> = ({ name, type = "search", options = [], disabled, labe
   }, [value]);
 
   return (
-    <div className="inp text-md">
+    <div className="inp">
       {label && (
         <label className="inp__lbl" htmlFor={name}>
           {label}
         </label>
       )}
       {type === "select" ? (
-        <select className="inp inp__fld" id={name} {...{ name, disabled, value, onChange }}>
+        <select className="inp inp__fld" id={name} {...{ name, disabled, required, value, onChange }}>
           {options.map((val, idx) => (
             <option key={idx}>{val}</option>
           ))}
         </select>
       ) : (
-        <input className="inp inp__fld" autoComplete="off" id={name} {...{ name, type, disabled, value, onChange }} />
+        <input
+          className="inp inp__fld"
+          autoComplete="off"
+          id={name}
+          {...{ name, type, disabled, required, value, onChange }}
+          {...(type === "password" && { minLength: 6, maxLength: 20 })}
+        />
       )}
     </div>
   );

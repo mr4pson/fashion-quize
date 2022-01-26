@@ -1,97 +1,57 @@
-import { Button, Form, Input } from "antd";
+import { FC, FormEvent, memo, useEffect } from "react";
+import { useHistory, useLocation } from "react-router";
+
+import { BMixin, Button, Input } from "components/modules";
 import Header from "components/modules/Header";
-import { useEffect } from "react";
-import { memo, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
-import { useLocation } from "react-router";
+import { useAppDispatch } from "redux/ReduxStore";
 import { resetPasswordThunks } from "redux/slicers/resetPasswordPageSlice";
 import { Page, paths } from "routes/constants";
-import styles from "./ResetPasswordPage.module.scss";
+import s from "./ResetPasswordPage.module.scss";
 
-function ResetPasswordPage(): JSX.Element {
-  const dispatch = useDispatch();
-  const location = useLocation();
+const ResetPasswordPage: FC = () => {
+  const dispatch = useAppDispatch();
   const history = useHistory();
-  const [loading, setLoading] = useState(false);
-  const queryParams = new URLSearchParams(location.search);
+  const { search } = useLocation();
+
+  const queryParams = new URLSearchParams(search);
   const token = queryParams.get("token");
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(resetPasswordThunks.resetPassword(e.target["login"].value));
+  };
 
   useEffect(() => {
     if (token) {
       (async () => {
-        const isPasswordRefreshed = (await dispatch(
-          resetPasswordThunks.sendPasswordResetRequest(token)
-        )) as any;
-        if (!isPasswordRefreshed) {
-          history.push(paths[Page.RESET_PASSWORD]);
-        }
+        const isPasswordRefreshed = (await dispatch(resetPasswordThunks.sendPasswordResetRequest(token))) as any;
+        if (!isPasswordRefreshed) history.push(paths[Page.RESET_PASSWORD]);
       })();
     }
   }, [history, dispatch, token]);
 
-  const onPasswordReset = async ({ login }: { login: string }) => {
-    setLoading(true);
-    await dispatch(resetPasswordThunks.resetPassword(login));
-    setLoading(false);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
   return (
     <>
       <Header />
-      <div className="container">
-        <div className={styles["reset-password-page"]}>
-          {!token && (
-            <div className={styles["reset-password-page__card"]}>
-              <h1 className={styles["reset-password-page__title"]}>
-                Восстановление пароля
-              </h1>
-              <Form
-                name="basic"
-                onFinish={onPasswordReset}
-                onFinishFailed={onFinishFailed}
-              >
-                <Form.Item
-                  name="login"
-                  rules={[
-                    {
-                      required: true,
-                      type: "email",
-                      message: "Невалидный email",
-                    },
-                  ]}
-                >
-                  <Input
-                    className={styles["reset-password-page__input"]}
-                    placeholder="Введите ваш email"
-                  />
-                </Form.Item>
-
-                <Form.Item>
-                  <div className={styles["reset-password-btn-wrap"]}>
-                    <Button loading={loading} type="primary" htmlType="submit">
-                      Отправить
-                    </Button>
-                  </div>
-                </Form.Item>
-              </Form>
-            </div>
-          )}
-          {token && (
-            <div>
-              <h1 className={styles["reset-password-page__title"]}>
-                Восстановление пароля
-              </h1>
-            </div>
-          )}
-        </div>
+      <div className={s["reset-password-page"]}>
+        {token ? (
+          <h1 className={s["reset-password-title"]}>Восстановление пароля...</h1>
+        ) : (
+          <div className={s["reset-password-card"]}>
+            <h4 className={s["reset-password-card__title"]}>Восстановление пароля</h4>
+            <form className={s["reset-password-card__form"]} onSubmit={handleSubmit}>
+              <Input name="login" label="Email" type="email" required />
+              <div className={s["reset-password-card__form-btn"]}>
+                <Button type="submit" mixin={[BMixin.FIX, BMixin.PRIMARY]}>
+                  Отправить
+                </Button>
+              </div>
+            </form>
+          </div>
+        )}
       </div>
     </>
   );
-}
+};
 
 export default memo(ResetPasswordPage);
