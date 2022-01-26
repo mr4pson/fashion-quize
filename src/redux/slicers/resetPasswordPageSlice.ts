@@ -14,20 +14,23 @@ export const resetPasswordThunks = {
     const payload = {
       login,
     };
-    await axiosInstance.post(`/api/auth/reset-password`, payload);
-    openNotification("success", `Запрос на восстановление пароля отправлен на ${login}`);
+
+    const response = await axiosInstance.post(`/api/auth/reset-password`, payload);
+    response && openNotification("success", `Запрос на восстановление пароля отправлен на ${login}`);
   },
   sendPasswordResetRequest: (token: string) => async () => {
     const payload = {
       token,
     };
+
     const response = await axiosInstance.post(`/api/auth/reset-password-confirmation`, payload);
     if (!response) {
       openNotification("error", `Токен невалидный. Попробуйте еще раз`);
       return false;
+    } else {
+      openNotification("success", `Пароль успешно восстановлен. На почту отправлен новый пароль`);
+      return true;
     }
-    openNotification("success", `Пароль успешно восстановлен. На почту отправлен новый пароль`);
-    return true;
   },
 };
 
