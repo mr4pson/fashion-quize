@@ -2,31 +2,33 @@
   display: flex;
   align-items: center;
 
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0em;
+
   color: #110e2b;
 
-  &-form {
-    gap: 20px;
-  }
-
-  &-look {
-    gap: 12px;
-  }
-
   &__fld {
-    cursor: pointer;
-
     height: 16px;
     width: 16px;
 
     appearance: none;
-    background: #ffffff;
+    background-color: #ffffff;
     border: 1px solid #110e2b;
     border-radius: 2px;
 
+    cursor: pointer;
+
     &:checked {
-      background: #110e2b url("../../../assets/icons/ic-check.svg");
+      background-color: #110e2b;
+      background-image: url("../../../assets/icons/ic-check.svg");
       border: 0;
     }
+  }
+
+  &__lbl {
+    margin-left: 20px;
   }
 
   &:focus-visible {

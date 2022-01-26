@@ -1,56 +1,53 @@
 .header {
-    $self: &;
-    padding: 7.5px 0;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    transition: all .3s;
+  $self: &;
+  padding: 7.5px 0;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  transition: all 0.3s;
 
-    &__content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    margin-bottom: -10px;
+    transition: all 0.3s;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__links {
+    width: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 80px;
+  }
+
+  &__link,
+  &__logo {
+    color: #ffffff;
+    transition: all 0.3s;
+  }
+
+  &--active {
+    background: #ffffff;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.04);
+
+    #{ $self }__link,
+    #{ $self }__logo {
+      color: #000000;
     }
 
-    &__logo {
-        margin-bottom: -10px;
-        transition: all .3s;
+    #{ $self }__login-btn {
+      filter: invert(1);
     }
-
-    &__actions {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    &__links {
-        width: 72px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-right: 80px;
-    }
-
-    &__link, &__logo {
-        color: #FFFFFF;
-        transition: all .3s;
-    }
-
-    &__login-btn {
-
-    }
-
-    &--active {
-        background: #FFFFFF;
-        box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.04);
-
-        #{ $self }__link, #{ $self }__logo {
-            color: #000000;
-        }
-
-        #{ $self }__login-btn {
-            border-color: #000000;
-            color: #000000;
-        }
-    }
+  }
 }
