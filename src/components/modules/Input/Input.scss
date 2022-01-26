@@ -2,6 +2,11 @@
   position: relative;
   width: 408px;
 
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0em;
+
   color: #110e2b;
 
   &__lbl {
@@ -32,13 +37,13 @@
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="time"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-
   position: absolute;
   right: 16px;
   height: 16px;
   width: 16px;
   padding: 0;
+
+  cursor: pointer;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
