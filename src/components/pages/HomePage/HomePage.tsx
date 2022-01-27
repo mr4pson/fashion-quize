@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import { memo } from "react";
+import { FormEvent, memo, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { BMixin, Button } from "components/modules";
+import { BMixin, Button, Checkbox, Form, Input, Radio } from "components/modules";
 import Footer from "components/modules/Footer";
 import Header from "components/modules/Header";
 import { ReactComponent as StepsIcon } from "./../../../assets/icons/steps.svg";
@@ -12,6 +12,12 @@ import styles from "./HomePage.module.scss";
 import QandAItem from "./QandAItem";
 
 function HomePage(): JSX.Element {
+  const [values, setValues] = useState("");
+
+  const submition = (value) => {
+    console.log(value);
+  };
+
   return (
     <>
       <Header />
@@ -59,6 +65,38 @@ function HomePage(): JSX.Element {
         </div>
         <div className={classNames(styles["how-work-section"], styles["how-work-section--light"])}>
           <div className={classNames("container", styles["how-work-section__container"])}>
+            <Form func={submition}>
+              {[
+                { key: "1", name: "Цвет кожи", label: "Тёплый (желтый)" },
+                { key: "2", name: "Цвет кожи", label: "Бледный" },
+                { key: "3", name: "Цвет кожи", label: "Розовый" },
+                { key: "4", name: "Цвет кожи", label: "Смуглый" },
+                { key: "5", name: "Цвет кожи", label: "Тёмный" },
+              ].map((value) => (
+                <Radio {...value} />
+              ))}
+
+              {[
+                { key: "1", name: "Что занимает ваше основное время?", label: "Работа" },
+                { key: "2", name: "Что занимает ваше основное время?", label: "Спорт" },
+                { key: "3", name: "Что занимает ваше основное время?", label: "Путешествия" },
+                { key: "4", name: "Что занимает ваше основное время?", label: "Кафе и рестораны" },
+                { key: "5", name: "Что занимает ваше основное время?", label: "Активный отдых" },
+              ].map((value) => (
+                <Checkbox {...value} />
+              ))}
+
+              <Checkbox name="Я даю согласие на обработку персональных данных и соглашаюсь с политикой конфиденциальности" />
+
+              <Input name="ФИО" label="ФИО" />
+              <Input name="Город проживания" label="Город проживания" />
+              <Input type="select" name="Тип задачи" label="Тип задачи" options={["minor", "medium", "sla"]} />
+
+              <Button type="submit" mixin={[BMixin.FIX, BMixin.PRIMARY]} disabled>
+                Отправить
+              </Button>
+            </Form>
+
             <h3 className={styles["how-work-section__title"]}>Что вас ждет впереди?</h3>
             <div className={classNames(styles["work-example"], styles["work-example--right"])}>
               <div className={styles["work-example__image"]}>

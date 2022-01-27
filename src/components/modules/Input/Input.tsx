@@ -1,5 +1,4 @@
-import { ChangeEvent, FC, memo, useEffect, useState } from "react";
-
+import { ChangeEvent, FC, memo, useState } from "react";
 import "./Input.scss";
 
 type HTMLInputTypeAttribute =
@@ -14,7 +13,6 @@ type HTMLInputTypeAttribute =
   | "month"
   | "number"
   | "password"
-  | "radio"
   | "range"
   | "reset"
   | "search"
@@ -42,29 +40,24 @@ const Input: FC<TProps> = ({ name, type = "search", options = [], disabled, requ
   const [value, setValue] = useState(initValue);
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => setValue(e.currentTarget.value);
 
-  useEffect(() => {
-    value && console.log(`input ${name}:`, value);
-  }, [value]);
-
   return (
     <div className="inp">
       {label && (
-        <label className="inp__lbl" htmlFor={name}>
+        <label className="inp__lbl" htmlFor={label}>
           {label}
         </label>
       )}
       {type === "select" ? (
-        <select className="inp inp__fld" id={name} {...{ name, disabled, required, value, onChange }}>
-          {options.map((val, idx) => (
-            <option key={idx}>{val}</option>
+        <select className="inp inp__fld" {...{ id: label, name, disabled, required, value, onChange }}>
+          {options.map((value, key) => (
+            <option {...{ key }}>{value}</option>
           ))}
         </select>
       ) : (
         <input
           className="inp inp__fld"
           autoComplete="off"
-          id={name}
-          {...{ name, type, disabled, required, value, onChange }}
+          {...{ id: label, name, type, disabled, required, value, onChange }}
           {...(type === "password" && { minLength: 6, maxLength: 20 })}
         />
       )}

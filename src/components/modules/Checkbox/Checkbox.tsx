@@ -1,26 +1,27 @@
-import { FC, memo, useEffect, useState } from "react";
+import { FC, memo, useState } from "react";
 
 import "./Checkbox.scss";
 
 type TProps = {
   name: string;
+  required?: boolean;
 
   label?: string;
 };
 
-const Checkbox: FC<TProps> = ({ name, label }) => {
+const Checkbox: FC<TProps> = ({ name, required, label }) => {
   const [checked, setChecked] = useState(false);
-  const onChange = () => setChecked((prevState) => !prevState);
-
-  useEffect(() => {
-    console.log(`checkbox ${name}:`, checked);
-  }, [checked]);
+  const onChange = () => setChecked(!checked);
 
   return (
     <div className="cbox">
-      <input className="cbox__fld" type="checkbox" id={name} {...{ name, checked, onChange }} />
+      <input
+        className="cbox__fld"
+        type="checkbox"
+        {...{ id: label, value: label, name, required, checked, onChange }}
+      />
       {label && (
-        <label className="cbox__lbl" htmlFor={name}>
+        <label className="cbox__lbl" htmlFor={label}>
           {label}
         </label>
       )}
