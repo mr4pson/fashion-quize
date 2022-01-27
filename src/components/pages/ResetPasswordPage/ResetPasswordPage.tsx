@@ -1,6 +1,7 @@
 import { FC, FormEvent, memo, useEffect } from "react";
 import { useHistory, useLocation } from "react-router";
 
+import { getFormValues } from "common/helpers";
 import { BMixin, Button, Input } from "components/modules";
 import Header from "components/modules/Header";
 import { useAppDispatch } from "redux/ReduxStore";
@@ -18,7 +19,7 @@ const ResetPasswordPage: FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(resetPasswordThunks.resetPassword(e.target["login"].value));
+    dispatch(resetPasswordThunks.resetPassword(getFormValues(e.target).login));
   };
 
   useEffect(() => {

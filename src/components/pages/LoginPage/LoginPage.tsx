@@ -1,6 +1,7 @@
 import { FC, FormEvent, memo } from "react";
 import { useHistory } from "react-router";
 
+import { getFormValues } from "common/helpers";
 import { BMixin, Button, Input } from "components/modules";
 import Header from "components/modules/Header";
 import { useAuth } from "hooks/useAuth";
@@ -13,10 +14,7 @@ const LoginPage: FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login({
-      login: e.target["login"].value,
-      password: e.target["password"].value,
-    });
+    login(getFormValues(e.target));
   };
 
   const linkToResetPassword = () => history.push(paths[Page.RESET_PASSWORD]);
