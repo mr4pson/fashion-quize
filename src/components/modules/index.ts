@@ -1,3 +1,3 @@
-export * from "./Checkbox";
+export * from "./Button";
 export * from "./Icon";
 export * from "./Input";

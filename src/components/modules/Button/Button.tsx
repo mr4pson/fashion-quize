@@ -1,25 +1,23 @@
-import { memo } from "react";
-import { ButtonTypes } from "./types";
-import styles from "./Button.module.scss";
-import classNames from "classnames";
+import { FC, memo, MouseEventHandler, ReactNode } from "react";
+
+import { BMixin } from ".";
+import "./Button.scss";
 
 type Props = {
-  type: ButtonTypes;
-  children: React.ReactNode;
-  className?: string;
+  type?: "submit" | "reset" | "button";
+  mixin?: BMixin[];
+  disabled?: boolean;
+  children: ReactNode;
+
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
-const Button: React.FC<Props> = ({ children, className = "", type }) => {
-  const getClassNames = (type: ButtonTypes) => {
-    return classNames({
-      [className]: true,
-      [styles["button"]]: true,
-      [styles["button--primary"]]: type === ButtonTypes.PRIMARY,
-      [styles["button--secondary"]]: type === ButtonTypes.SECONDARY,
-    });
-  };
-
-  return <button className={getClassNames(type)}>{children}</button>;
+const Button: FC<Props> = ({ type = "button", mixin = [], disabled, children, onClick }) => {
+  return (
+    <button className={`btn ${mixin.join(" ")}`} {...{ type, disabled, onClick }}>
+      {children}
+    </button>
+  );
 };
 
 export default memo(Button);

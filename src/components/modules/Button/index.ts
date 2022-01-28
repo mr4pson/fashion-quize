@@ -1,2 +1,2 @@
-export { default } from './Button'
-export { ButtonTypes } from './types';
+export { default as Button } from "./Button";
+export * from "./Mixin";
