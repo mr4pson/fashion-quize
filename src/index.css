@@ -1,10 +1,11 @@
-body {
-  margin: 0;
-  color: #101010;
-  font-family: "inter", sans-serif;
-}
+@import url("./styles/desktop/Checkbox.css");
+@import url("./styles/desktop/Form.css");
+@import url("./styles/desktop/Input.css");
+@import url("./styles/desktop/Radio.css");
 
-input, button, select, optgroup, textarea {
+button,
+optgroup,
+textarea {
   font-family: "inter", sans-serif;
 }
 
@@ -19,32 +20,6 @@ input, button, select, optgroup, textarea {
   margin: auto;
 }
 
-.ant-radio {
-  color: currentColor;
-}
-
-.ant-radio-wrapper {
-  color: #000;
-  margin-bottom: 15px !important;
-}
-
-.ant-radio-wrapper span {
-  line-height: 16px;
-}
-
-.ant-form label {
-  /* font-size: 16px !important; */
-  display: inline-block !important;
-  align-items: center;
-  white-space: unset;
-  height: auto !important;
-  margin-bottom: 5px;
-  line-height: auto !important;
-}
-.ant-checkbox {
-  color: currentColor;
-}
-
 .quize-page .ant-checkbox-wrapper > span:last-child {
   color: #000;
   display: inline !important;
@@ -55,20 +30,10 @@ input, button, select, optgroup, textarea {
   margin-bottom: 10px;
 }
 
-.ant-checkbox-group .ant-row {
-  margin-bottom: 20px;
-}
-
 .quize-page .ant-checkbox-wrapper {
   /* display: flex !important;
   align-items: center;
   justify-content: center; */
-}
-
-.ant-checkbox-wrapper > span:nth-child(2) {
-  font-size: 16px;
-  line-height: 16px;
-  margin-top: 4px;
 }
 
 .ant-layout .ant-layout-sider {
@@ -80,20 +45,20 @@ input, button, select, optgroup, textarea {
 }
 
 .quize-page .ant-checkbox-inner {
-	width: 24px;
-	height: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 .quize-page .ant-checkbox-checked .ant-checkbox-inner {
-	background-color: currentColor;
-	border-color: currentColor;
+  background-color: currentColor;
+  border-color: currentColor;
 }
 
 .quize-page .ant-checkbox-checked .ant-checkbox-inner::after {
   transform: rotate(45deg) scale(1.6) translate(-20%, -50%);
 }
 .quize-page .ant-checkbox-wrapper span:first-child span {
-	display: inline-block;
+  display: inline-block;
 }
 .quize-page .ant-checkbox-checked::after {
   border: none;
@@ -103,20 +68,19 @@ input, button, select, optgroup, textarea {
   display: none;
 }
 
-.ant-checkbox-input + .ant-checkbox-inner {
-  border-color: #000 !important;
-}
-
 .quize-page .ant-radio-inner::after {
-	top: 4px;
-	left: 4px;
-	width: 14px;
-	height: 14px;
-	background-color: currentColor;
+  top: 4px;
+  left: 4px;
+  width: 14px;
+  height: 14px;
+  background-color: currentColor;
   display: none;
 }
 
-.quize-page .ant-form-item-required::before, .quize-page .ant-form-item-required::after, .task-creation-page .ant-form-item-required::before, .task-creation-page .ant-form-item-required::after {
+.quize-page .ant-form-item-required::before,
+.quize-page .ant-form-item-required::after,
+.task-creation-page .ant-form-item-required::before,
+.task-creation-page .ant-form-item-required::after {
   display: none !important;
 }
 
@@ -138,18 +102,8 @@ input, button, select, optgroup, textarea {
   border-width: 6px;
 }
 
-.ant-radio-checked .ant-radio-inner {
-	border-color: currentColor;
-}
-
-.ant-radio-wrapper > span:nth-child(2) {
-  font-size: 16px;
-  line-height: 16px;
-  margin-top: 4px;
-}
-
 .quize-page .ant-radio-wrapper span {
-	display: inline-block;
+  display: inline-block;
 }
 
 .quize-page .ant-radio-wrapper > span:last-child {
@@ -162,18 +116,18 @@ input, button, select, optgroup, textarea {
 }
 
 .ant-dropdown-menu-title-content .ant-btn {
-	color: #000;
+  color: #000;
 }
 
 a:hover {
-	color: #1389ff;
+  color: #1389ff;
 }
 
 .ant-layout {
-	min-height: 100vh;
+  min-height: 100vh;
 }
 .ant-layout-header {
-	background: #fff;
+  background: #fff;
 }
 
 .ant-image {
@@ -183,7 +137,7 @@ a:hover {
 }
 
 img.ant-image-img {
-  height: auto!important;
+  height: auto !important;
 }
 
 .rating-modal .ant-modal-body {
@@ -191,11 +145,11 @@ img.ant-image-img {
 }
 
 #basic_password {
-  background-color: #F2F3F4!important;
+  background-color: #f2f3f4 !important;
 }
 
 #basic_password::placeholder {
-  color: #858585!important;
+  color: #858585 !important;
 }
 
 .ant-btn {
@@ -210,7 +164,6 @@ img.ant-image-img {
   color: #4569d4;
 }
 
-
 .ant-pagination-item-active {
   color: #4569d4;
 }
@@ -221,14 +174,15 @@ img.ant-image-img {
 
 @media (max-width: 480px) {
   .ant-calendar-range {
-      width: 320px;
+    width: 320px;
   }
   .ant-calendar-range-part {
-      width: 100%;
+    width: 100%;
   }
 }
 
-.ant-skeleton.ant-skeleton-active .ant-skeleton-input, .ant-skeleton.ant-skeleton-active .ant-skeleton-button {
+.ant-skeleton.ant-skeleton-active .ant-skeleton-input,
+.ant-skeleton.ant-skeleton-active .ant-skeleton-button {
   background-image: linear-gradient(90deg, rgb(240 242 245) 25%, rgb(247 249 252) 37%, rgb(242 244 247) 63%);
 }
 
@@ -253,11 +207,11 @@ img.ant-image-img {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
 }
