@@ -1,0 +1,51 @@
+.ant-checkbox + span
+{
+	padding-left:20px;
+	padding-right:20px;
+}
+
+.ant-checkbox,.ant-checkbox-wrapper,.ant-checkbox-group
+{
+	color:#110e2b;
+	font-family:Montserrat;
+	font-size:16px;
+	letter-spacing:0;
+	line-height:24px;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner
+{
+	background-color:#110e2b;
+	border-color:#110e2b;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner::after
+{
+	background-image:url("../../assets/icons/ic-check.svg");
+	border:none;
+	transform:rotate(0) scale(1) translate(-50%,-50%);
+}
+
+.ant-checkbox-checked::after
+{
+	border:none;
+	border-radius:2px;
+}
+
+.ant-checkbox-inner
+{
+	border:1px solid #110e2b;
+}
+
+.ant-checkbox-inner::after
+{
+	height:16px;
+	left:7px;
+	top:7px;
+	width:16px;
+}
+
+.ant-checkbox-wrapper:hover .ant-checkbox-inner,.ant-checkbox:hover .ant-checkbox-inner,.ant-checkbox-input:focus + .ant-checkbox-inner
+{
+	border-color:#110e2b;
+}
