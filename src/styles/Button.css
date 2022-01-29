@@ -1,0 +1,49 @@
+.ant-btn {
+  background: none;
+  border-radius: 8px;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+.ant-btn,
+.ant-btn:focus,
+.ant-btn:hover {
+  border-color: #000;
+  color: #000;
+}
+
+.ant-btn.ant-btn-primary {
+  background-color: #f9e5d9;
+  border-color: #f9e5d9;
+  color: #000;
+}
+
+.ant-btn.ant-btn-primary:focus,
+.ant-btn.ant-btn-primary:hover {
+  background-color: #f6ceb4;
+  border-color: #f6ceb4;
+  color: #000;
+}
+
+.ant-btn:disabled,
+.ant-btn:disabled:hover {
+  background-color: #f2f0f0;
+  border-color: #f2f0f0;
+  color: #6f7374;
+}
+
+.ant-btn:focus,
+.ant-btn:hover {
+  background-color: #0000001a;
+}
+
+.ant-btn:not(.ant-btn-sm) {
+  font-size: 16px;
+  font-weight: 500;
+  height: 40px;
+  padding: 0 23px;
+}
+
+[ant-click-animating-without-extra-node]:after {
+  display: none;
+}

@@ -1,0 +1,71 @@
+.anticon-calendar {
+  background-image: url("../assets/icons/ic-calendar.svg");
+}
+
+.anticon-calendar > svg,
+.anticon-clock-circle > svg {
+  fill: none;
+}
+
+.anticon-calendar,
+.anticon-clock-circle {
+  height: 16px;
+  width: 16px;
+}
+
+.anticon-clock-circle {
+  background-image: url("../assets/icons/ic-time.svg");
+}
+
+.ant-picker {
+  background-color: #f2f0f0;
+  border-color: #f2f0f0;
+  border-radius: 8px;
+  height: 40px;
+  padding: 0 15px;
+  transition: all 0.3s;
+  width: 408px;
+}
+
+.ant-picker,
+.ant-picker-input > input {
+  color: #110e2b;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.ant-picker:hover,
+.ant-picker-focused {
+  background-color: #fff;
+  border-color: #6f7374;
+  box-shadow: none;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
+  background-color: #6f7374;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+  border-color: #6f7374;
+}
+
+.ant-picker-clear {
+  display: none;
+}
+
+.ant-picker-dropdown {
+  font-family: Montserrat;
+}
+
+.ant-picker-suffix {
+  margin-left: 8px;
+}
+
+.ant-picker-time-panel-column > li.ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner {
+  background-color: #f2f0f0;
+}
+
+.ant-picker-today-btn,
+.ant-picker-today-btn:hover {
+  color: #110e2b;
+}

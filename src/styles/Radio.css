@@ -1,0 +1,38 @@
+.ant-radio {
+  top: auto;
+}
+
+.ant-radio,
+.ant-radio-group,
+.ant-radio-wrapper {
+  color: #110e2b;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.ant-radio:hover .ant-radio-inner,
+.ant-radio-checked .ant-radio-inner,
+.ant-radio-checked::after,
+.ant-radio-inner,
+.ant-radio-input:focus + .ant-radio-inner {
+  border-color: #110e2b;
+}
+
+.ant-radio-inner::after {
+  background-color: #110e2b;
+}
+
+.ant-radio-input:focus + .ant-radio-inner {
+  box-shadow: none;
+}
+
+.ant-radio-wrapper {
+  align-items: center;
+  display: flex;
+  margin-right: auto;
+}
+
+span.ant-radio + * {
+  padding-left: 20px;
+  padding-right: 20px;
+}

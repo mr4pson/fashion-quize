@@ -1,22 +1,17 @@
-import { Checkbox, Col, Form, Radio, Input, Row, Select, Space } from "antd";
 import classNames from "classnames";
+import { memo } from "react";
+import { Link } from "react-router-dom";
+
 import { BMixin, Button } from "components/modules";
 import Footer from "components/modules/Footer";
 import Header from "components/modules/Header";
-import { memo } from "react";
-import { Link } from "react-router-dom";
 import { ReactComponent as StepsIcon } from "./../../../assets/icons/steps.svg";
 import { qandAItems } from "./constants";
 import { getLinkToQiuze } from "./helper";
 import styles from "./HomePage.module.scss";
 import QandAItem from "./QandAItem";
-const { Option } = Select;
 
 function HomePage(): JSX.Element {
-  const onFinish = (value) => {
-    console.log(value);
-  };
-
   return (
     <>
       <Header />
@@ -64,72 +59,6 @@ function HomePage(): JSX.Element {
         </div>
         <div className={classNames(styles["how-work-section"], styles["how-work-section--light"])}>
           <div className={classNames("container", styles["how-work-section__container"])}>
-            <Form onFinish={onFinish}>
-              <Form.Item name="Что занимает ваше основное время?">
-                <Checkbox.Group>
-                  <Row style={{ rowGap: 24 }}>
-                    <Col span={12}>
-                      <Checkbox value="Работа">Работа</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox value="Спорт">Спорт</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox value="Путешествия">Путешествия</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox value="Кафе и рестораны">Кафе и рестораны</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox value="Активный отдых">Активный отдых</Checkbox>
-                    </Col>
-                  </Row>
-                </Checkbox.Group>
-              </Form.Item>
-
-              <Form.Item name="Мой тип фигуры">
-                <Radio.Group>
-                  <Space direction="vertical">
-                    <Radio value="Полупрямой/полуприталенный тип (талия выражена, плечи приблизительно равны бедрам по ширине)">
-                      Полупрямой/полуприталенный тип (талия выражена, плечи приблизительно равны бедрам по ширине);
-                    </Radio>
-                    <Radio value="Прямой тип (талия не выражена)">Прямой тип (талия не выражена);</Radio>
-                    <Radio value="Приталенный/округлый тип (талия выражена, бедра шире плеч)">
-                      Приталенный/округлый тип (талия выражена, бедра шире плеч);
-                    </Radio>
-                    <Radio value="Прямой тип, при этом плечи шире относительно бёдер">
-                      Прямой тип, при этом плечи шире относительно бёдер;
-                    </Radio>
-                    <Radio value="Округлый тип фигуры крупного телосложения (plus size)">
-                      Округлый тип фигуры крупного телосложения (plus size);
-                    </Radio>
-                  </Space>
-                </Radio.Group>
-              </Form.Item>
-
-              <Form.Item name="Мои плечи">
-                <Radio.Group>
-                  <Space direction="horizontal">
-                    <Radio value="Короткие">Короткие</Radio>
-                    <Radio value="Средние">Средние</Radio>
-                    <Radio value="Длинные">Длинные</Radio>
-                  </Space>
-                </Radio.Group>
-              </Form.Item>
-
-              <Form.Item name="Тип задачи">
-                <Select>
-                  <Option value="Минорная">Минорная</Option>
-                  <Option value="Сложная">Сложная</Option>
-                </Select>
-              </Form.Item>
-
-              <Form.Item name="Текст" rules={[{ required: true, message: "Поле не может быть пустым" }]}>
-                <Input allowClear/>
-              </Form.Item>
-
-              <button>Send</button>
-            </Form>
             <h3 className={styles["how-work-section__title"]}>Что вас ждет впереди?</h3>
             <div className={classNames(styles["work-example"], styles["work-example--right"])}>
               <div className={styles["work-example__image"]}>

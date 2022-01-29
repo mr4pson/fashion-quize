@@ -1,0 +1,54 @@
+.ant-input,
+.ant-input-affix-wrapper {
+  background-color: #f2f0f0;
+}
+
+.ant-input,
+.ant-input-affix-wrapper {
+  color: #110e2b;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.ant-input:focus,
+.ant-input-affix-wrapper:hover .ant-input {
+  background-color: #fff;
+}
+
+.ant-input-affix-wrapper {
+  border-color: #f2f0f0;
+  border-radius: 8px;
+  height: 40px;
+  padding: 0 15px;
+  width: 408px;
+}
+
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
+.ant-input-affix-wrapper-focused {
+  background-color: #fff;
+  border-color: #6f7374;
+}
+
+.ant-input-affix-wrapper-focused {
+  box-shadow: none;
+}
+
+.ant-input-clear-icon {
+  background-image: url("../assets/icons/ic-cross.svg");
+  margin: auto;
+}
+
+.ant-input-clear-icon > svg {
+  fill: none;
+  height: 16px;
+  width: 16px;
+}
+
+.ant-input-password-icon,
+.ant-input-password-icon:hover {
+  color: #6f7374;
+}
+
+.ant-input-suffix {
+  margin-left: 8px;
+}

@@ -1,24 +1,20 @@
-import { FC, memo, MouseEventHandler } from "react";
+import { FC, memo, SVGProps } from "react";
 
-import { TIcon } from ".";
-
-type TProps = {
-  icon: TIcon;
-
-  className?: string;
-  height?: number;
-  width?: number;
-  fill?: string;
-
-  onClick?: MouseEventHandler<SVGSVGElement>;
+type TIcon = {
+  html: string;
+  viewBox: string;
 };
 
-const Icon: FC<TProps> = ({ className, icon, fill, height = 16, width = 16, onClick }) => (
+interface IProps extends SVGProps<SVGSVGElement> {
+  icon: TIcon;
+}
+
+const Icon: FC<IProps> = ({ icon, className, fill, height = 24, width = 24, ...props }) => (
   <svg
     viewBox={icon.viewBox}
     dangerouslySetInnerHTML={{ __html: icon.html }}
-    {...(className ? { className } : { height, width, fill })}
-    {...{ onClick }}
+    {...(className ? { className } : { fill, height, width })}
+    {...props}
   />
 );
 
