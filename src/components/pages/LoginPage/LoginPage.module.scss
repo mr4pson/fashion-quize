@@ -1,56 +1,50 @@
-.login-page {
-  display: flex;
-  justify-content: center;
-  padding-top: 96px;
-
-  height: 100vh;
-
-  background-color: #110e2b;
-}
-
 .login-card {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 32px;
-
-  height: fit-content;
-  width: 624px;
-
   background-color: #ffffff;
   border-radius: 16px;
-
-  &__title {
-    margin-bottom: 32px;
-
-    font-family: Cormorant;
-    font-weight: bold;
-    font-size: 32px;
-    line-height: 40px;
-
-    color: #110e2b;
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 24px;
-
-    gap: 24px;
-
-    &-btn {
-      margin-top: 40px;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: 32px;
+  width: 624px;
 
   &__reset-pass {
+    color: #6f7374;
+    cursor: pointer;
+    margin-top: 24px;
     font-family: Montserrat;
     font-size: 16px;
     line-height: 24px;
-
-    color: #6f7374;
-
-    cursor: pointer;
   }
+
+  &__title {
+    color: #110e2b;
+    font-family: Cormorant;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 40px;
+    margin-bottom: 32px;
+  }
+}
+
+.login-form {
+  height: 232px;
+
+  &__lbl {
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.login-page {
+  background-color: #110e2b;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  padding-top: 96px;
 }

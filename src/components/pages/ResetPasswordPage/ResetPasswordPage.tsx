@@ -1,9 +1,8 @@
-import { FC, FormEvent, memo, useEffect } from "react";
+import { Button, Form, Input } from "antd";
+import { FC, memo, useEffect } from "react";
 import { useHistory, useLocation } from "react-router";
 
-import { getFormValues } from "common/helpers";
-import { BMixin, Button, Input } from "components/modules";
-import Header from "components/modules/Header";
+import { Footer, Header } from "components/modules";
 import { useAppDispatch } from "redux/ReduxStore";
 import { resetPasswordThunks } from "redux/slicers/resetPasswordPageSlice";
 import { Page, paths } from "routes/constants";
@@ -17,9 +16,13 @@ const ResetPasswordPage: FC = () => {
   const queryParams = new URLSearchParams(search);
   const token = queryParams.get("token");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(resetPasswordThunks.resetPassword(getFormValues(e.target).login));
+  const onFinish = ({ login }) => dispatch(resetPasswordThunks.resetPassword(login));
+
+  const validateMessages = {
+    required: "Поле необходимо заполнить!",
+    types: {
+      email: "Email введён некорректно!",
+    },
   };
 
   useEffect(() => {
@@ -40,17 +43,25 @@ const ResetPasswordPage: FC = () => {
         ) : (
           <div className={s["reset-password-card"]}>
             <h4 className={s["reset-password-card__title"]}>Восстановление пароля</h4>
-            <form className={s["reset-password-card__form"]} onSubmit={handleSubmit}>
-              <Input name="login" label="Email" type="email" required />
-              <div className={s["reset-password-card__form-btn"]}>
-                <Button type="submit" mixin={[BMixin.FIX, BMixin.PRIMARY]}>
+            <Form validateMessages={validateMessages} onFinish={onFinish} autoComplete="off">
+              <div className={s["reset-password-form"]}>
+                <label className={s["reset-password-form__lbl"]} htmlFor="login">
+                  Email
+                </label>
+                <Form.Item rules={[{ type: "email", required: true }]} name="login">
+                  <Input allowClear id="login" />
+                </Form.Item>
+              </div>
+              <div className={s["reset-password-form__btn"]}>
+                <Button type="primary" size="large" htmlType="submit">
                   Отправить
                 </Button>
               </div>
-            </form>
+            </Form>
           </div>
         )}
       </div>
+      <Footer />
     </>
   );
 };

@@ -1,15 +1,15 @@
+import { Button } from "antd";
 import classNames from "classnames";
-import { memo, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Page, paths } from "routes/constants";
 
-import { BMixin, Button } from "..";
+import { Page, paths } from "routes/constants";
 import { ReactComponent as FbIcon } from "./../../../assets/icons/ic-fb.svg";
 import { ReactComponent as InstIcon } from "./../../../assets/icons/ic-inst.svg";
 import { ReactComponent as Logo } from "./../../../assets/icons/logo.svg";
-import styles from "./Header.module.scss";
+import s from "./Header.module.scss";
 
-function Header(): JSX.Element {
+const Header: FC = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
   useEffect(() => {
@@ -22,33 +22,31 @@ function Header(): JSX.Element {
 
   const getClassNames = (isActive: boolean) => {
     return classNames({
-      [styles["header"]]: true,
-      [styles["header--active"]]: isActive,
+      [s["header"]]: true,
+      [s["header--active"]]: isActive,
     });
   };
 
   return (
     <div className={getClassNames(isActive)}>
       <div className="container">
-        <div className={styles["header__content"]}>
+        <div className={s["header__content"]}>
           <Link to={paths[Page.HOME]}>
-            <Logo className={styles["header__logo"]} />
+            <Logo className={s["header__logo"]} />
           </Link>
-          <div className={styles["header__actions"]}>
-            <div className={styles["header__links"]}>
-              <InstIcon className={styles["header__link"]} />
-              <FbIcon className={styles["header__link"]} />
+          <div className={s["header__actions"]}>
+            <div className={s["header__links"]}>
+              <InstIcon className={s["header__link"]} />
+              <FbIcon className={s["header__link"]} />
             </div>
-            <div className={styles["header__login-btn"]}>
-              <Link to={paths[Page.LOGIN]}>
-                <Button mixin={[BMixin.FLEX, BMixin.SECONDARY]}>Войти</Button>
-              </Link>
-            </div>
+            <Link to={paths[Page.LOGIN]}>
+              <Button className={s["header__login-btn"]}>Войти</Button>
+            </Link>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default memo(Header);
+export default Header;

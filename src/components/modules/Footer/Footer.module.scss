@@ -1,24 +1,27 @@
 .footer {
+  background: #110e2b;
   padding: 25px 0 20px;
-  background: #110E2B;
   width: 100%;
-
-  &__logo-wraper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 24px;
-  }
-
-  &__logo {
-      color: #fff;
-      margin-top: 12px;
-      width: 93px;
-      height: 48px;
-  }
 
   &__center {
     display: flex;
     justify-content: space-between;
+  }
+
+  &__connect-item {
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    line-height: 32px;
+    margin-bottom: 5px;
+  }
+
+  &__copyright {
+    color: #6f7374;
+    font-family: "Cormorant", serif;
+    font-size: 16px;
+    margin-top: 80px;
+    text-align: center;
   }
 
   &__info {
@@ -28,25 +31,26 @@
     width: 100%;
   }
 
-  &__connect-item {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    line-height: 32px;
+  &__logo {
     color: #fff;
-    margin-bottom: 5px;
+    height: 48px;
+    margin-top: 12px;
+    width: 93px;
+  }
+
+  &__logo-wraper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
   }
 
   &__nav-item {
-    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 300;
     line-height: 24px;
-    color: #fff;
     margin-bottom: 12px;
-  }
-
-  &__social-links {
-    margin-top: 40px;
   }
 
   &__social-link {
@@ -54,36 +58,32 @@
     margin-right: 22px;
   }
 
-  &__copyright {
-    font-family: 'Cormorant', serif;
-    font-size: 16px;
-    color: #6F7374;
-    text-align: center;
-    margin-top: 80px;
+  &__social-links {
+    margin-top: 40px;
   }
 }
 
 .recieve-compilation {
   max-width: 467px;
 
-  &__title {
-    font-family: 'Cormorant', serif;
-    font-size: 32px;
-    line-height: 32px;
-    color: #fff;
+  &__btn {
+    margin-top: 20px;
   }
 
   &__desc {
-    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 300;
     line-height: 24px;
-    color: #fff;
-    opacity: 0.7;
     margin-top: 20px;
+    opacity: 0.7;
   }
 
-  &__btn {
-    margin-top: 20px;
+  &__title {
+    color: #fff;
+    font-family: "Cormorant", serif;
+    font-size: 32px;
+    line-height: 32px;
   }
 }
