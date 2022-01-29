@@ -1,10 +1,17 @@
-@import url("./styles/desktop/Checkbox.css");
-@import url("./styles/desktop/Form.css");
-@import url("./styles/desktop/Input.css");
-@import url("./styles/desktop/Radio.css");
-@import url("./styles/desktop/ImageSlider.css");
+@import url("./styles/Button.css");
+@import url("./styles/Checkbox.css");
+@import url("./styles/DatePicker.css");
+@import url("./styles/Form.css");
+@import url("./styles/ImageSlider.css");
+@import url("./styles/Input.css");
+@import url("./styles/Radio.css");
+@import url("./styles/Select.css");
 
-button,
+a,
+a:hover {
+  color: #110e2b;
+}
+
 optgroup,
 textarea {
   font-family: "inter", sans-serif;
@@ -29,12 +36,6 @@ textarea {
 .quize-page .ant-checkbox-group .ant-row {
   display: inline-block;
   margin-bottom: 10px;
-}
-
-.quize-page .ant-checkbox-wrapper {
-  /* display: flex !important;
-  align-items: center;
-  justify-content: center; */
 }
 
 .ant-layout .ant-layout-sider {
@@ -120,10 +121,6 @@ textarea {
   color: #000;
 }
 
-a:hover {
-  color: #1389ff;
-}
-
 .ant-layout {
   min-height: 100vh;
 }
@@ -151,18 +148,6 @@ img.ant-image-img {
 
 #basic_password::placeholder {
   color: #858585 !important;
-}
-
-.ant-btn {
-  color: rgba(0, 0, 0, 0.85);
-}
-
-.ant-btn.ant-btn-primary {
-  color: #fff;
-}
-
-.ant-btn-link {
-  color: #4569d4;
 }
 
 .ant-pagination-item-active {

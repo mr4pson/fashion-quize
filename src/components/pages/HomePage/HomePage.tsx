@@ -1,9 +1,10 @@
 import classNames from "classnames";
+import { memo } from "react";
+import { Link } from "react-router-dom";
+
 import { BMixin, Button } from "components/modules";
 import Footer from "components/modules/Footer";
 import Header from "components/modules/Header";
-import { memo } from "react";
-import { Link } from "react-router-dom";
 import { ReactComponent as StepsIcon } from "./../../../assets/icons/steps.svg";
 import { qandAItems, stylistJobs, whyUsItems } from "./constants";
 import { getLinkToQiuze } from "./helper";

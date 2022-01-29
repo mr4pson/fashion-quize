@@ -1,0 +1,65 @@
+.ant-form {
+  font-family: Montserrat;
+}
+
+.ant-form input[type="checkbox"]:focus,
+.ant-form input[type="radio"]:focus {
+  outline: none;
+}
+
+.ant-form label {
+  font-size: 16px;
+}
+
+.ant-form,
+.ant-form-item {
+  color: #110e2b;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.ant-form-item .ant-select {
+  width: auto;
+}
+
+.ant-form-item input[type="checkbox"],
+.ant-form-item input[type="radio"] {
+  height: 16px;
+  width: 16px;
+}
+
+.ant-form-item-explain {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.ant-form-item-explain.ant-form-item-explain-error {
+  color: #e26767;
+}
+
+.ant-form-item-has-error .ant-input,
+.ant-form-item-has-error .ant-input:hover,
+.ant-form-item-has-error .ant-input-affix-wrapper,
+.ant-form-item-has-error .ant-input-affix-wrapper:hover {
+  border-color: #6f7374;
+}
+
+.ant-form-item-has-error .ant-input:focus,
+.ant-form-item-has-error .ant-input-affix-wrapper,
+.ant-form-item-has-error .ant-input-affix-wrapper-focused,
+.ant-form-item-has-error .ant-picker,
+.ant-form-item-has-error .ant-picker-focused,
+.ant-form-item-has-error .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input) .ant-select-selector {
+  border-color: #6f7374 !important;
+  box-shadow: none;
+}
+
+.ant-form-item-has-error
+  .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input).ant-select-focused
+  .ant-select-selector,
+.ant-form-item-has-error
+  .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input).ant-select-open
+  .ant-select-selector {
+  box-shadow: none;
+}

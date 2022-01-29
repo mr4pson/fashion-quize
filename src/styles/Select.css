@@ -1,0 +1,63 @@
+.ant-select {
+  color: #110e2b;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background-color: #f2f0f0;
+  border-color: #f2f0f0;
+  border-radius: 8px;
+}
+
+.ant-select-arrow {
+  background-image: url("../assets/icons/ic-chevron-down.svg");
+  height: 16px;
+  margin-top: auto;
+  right: 16px;
+  top: 12px;
+  transition: all 0.3s;
+  width: 16px;
+}
+
+.ant-select-arrow .anticon {
+  display: none;
+}
+
+.ant-select-dropdown {
+  font-family: Montserrat;
+}
+
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector,
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background-color: #fff;
+  border-color: #6f7374;
+}
+
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  box-shadow: none;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: #f2f0f0;
+}
+
+.ant-select-open > .ant-select-arrow {
+  transform: rotate(180deg);
+}
+
+.ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+  padding-right: 24px;
+}
+
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  height: 40px;
+  padding: 0 15px;
+  width: 408px;
+}
+
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector,
+.ant-select-single.ant-select-show-arrow .ant-select-selection-search {
+  align-items: center;
+  display: flex;
+}
