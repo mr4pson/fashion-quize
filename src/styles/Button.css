@@ -2,6 +2,11 @@
   background: none;
   border-radius: 8px;
   box-shadow: none;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  height: 40px;
+  padding: 0 23px;
   text-shadow: none;
 }
 
@@ -37,11 +42,15 @@
   background-color: #0000001a;
 }
 
-.ant-btn:not(.ant-btn-sm) {
-  font-size: 16px;
-  font-weight: 500;
-  height: 40px;
-  padding: 0 23px;
+.ant-btn-lg {
+  height: 48px;
+  width: 265px;
+}
+
+.ant-btn-sm {
+  font-size: 14px;
+  height: 24px;
+  padding: 0px 7px;
 }
 
 [ant-click-animating-without-extra-node]:after {

@@ -1,8 +1,6 @@
+import { HomePage, LoginPage, ResetPasswordPage } from "components/pages";
 import AdminPage from "components/pages/AdminPage";
-import HomePage from "components/pages/HomePage";
-import LoginPage from "components/pages/LoginPage/LoginPage";
 import QuizePage from "components/pages/QuizePage/QuizePage";
-import ResetPasswordPage from "components/pages/ResetPasswordPage/ResetPasswordPage";
 import StylistPage from "components/pages/StylistPage";
 import UserPage from "components/pages/UserPage";
 import { Page, paths } from "./constants";
