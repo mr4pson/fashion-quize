@@ -26,3 +26,34 @@ export const qandAItems: TQandAItem[] = [
     description: 'Банковской картой или наличными курьеру после примерки.',
   },
 ];
+
+export const whyUsItems = [
+  {
+    image: './assets/images/compilation-selection.jpg',
+    label: 'Подбор образов на каждый день'
+  },
+  {
+    image: './assets/images/personal-approach.jpg',
+    label: 'Персональный подход'
+  },
+  {
+    image: './assets/images/preparation-for-events.jpg',
+    label: 'Подготовка к мероприятиям'
+  },
+  {
+    image: './assets/images/style-creation-help.jpg',
+    label: 'Помощь в создании стиля'
+  }
+];
+
+export const stylistJobs = [
+  {
+    image: './assets/images/stylist-job-1.jpg'
+  },
+  {
+    image: './assets/images/stylist-job-2.jpg'
+  },
+  {
+    image: './assets/images/stylist-job-3.jpg'
+  }
+];

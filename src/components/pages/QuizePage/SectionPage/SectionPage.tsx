@@ -33,6 +33,7 @@ const SectionPage: FC<Props> = (props) => {
 
   const onFinish = async (form: object) => {
     const currentAnswers = { ...answers, ...form };
+    console.log(currentAnswers);
     dispatch(setStateAnswers(currentAnswers));
 
     if (+sectionNumber === blocks.length) {

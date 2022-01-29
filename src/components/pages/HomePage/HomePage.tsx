@@ -6,9 +6,10 @@ import { BMixin, Button } from "components/modules";
 import Footer from "components/modules/Footer";
 import Header from "components/modules/Header";
 import { ReactComponent as StepsIcon } from "./../../../assets/icons/steps.svg";
-import { qandAItems } from "./constants";
+import { qandAItems, stylistJobs, whyUsItems } from "./constants";
 import { getLinkToQiuze } from "./helper";
 import styles from "./HomePage.module.scss";
+import ImageSlider, { ImageSliderThemes } from "./ImageSlider";
 import QandAItem from "./QandAItem";
 
 function HomePage(): JSX.Element {
@@ -17,7 +18,7 @@ function HomePage(): JSX.Element {
       <Header />
       <div className={styles["home-page"]}>
         <div className={styles["compilation-section"]}>
-          <div className="container">
+          <div className={classNames("container", styles["compilation-section__container"])}>
             <div className={styles["compilation-section__title"]}>Подбор и доставка стильных образов</div>
             <div className={styles["compilation-section__desc"]}>
               Персональные подборки для вашего гардероба <br /> от стилистов. Для любых целей. Полностью онлайн.
@@ -26,6 +27,28 @@ function HomePage(): JSX.Element {
               <Link to={getLinkToQiuze()}>
                 <Button mixin={[BMixin.FLEX, BMixin.PRIMARY]}>Заполнить анкету</Button>
               </Link>
+            </div>
+            <div className={classNames("why-us", styles["why-us"])}>
+              <h3 className={styles["why-us__title"]}>Почему мы?</h3>
+              <ImageSlider slidesToShow={3} theme={ImageSliderThemes.LIGHT}>
+                {whyUsItems.map((item, index) => (
+                  <div
+                    key={`why-us-${index}`}
+                    className={classNames(
+                      styles["why-us-item"],
+                      styles[`why-us-item--${index}`]
+                    )}
+                  >
+                    <div
+                      className={styles["why-us-item__image"]}
+                      style={{ backgroundImage: `url(${item.image})` }}
+                    ></div>
+                    <div className={styles["why-us-item__label"]}>
+                      {item.label}
+                    </div>
+                  </div>
+                ))}
+              </ImageSlider>
             </div>
           </div>
         </div>
@@ -99,6 +122,21 @@ function HomePage(): JSX.Element {
                   образы будут готовы, вам придет уведомление на почту. В приложении вы сможете увидеть их на странице
                   подборок <br /> и выбрать понравившиеся.
                 </div>
+              </div>
+              <div className={classNames("stylist-jobs", styles["stylist-jobs"])}>
+                <ImageSlider slidesToShow={2} theme={ImageSliderThemes.DARK}>
+                  {stylistJobs.map((item, index) => (
+                    <div
+                      key={`stylist-job-${index}`}
+                      className={styles["stylist-job"]}
+                    >
+                      <div
+                        className={styles["stylist-job__image"]}
+                        style={{ backgroundImage: `url(${item.image})` }}
+                      ></div>
+                    </div>
+                  ))}
+                </ImageSlider>
               </div>
             </div>
           </div>

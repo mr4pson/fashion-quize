@@ -8,6 +8,11 @@
     background-image: url(./images/main-section.jpg);
     background-size: cover;
     background-position: center;
+    overflow: hidden;
+
+    &__container {
+        position: relative;
+    }
 
     &__title {
         padding-top: 256px;
@@ -30,6 +35,65 @@
 
     &__btn {
         margin-top: 35px;
+    }
+}
+
+.why-us {
+    width: 500px;
+    position: absolute;
+    right: -70px;
+    bottom: -240px;
+
+    &__title {
+        font-family: 'Cormorant', serif;
+        font-size: 32px;
+        color: #FFFFFF;
+        line-height: 24px;
+    }
+}
+
+.why-us-item {
+    $self: &;
+
+    &__image {
+        width: 144px;
+        height: 144px;
+        border-radius: 8px;
+        background-size: cover;
+    }
+    
+    &__label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 24px;
+        width: 144px;
+        color: #FFFFFF;
+        margin-top: 20px
+    }
+
+    &--0 {
+        #{ $self }__image {
+            background-position-y: 0;
+        }
+    }
+
+    &--1 {
+        #{ $self }__image {
+            background-position-y: -35px;
+        }
+    }
+
+    &--2 {
+        #{ $self }__image {
+            background-position-y: -35px;
+        }
+    }
+
+    &--3 {
+        #{ $self }__image {
+            background-position-y: -65px;
+        }
     }
 }
 
@@ -312,6 +376,10 @@
         }
     }
 
+    &:nth-child(4) {
+        margin-top: 235px;
+    }
+
     &--right {
         flex-direction: row-reverse;
         justify-content: space-between;
@@ -331,6 +399,24 @@
 
     &__quize-btn {
         margin-top: 42px;
+    }
+}
+
+.stylist-jobs {
+    position: absolute;
+    bottom: -10px;
+    right: -191px;
+}
+
+.stylist-job {
+    $self: &;
+
+    &__image {
+        width: 360px;
+        height: 360px;
+        border-radius: 16px;
+        background-size: cover;
+        box-shadow: 2px 2px 22px rgba(0, 0, 0, 0.08);
     }
 }
 
