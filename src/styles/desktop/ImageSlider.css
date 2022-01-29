@@ -1,0 +1,72 @@
+.slick-list,
+.slick-slider {
+  margin: 30px auto 50px;
+}
+
+.slick-dots {
+  text-align: left;
+  margin-left: -7px;
+  bottom: -45px;
+}
+
+.slick-dots li {
+  margin: 0 1px;
+}
+
+.slick-dots li button:before {
+  font-size: 9px;
+}
+
+.slick-next {
+  width: 52px;
+  height: 24px;
+  top: auto;
+  bottom: -57px;
+  left: 95px;
+  z-index: 10;
+}
+
+.image-slider--light .slick-next, 
+.image-slider--light .slick-next:hover {
+  color: #FFFFFF;
+}
+
+.image-slider--dark .slick-next,
+.image-slider--dark .slick-next:hover {
+  color: #110e2b;
+}
+
+.image-slider--light .slick-dots li button:before,
+.image-slider--light .slick-dots li.slick-active button:before {
+  color: #FFFFFF;
+}
+
+.image-slider--dark .slick-dots li button:before,
+.image-slider--dark .slick-dots li.slick-active button:before {
+  color: #110e2b;
+}
+
+/* Custom styles */
+
+.why-us .image-slider {
+  width: 500px;
+}
+
+.stylist-jobs .image-slider {
+  width: 785px;
+}
+
+.stylist-jobs .image-slider .slick-list {
+  padding-bottom: 30px;
+  padding-top: 30px;
+  padding-left: 15px;
+  margin-left: -15px;
+}
+
+.stylist-jobs .image-slider .slick-dots {
+  bottom: -15px;
+}
+
+.stylist-jobs .image-slider .slick-next {
+  bottom: -27px;
+}

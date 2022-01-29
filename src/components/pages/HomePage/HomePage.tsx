@@ -1,4 +1,3 @@
-import { Checkbox, Col, Form, Radio, Input, Row, Select, Space } from "antd";
 import classNames from "classnames";
 import { BMixin, Button } from "components/modules";
 import Footer from "components/modules/Footer";
@@ -6,23 +5,19 @@ import Header from "components/modules/Header";
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as StepsIcon } from "./../../../assets/icons/steps.svg";
-import { qandAItems } from "./constants";
+import { qandAItems, stylistJobs, whyUsItems } from "./constants";
 import { getLinkToQiuze } from "./helper";
 import styles from "./HomePage.module.scss";
+import ImageSlider, { ImageSliderThemes } from "./ImageSlider";
 import QandAItem from "./QandAItem";
-const { Option } = Select;
 
 function HomePage(): JSX.Element {
-  const onFinish = (value) => {
-    console.log(value);
-  };
-
   return (
     <>
       <Header />
       <div className={styles["home-page"]}>
         <div className={styles["compilation-section"]}>
-          <div className="container">
+          <div className={classNames("container", styles["compilation-section__container"])}>
             <div className={styles["compilation-section__title"]}>Подбор и доставка стильных образов</div>
             <div className={styles["compilation-section__desc"]}>
               Персональные подборки для вашего гардероба <br /> от стилистов. Для любых целей. Полностью онлайн.
@@ -31,6 +26,28 @@ function HomePage(): JSX.Element {
               <Link to={getLinkToQiuze()}>
                 <Button mixin={[BMixin.FLEX, BMixin.PRIMARY]}>Заполнить анкету</Button>
               </Link>
+            </div>
+            <div className={classNames("why-us", styles["why-us"])}>
+              <h3 className={styles["why-us__title"]}>Почему мы?</h3>
+              <ImageSlider slidesToShow={3} theme={ImageSliderThemes.LIGHT}>
+                {whyUsItems.map((item, index) => (
+                  <div
+                    key={`why-us-${index}`}
+                    className={classNames(
+                      styles["why-us-item"],
+                      styles[`why-us-item--${index}`]
+                    )}
+                  >
+                    <div
+                      className={styles["why-us-item__image"]}
+                      style={{ backgroundImage: `url(${item.image})` }}
+                    ></div>
+                    <div className={styles["why-us-item__label"]}>
+                      {item.label}
+                    </div>
+                  </div>
+                ))}
+              </ImageSlider>
             </div>
           </div>
         </div>
@@ -64,72 +81,6 @@ function HomePage(): JSX.Element {
         </div>
         <div className={classNames(styles["how-work-section"], styles["how-work-section--light"])}>
           <div className={classNames("container", styles["how-work-section__container"])}>
-            <Form onFinish={onFinish}>
-              <Form.Item name="Что занимает ваше основное время?">
-                <Checkbox.Group>
-                  <Row style={{ rowGap: 24 }}>
-                    <Col span={12}>
-                      <Checkbox value="Работа">Работа</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox value="Спорт">Спорт</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox value="Путешествия">Путешествия</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox value="Кафе и рестораны">Кафе и рестораны</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox value="Активный отдых">Активный отдых</Checkbox>
-                    </Col>
-                  </Row>
-                </Checkbox.Group>
-              </Form.Item>
-
-              <Form.Item name="Мой тип фигуры">
-                <Radio.Group>
-                  <Space direction="vertical">
-                    <Radio value="Полупрямой/полуприталенный тип (талия выражена, плечи приблизительно равны бедрам по ширине)">
-                      Полупрямой/полуприталенный тип (талия выражена, плечи приблизительно равны бедрам по ширине);
-                    </Radio>
-                    <Radio value="Прямой тип (талия не выражена)">Прямой тип (талия не выражена);</Radio>
-                    <Radio value="Приталенный/округлый тип (талия выражена, бедра шире плеч)">
-                      Приталенный/округлый тип (талия выражена, бедра шире плеч);
-                    </Radio>
-                    <Radio value="Прямой тип, при этом плечи шире относительно бёдер">
-                      Прямой тип, при этом плечи шире относительно бёдер;
-                    </Radio>
-                    <Radio value="Округлый тип фигуры крупного телосложения (plus size)">
-                      Округлый тип фигуры крупного телосложения (plus size);
-                    </Radio>
-                  </Space>
-                </Radio.Group>
-              </Form.Item>
-
-              <Form.Item name="Мои плечи">
-                <Radio.Group>
-                  <Space direction="horizontal">
-                    <Radio value="Короткие">Короткие</Radio>
-                    <Radio value="Средние">Средние</Radio>
-                    <Radio value="Длинные">Длинные</Radio>
-                  </Space>
-                </Radio.Group>
-              </Form.Item>
-
-              <Form.Item name="Тип задачи">
-                <Select>
-                  <Option value="Минорная">Минорная</Option>
-                  <Option value="Сложная">Сложная</Option>
-                </Select>
-              </Form.Item>
-
-              <Form.Item name="Текст" rules={[{ required: true, message: "Поле не может быть пустым" }]}>
-                <Input allowClear/>
-              </Form.Item>
-
-              <button>Send</button>
-            </Form>
             <h3 className={styles["how-work-section__title"]}>Что вас ждет впереди?</h3>
             <div className={classNames(styles["work-example"], styles["work-example--right"])}>
               <div className={styles["work-example__image"]}>
@@ -170,6 +121,21 @@ function HomePage(): JSX.Element {
                   образы будут готовы, вам придет уведомление на почту. В приложении вы сможете увидеть их на странице
                   подборок <br /> и выбрать понравившиеся.
                 </div>
+              </div>
+              <div className={classNames("stylist-jobs", styles["stylist-jobs"])}>
+                <ImageSlider slidesToShow={2} theme={ImageSliderThemes.DARK}>
+                  {stylistJobs.map((item, index) => (
+                    <div
+                      key={`stylist-job-${index}`}
+                      className={styles["stylist-job"]}
+                    >
+                      <div
+                        className={styles["stylist-job__image"]}
+                        style={{ backgroundImage: `url(${item.image})` }}
+                      ></div>
+                    </div>
+                  ))}
+                </ImageSlider>
               </div>
             </div>
           </div>
