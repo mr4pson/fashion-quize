@@ -87,3 +87,45 @@
     line-height: 32px;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .footer {
+    padding: 45px 0 20px;
+
+    &__logo-wraper {
+      display: none;
+    }
+
+    &__center {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    &__info {
+      flex-direction: column-reverse;
+      margin-top: 58px;
+    }
+
+    &__col {
+      &:nth-child(1) {
+        padding-top: 20px;
+      }
+
+      &:nth-child(2) {
+        border-bottom: 1px solid #6f737480;
+        padding-bottom: 20px;
+      }
+    }
+
+    &__copyright {
+      margin-top: 50px;
+    }
+  }
+
+  .recieve-compilation {
+    &__title {
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+}

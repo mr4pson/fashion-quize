@@ -1,15 +1,17 @@
-import { Button } from "antd";
 import classNames from "classnames";
-import { FC, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { Page, paths } from "routes/constants";
+
 import { ReactComponent as FbIcon } from "./../../../assets/icons/ic-fb.svg";
 import { ReactComponent as InstIcon } from "./../../../assets/icons/ic-inst.svg";
 import { ReactComponent as Logo } from "./../../../assets/icons/logo.svg";
-import s from "./Header.module.scss";
+import { ReactComponent as MenuIcon } from "./../../../assets/icons/menu.svg";
+import { ReactComponent as LoginIcon } from "./../../../assets/icons/login.svg";
+import styles from "./Header.module.scss";
+import { Button } from "antd";
 
-const Header: FC = () => {
+function Header(): JSX.Element {
   const [isActive, setIsActive] = useState<boolean>(false);
 
   useEffect(() => {
@@ -22,31 +24,39 @@ const Header: FC = () => {
 
   const getClassNames = (isActive: boolean) => {
     return classNames({
-      [s["header"]]: true,
-      [s["header--active"]]: isActive,
+      [styles["header"]]: true,
+      [styles["header--active"]]: isActive,
     });
   };
 
   return (
     <div className={getClassNames(isActive)}>
       <div className="container">
-        <div className={s["header__content"]}>
+        <div className={styles["header__content"]}>
+          <button className={styles["header__menu-btn"]}>
+            <MenuIcon />
+          </button>
           <Link to={paths[Page.HOME]}>
-            <Logo className={s["header__logo"]} />
+            <Logo className={styles["header__logo"]} />
           </Link>
-          <div className={s["header__actions"]}>
-            <div className={s["header__links"]}>
-              <InstIcon className={s["header__link"]} />
-              <FbIcon className={s["header__link"]} />
+          <div className={styles["header__actions"]}>
+            <div className={styles["header__links"]}>
+              <InstIcon className={styles["header__link"]} />
+              <FbIcon className={styles["header__link"]} />
             </div>
-            <Link to={paths[Page.LOGIN]}>
-              <Button className={s["header__login-btn"]}>Войти</Button>
-            </Link>
+            <div className={styles["header__login-btn"]}>
+              <Link to={paths[Page.LOGIN]}>
+                <Button className={styles["login-btn--desktop"]}>Войти</Button>
+                <button className={styles["login-btn--mobile"]}>
+                  <LoginIcon />
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
-export default Header;
+export default memo(Header);
