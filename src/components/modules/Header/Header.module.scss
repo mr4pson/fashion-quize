@@ -6,6 +6,12 @@
   z-index: 100;
   transition: all 0.3s;
 
+  &__menu-btn {
+    display: none;
+    background: none;
+    border: none;
+  }
+
   &__content {
     display: flex;
     align-items: center;
@@ -46,8 +52,46 @@
       color: #000000;
     }
 
-    #{ $self }__login-btn {
+    #{ $self }__login-btn,
+    #{ $self }__menu-btn {
       filter: invert(1);
+    }
+  }
+}
+
+.login-btn {
+  &--mobile {
+    display: none;
+    background: none;
+    border: none;
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+  .header {
+    padding-top: 48px;
+
+    &__menu-btn {
+      display: block;
+    }
+
+    &__links {
+      display: none;
+    }
+
+    &--active {
+      padding-top: 9.5px;
+    }
+  }
+
+  .login-btn {
+    &--mobile {
+      display: block;
+    }
+
+    &--desktop {
+      display: none;
     }
   }
 }

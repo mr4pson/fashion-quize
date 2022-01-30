@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { FC, memo, MouseEventHandler, ReactNode } from "react";
 
 import { BMixin } from ".";
@@ -8,13 +9,24 @@ type Props = {
   mixin?: BMixin[];
   disabled?: boolean;
   children: ReactNode;
+  className?: string;
 
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
-const Button: FC<Props> = ({ type = "button", mixin = [], disabled, children, onClick }) => {
+const Button: FC<Props> = ({
+  type = "button",
+  mixin = [],
+  disabled,
+  children,
+  className,
+  onClick,
+}) => {
   return (
-    <button className={`btn ${mixin.join(" ")}`} {...{ type, disabled, onClick }}>
+    <button
+      className={classNames(`btn ${mixin.join(" ")}`, className)}
+      {...{ type, disabled, onClick }}
+    >
       {children}
     </button>
   );

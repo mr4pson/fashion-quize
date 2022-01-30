@@ -6,6 +6,7 @@ import { BMixin, Button } from "components/modules";
 import Footer from "components/modules/Footer";
 import Header from "components/modules/Header";
 import { ReactComponent as StepsIcon } from "./../../../assets/icons/steps.svg";
+import { ReactComponent as StepsMobileIcon } from "./../../../assets/icons/steps-mobile.svg";
 import { qandAItems, stylistJobs, whyUsItems } from "./constants";
 import { getLinkToQiuze } from "./helper";
 import styles from "./HomePage.module.scss";
@@ -21,7 +22,7 @@ function HomePage(): JSX.Element {
           <div className={classNames("container", styles["compilation-section__container"])}>
             <div className={styles["compilation-section__title"]}>Подбор и доставка стильных образов</div>
             <div className={styles["compilation-section__desc"]}>
-              Персональные подборки для вашего гардероба <br /> от стилистов. Для любых целей. Полностью онлайн.
+              Персональные подборки для вашего гардероба <br /> от стилистов. <br /> Для любых целей.Полностью онлайн.
             </div>
             <div className={styles["compilation-section__btn"]}>
               <Link to={getLinkToQiuze()}>
@@ -60,6 +61,12 @@ function HomePage(): JSX.Element {
               </div>
               <div className={styles["receive-section__right"]}>
                 <StepsIcon className={styles["receive-section__steps"]} />
+                <StepsMobileIcon
+                  className={classNames(
+                    styles["receive-section__steps"],
+                    styles["receive-section__steps--mobile"]
+                  )}
+                />
                 <div className={styles["receive-section__title"]}>Как мы работаем</div>
                 <ul className={styles["receive-section__items"]}>
                   <li>Вы заполняете анкету;</li>
@@ -195,8 +202,8 @@ function HomePage(): JSX.Element {
         </div>
         <div className={styles["q-and-a"]}>
           <div className={classNames("container", styles["q-and-a__container"])}>
+            <div className={styles["q-and-a__title"]}>Вопросы & Ответы</div>
             <div className={styles["q-and-a__content"]}>
-              <div className={styles["q-and-a__title"]}>Вопросы & Ответы</div>
               <div className={styles["q-and-a__items"]}>
                 {qandAItems.map((qandAItem, index) => (
                   <QandAItem key={`q-and-a-${index}`} item={qandAItem} />

@@ -7,6 +7,8 @@ import { BMixin, Button } from "..";
 import { ReactComponent as FbIcon } from "./../../../assets/icons/ic-fb.svg";
 import { ReactComponent as InstIcon } from "./../../../assets/icons/ic-inst.svg";
 import { ReactComponent as Logo } from "./../../../assets/icons/logo.svg";
+import { ReactComponent as MenuIcon } from "./../../../assets/icons/menu.svg";
+import { ReactComponent as LoginIcon } from "./../../../assets/icons/login.svg";
 import styles from "./Header.module.scss";
 
 function Header(): JSX.Element {
@@ -31,6 +33,9 @@ function Header(): JSX.Element {
     <div className={getClassNames(isActive)}>
       <div className="container">
         <div className={styles["header__content"]}>
+          <button className={styles["header__menu-btn"]}>
+            <MenuIcon />
+          </button>
           <Link to={paths[Page.HOME]}>
             <Logo className={styles["header__logo"]} />
           </Link>
@@ -41,7 +46,17 @@ function Header(): JSX.Element {
             </div>
             <div className={styles["header__login-btn"]}>
               <Link to={paths[Page.LOGIN]}>
-                <Button mixin={[BMixin.FLEX, BMixin.SECONDARY]}>Войти</Button>
+                <Button
+                  className={styles["login-btn--desktop"]}
+                  mixin={[BMixin.FLEX, BMixin.SECONDARY]}
+                >
+                  Войти
+                </Button>
+                <button
+                  className={styles["login-btn--mobile"]}
+                >
+                  <LoginIcon />
+                </button>
               </Link>
             </div>
           </div>

@@ -70,3 +70,60 @@
 .stylist-jobs .image-slider .slick-next {
   bottom: -27px;
 }
+
+.short-arrow-right {
+  display: none !important;
+  width: 34px;
+  height: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  .slick-dots li {
+    width: 10px;
+    height: 10px;
+  }
+
+  .slick-dots li button {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+  }
+  
+  .slick-dots li button:before {
+    font-size: 5px;
+    width: 10px;
+    height: 10px;
+    margin-top: -5px;
+  }
+
+  .short-arrow-right {
+    display: block !important;
+  }
+
+  .long-arrow-right {
+    display: none !important;
+  }
+
+  .slick-dots {
+    margin-left: -3px;
+    bottom: -35px;
+  }
+
+  .slick-next {
+    left: 55px;
+    bottom: -44px;
+  }
+
+  .why-us .image-slider {
+    width: 382px;
+  }
+  
+  .stylist-jobs .image-slider {
+    width: 478px;
+  }
+
+  .stylist-jobs .image-slider .slick-next {
+    left: 45px;
+    bottom: -25px;
+  }
+}
