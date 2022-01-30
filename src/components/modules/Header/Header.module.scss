@@ -6,6 +6,12 @@
   width: 100%;
   z-index: 100;
 
+  &__actions {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__menu-btn {
     display: none;
     background: none;
@@ -38,7 +44,6 @@
   }
 
   &__login-btn {
-    filter: invert(1);
     transition: all 0.3s;
   }
 
@@ -56,18 +61,29 @@
       color: #000000;
     }
 
-    #{ $self }__login-btn,
     #{ $self }__menu-btn {
-      filter: invert(0);
+      filter: invert(1);
+    }
+
+    #{ $self }__login-btn {
+      filter: invert(1);
     }
   }
 }
 
 .login-btn {
+  &--desktop {
+    filter: invert(1);
+  }
+
   &--mobile {
     display: none;
     background: none;
     border: none;
+
+    svg {
+      color: #ffffff;
+    }
   }
 }
 
@@ -95,7 +111,7 @@
     }
 
     &--desktop {
-      display: none;
+      display: none !important;
     }
   }
 }
