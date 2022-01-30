@@ -1,10 +1,10 @@
 .header {
-  $self: &;
   padding: 7.5px 0;
   position: fixed;
+  $self: &;
+  transition: all 0.3s;
   width: 100%;
   z-index: 100;
-  transition: all 0.3s;
 
   &__menu-btn {
     display: none;
@@ -14,32 +14,36 @@
 
   &__content {
     display: flex;
-    align-items: center;
     justify-content: space-between;
   }
 
-  &__logo {
-    margin-bottom: -10px;
-    transition: all 0.3s;
-  }
-
-  &__actions {
+  &__content {
+    align-items: center;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-  }
-
-  &__links {
-    width: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-right: 80px;
   }
 
   &__link,
   &__logo {
     color: #ffffff;
+    transition: all 0.3s;
+  }
+
+  &__links {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 80px;
+    width: 72px;
+  }
+
+  &__login-btn {
+    filter: invert(1);
+    transition: all 0.3s;
+  }
+
+  &__logo {
+    margin-bottom: -10px;
     transition: all 0.3s;
   }
 
@@ -54,7 +58,7 @@
 
     #{ $self }__login-btn,
     #{ $self }__menu-btn {
-      filter: invert(1);
+      filter: invert(0);
     }
   }
 }

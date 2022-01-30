@@ -3,13 +3,13 @@ import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Page, paths } from "routes/constants";
 
-import { BMixin, Button } from "..";
 import { ReactComponent as FbIcon } from "./../../../assets/icons/ic-fb.svg";
 import { ReactComponent as InstIcon } from "./../../../assets/icons/ic-inst.svg";
 import { ReactComponent as Logo } from "./../../../assets/icons/logo.svg";
 import { ReactComponent as MenuIcon } from "./../../../assets/icons/menu.svg";
 import { ReactComponent as LoginIcon } from "./../../../assets/icons/login.svg";
 import styles from "./Header.module.scss";
+import { Button } from "antd";
 
 function Header(): JSX.Element {
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -46,15 +46,8 @@ function Header(): JSX.Element {
             </div>
             <div className={styles["header__login-btn"]}>
               <Link to={paths[Page.LOGIN]}>
-                <Button
-                  className={styles["login-btn--desktop"]}
-                  mixin={[BMixin.FLEX, BMixin.SECONDARY]}
-                >
-                  Войти
-                </Button>
-                <button
-                  className={styles["login-btn--mobile"]}
-                >
+                <Button className={styles["login-btn--desktop"]}>Войти</Button>
+                <button className={styles["login-btn--mobile"]}>
                   <LoginIcon />
                 </button>
               </Link>

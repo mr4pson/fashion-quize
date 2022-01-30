@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 import { openNotification } from "common/helpers/common-helpers";
 import { axiosInstance } from "components/pages/AdminPage/consts";
@@ -15,8 +16,12 @@ export const resetPasswordThunks = {
       login,
     };
 
-    const response = await axiosInstance.post(`/api/auth/reset-password`, payload);
-    response && openNotification("success", `Запрос на восстановление пароля отправлен на ${login}`);
+    try {
+      await axios.post(`/api/auth/reset-password`, payload);
+      openNotification("success", `Запрос на восстановление пароля отправлен на ${login}`);
+    } catch {
+      openNotification("error", `Запрос на восстановление пароля не удался. Повторите запрос позже`);
+    }
   },
   sendPasswordResetRequest: (token: string) => async () => {
     const payload = {

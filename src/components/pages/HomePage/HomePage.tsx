@@ -1,10 +1,9 @@
+import { Button } from "antd";
 import classNames from "classnames";
-import { memo } from "react";
+import { FC, memo } from "react";
 import { Link } from "react-router-dom";
 
-import { BMixin, Button } from "components/modules";
-import Footer from "components/modules/Footer";
-import Header from "components/modules/Header";
+import { Footer, Header } from "components/modules";
 import { ReactComponent as StepsIcon } from "./../../../assets/icons/steps.svg";
 import { ReactComponent as StepsMobileIcon } from "./../../../assets/icons/steps-mobile.svg";
 import { qandAItems, stylistJobs, whyUsItems } from "./constants";
@@ -13,7 +12,7 @@ import styles from "./HomePage.module.scss";
 import ImageSlider, { ImageSliderThemes } from "./ImageSlider";
 import QandAItem from "./QandAItem";
 
-function HomePage(): JSX.Element {
+const HomePage: FC = () => {
   return (
     <>
       <Header />
@@ -24,29 +23,18 @@ function HomePage(): JSX.Element {
             <div className={styles["compilation-section__desc"]}>
               Персональные подборки для вашего гардероба <br /> от стилистов. <br /> Для любых целей.Полностью онлайн.
             </div>
-            <div className={styles["compilation-section__btn"]}>
-              <Link to={getLinkToQiuze()}>
-                <Button mixin={[BMixin.FLEX, BMixin.PRIMARY]}>Заполнить анкету</Button>
-              </Link>
-            </div>
+            <Link to={getLinkToQiuze()}>
+              <Button className={styles["compilation-section__btn"]} type="primary">
+                Заполнить анкету
+              </Button>
+            </Link>
             <div className={classNames("why-us", styles["why-us"])}>
               <h3 className={styles["why-us__title"]}>Почему мы?</h3>
               <ImageSlider slidesToShow={3} theme={ImageSliderThemes.LIGHT}>
                 {whyUsItems.map((item, index) => (
-                  <div
-                    key={`why-us-${index}`}
-                    className={classNames(
-                      styles["why-us-item"],
-                      styles[`why-us-item--${index}`]
-                    )}
-                  >
-                    <div
-                      className={styles["why-us-item__image"]}
-                      style={{ backgroundImage: `url(${item.image})` }}
-                    ></div>
-                    <div className={styles["why-us-item__label"]}>
-                      {item.label}
-                    </div>
+                  <div key={`why-us-${index}`} className={classNames(styles["why-us-item"], styles[`why-us-item--${index}`])}>
+                    <div className={styles["why-us-item__image"]} style={{ backgroundImage: `url(${item.image})` }}></div>
+                    <div className={styles["why-us-item__label"]}>{item.label}</div>
                   </div>
                 ))}
               </ImageSlider>
@@ -133,14 +121,8 @@ function HomePage(): JSX.Element {
               <div className={classNames("stylist-jobs", styles["stylist-jobs"])}>
                 <ImageSlider slidesToShow={2} theme={ImageSliderThemes.DARK}>
                   {stylistJobs.map((item, index) => (
-                    <div
-                      key={`stylist-job-${index}`}
-                      className={styles["stylist-job"]}
-                    >
-                      <div
-                        className={styles["stylist-job__image"]}
-                        style={{ backgroundImage: `url(${item.image})` }}
-                      ></div>
+                    <div key={`stylist-job-${index}`} className={styles["stylist-job"]}>
+                      <div className={styles["stylist-job__image"]} style={{ backgroundImage: `url(${item.image})` }}></div>
                     </div>
                   ))}
                 </ImageSlider>
@@ -170,11 +152,11 @@ function HomePage(): JSX.Element {
                   причинах. И, наоборот, прокомментировать почему образ вас впечатлил, как вы себя в нем ощущаете. С
                   каждым новым комментарием стилист будет лучше знать ваши предпочтения и собирать образы быстрее!
                 </div>
-                <div className={styles["work-example__quize-btn"]}>
-                  <Link to={getLinkToQiuze()}>
-                    <Button mixin={[BMixin.FLEX, BMixin.PRIMARY]}>Заполнить анкету</Button>
-                  </Link>
-                </div>
+                <Link to={getLinkToQiuze()}>
+                  <Button className={styles["work-example__quize-btn"]} type="primary">
+                    Заполнить анкету
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -195,7 +177,7 @@ function HomePage(): JSX.Element {
             </h3>
             <div className={styles["try-quize-section__btn-wrap"]}>
               <Link to={getLinkToQiuze()}>
-                <Button mixin={[BMixin.FLEX, BMixin.PRIMARY]}>Заполнить анкету</Button>
+                <Button type="primary">Заполнить анкету</Button>
               </Link>
             </div>
           </div>
@@ -217,6 +199,6 @@ function HomePage(): JSX.Element {
       <Footer />
     </>
   );
-}
+};
 
 export default memo(HomePage);

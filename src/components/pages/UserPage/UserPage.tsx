@@ -4,10 +4,10 @@ import { useHistory } from "react-router";
 import { getJwtPair } from "common/helpers/auth-helpers";
 import { getUserInfo } from "common/helpers/common-helpers";
 import { EUser } from "common/types/types";
+import { Footer } from "components/modules";
 import Header from "./Header";
 import UserRoutes from "./routes/UsrRoutes";
 import styles from "./UserPage.module.scss";
-import Footer from "components/modules/Footer";
 
 const UserPage: FC = () => {
   const history = useHistory();
