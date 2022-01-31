@@ -1,34 +1,17 @@
 .quize-page {
-    padding-top: 63px;
-    min-height: calc(100vh - 63px);
-    background: #F3F3F3;
-    padding-bottom: 30px;
-    .container {
-        height: 100%;
-    }
-    &__blank {
-        margin-top: 30px;
-        background: #fff;
-        height: 90%;
-        border-radius: 7px;
-        box-sizing: border-box;
-        padding: 70px 110px 60px;
-        position: relative;
-    }
+  background-color: #110e2b;
+  padding: 88px 15px;
+
+  &__ctr {
+    background-color: #fff;
+    border-radius: 16px;
+    margin: auto;
+    max-width: 920px;
+    padding: 32px;
+  }
 }
 
-@media only screen and (min-width: 769px) and (max-width: 990px) {
-    .quize-page {
-        &__blank {
-            padding: 60px;
-        }
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .quize-page {
-        &__blank {
-            padding: 30px;
-        }
-    }
+.quize-form__btn {
+  display: flex;
+  justify-content: center;
 }
