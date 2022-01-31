@@ -30,7 +30,9 @@ const QuestionDetail: FC<TProps> = (props) => {
   const formRef = useRef<FormInstance>(null);
   const { id, quizeType } = useParams() as any;
   const [loading, setLoading] = useState(false);
-  const [questionType, setQuestionType] = useState<QuestionType>("" as QuestionType);
+  const [questionType, setQuestionType] = useState<QuestionType>(
+    "" as QuestionType
+  );
 
   const dispatch = useAppDispatch();
   const { question, blocks } = useSelector((state: TRootState) => ({
@@ -104,7 +106,9 @@ const QuestionDetail: FC<TProps> = (props) => {
   }, [dispatch]);
 
   const handleAddAnswerOption = () => {
-    setAnswerOptions((prevState) => (Array.isArray(prevState) ? prevState.concat("") : [""]));
+    setAnswerOptions((prevState) =>
+      Array.isArray(prevState) ? prevState.concat("") : [""]
+    );
   };
 
   const handleRemoveAnswerOption = (index) => {
@@ -132,7 +136,8 @@ const QuestionDetail: FC<TProps> = (props) => {
       <div className={styles["detail__header"]}>
         <h1>{getPageTitle(id)}</h1>
       </div>
-      {(!!id && !!question.description) || props.method === PageMethods.CREATE ? (
+      {(!!id && !!question.description) ||
+      props.method === PageMethods.CREATE ? (
         <Form
           initialValues={initialValues}
           {...layout}
@@ -140,7 +145,19 @@ const QuestionDetail: FC<TProps> = (props) => {
           onFinish={onFinish}
           validateMessages={validateMessages}
         >
-          <Form.Item name="description" label="Вопрос" rules={[{ required: true, type: "string", max: 255 }]}>
+          <Form.Item
+            name="title"
+            label="Вопрос"
+            rules={[{ required: true, type: "string", max: 255 }]}
+          >
+            <Input.TextArea />
+          </Form.Item>
+
+          <Form.Item
+            name="description"
+            label="Описание"
+            rules={[{ type: "string", max: 255 }]}
+          >
             <Input.TextArea />
           </Form.Item>
 
@@ -151,7 +168,11 @@ const QuestionDetail: FC<TProps> = (props) => {
           {question?.image && (
             <div
               style={{
-                backgroundImage: `url(${mediaFile ? getImageUrl(mediaFile) : getImageUrl(question?.image)})`,
+                backgroundImage: `url(${
+                  mediaFile
+                    ? getImageUrl(mediaFile)
+                    : getImageUrl(question?.image)
+                })`,
               }}
               className={styles["detail__uploaded-image"]}
             ></div>
@@ -179,12 +200,19 @@ const QuestionDetail: FC<TProps> = (props) => {
             </Select>
           </Form.Item>
 
-          {[QuestionType.SINGLE_OPTION, QuestionType.MULTIPLE_OPTION].includes(questionType) && (
+          {[QuestionType.SINGLE_OPTION, QuestionType.MULTIPLE_OPTION].includes(
+            questionType
+          ) && (
             <div className={styles["answer-controls"]}>
-              <h2 className={styles["answer-controls__title"]}>Варианты ответов</h2>
+              <h2 className={styles["answer-controls__title"]}>
+                Варианты ответов
+              </h2>
               {answerOptions?.length > 0 &&
                 answerOptions.map((answerOption, index) => (
-                  <div key={"answer-option" + index} className={styles["answer-control"]}>
+                  <div
+                    key={"answer-option" + index}
+                    className={styles["answer-control"]}
+                  >
                     <Input
                       value={answerOption}
                       onChange={(e) => handleAnswerOptionChange(e, index)}
@@ -201,7 +229,9 @@ const QuestionDetail: FC<TProps> = (props) => {
                   </div>
                 ))}
               {answerOptions?.length === 0 && (
-                <div className={styles["answer-controls__info"]}>Список вариантов ответов пуст</div>
+                <div className={styles["answer-controls__info"]}>
+                  Список вариантов ответов пуст
+                </div>
               )}
               <div className={styles["answer-controls__add-btn-container"]}>
                 <Button type="link" onClick={handleAddAnswerOption}>
