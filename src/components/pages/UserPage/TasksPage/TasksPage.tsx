@@ -26,7 +26,7 @@ const TasksPage: React.FC<Props> = (props) => {
     ...task,
     key: task.id,
     updatedAt: moment(task.updatedAt).format("DD.MM.YYYY HH:mm:ss"),
-    createdAt: moment(task.createdAt).format("DD.MM.YYYY HH:mm:ss"),
+    createdAt: moment(task.createdAt).format("DD.MM.YYYY"),
   }));
 
   const handleAddTask = () => {
@@ -37,7 +37,8 @@ const TasksPage: React.FC<Props> = (props) => {
     <div className={styles["tasks-page"]}>
       <PageHeader
         title={"Список задач"}
-        btnTitle={"Добавить"}
+        btnTitle={"Добавить задачу"}
+        elementsNumberLabel={`Всего ${tasks.length} задач`}
         handleBtnClick={handleAddTask}
       />
       <div className={styles["tasks-page__body"]}>

@@ -1,20 +1,38 @@
+import { Button } from "antd";
 import React, { memo } from "react";
 import styles from "./PageHeader.module.scss";
 
-type Props = {
+type TProps = {
   title: string;
   btnTitle?: string;
+  elementsNumberLabel?: string;
   handleBtnClick?: () => void;
 };
 
-const PageHeader: React.FC<Props> = ({ title, btnTitle, handleBtnClick }) => {
+const PageHeader: React.FC<TProps> = ({
+  title,
+  btnTitle,
+  elementsNumberLabel,
+  handleBtnClick,
+}) => {
   return (
     <div className={styles["page-header"]}>
-      <h1 className={styles["page-header__title"]}>{title}</h1>
+      <div>
+        <h1 className={styles["page-header__title"]}>{title}</h1>
+        {elementsNumberLabel && (
+          <div className={styles["page-header__elements-number"]}>
+            {elementsNumberLabel}
+          </div>
+        )}
+      </div>
       {btnTitle && handleBtnClick && (
-        <button onClick={handleBtnClick} className={styles["page-header__btn"]}>
+        <Button
+          type="primary"
+          onClick={handleBtnClick}
+          className={styles["page-header__btn"]}
+        >
           {btnTitle}
-        </button>
+        </Button>
       )}
     </div>
   );

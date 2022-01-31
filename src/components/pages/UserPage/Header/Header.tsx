@@ -12,6 +12,11 @@ import { paths, UsrPage } from "../routes/consts";
 import { menuItems } from "./constants";
 import styles from "./Header.module.scss";
 import { TypeMenuItem } from "./types";
+import { ReactComponent as FbIcon } from "./../../../../assets/icons/ic-fb.svg";
+import { ReactComponent as InstIcon } from "./../../../../assets/icons/ic-inst.svg";
+import { ReactComponent as UserIcon } from "./../../../../assets/icons/ic-user.svg";
+import { ReactComponent as Logo } from "./../../../../assets/icons/logo.svg";
+import { ReactComponent as MenuIcon } from "./../../../../assets/icons/menu.svg";
 
 const Header: React.FC = () => {
   const history = useHistory();
@@ -46,26 +51,31 @@ const Header: React.FC = () => {
     <div className={styles["header"]}>
       <div className="container">
         <div className={styles["header__content"]}>
+          <button className={styles["header__menu-btn"]}>
+            <MenuIcon />
+          </button>
           <Link to={paths[UsrPage.TASKS]}>
-            <div className={styles["header__logo"]}>Eyelish</div>
+            <Logo className={styles["header__logo"]} />
           </Link>
-          <button
-            className={styles["navbar-toggle"]}
-            onClick={handleExpandMobileMenu}
-          ></button>
-          <nav className={styles["nav"]}>
-            {menuItems.map((item, index) => (
-              <span key={index}>
-                <Link
-                  className={
-                    checkIfMenuItemActive(item) ? styles["active"] : ""
-                  }
-                  to={item.path}
-                >
-                  {item.title}
-                </Link>
-              </span>
-            ))}
+          <div className={styles["header__actions"]}>
+            <nav className={styles["header__nav"]}>
+              {menuItems.map((item, index) => (
+                <span key={index}>
+                  <Link
+                    className={
+                      checkIfMenuItemActive(item) ? styles["active"] : ""
+                    }
+                    to={item.path}
+                  >
+                    {item.title}
+                  </Link>
+                </span>
+              ))}
+            </nav>
+            <div className={styles["header__links"]}>
+              <InstIcon className={styles["header__link"]} />
+              <FbIcon className={styles["header__link"]} />
+            </div>
             <span>
               <Dropdown
                 overlay={
@@ -83,12 +93,14 @@ const Header: React.FC = () => {
                   <div className={styles["user-info__name"]}>
                     {userInfo?.name}
                   </div>
-                  <div className={styles["user-info__photo"]}></div>
+                  <div className={styles["user-info__avatar"]}>
+                    <UserIcon />
+                  </div>
                 </div>
               </Dropdown>
             </span>
-          </nav>
-          <div
+          </div>
+          {/* <div
             onClick={handleExpandMobileMenu}
             className={getMobileMenuBackdropClassNames()}
           ></div>
@@ -120,24 +132,11 @@ const Header: React.FC = () => {
                   </Button>
                 </li>
               </ul>
-            </div>
-          </div>
+            </div> 
+          </div> */}
         </div>
       </div>
     </div>
-    // <div className={styles["header"]}>
-    //   <Link
-    //     className={styles["logo"]}
-    //     style={{
-    //       backgroundImage:
-    //         "url('https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg')",
-    //     }}
-    //     to={paths[UsrPage.PROFILE]}
-    //   >
-    //     Eyelish
-    //   </Link>
-
-    // </div>
   );
 };
 

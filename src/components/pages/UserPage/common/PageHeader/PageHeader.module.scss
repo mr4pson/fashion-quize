@@ -3,19 +3,17 @@
   align-items: center;
   justify-content: space-between;
   &__title {
-    font-size: 26px;
-    font-weight: 400;
+    font-family: 'Cormorant', serif;
+    font-size: 32px;
+    font-weight: 32px;
+    font-weight: 700;
     margin: 0;
   }
-  &__btn {
-    font-family: 'Ubuntu', sans-serif!important;
-    color: #fff;
-    background: #101010;
-    border: none;
-    padding: 8px 56px;
-    border-radius: 7px;
-    height: auto;
-    cursor: pointer;
+  &__elements-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    color: #6F7374;
   }
 }
 
