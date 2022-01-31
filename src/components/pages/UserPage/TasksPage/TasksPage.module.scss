@@ -1,10 +1,9 @@
 .tasks-page {
-  font-family: 'Ubuntu', sans-serif;
   padding-bottom: 60px;
   &__body {
-    margin-top: 16px;
+    margin-top: 25px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 15px;
     position: relative;
   }
