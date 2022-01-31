@@ -3,5 +3,4 @@ export type TBaseFields = {
   number: string;
   email: string;
   city: string;
-  age: number;
-}
+};

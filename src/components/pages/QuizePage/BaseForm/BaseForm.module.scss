@@ -1,65 +1,22 @@
-.base-page {
-  margin-top: 40px;
-  &__submit-btn {
-    background: #101010 !important;
-    color: #fff !important;
-    width: 220px;
-    height: 48px !important;
-    border-radius: 7px !important;
-    display: block !important;
-    margin: 40px auto 0 !important;
-    &:hover, &:active {
-      border: none !important;
-    }
-    &:disabled {
-      background:#686868 !important;
-    }
-  }
+.base-form__body {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column-gap: 40px;
+  grid-row-gap: 8px;
+  justify-content: center;
 }
 
-.form-item {
-  display: inline-block !important;
-  width: calc(50% - 9px);
-  &__label {
-    font-family: 'Ubuntu', sans-serif !important;
-    font-size: 18px !important;
-    font-weight: bold;
-  }
-  &__input {
-    padding: 15px 11px !important;
-    border-radius: 5px !important;
-    font-size: 18px !important;
-  }
-  &__checkbox {
-    font-size: 16px;
-    color: #A7A7A8;
-    font-weight: 300;
-    display: inline !important;
-    button {
-      margin-left: 5px;
-      padding: 0 !important;
-      height: 22px;
-    }
-  }
-  &:nth-child(2n) {
-    margin-left: 18px;
-  }
-}
+.base-form__policy {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0 24px 0;
 
-@media only screen and (max-width: 768px) {
-  .base-page {
-    margin-top: 20px;
-  }
-  .form-item {
-    display: block !important;
-    width: 100%;
-    margin-left: 0 !important;
-    margin-bottom: 15px !important;
-    &__input {
-      font-size: 16px !important;
-    }
-    &__checkbox {
-      font-size: 14px !important;
+  &__text {
+    color: #6f7374;
+    font-size: 14px;
+
+    & > button {
+      font-size: 14px;
     }
   }
 }

@@ -1,58 +1,37 @@
-import classNames from "classnames";
-import { FC, memo, useEffect } from "react";
+import { Button, Form } from "antd";
+import { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 import { EQuize } from "common/types/types";
 import { Footer, Header } from "components/modules";
 import { TRootState, useAppDispatch } from "redux/ReduxStore";
-import { quizeThunks } from "redux/slicers/quizePageSlice";
+import { quizeThunks, setSex } from "redux/slicers/quizePageSlice";
 import { checkIfHeaderVisible, getPrevQuestionLink } from "./helper";
 import QuizeHeader from "./QuizeHeader";
 import { TQuizeHeaderConfig } from "./QuizeHeader/types";
-import styles from "./QuizePage.module.scss";
-import { paths, QzPage } from "./routes/constants";
+import s from "./QuizePage.module.scss";
+import { paths, QUIZE_TYPE, QzPage, SECTION_NUMBER } from "./routes/constants";
 import QuizeRoutes from "./routes/QuizeRoutes";
 
-type TProps = {};
-
-const QuizePage: FC<TProps> = () => {
-  const location = useLocation();
+const QuizePage: FC = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
+  const { pathname } = useLocation();
   const { blocks } = useSelector((state: TRootState) => state.quizePage);
 
-  const pathSections = location.pathname.split("/");
+  const pathSections = pathname.split("/");
   const quizeType = pathSections[2] as EQuize;
   const sectionNumber = Number.isNaN(+pathSections[3]) ? undefined : +pathSections[3];
   const currentBlock = sectionNumber ? blocks[sectionNumber - 1] : undefined;
 
-  useEffect(() => {
-    if (quizeType && currentBlock) {
-      dispatch(quizeThunks.getQuestionBlocksByQuizeType(quizeType));
-      return;
-    }
-    dispatch(quizeThunks.getQuestionBlocksByQuizeType(EQuize.FOR_WOMEN));
-  }, [dispatch, quizeType]);
-
-  useEffect(() => {
-    if (currentBlock) {
-      dispatch(quizeThunks.setCurrentBlock(currentBlock));
-    }
-  }, [dispatch, blocks, currentBlock]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(quizeThunks.clearAnswers());
-    };
-  }, [dispatch]);
-
   const getQuizeHeaderConfig = (): TQuizeHeaderConfig => {
     let config = {} as TQuizeHeaderConfig;
-    switch (location.pathname) {
+    switch (pathname) {
       case paths[QzPage.BASE]:
         config = {
           title: "Ваши данные",
-          description: "Укажите ваши основные идентификационные данные",
+          description: "Укажите ваши основные идентификационные данные.",
           backUrl: undefined,
           currentSectionNumber: 1,
           sectionLength: blocks?.length + 2,
@@ -61,7 +40,7 @@ const QuizePage: FC<TProps> = () => {
       case paths[QzPage.SEX]:
         config = {
           title: "Выберите ваш пол",
-          description: undefined,
+          description: "Укажите для кого нашим стилистам необходимо подобрать образы.",
           backUrl: paths[QzPage.BASE],
           currentSectionNumber: 2,
           sectionLength: blocks?.length + 2,
@@ -80,15 +59,61 @@ const QuizePage: FC<TProps> = () => {
     return config;
   };
 
+  useEffect(() => {
+    if (quizeType && currentBlock) {
+      dispatch(quizeThunks.getQuestionBlocksByQuizeType(quizeType));
+    } else {
+      dispatch(quizeThunks.getQuestionBlocksByQuizeType(EQuize.FOR_WOMEN));
+    }
+  }, [dispatch, quizeType, currentBlock]);
+
+  useEffect(() => {
+    if (currentBlock) dispatch(quizeThunks.setCurrentBlock(currentBlock));
+  }, [dispatch, blocks, currentBlock]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(quizeThunks.clearAnswers());
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  const onFinish = async (form) => {
+    console.log(form);
+
+    switch (pathname) {
+      case paths[QzPage.BASE]:
+        const response: any = await dispatch(quizeThunks.checkEmail(form.email));
+        if (!response || !response.status) return;
+        dispatch(quizeThunks.setBaseFields(form));
+        history.push(paths[QzPage.SEX]);
+        break;
+      case paths[QzPage.SEX]:
+        dispatch(setSex(form.sex.type));
+        history.push(paths[QzPage.ROUTE].replace(QUIZE_TYPE, form.sex.path).replace(SECTION_NUMBER, "1"));
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       <Header />
-      <div className={classNames(styles["quize-page"], "quize-page")}>
-        <div className={classNames("container", styles["container"])}>
-          <div className={styles["quize-page__blank"]}>
-            {checkIfHeaderVisible(location) && <QuizeHeader {...getQuizeHeaderConfig()} />}
+      <div className={s["quize-page"]}>
+        <div className={s["quize-page__ctr"]}>
+          {checkIfHeaderVisible(pathname) && <QuizeHeader {...getQuizeHeaderConfig()} />}
+          <Form onFinish={onFinish} autoComplete="off">
             <QuizeRoutes />
-          </div>
+            <div className={s["quize-form__btn"]}>
+              <Button type="primary" size="large" htmlType="submit">
+                Далее
+              </Button>
+            </div>
+          </Form>
         </div>
       </div>
       <Footer />
@@ -96,4 +121,4 @@ const QuizePage: FC<TProps> = () => {
   );
 };
 
-export default memo(QuizePage);
+export default QuizePage;

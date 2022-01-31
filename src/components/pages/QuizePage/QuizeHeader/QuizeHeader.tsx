@@ -1,44 +1,48 @@
-import { Button } from "antd";
-import classNames from "classnames";
 import { FC, memo } from "react";
 import { Link } from "react-router-dom";
-import { ReactComponent as LeftArrowSvg } from "../icons/left-arrow.svg";
-import styles from "./QuizeHeader.module.scss";
+
+import { ReactComponent as ChevronLeft } from "../../../../assets/icons/ic-chevron-left.svg";
+import s from "./QuizeHeader.module.scss";
 import { TQuizeHeaderConfig } from "./types";
 
 type Props = TQuizeHeaderConfig;
 
-const QuizeHeader: FC<Props> = ({
-  title,
-  description,
-  backUrl,
-  currentSectionNumber,
-  sectionLength,
-}) => {
+const QuizeHeader: FC<Props> = ({ title, description, backUrl, currentSectionNumber, sectionLength }) => {
+  const steps = [1];
+  for (let i = 2; i <= sectionLength!; i++) steps.push(i);
+
+  const stepClassName = (step) => {
+    if (currentSectionNumber) {
+      if (step < currentSectionNumber) {
+        return s["steps__item_prev"];
+      } else {
+        return step === currentSectionNumber ? s["steps__item_active"] : s["steps__item"];
+      }
+    }
+  };
+
   return (
-    <div className={styles["quize-header"]}>
-      {backUrl && (
-        <Link className={styles["quize-header__back-btn"]} to={backUrl}>
-          <Button type={"link"}>
-            <LeftArrowSvg />
-            <span>Назад</span>
-          </Button>
-        </Link>
-      )}
-      {!backUrl && <div className={styles["quize-header__back-btn"]} />}
-      <div className={classNames(styles["quize-header__info"], "quize-header__info")}>
-        <h1 className={styles["quize-header__title"]}>{title}</h1>
-        {description && (
-          <div className={styles["quize-header__desc"]}>{description}</div>
+    <div className={s["quize-header"]}>
+      <div className={s["quize-header__top"]}>
+        {backUrl && (
+          <Link to={backUrl}>
+            <ChevronLeft />
+          </Link>
         )}
       </div>
-      {currentSectionNumber && sectionLength && (
-        <div className={styles["quize-header__progress"]}>
-          <b>{currentSectionNumber}</b>
-          <span>/</span>
-          <span>{sectionLength}</span>
+      <div className={s["quize-header__body"]}>
+        <h4 className={s["quize-header__body__title"]}>{`${currentSectionNumber}. ${title}`}</h4>
+        <div className={s["quize-header__body__desc"]}>{description}</div>
+        <div className={s["quize-header__body__steps"]}>
+          <div className={s["steps"]}>
+            {steps.map((val) => (
+              <div className={stepClassName(val)} key={val}>
+                {val}
+              </div>
+            ))}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

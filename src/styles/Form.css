@@ -63,3 +63,20 @@
   .ant-select-selector {
   box-shadow: none;
 }
+
+.ant-form-item-label > label,
+.ant-row {
+  color: #110e2b;
+  display: block;
+}
+
+.ant-form-item-label > label::after,
+.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+  display: none;
+}
+
+@media (max-width: 575px) {
+  .ant-form-item .ant-form-item-label {
+    padding: 0;
+  }
+}
