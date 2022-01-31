@@ -23,7 +23,8 @@ export const getColumns = (
 ) => {
   return [
     { title: "ID", dataIndex: "id", key: "id" },
-    { title: "Вопрос", dataIndex: "description", key: "description" },
+    { title: "Вопрос", dataIndex: "title", key: "title" },
+    { title: "Описание", dataIndex: "description", key: "description" },
     { title: "Изображение", dataIndex: "image", key: "image" },
     {
       title: "Тип",
