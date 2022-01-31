@@ -16,7 +16,7 @@ const quizePageSlice = createSlice({
     blocks: [] as TypeBlock[],
     currentBlock: {} as TypeBlock,
     baseFields: {} as TBaseFields,
-    sex: "" as ESexes,
+    sex: ESexes.FEMALE as ESexes,
     user: {} as TUser,
   },
   reducers: {
@@ -47,7 +47,7 @@ const quizePageSlice = createSlice({
     setUser: (state, action: PayloadAction<TUser>) => ({
       ...state,
       user: action.payload,
-    })
+    }),
   },
 });
 
@@ -94,5 +94,6 @@ export const quizeThunks = {
   },
 };
 
-export const { setStateAnswers, setQuestions, setBaseFields, setCurrentBlock, setBlocks, setSex, setUser } = quizePageSlice.actions;
+export const { setStateAnswers, setQuestions, setBaseFields, setCurrentBlock, setBlocks, setSex, setUser } =
+  quizePageSlice.actions;
 export default quizePageSlice.reducer;

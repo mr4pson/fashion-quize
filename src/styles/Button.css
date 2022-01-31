@@ -53,6 +53,27 @@
   padding: 0px 7px;
 }
 
+.ant-btn-text {
+  color: #110e2b;
+  height: auto;
+  padding: 0;
+}
+
+.ant-btn-text > span {
+  text-decoration: underline;
+}
+
+.ant-btn-text,
+.ant-btn-text:hover,
+.ant-btn-text:focus {
+  background: transparent;
+  border-color: transparent;
+}
+
+.ant-btn-text:hover {
+  color: #000;
+}
+
 [ant-click-animating-without-extra-node]:after {
   display: none;
 }

@@ -1,86 +1,48 @@
-import { Button } from "antd";
-import { memo, useEffect, useState } from "react";
-import { useHistory } from "react-router";
-import { useAppDispatch } from "redux/ReduxStore";
+import { Form, Radio, Space } from "antd";
+import { FC } from "react";
+import { useSelector } from "react-redux";
+
+import { TRootState, useAppDispatch } from "redux/ReduxStore";
 import { setSex } from "redux/slicers/quizePageSlice";
-import {
-  paths,
-  SECTION_NUMBER,
-  QUIZE_TYPE,
-  QzPage,
-} from "../routes/constants";
-import { sexsDefault } from "./constants";
-import { checkIfSubmitDisable, getSexItemClassNames } from "./helpers";
-import styles from "./SexPage.module.scss";
-import { ISex } from "./types";
+import { radios } from "./consts";
+import s from "./SexPage.module.scss";
 
-const SexPage: React.FC = () => {
-  const history = useHistory();
+const SexPage: FC = () => {
   const dispatch = useAppDispatch();
-  const [sexs, setSexs] = useState<ISex[]>(sexsDefault);
+  const { sex } = useSelector((state: TRootState) => state.quizePage);
 
-  const handleSexChoice = (sex: ISex): void => {
-    setSexs((prev) => {
-      const sexs = [...prev];
+  const onChange = ({ target }) => dispatch(setSex(target.value.type));
 
-      sexs.forEach((sex) => {
-        sex.isActive = false;
-      });
-
-      const currentSex = sexs.find(
-        (sexIn) => sex.label === sexIn.label
-      ) as ISex;
-      currentSex.isActive = true;
-
-      return sexs;
-    });
-  };
-
-  const handleSubmit = (): void => {
-    const activeSex = sexs.find((sex) => sex.isActive) as ISex;
-
-    dispatch(setSex(activeSex.value));
-
-    history.push(
-      paths[QzPage.ROUTE]
-        .replace(QUIZE_TYPE, activeSex.path)
-        .replace(SECTION_NUMBER, "1")
-    );
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    return () => {
-      setSexs(sexsDefault);
+  const sexClassName = ({ type }, label?) => {
+    if (label) {
+      return sex === type ? s["sex-form__col__radio_active"] : s["sex-form__col__radio"];
+    } else {
+      if (type === "FEMALE") {
+        return sex === type ? s["sex-form__col__female_active"] : s["sex-form__col__female"];
+      } else {
+        return sex === type ? s["sex-form__col__male_active"] : s["sex-form__col__male"];
+      }
     }
-  }, []);
+  };
 
   return (
-    <div className={styles["sex-page"]}>
-      <div className={styles["sex-page__body"]}>
-        {sexs.map((sex) => (
-          <div
-            className={getSexItemClassNames(sex, styles)}
-            key={sex.path}
-            onClick={() => handleSexChoice(sex)}
-          >
-            <div className={styles["sex-item"]}>
-              <div className={styles["sex-item__icon"]}>{sex.icon}</div>
-              <div className={styles["sex-item__title"]}>{sex.label}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <Button
-        htmlType="submit"
-        className={styles["sex-page__submit-btn"]}
-        disabled={checkIfSubmitDisable(sexs)}
-        onClick={handleSubmit}
-      >
-        Продолжить
-      </Button>
+    <div className={s["sex-page"]}>
+      <Form.Item name="sex" initialValue={sex}>
+        <Radio.Group onChange={onChange}>
+          <Space direction="horizontal" size={40}>
+            {radios.map(({ key, label, value }) => (
+              <label className={s["sex-form__col"]} key={key}>
+                <div className={sexClassName(value)} />
+                <Radio className={sexClassName(value, label)} value={value}>
+                  {label}
+                </Radio>
+              </label>
+            ))}
+          </Space>
+        </Radio.Group>
+      </Form.Item>
     </div>
   );
 };
 
-export default memo(SexPage);
+export default SexPage;

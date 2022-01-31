@@ -28,16 +28,6 @@ textarea {
   margin: auto;
 }
 
-.quize-page .ant-checkbox-wrapper > span:last-child {
-  color: #000;
-  display: inline !important;
-}
-
-.quize-page .ant-checkbox-group .ant-row {
-  display: inline-block;
-  margin-bottom: 10px;
-}
-
 .ant-layout .ant-layout-sider {
   background-color: #001529;
 }
@@ -46,41 +36,6 @@ textarea {
   background-color: #001529;
 }
 
-.quize-page .ant-checkbox-inner {
-  width: 24px;
-  height: 24px;
-}
-
-.quize-page .ant-checkbox-checked .ant-checkbox-inner {
-  background-color: currentColor;
-  border-color: currentColor;
-}
-
-.quize-page .ant-checkbox-checked .ant-checkbox-inner::after {
-  transform: rotate(45deg) scale(1.6) translate(-20%, -50%);
-}
-.quize-page .ant-checkbox-wrapper span:first-child span {
-  display: inline-block;
-}
-.quize-page .ant-checkbox-checked::after {
-  border: none;
-}
-
-.quize-page .ant-checkbox-wrapper:after {
-  display: none;
-}
-
-.quize-page .ant-radio-inner::after {
-  top: 4px;
-  left: 4px;
-  width: 14px;
-  height: 14px;
-  background-color: currentColor;
-  display: none;
-}
-
-.quize-page .ant-form-item-required::before,
-.quize-page .ant-form-item-required::after,
 .task-creation-page .ant-form-item-required::before,
 .task-creation-page .ant-form-item-required::after {
   display: none !important;
@@ -91,30 +46,6 @@ textarea {
   border-radius: 5px;
   font-size: 18px;
   padding: 14px 12px;
-}
-
-.quize-page .ant-radio .ant-radio-inner {
-  width: 20px;
-  height: 20px;
-  border-width: 2px;
-  border-color: #000;
-}
-
-.quize-page .ant-radio-checked .ant-radio-inner {
-  border-width: 6px;
-}
-
-.quize-page .ant-radio-wrapper span {
-  display: inline-block;
-}
-
-.quize-page .ant-radio-wrapper > span:last-child {
-  color: #000;
-  display: inline !important;
-}
-
-.quize-page .ant-radio-wrapper::after {
-  display: none;
 }
 
 .ant-dropdown-menu-title-content .ant-btn {

@@ -1,89 +1,59 @@
 .sex-page {
-  &__body {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
+  padding-bottom: 32px;
+  text-align: center;
+}
+
+.sex-form__col {
+  display: block;
+
+  &__female,
+  &__female_active {
+    background-image: url("../../../../assets/images/card-sex-female.jpg");
+    background-position: 0 -76px;
   }
-  &__item {
-    position: relative;
-    width: 250px;
-    height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+  &__male,
+  &__male_active {
+    background-image: url("../../../../assets/images/card-sex-male.jpg");
+    background-position: 0 -28px;
+  }
+
+  &__female,
+  &__female_active,
+  &__male,
+  &__male_active {
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 16px;
+    box-shadow: 0px 4px 25px -12px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    transition: all 0.3s;
-    border-radius: 5px;
-    color: #B0B9C9;
-    background: #F0F6FB;
-    &:hover {
-      opacity: 0.8;
-    }
-    &:last-child {
-      margin-left: 32px;
-    }
+    display: block;
+    height: 184px;
+    margin-bottom: 16px;
+    width: 296px;
+  }
 
-    &--for-women {
-      .sex-item {
-        &__icon {
-          font-size: 180px;
-        }
-      }
-    }
-    &--active {
-      background: #33495C;
-      .sex-item {
-        &__title {
-          color: #fff;
-        }
-      }
-    }
+  &__female_active,
+  &__male_active {
+    outline: 3px solid #f6ceb4;
+    outline-offset: -1.5px;
   }
-  &__submit-btn {
-    background: #101010 !important;
-    color: #fff !important;
-    width: 220px;
-    height: 48px !important;
-    border-radius: 7px !important;
-    display: block !important;
-    margin: 60px auto 0 !important;
-    &:hover, &:active {
-      border: none !important;
-    }
-    &:disabled {
-      background:#686868 !important;
-    }
-  }
-}
-.sex-item {
-  &__icon {
-    text-align: center;
-    font-size: 200px;
-    margin-top: -40px;
-  }
-  &__title {
-    width: 100%;
-    position: absolute;
-    bottom: 25px;
-    right: 0;
-    color: #000;
-    font-size: 18px;
-    text-align: center;
-  }
-}
 
-@media only screen and (max-width: 768px) {
-  .sex-page {
-    &__body {
-      flex-direction: column;
-      align-items: center;
-      margin-top: 25px;
-    }
-    &__item {
-      &:last-child {
-        margin-left: 0;
-        margin-top: 25px;
-      }
+  &__radio > span {
+    font-weight: 500;
+  }
+
+  &__radio_active > span {
+    font-weight: 600;
+  }
+
+  &__radio > span,
+  &__radio_active > span {
+    margin: auto;
+    padding: 0 !important;
+
+    &:first-child {
+      display: none;
     }
   }
 }

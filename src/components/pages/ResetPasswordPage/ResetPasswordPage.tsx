@@ -1,11 +1,12 @@
 import { Button, Form, Input } from "antd";
-import { FC, memo, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useHistory, useLocation } from "react-router";
+import { useAppDispatch } from "redux/ReduxStore";
 
 import { Footer, Header } from "components/modules";
-import { useAppDispatch } from "redux/ReduxStore";
 import { resetPasswordThunks } from "redux/slicers/resetPasswordPageSlice";
 import { Page, paths } from "routes/constants";
+import { field, validateMessages } from "./consts";
 import s from "./ResetPasswordPage.module.scss";
 
 const ResetPasswordPage: FC = () => {
@@ -17,13 +18,6 @@ const ResetPasswordPage: FC = () => {
   const token = queryParams.get("token");
 
   const onFinish = ({ login }) => dispatch(resetPasswordThunks.resetPassword(login));
-
-  const validateMessages = {
-    required: "Поле необходимо заполнить!",
-    types: {
-      email: "Email введён некорректно!",
-    },
-  };
 
   useEffect(() => {
     if (token) {
@@ -44,12 +38,9 @@ const ResetPasswordPage: FC = () => {
           <div className={s["reset-password-card"]}>
             <h4 className={s["reset-password-card__title"]}>Восстановление пароля</h4>
             <Form validateMessages={validateMessages} onFinish={onFinish} autoComplete="off">
-              <div className={s["reset-password-form"]}>
-                <label className={s["reset-password-form__lbl"]} htmlFor="login">
-                  Email
-                </label>
-                <Form.Item rules={[{ type: "email", required: true }]} name="login">
-                  <Input allowClear id="login" />
+              <div className={s["reset-password-form__body"]}>
+                <Form.Item {...field}>
+                  <Input allowClear />
                 </Form.Item>
               </div>
               <div className={s["reset-password-form__btn"]}>
@@ -66,4 +57,4 @@ const ResetPasswordPage: FC = () => {
   );
 };
 
-export default memo(ResetPasswordPage);
+export default ResetPasswordPage;
