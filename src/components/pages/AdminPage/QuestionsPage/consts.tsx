@@ -1,5 +1,6 @@
 import { Button } from "antd";
 import { QuestionType } from "components/pages/QuizePage/types";
+import { QuestionDirectionAlignments } from "../QuestionDetail/types";
 
 const EDIT = "EDIT";
 const DELETE = "DELETE";
@@ -30,13 +31,23 @@ export const getColumns = (
       title: "Тип",
       dataIndex: "type",
       key: "type",
-      render: (type: QuestionType) =>
-        ({
+      render: (type: QuestionType, row) => {
+        const typeLabel = {
           [QuestionType.INPUT]: "Строка",
           [QuestionType.TEXT]: "Текст",
           [QuestionType.SINGLE_OPTION]: "Один вариант",
           [QuestionType.MULTIPLE_OPTION]: "Несколько вариантов",
-        }[type]),
+        }[type];
+
+        const directionAlignmentLabel = {
+          [QuestionDirectionAlignments.VERTICAL]: "Вертикальное",
+          [QuestionDirectionAlignments.HORIZONTAL]: "Горизонтальное",
+        }[row.directionAlignment];
+
+        return directionAlignmentLabel
+          ? `${typeLabel}(${directionAlignmentLabel})`
+          : typeLabel;
+      },
     },
     {
       title: "Блок",
@@ -51,7 +62,12 @@ export const getColumns = (
       render: ({ id }) => (
         <>
           {actionButtons.map((button) => (
-            <Button key={button.id} onClick={getActionRow(button.type, id)} className={styles["action"]} type="link">
+            <Button
+              key={button.id}
+              onClick={getActionRow(button.type, id)}
+              className={styles["action"]}
+              type="link"
+            >
               {button.action}
             </Button>
           ))}

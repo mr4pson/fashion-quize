@@ -14,7 +14,7 @@ import { questionsThunks } from "redux/slicers/questionsPageSlice";
 import { axiosInstance } from "../consts";
 import { AdmPage, paths } from "../routes/constants";
 import { PageMethods } from "../types";
-import { layout, QuestionTypeOptions, validateMessages } from "./constants";
+import { layout, questionDirectionAlignments, QuestionTypeOptions, validateMessages } from "./constants";
 import { getPageTitle } from "./helpers";
 import styles from "./QuestionDetail.module.scss";
 import { ChangeQuestionDto } from "./types";
@@ -54,6 +54,7 @@ const QuestionDetail: FC<TProps> = (props) => {
     const payload = {
       ...questionData,
       image: mediaFile ? mediaFile : question.image,
+      directionAlignment: questionData.directionAlignment ?? '',
       options: JSON.stringify(answerOptions),
       quizeType: quizeType,
     };
@@ -203,42 +204,53 @@ const QuestionDetail: FC<TProps> = (props) => {
           {[QuestionType.SINGLE_OPTION, QuestionType.MULTIPLE_OPTION].includes(
             questionType
           ) && (
-            <div className={styles["answer-controls"]}>
-              <h2 className={styles["answer-controls__title"]}>
-                Варианты ответов
-              </h2>
-              {answerOptions?.length > 0 &&
-                answerOptions.map((answerOption, index) => (
-                  <div
-                    key={"answer-option" + index}
-                    className={styles["answer-control"]}
-                  >
-                    <Input
-                      value={answerOption}
-                      onChange={(e) => handleAnswerOptionChange(e, index)}
-                      className={styles["answer-control__body"]}
-                      type="text"
-                    />
-                    <button
-                      onClick={() => handleRemoveAnswerOption(index)}
-                      type="button"
-                      className={styles["answer-control__btn"]}
+            <>
+              <Form.Item name="directionAlignment" label="Расположение" rules={[{ required: true }]}>
+                <Select>
+                  {questionDirectionAlignments?.map((option, index) => (
+                    <Option key={"question-direction-alignments" + index} value={option.value}>
+                      {option.title}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+              <div className={styles["answer-controls"]}>
+                <h2 className={styles["answer-controls__title"]}>
+                  Варианты ответов
+                </h2>
+                {answerOptions?.length > 0 &&
+                  answerOptions.map((answerOption, index) => (
+                    <div
+                      key={"answer-option" + index}
+                      className={styles["answer-control"]}
                     >
-                      <CloseOutlined />
-                    </button>
+                      <Input
+                        value={answerOption}
+                        onChange={(e) => handleAnswerOptionChange(e, index)}
+                        className={styles["answer-control__body"]}
+                        type="text"
+                      />
+                      <button
+                        onClick={() => handleRemoveAnswerOption(index)}
+                        type="button"
+                        className={styles["answer-control__btn"]}
+                      >
+                        <CloseOutlined />
+                      </button>
+                    </div>
+                  ))}
+                {answerOptions?.length === 0 && (
+                  <div className={styles["answer-controls__info"]}>
+                    Список вариантов ответов пуст
                   </div>
-                ))}
-              {answerOptions?.length === 0 && (
-                <div className={styles["answer-controls__info"]}>
-                  Список вариантов ответов пуст
+                )}
+                <div className={styles["answer-controls__add-btn-container"]}>
+                  <Button type="link" onClick={handleAddAnswerOption}>
+                    Добавить
+                  </Button>
                 </div>
-              )}
-              <div className={styles["answer-controls__add-btn-container"]}>
-                <Button type="link" onClick={handleAddAnswerOption}>
-                  Добавить
-                </Button>
               </div>
-            </div>
+            </>
           )}
 
           <div className={styles["detail__save-btn"]}>
