@@ -1,5 +1,6 @@
 import { TypeSelectOption } from "common/types/types";
 import { QuestionType } from "components/pages/QuizePage/types";
+import { QuestionDirectionAlignments } from "./types";
 
 export const QuestionTypeOptions: TypeSelectOption[] = [
   {
@@ -18,6 +19,17 @@ export const QuestionTypeOptions: TypeSelectOption[] = [
     title: "Несколько вариантов",
     value: QuestionType.MULTIPLE_OPTION,
   },
+];
+
+export const questionDirectionAlignments: TypeSelectOption[] = [
+  {
+    title: "Вертикальное",
+    value: QuestionDirectionAlignments.VERTICAL,
+  },
+  {
+    title: "Горизонтальное",
+    value: QuestionDirectionAlignments.HORIZONTAL,
+  }
 ];
 
 export const layout = {
