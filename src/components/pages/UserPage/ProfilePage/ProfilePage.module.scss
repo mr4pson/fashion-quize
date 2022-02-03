@@ -1,14 +1,3 @@
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.title {
-  margin: 0;
-}
-
-@media only screen and (max-width: 768px) {
-  .title {
-    font-size: 20px;
-  }
+.profile-page {
+  margin-top: 20px;
 }

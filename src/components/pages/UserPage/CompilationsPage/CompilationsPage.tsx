@@ -6,9 +6,7 @@ import ImageSlider from "../ImageSlider";
 import CompilationCard from "./CompilationCard";
 import CompilationCardSkeleton from "./CompilationCardSkeleton";
 import styles from "./CompilationsPage.module.scss";
-import {
-  COMPILATION_CARD_SKELETON_NUMBER
-} from "./constants";
+import { COMPILATION_CARD_SKELETON_NUMBER } from "./constants";
 
 type TProps = {
   compilations: TCompilation[];
@@ -29,7 +27,10 @@ const CompilationsPage: React.FC<TProps> = (props) => {
   return (
     <>
       <div className={styles["compilations-page"]}>
-        <PageHeader title={"Список подборок"} />
+        <PageHeader
+          title={"Список подборок"}
+          elementsNumberLabel={'Выберитие понравившиеся луки из подборки. Подтвердите свой выбор с помощью кнопки «Подтвердить выбор».'}
+        />
         <div className={styles["compilations-page__body"]}>
           {props.compilations?.map((compilation, index) => (
             <CompilationCard
@@ -56,7 +57,9 @@ const CompilationsPage: React.FC<TProps> = (props) => {
           activeLookIndex={props.activeLookIndex}
           compilation={props.activeCompilation}
         />
-      ) : <></>}
+      ) : (
+        <></>
+      )}
     </>
   );
 };

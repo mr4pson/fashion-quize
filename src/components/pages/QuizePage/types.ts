@@ -20,6 +20,7 @@ export type TypeQuestion = {
     id: number;
     type: QuestionType;
     description: string;
+    title: string;
     options?: string;
     image?: string;
     block?: TypeQuestionBlock;
