@@ -1,18 +1,21 @@
 .compilations-page {
   font-family: 'Ubuntu', sans-serif;
   padding-bottom: 60px;
+
   &__body {
-    margin-top: 16px;
+    margin-top: 30px;
     display: grid;
     grid-template-columns: 1fr;
     gap: 15px;
     position: relative;
   }
+
   &__show-more-btn {
     position: absolute!important;
     bottom: -45px;
     left: calc(50% - 75px);
   }
+
   &__no-data {
     position: absolute;
     text-align: center;
@@ -25,6 +28,7 @@
 
 .rating {
   display: flex;
+
   &__item {
     display: flex;
     align-items: center;
@@ -37,9 +41,11 @@
     color: #fff;
     border-right: 1px solid #fff;
     cursor: pointer;
+  
     &:last-child {
       border-right: none;
     }
+  
     &--active {
       background: #10b210;
     }

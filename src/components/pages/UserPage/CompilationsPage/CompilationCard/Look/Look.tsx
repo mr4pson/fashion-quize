@@ -34,7 +34,7 @@ const Look: React.FC<Props> = ({ look, index, compilation }) => {
       onClick={handleLookClick}
     >
       <div className={getLookParamClassNames("index", look.selected, styles)}>
-        {index + 1}
+        Лук №{index + 1}
       </div>
       <div className={getLookParamClassNames("price", look.selected, styles)}>
         {estimateCompilationLooksPrice(compilation.looks)} ₽

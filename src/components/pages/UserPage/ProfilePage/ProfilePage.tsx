@@ -4,6 +4,7 @@ import useWindowDimensions from "common/hooks/useWindowDimensions";
 import { ESexes } from "components/pages/StylistPage/TasksPage/types";
 import moment from "moment";
 import React, { memo } from "react";
+import PageHeader from "../common/PageHeader";
 import styles from "./ProfilePage.module.scss";
 
 const ProfilePage: React.FC = () => {
@@ -16,14 +17,10 @@ const ProfilePage: React.FC = () => {
   };
 
   return (
-    <Card
-      title={
-        <div className={styles["header"]}>
-          <h2 className={styles["title"]}>Профиль пользователя</h2>
-        </div>
-      }
-      bordered={false}
-    >
+    <>
+      <PageHeader
+        title={"Профиль пользователя"}
+      />
       <div className={styles["profile-page"]}>
         <Descriptions size="default" column={getDescriptionCols()}>
           <Descriptions.Item label="Email">{userInfo?.login}</Descriptions.Item>
@@ -36,7 +33,7 @@ const ProfilePage: React.FC = () => {
           <Descriptions.Item label="Пол">{userInfo?.sex === ESexes.MALE ? 'Мужской' : 'Женский'}</Descriptions.Item>
         </Descriptions>
       </div>
-    </Card>
+    </>
   );
 };
 

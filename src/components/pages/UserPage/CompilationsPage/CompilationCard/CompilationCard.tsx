@@ -17,7 +17,7 @@ const CompilationCard: React.FC<Props> = ({ compilation }) => {
       <div className={styles["compilation-card__header"]}>
         <div className={styles["compilation-card__info"]}>
           <div className={styles["compilation-card__number"]}>
-            {compilation.id}
+            {compilation.id}.
           </div>
           <div className={styles["compilation-card__params"]}>
             <div className={styles["compilation-card__type"]}>
