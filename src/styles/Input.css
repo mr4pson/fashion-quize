@@ -1,10 +1,6 @@
 .ant-input,
 .ant-input-affix-wrapper {
   background-color: #f2f0f0;
-}
-
-.ant-input,
-.ant-input-affix-wrapper {
   color: #110e2b;
   font-size: 16px;
   line-height: 24px;
@@ -51,4 +47,17 @@
 
 .ant-input-suffix {
   margin-left: 8px;
+}
+
+@media (max-width: 575px) {
+  .ant-input,
+  .ant-input-affix-wrapper {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .ant-input-affix-wrapper {
+    max-width: 408px;
+    width: 100%;
+  }
 }

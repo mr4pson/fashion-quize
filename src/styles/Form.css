@@ -9,6 +9,7 @@
 
 .ant-form label {
   font-size: 16px;
+  font-weight: 500;
 }
 
 .ant-form,
@@ -26,6 +27,10 @@
 .ant-form-item input[type="radio"] {
   height: 16px;
   width: 16px;
+}
+
+.ant-form-item-control-input {
+  min-height: auto;
 }
 
 .ant-form-item-explain {
@@ -64,6 +69,11 @@
   box-shadow: none;
 }
 
+.ant-form-item-label > label {
+  height: auto;
+  padding-bottom: 8px;
+}
+
 .ant-form-item-label > label,
 .ant-row {
   color: #110e2b;
@@ -75,7 +85,20 @@
   display: none;
 }
 
+.ant-space {
+  margin: 0 !important;
+}
+
 @media (max-width: 575px) {
+  .ant-form .ant-form-item {
+    max-width: 408px;
+    width: 100%;
+  }
+
+  .ant-form label {
+    font-size: 14px;
+  }
+
   .ant-form-item .ant-form-item-label {
     padding: 0;
   }
