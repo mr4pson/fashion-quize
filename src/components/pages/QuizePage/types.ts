@@ -19,7 +19,6 @@ export type TypeQuestionBlock = {
 export type TypeQuestion = {
     id: number;
     type: QuestionType;
-    title: string;
     description: string;
     title: string;
     options?: string;
