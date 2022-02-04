@@ -1,4 +1,4 @@
-import { Form, Radio, Space } from "antd";
+import { Form, Radio } from "antd";
 import { FC } from "react";
 import { useSelector } from "react-redux";
 
@@ -13,15 +13,11 @@ const SexPage: FC = () => {
 
   const onChange = ({ target }) => dispatch(setSex(target.value.type));
 
-  const sexClassName = ({ type }, label?) => {
+  const sexClassName = (value, label?) => {
     if (label) {
-      return sex === type ? s["sex-form__col__radio_active"] : s["sex-form__col__radio"];
+      return sex === value.type ? s["sex-form__radio_active"] : s["sex-form__radio"];
     } else {
-      if (type === "FEMALE") {
-        return sex === type ? s["sex-form__col__female_active"] : s["sex-form__col__female"];
-      } else {
-        return sex === type ? s["sex-form__col__male_active"] : s["sex-form__col__male"];
-      }
+      return sex === value.type ? s["sex-form__img-wrap_active"] : s["sex-form__img-wrap"];
     }
   };
 
@@ -29,16 +25,18 @@ const SexPage: FC = () => {
     <div className={s["sex-page"]}>
       <Form.Item name="sex" initialValue={sex}>
         <Radio.Group onChange={onChange}>
-          <Space direction="horizontal" size={40}>
-            {radios.map(({ key, label, value }) => (
-              <label className={s["sex-form__col"]} key={key}>
-                <div className={sexClassName(value)} />
+          <div className={s["sex-form__grp"]}>
+            {radios.map(({ key, label, src, value }) => (
+              <label className={s["sex-form__lbl"]} key={key}>
+                <div className={sexClassName(value)}>
+                  <img className={s["sex-form__img-src"]} src={src} alt="" />
+                </div>
                 <Radio className={sexClassName(value, label)} value={value}>
                   {label}
                 </Radio>
               </label>
             ))}
-          </Space>
+          </div>
         </Radio.Group>
       </Form.Item>
     </div>

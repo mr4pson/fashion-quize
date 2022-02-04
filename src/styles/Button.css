@@ -74,6 +74,17 @@
   color: #000;
 }
 
+@media (max-width: 575px) {
+  .ant-btn {
+    font-size: 14px;
+  }
+
+  .ant-btn-lg {
+    height: 40px;
+    width: 100%;
+  }
+}
+
 [ant-click-animating-without-extra-node]:after {
   display: none;
 }

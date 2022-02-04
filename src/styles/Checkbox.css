@@ -1,4 +1,6 @@
 .ant-checkbox {
+  margin-bottom: auto;
+  margin-top: auto;
   top: auto;
 }
 
@@ -41,8 +43,4 @@
   height: 16px;
   left: 7px;
   width: 16px;
-}
-
-.ant-checkbox-wrapper {
-  align-items: center;
 }

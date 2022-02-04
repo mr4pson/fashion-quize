@@ -1,189 +1,72 @@
-import { Button, Checkbox, Col, Form, Input, Radio, Row } from "antd";
-import React from "react";
-import { FC, memo, useEffect } from "react";
+import { Checkbox, Form, Input, Radio, Space } from "antd";
+import { FC } from "react";
 import { useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
-import { TRootState, useAppDispatch } from "redux/ReduxStore";
-import { quizeThunks, setStateAnswers } from "redux/slicers/quizePageSlice";
-import { getNextQuestionLink } from "../helper";
-import { paths, QzPage } from "../routes/constants";
+
+import { TRootState } from "redux/ReduxStore";
 import { QuestionType } from "../types";
-import {
-  checkIfSingleInput,
-  getFormItemClassNames,
-  getQuestionOptions,
-} from "./helpers";
-import styles from "./SectionPage.module.scss";
+import { getQuestionOptions } from "./helpers";
+import s from "./SectionPage.module.scss";
 
-/* eslint-disable no-template-curly-in-string */
-const validateMessages = {
-  required: "Необходимо заполнить поле!",
-};
-/* eslint-enable no-template-curly-in-string */
+const SectionPage: FC = () => {
+  const { currentBlock } = useSelector((state: TRootState) => state.quizePage);
 
-type Props = {};
-
-const SectionPage: FC<Props> = (props) => {
-  const history = useHistory();
-  const dispatch = useAppDispatch();
-  const { quizeType, sectionNumber } = useParams() as any;
-  const { currentBlock, blocks, answers, baseFields, sex } = useSelector(
-    (state: TRootState) => state.quizePage
+  const getLabel = ({ title, description }) => (
+    <>
+      <div className={s["section-form__title"]}>{title}</div>
+      <div className={s["section-form__desc"]}>{description}</div>
+    </>
   );
 
-  const onFinish = async (form: object) => {
-    const currentAnswers = { ...answers, ...form };
-    console.log(currentAnswers);
-    dispatch(setStateAnswers(currentAnswers));
+  const getDirection = (directionAlignment) =>
+    ({
+      ["VERTICAL"]: { direction: "vertical" },
+      ["HORIZONTAL"]: { direction: "horizontal" },
+    }[directionAlignment]);
 
-    if (+sectionNumber === blocks.length) {
-      const payload = {
-        ...baseFields,
-        sex,
-        data: JSON.stringify(currentAnswers),
-      };
+  const getField = (question) => {
+    const { directionAlignment, type, options } = question;
 
-      await dispatch(quizeThunks.registrateUser(payload));
-      dispatch(quizeThunks.clearAnswers());
+    const field = {
+      [QuestionType.INPUT]: <Input allowClear />,
+      [QuestionType.TEXT]: <Input allowClear />,
+      ...(Array.isArray(getQuestionOptions(options)) && {
+        [QuestionType.SINGLE_OPTION]: (
+          <Radio.Group>
+            <Space {...getDirection(directionAlignment)} size={[0, 16]} wrap>
+              {getQuestionOptions(options).map((option, optionIndex) => (
+                <Radio value={option} key={optionIndex} style={{ ["HORIZONTAL"]: { width: 220 } }[directionAlignment]}>
+                  {option}
+                </Radio>
+              ))}
+            </Space>
+          </Radio.Group>
+        ),
+        [QuestionType.MULTIPLE_OPTION]: (
+          <Checkbox.Group>
+            <Space size={[0, 16]} wrap>
+              {getQuestionOptions(options).map((option, optionIndex) => (
+                <Checkbox value={option} key={optionIndex} style={{ width: 350 }}>
+                  {option}
+                </Checkbox>
+              ))}
+            </Space>
+          </Checkbox.Group>
+        ),
+      }),
+    }[type];
 
-      history.push(paths[QzPage.COMPLETE]);
-      return;
-    }
-
-    history.push(getNextQuestionLink(+sectionNumber, quizeType));
+    return field;
   };
-
-  const onFinishFailed = (e) => {
-    console.log(e);
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [currentBlock]);
 
   return (
-    <div className={styles["section-page"]}>
-      <Form
-        name="basic"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        validateMessages={validateMessages}
-      >
-        <div className={styles["section-page__body"]}>
-          {currentBlock.questions?.map((question, index) => (
-            <React.Fragment key={index}>
-              {question.type === QuestionType.INPUT && (
-                <Form.Item
-                  style={{
-                    marginLeft: checkIfSingleInput(currentBlock, index)
-                      ? "0px"
-                      : undefined,
-                  }}
-                  className={getFormItemClassNames(question.type, styles)}
-                  label={
-                    <label className={styles["form-item__label"]}>
-                      {question.description}
-                    </label>
-                  }
-                  name={question.id}
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <Input className={styles["form-item__input"]} />
-                </Form.Item>
-              )}
-              {question.type === QuestionType.TEXT && (
-                <Form.Item
-                  className={getFormItemClassNames(question.type, styles)}
-                  label={
-                    <label className={styles["form-item__label"]}>
-                      {question.description}
-                    </label>
-                  }
-                  name={question.id}
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <Input.TextArea className={styles["form-item__text"]} />
-                </Form.Item>
-              )}
-              {question.type === QuestionType.SINGLE_OPTION && (
-                <Form.Item
-                  className={getFormItemClassNames(question.type, styles)}
-                  label={
-                    <label className={styles["form-item__label"]}>
-                      {question.description}
-                    </label>
-                  }
-                  name={question.id}
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <Radio.Group>
-                    {question.options &&
-                      getQuestionOptions(question.options).map(
-                        (option, optionIndex) => (
-                          <Radio
-                            key={`option-${index}-${optionIndex}`}
-                            value={option}
-                          >
-                            {option}
-                          </Radio>
-                        )
-                      )}
-                  </Radio.Group>
-                </Form.Item>
-              )}
-              {question.type === QuestionType.MULTIPLE_OPTION && (
-                <Form.Item
-                  className={getFormItemClassNames(question.type, styles)}
-                  label={
-                    <label className={styles["form-item__label"]}>
-                      {question.description}
-                    </label>
-                  }
-                  name={question.id}
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <Checkbox.Group style={{ width: "100%" }}>
-                    {question.options &&
-                      getQuestionOptions(question.options).map(
-                        (option, optionIndex) => (
-                          <Row key={`option-${index}-${optionIndex}`}>
-                            <Col span={24}>
-                              <Checkbox value={option}>{option}</Checkbox>
-                            </Col>
-                          </Row>
-                        )
-                      )}
-                  </Checkbox.Group>
-                </Form.Item>
-              )}
-            </React.Fragment>
-          ))}
-          <Button
-            htmlType="submit"
-            className={styles["section-page__submit-btn"]}
-          >
-            Продолжить
-          </Button>
-        </div>
-      </Form>
+    <div className={s["section-form"]}>
+      {currentBlock.questions?.map(({ id, ...question }) => (
+        <Form.Item key={id} name={id} label={getLabel(question)} rules={[{ required: true }]}>
+          {getField(question)}
+        </Form.Item>
+      ))}
     </div>
   );
 };
 
-export default memo(SectionPage);
+export default SectionPage;

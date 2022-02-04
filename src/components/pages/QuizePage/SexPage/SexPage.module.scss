@@ -1,50 +1,41 @@
 .sex-page {
-  padding-bottom: 32px;
+  display: flex;
+  justify-content: center;
   text-align: center;
 }
 
-.sex-form__col {
-  display: block;
-
-  &__female,
-  &__female_active {
-    background-image: url("../../../../assets/images/card-sex-female.jpg");
-    background-position: 0 -76px;
+.sex-form {
+  &__grp {
+    column-gap: 40px;
+    display: inline-flex;
   }
 
-  &__male,
-  &__male_active {
-    background-image: url("../../../../assets/images/card-sex-male.jpg");
-    background-position: 0 -28px;
-  }
-
-  &__female,
-  &__female_active,
-  &__male,
-  &__male_active {
-    background-repeat: no-repeat;
-    background-size: cover;
+  &__img-wrap,
+  &__img-wrap_active {
     border-radius: 16px;
     box-shadow: 0px 4px 25px -12px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     display: block;
     height: 184px;
     margin-bottom: 16px;
+    overflow: hidden;
+    position: relative;
     width: 296px;
   }
 
-  &__female_active,
-  &__male_active {
+  &__img-wrap_active {
     outline: 3px solid #f6ceb4;
     outline-offset: -1.5px;
   }
 
-  &__radio > span {
-    font-weight: 500;
+  &__img-src {
+    display: block;
+    margin-top: -25px;
+    width: 100%;
   }
 
-  &__radio_active > span {
-    font-weight: 600;
+  &__lbl:first-child img {
+    margin-top: -60px;
   }
 
   &__radio > span,
@@ -54,6 +45,41 @@
 
     &:first-child {
       display: none;
+    }
+  }
+
+  &__radio_active > span {
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 730px) {
+  .sex-form {
+    &__grp {
+      column-gap: 10px;
+    }
+
+    &__img-wrap {
+      filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.16));
+    }
+
+    &__img-wrap,
+    &__img-wrap_active {
+      height: 222px;
+      width: 151px;
+    }
+
+    &__img-wrap_active {
+      box-shadow: 0px 2px 16px 4px rgba(38, 22, 13, 0.24);
+    }
+
+    &__img-src {
+      transform: scale(1.2);
+    }
+
+    &__img-src,
+    &__lbl:first-child img {
+      margin-top: 20px;
     }
   }
 }

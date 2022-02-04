@@ -1,4 +1,6 @@
 .ant-radio {
+  margin-bottom: auto;
+  margin-top: auto;
   top: auto;
 }
 
@@ -27,8 +29,6 @@
 }
 
 .ant-radio-wrapper {
-  align-items: center;
-  display: flex;
   margin-right: auto;
 }
 

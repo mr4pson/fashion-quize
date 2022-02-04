@@ -1,5 +1,7 @@
 .quize-header {
-  margin-bottom: 40px;
+  padding: 32px 32px 40px;
+  position: relative;
+  z-index: 1;
 
   &__top {
     height: 32px;
@@ -7,6 +9,7 @@
 
   &__body {
     text-align: center;
+    overflow: hidden;
 
     &__title {
       color: #110e2b;
@@ -53,5 +56,36 @@
     border-radius: 50%;
     height: 24px;
     min-width: 24px;
+  }
+}
+
+@media (max-width: 575px) {
+  .quize-header {
+    padding: 16px 16px 24px;
+
+    &__top {
+      height: 24px;
+
+      & svg {
+        height: 24px;
+        width: 24px;
+      }
+    }
+
+    &__body__title {
+      font-size: 24px;
+      line-height: 24px;
+    }
+
+    &__body__desc {
+      height: 32px;
+      font-size: 14px;
+      line-height: 16px;
+      margin-bottom: 16px;
+    }
+  }
+
+  .steps {
+    grid-column-gap: 8px;
   }
 }
