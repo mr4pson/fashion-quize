@@ -1,8 +1,8 @@
 export enum QuestionType {
-    INPUT = 'INPUT',
-    TEXT = 'TEXT',
-    SINGLE_OPTION = 'SINGLE_OPTION',
-    MULTIPLE_OPTION = 'MULTIPLE_OPTION'
+  INPUT = "INPUT",
+  TEXT = "TEXT",
+  SINGLE_OPTION = "SINGLE_OPTION",
+  MULTIPLE_OPTION = "MULTIPLE_OPTION",
 }
 
 // type TypeQuestionOption = {
@@ -10,23 +10,24 @@ export enum QuestionType {
 // }
 
 export type TypeQuestionBlock = {
-    id: number;
-    title: string;
-    description?: string;
-    color: string;
-}
+  id: number;
+  title: string;
+  description?: string;
+  color: string;
+};
 
 export type TypeQuestion = {
-    id: number;
-    type: QuestionType;
-    description: string;
-    title: string;
-    options?: string;
-    image?: string;
-    block?: TypeQuestionBlock;
-}
+  id: number;
+  type: QuestionType;
+  description: string;
+  title: string;
+  options?: string;
+  image?: string;
+  block?: TypeQuestionBlock;
+  directionAlignment?: "HORIZONTAL" | "VERTICAL";
+};
 
 export type TypeQuizePageState = {
-    answers: Object;
-    setStateAnswersToState: (arg) => void;
-}
+  answers: Object;
+  setStateAnswersToState: (arg) => void;
+};

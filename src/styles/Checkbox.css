@@ -5,6 +5,7 @@
 }
 
 .ant-checkbox + span {
+  font-weight: 400;
   padding-left: 20px;
   padding-right: 0;
 }

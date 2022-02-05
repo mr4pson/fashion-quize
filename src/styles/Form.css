@@ -91,6 +91,7 @@
 
 @media (max-width: 575px) {
   .ant-form .ant-form-item {
+    line-height: 1;
     max-width: 408px;
     width: 100%;
   }
@@ -100,6 +101,7 @@
   }
 
   .ant-form-item .ant-form-item-label {
+    line-height: 16px;
     padding: 0;
   }
 }

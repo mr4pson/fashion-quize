@@ -1,9 +1,8 @@
 .section-form {
   display: flex;
   flex-direction: column;
-  grid-row-gap: 24px;
+  row-gap: 24px;
   line-height: 24px;
-  padding-bottom: 32px;
 
   &__desc {
     color: #6f7374;
@@ -12,7 +11,12 @@
 
   &__desc,
   &__title {
-    text-align: left;
     white-space: pre-wrap;
+  }
+}
+
+@media (max-width: 575px) {
+  .section-form {
+    row-gap: 8px;
   }
 }

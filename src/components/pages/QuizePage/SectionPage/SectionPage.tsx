@@ -7,8 +7,16 @@ import { QuestionType } from "../types";
 import { getQuestionOptions } from "./helpers";
 import s from "./SectionPage.module.scss";
 
+const { TextArea } = Input;
+
 const SectionPage: FC = () => {
   const { currentBlock } = useSelector((state: TRootState) => state.quizePage);
+
+  const getDirection = (directionAlignment) =>
+    ({
+      ["VERTICAL"]: { direction: "vertical" },
+      ["HORIZONTAL"]: { direction: "horizontal" },
+    }[directionAlignment]);
 
   const getLabel = ({ title, description }) => (
     <>
@@ -17,25 +25,19 @@ const SectionPage: FC = () => {
     </>
   );
 
-  const getDirection = (directionAlignment) =>
-    ({
-      ["VERTICAL"]: { direction: "vertical" },
-      ["HORIZONTAL"]: { direction: "horizontal" },
-    }[directionAlignment]);
-
   const getField = (question) => {
     const { directionAlignment, type, options } = question;
 
     const field = {
       [QuestionType.INPUT]: <Input allowClear />,
-      [QuestionType.TEXT]: <Input allowClear />,
+      [QuestionType.TEXT]: <TextArea autoSize />,
       ...(Array.isArray(getQuestionOptions(options)) && {
         [QuestionType.SINGLE_OPTION]: (
           <Radio.Group>
-            <Space {...getDirection(directionAlignment)} size={[0, 16]} wrap>
-              {getQuestionOptions(options).map((option, optionIndex) => (
-                <Radio value={option} key={optionIndex} style={{ ["HORIZONTAL"]: { width: 220 } }[directionAlignment]}>
-                  {option}
+            <Space {...getDirection(directionAlignment)} size={[0, 8]} wrap>
+              {getQuestionOptions(options).map((value, key) => (
+                <Radio {...{ key, value }} style={{ ["HORIZONTAL"]: { width: 220 } }[directionAlignment]}>
+                  {value}
                 </Radio>
               ))}
             </Space>
@@ -43,10 +45,10 @@ const SectionPage: FC = () => {
         ),
         [QuestionType.MULTIPLE_OPTION]: (
           <Checkbox.Group>
-            <Space size={[0, 16]} wrap>
-              {getQuestionOptions(options).map((option, optionIndex) => (
-                <Checkbox value={option} key={optionIndex} style={{ width: 350 }}>
-                  {option}
+            <Space size={[40, 8]} wrap>
+              {getQuestionOptions(options).map((value, key) => (
+                <Checkbox {...{ key, value }} style={{ width: 313 }}>
+                  {value}
                 </Checkbox>
               ))}
             </Space>
@@ -61,7 +63,12 @@ const SectionPage: FC = () => {
   return (
     <div className={s["section-form"]}>
       {currentBlock.questions?.map(({ id, ...question }) => (
-        <Form.Item key={id} name={id} label={getLabel(question)} rules={[{ required: true }]}>
+        <Form.Item
+          key={id}
+          name={id}
+          label={getLabel(question)}
+          rules={[{ required: true, message: "Пожалуйста, заполните поле" }]}
+        >
           {getField(question)}
         </Form.Item>
       ))}

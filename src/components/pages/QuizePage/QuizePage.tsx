@@ -117,7 +117,7 @@ const QuizePage: FC = () => {
         <div className={s["quize-page__ctr"]}>
           {checkIfHeaderVisible(pathname) && <QuizeHeader {...getQuizeHeaderConfig()} />}
           <div className={s["quize-form"]}>
-            <Form onFinish={onFinish} autoComplete="off">
+            <Form onFinish={onFinish} labelAlign="left">
               <div className={s["quize-form__body"]}>
                 <QuizeRoutes />
               </div>
