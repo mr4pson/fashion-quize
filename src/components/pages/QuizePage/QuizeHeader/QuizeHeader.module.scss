@@ -1,7 +1,5 @@
 .quize-header {
   padding: 32px 32px 40px;
-  position: relative;
-  z-index: 1;
 
   &__top {
     height: 32px;
@@ -9,7 +7,6 @@
 
   &__body {
     text-align: center;
-    overflow: hidden;
 
     &__title {
       color: #110e2b;
@@ -24,6 +21,7 @@
       color: #6f7374;
       font-family: Montserrat;
       font-size: 16px;
+      height: 44px;
       line-height: 22px;
       margin-bottom: 24px;
     }
@@ -32,7 +30,7 @@
 
 .steps {
   display: flex;
-  grid-column-gap: 16px;
+  column-gap: 16px;
   justify-content: center;
 
   &__item {
@@ -86,6 +84,6 @@
   }
 
   .steps {
-    grid-column-gap: 8px;
+    column-gap: 8px;
   }
 }

@@ -12,8 +12,7 @@ a:hover {
   color: #110e2b;
 }
 
-optgroup,
-textarea {
+optgroup {
   font-family: "inter", sans-serif;
 }
 

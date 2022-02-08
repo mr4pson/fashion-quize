@@ -4,6 +4,12 @@
   top: auto;
 }
 
+.ant-radio + span {
+  font-weight: 400;
+  padding-left: 20px;
+  padding-right: 0;
+}
+
 .ant-radio,
 .ant-radio-group,
 .ant-radio-wrapper {
@@ -30,9 +36,4 @@
 
 .ant-radio-wrapper {
   margin-right: auto;
-}
-
-span.ant-radio + * {
-  padding-left: 20px;
-  padding-right: 0;
 }

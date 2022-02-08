@@ -1,32 +1,49 @@
 .ant-input,
 .ant-input-affix-wrapper {
   background-color: #f2f0f0;
+  border-color: #f2f0f0;
   color: #110e2b;
+}
+
+.ant-input,
+textarea.ant-input {
   font-size: 16px;
   line-height: 24px;
 }
 
 .ant-input:focus,
-.ant-input-affix-wrapper:hover .ant-input {
-  background-color: #fff;
-}
-
-.ant-input-affix-wrapper {
-  border-color: #f2f0f0;
-  border-radius: 8px;
-  height: 40px;
-  padding: 0 15px;
-  width: 408px;
-}
-
 .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
-.ant-input-affix-wrapper-focused {
+.ant-input-affix-wrapper-focused,
+textarea.ant-input:hover {
   background-color: #fff;
   border-color: #6f7374;
 }
 
+.ant-input:focus,
 .ant-input-affix-wrapper-focused {
   box-shadow: none;
+}
+
+.ant-input[disabled] {
+  background-color: #f2f0f0 !important;
+  border-color: #f2f0f0 !important;
+  color: #6f7374 !important;
+}
+
+.ant-input-affix-wrapper,
+textarea.ant-input {
+  border-radius: 8px;
+  min-height: 40px;
+  padding: 7px 15px;
+  width: 408px;
+}
+
+.ant-input-affix-wrapper:hover .ant-input {
+  background-color: #fff;
+}
+
+.ant-input-affix-wrapper-disabled:hover {
+  border-color: #f2f0f0;
 }
 
 .ant-input-clear-icon {
@@ -51,7 +68,7 @@
 
 @media (max-width: 575px) {
   .ant-input,
-  .ant-input-affix-wrapper {
+  textarea.ant-input {
     font-size: 14px;
     line-height: 16px;
   }
@@ -59,5 +76,10 @@
   .ant-input-affix-wrapper {
     max-width: 408px;
     width: 100%;
+  }
+
+  textarea.ant-input {
+    padding-bottom: 11px;
+    padding-top: 11px;
   }
 }
