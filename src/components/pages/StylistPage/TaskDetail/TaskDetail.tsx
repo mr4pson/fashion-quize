@@ -82,7 +82,7 @@ const TaskDetail: FC = () => {
             label={field.label}
             rules={[{ required: true, type: "string", max: 99 }]}
           >
-            <Input readOnly={field.readonly} />
+            <Input readOnly={field.readonly} allowClear />
           </Form.Item>
         );
       case TIME:
@@ -92,7 +92,7 @@ const TaskDetail: FC = () => {
             label={field.label}
             rules={[{ required: true, type: "string", max: 99 }]}
           >
-            <Input readOnly={field.readonly} />
+            <Input readOnly={field.readonly} allowClear />
           </Form.Item>
         );
       case STATUS:
@@ -135,7 +135,7 @@ const TaskDetail: FC = () => {
             label={field.label}
             rules={[{ required: true }]}
           >
-            <Input.TextArea readOnly={field.readonly} />
+            <Input.TextArea readOnly={field.readonly} allowClear />
           </Form.Item>
         );
       default:

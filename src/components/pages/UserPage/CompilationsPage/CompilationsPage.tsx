@@ -29,7 +29,7 @@ const CompilationsPage: React.FC<TProps> = (props) => {
       <div className={styles["compilations-page"]}>
         <PageHeader
           title={"Список подборок"}
-          elementsNumberLabel={'Выберитие понравившиеся луки из подборки. Подтвердите свой выбор с помощью кнопки «Подтвердить выбор».'}
+          elementsNumberLabel={'Выберитие понравившиеся луки из подборки. Подтвердите свой выбор, нажав «Да» внизу галереи при просмотре лука.'}
         />
         <div className={styles["compilations-page__body"]}>
           {props.compilations?.map((compilation, index) => (

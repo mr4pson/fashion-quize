@@ -17,12 +17,15 @@ const ResetPasswordPage: FC = () => {
   const queryParams = new URLSearchParams(search);
   const token = queryParams.get("token");
 
-  const onFinish = ({ login }) => dispatch(resetPasswordThunks.resetPassword(login));
+  const onFinish = ({ login }) =>
+    dispatch(resetPasswordThunks.resetPassword(login));
 
   useEffect(() => {
     if (token) {
       (async () => {
-        const isPasswordRefreshed = (await dispatch(resetPasswordThunks.sendPasswordResetRequest(token))) as any;
+        const isPasswordRefreshed = (await dispatch(
+          resetPasswordThunks.sendPasswordResetRequest(token)
+        )) as any;
         if (!isPasswordRefreshed) history.push(paths[Page.RESET_PASSWORD]);
       })();
     }
@@ -33,11 +36,20 @@ const ResetPasswordPage: FC = () => {
       <Header />
       <div className={s["reset-password-page"]}>
         {token ? (
-          <h1 className={s["reset-password-title"]}>Восстановление пароля...</h1>
+          <h1 className={s["reset-password-title"]}>
+            Восстановление пароля...
+          </h1>
         ) : (
           <div className={s["reset-password-card"]}>
-            <h4 className={s["reset-password-card__title"]}>Восстановление пароля</h4>
-            <Form validateMessages={validateMessages} onFinish={onFinish} autoComplete="off">
+            <h4 className={s["reset-password-card__title"]}>
+              Восстановление пароля
+            </h4>
+            <Form
+              className={s["reset-password-form"]}
+              validateMessages={validateMessages}
+              onFinish={onFinish}
+              autoComplete="off"
+            >
               <div className={s["reset-password-form__body"]}>
                 <Form.Item {...field}>
                   <Input allowClear />

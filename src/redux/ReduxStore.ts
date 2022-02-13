@@ -8,6 +8,7 @@ import questionsPageSlice from "./slicers/questionsPageSlice";
 import quizePageSlice from "./slicers/quizePageSlice";
 import stylistsPageSlice from "./slicers/stylistsPageSlice";
 import tasksPageSlice from "./slicers/tasksPageSlice";
+import themeSlice from "./slicers/themeSlice";
 import usersPageSlice from "./slicers/usersPageSlice";
 
 const store = configureStore({
@@ -19,6 +20,7 @@ const store = configureStore({
     tasksPage: tasksPageSlice,
     compilationsPage: compilationsPageSlice,
     usersPage: usersPageSlice,
+    theme: themeSlice,
   },
 });
 

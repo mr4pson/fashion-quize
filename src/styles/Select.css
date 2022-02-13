@@ -61,3 +61,14 @@
   align-items: center;
   display: flex;
 }
+
+@media (max-width: 575px) {
+  .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+    max-width: 408px;
+    width: 100%;
+  }
+
+  .ant-form-item .ant-select {
+    width: 100%;
+  }
+}

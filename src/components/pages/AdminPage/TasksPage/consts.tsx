@@ -1,7 +1,5 @@
-import { Button } from "antd";
 import { Link } from "react-router-dom";
 import { AdmPage, paths } from "../routes/constants";
-
 import { TypeTask } from "./types";
 
 export const getColumns = (styles: any, history: any) => {
@@ -75,9 +73,14 @@ export const getColumns = (styles: any, history: any) => {
       key: "id",
       render: (id, task: TypeTask) => {
         if (task.status.title !== "Завершена") {
-          return <Button onClick={() => onEditClick(id)} type="link">
-            Посмотреть
-          </Button>;
+          return (
+            <button
+              className={styles["action"]}
+              onClick={() => onEditClick(id)}
+            >
+              Посмотреть
+            </button>
+          );
         }
         return;
       },

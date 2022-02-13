@@ -1,4 +1,6 @@
+import { Rule } from "antd/lib/form";
 import { TFormField } from "common/types/types";
+import { Key } from "react";
 
 export enum FieldTypes {
   TYPE = "TYPE",
@@ -7,30 +9,43 @@ export enum FieldTypes {
   COMMENT = "COMMENT",
 }
 
+type TFields = {
+  key?: Key;
+  name: string;
+  label?: string;
+  valuePropName?: string;
+  rules: Rule[];
+  mask?: string;
+};
 
-export const formFields: TFormField[] = [
+export const fields = [
   {
-    id: "1",
+    key: "1",
     type: FieldTypes.TYPE,
     name: "type",
     label: "Тип",
+    rules: [{ required: true }],
   },
   {
-    id: "2",
+    key: "2",
     type: FieldTypes.DATE,
     name: "date",
     label: "Дата исполнения",
+    rules: [{ required: true }],
   },
   {
-    id: "3",
+    key: "3",
     type: FieldTypes.TIME,
     name: "time",
+    mask: "11:11",
     label: "Время исполнения",
+    rules: [{ required: true }],
   },
   {
-    id: "4",
+    key: "4",
     type: FieldTypes.COMMENT,
     name: "comment",
     label: "Комментарий",
+    rules: [],
   },
 ];

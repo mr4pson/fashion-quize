@@ -75,9 +75,14 @@ export const getColumns = (styles: any, history: any) => {
       key: "id",
       render: (id, task: TypeTask) => {
         if (task.status.title !== "Завершена") {
-          return <Button onClick={() => onEditClick(id)} type="link">
-            Изменить
-          </Button>;
+          return (
+            <button
+              onClick={() => onEditClick(id)}
+              className={styles["action"]}
+            >
+              Изменить
+            </button>
+          );
         }
         return;
       },

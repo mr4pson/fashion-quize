@@ -49,6 +49,32 @@
   margin-left: 8px;
 }
 
+.ant-input-affix-wrapper-textarea-with-clear-btn textarea {
+  background: none;
+  border: none;
+  border-radius: 8px;
+  box-sizing: border-box;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.ant-input-affix-wrapper {
+  box-sizing: border-box;
+}
+
+/* .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover, */
+.ant-input-affix-wrapper textarea:active,
+.ant-input-affix-wrapper textarea:hover,
+.ant-input-affix-wrapper textarea:focus {
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid #6f7374 !important;
+}
+
+.ant-input-affix-wrapper-textarea-with-clear-btn .ant-input-clear-icon {
+  top: 12px;
+}
+
 @media (max-width: 575px) {
   .ant-input,
   .ant-input-affix-wrapper {

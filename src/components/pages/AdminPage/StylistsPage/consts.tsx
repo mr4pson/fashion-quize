@@ -1,5 +1,3 @@
-import { Button } from "antd";
-
 const EDIT = "EDIT";
 const DELETE = "DELETE";
 
@@ -35,9 +33,13 @@ export const getColumns = (
       render: ({ id }) => (
         <>
           {actionButtons.map((button) => (
-            <Button key={button.id} onClick={getActionRow(button.type, +id)} className={styles["action"]} type="link">
+            <button
+              key={button.id}
+              onClick={getActionRow(button.type, +id)}
+              className={styles["action"]}
+            >
               {button.action}
-            </Button>
+            </button>
           ))}
         </>
       ),

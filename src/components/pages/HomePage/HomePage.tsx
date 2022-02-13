@@ -21,7 +21,7 @@ const HomePage: FC = () => {
           <div className={classNames("container", styles["compilation-section__container"])}>
             <div className={styles["compilation-section__title"]}>Подбор и доставка стильных образов</div>
             <div className={styles["compilation-section__desc"]}>
-              Персональные подборки для вашего гардероба <br /> от стилистов. <br /> Для любых целей.Полностью онлайн.
+              Персональные подборки для вашего гардероба <br /> от стилистов. <br /> Для любых целей. Полностью онлайн.
             </div>
             <Link to={getLinkToQiuze()}>
               <Button className={styles["compilation-section__btn"]} type="primary">
@@ -41,7 +41,7 @@ const HomePage: FC = () => {
             </div>
           </div>
         </div>
-        <div className={styles["receive-section"]}>
+        <div className={styles["receive-section"]} id="receive-section">
           <div className="container">
             <div className={styles["receive-section__content"]}>
               <div className={styles["receive-section__image-card"]}>
@@ -58,8 +58,8 @@ const HomePage: FC = () => {
                 <div className={styles["receive-section__title"]}>Как мы работаем</div>
                 <ul className={styles["receive-section__items"]}>
                   <li>Вы заполняете анкету;</li>
-                  <li>Стилисты приложения подберают вам готовые образы;</li>
-                  <li>Заказывайте только то, что вам понравилось;</li>
+                  <li>Стилисты приложения подбирают вам готовые образы;</li>
+                  <li>Заказываете только то, что вам понравилось;</li>
                   <li>Примеряете перед покупкой;</li>
                   <li>
                     Платите только за услуги стилистов, доставка <br /> и возврат бесплатны.
@@ -113,7 +113,7 @@ const HomePage: FC = () => {
                 <div className={styles["work-example__number"]}>03.</div>
                 <div className={styles["work-example__title"]}>Работа стилистов</div>
                 <div className={styles["work-example__desc"]}>
-                  Стилисты подберут вам <b>3 образа</b>. В каждом 5 вещей, включая обувь и аксессуары. <br /> Как только
+                  Стилисты подберут вам <b>3 образа</b>. В каждом от 5 до 7 вещей, включая обувь и аксессуары. <br /> Как только
                   образы будут готовы, вам придет уведомление на почту. В приложении вы сможете увидеть их на странице
                   подборок <br /> и выбрать понравившиеся.
                 </div>
@@ -182,7 +182,7 @@ const HomePage: FC = () => {
             </div>
           </div>
         </div>
-        <div className={styles["q-and-a"]}>
+        <div className={styles["q-and-a"]}  id="q-and-a">
           <div className={classNames("container", styles["q-and-a__container"])}>
             <div className={styles["q-and-a__title"]}>Вопросы & Ответы</div>
             <div className={styles["q-and-a__content"]}>
