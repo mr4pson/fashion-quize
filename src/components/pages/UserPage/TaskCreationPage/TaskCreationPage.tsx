@@ -38,6 +38,7 @@ export const TaskCreationPage: FC = () => {
     })();
 
     dispatch(themeThunks.setTheme(ETheme.DARK));
+    window.scrollTo(0, 0);
 
     return () => {
       dispatch(themeThunks.setTheme(ETheme.LIGHT));

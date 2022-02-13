@@ -1,9 +1,9 @@
-import { Card, Descriptions } from "antd";
+import { Descriptions } from "antd";
 import { getUserInfo } from "common/helpers/common-helpers";
 import useWindowDimensions from "common/hooks/useWindowDimensions";
 import { ESexes } from "components/pages/StylistPage/TasksPage/types";
 import moment from "moment";
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import PageHeader from "../common/PageHeader";
 import styles from "./ProfilePage.module.scss";
 
@@ -15,6 +15,10 @@ const ProfilePage: React.FC = () => {
   const getDescriptionCols = (): number => {
     return width < 550 ? 1 : 2;
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

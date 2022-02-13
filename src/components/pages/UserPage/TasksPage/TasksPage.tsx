@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { TypeTask } from "components/pages/StylistPage/TasksPage/types";
 import moment from "moment";
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import styles from "./TasksPage.module.scss";
 import { useHistory } from "react-router";
 import { paths, UsrPage } from "../routes/consts";
@@ -32,6 +32,10 @@ const TasksPage: React.FC<Props> = (props) => {
   const handleAddTask = () => {
     history.push(paths[UsrPage.TASKS_CREATE]);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className={styles["tasks-page"]}>
