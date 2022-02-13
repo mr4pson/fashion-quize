@@ -22,6 +22,7 @@ const CompilationsPageContainer: FC = () => {
 
   useEffect(() => {
     dispatch(compilationsThunks.getUserCompilations());
+    window.scrollTo(0, 0);
 
     return () => {
       dispatch(compilationsThunks.clearCompilations());

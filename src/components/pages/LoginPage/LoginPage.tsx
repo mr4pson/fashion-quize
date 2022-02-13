@@ -1,5 +1,5 @@
 import { Button, Form, Input } from "antd";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useHistory } from "react-router";
 
 import { Footer, Header } from "components/modules";
@@ -14,6 +14,10 @@ const LoginPage: FC = () => {
 
   const linkToResetPassword = () => history.push(paths[Page.RESET_PASSWORD]);
   const onFinish = (value) => login(value);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
