@@ -13,9 +13,9 @@ const StylistHeader: React.FC = () => {
 
   return (
     <Header className={styles["stl-header"]}>
-      <Button onClick={logout} type="link">
+      <button onClick={logout}>
         Выйти
-      </Button>
+      </button>
     </Header>
   );
 };

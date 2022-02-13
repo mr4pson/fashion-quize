@@ -6,6 +6,7 @@
 @import url("./styles/Input.css");
 @import url("./styles/Radio.css");
 @import url("./styles/Select.css");
+@import url("./styles/Modal.css");
 
 a,
 a:hover {
@@ -35,17 +36,6 @@ optgroup {
   background-color: #001529;
 }
 
-.task-creation-page .ant-form-item-required::before,
-.task-creation-page .ant-form-item-required::after {
-  display: none !important;
-}
-
-.task-creation-page .ant-select .ant-select-selector {
-  height: 60px;
-  border-radius: 5px;
-  font-size: 18px;
-  padding: 14px 12px;
-}
 
 .ant-dropdown-menu-title-content .ant-btn {
   color: #000;
@@ -111,13 +101,6 @@ img.ant-image-img {
 @media only screen and (max-width: 768px) {
   #basic_phone {
     font-size: 16px !important;
-  }
-  .task-creation-page .ant-select .ant-select-selector {
-    height: 57px;
-    font-size: 16px;
-  }
-  .task-creation-page .quize-header__info {
-    margin-top: 0;
   }
 }
 

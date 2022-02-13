@@ -1,4 +1,4 @@
-import { Button, Layout } from "antd";
+import { Layout } from "antd";
 import { useAuth } from "hooks/useAuth";
 import React from "react";
 import { useHistory } from "react-router";
@@ -13,9 +13,9 @@ const AdmHeader: React.FC = () => {
 
   return (
     <Header className={styles["adm-header"]}>
-      <Button onClick={logout} type="link">
+      <button onClick={logout}>
         Выйти
-      </Button>
+      </button>
     </Header>
   );
 };

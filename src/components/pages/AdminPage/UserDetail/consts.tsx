@@ -1,4 +1,3 @@
-import { Button } from "antd";
 import { Link } from "react-router-dom";
 import { AdmPage, paths } from "../routes/constants";
 
@@ -61,7 +60,7 @@ export const getColumns = (styles: any) => {
       key: "id",
       render: (id) => (
         <Link to={`${paths[AdmPage.TASKS]}/${id}`}>
-          <Button type="link">Посмотреть</Button>
+          <button className={styles["action"]}>Посмотреть</button>
         </Link>
       ),
     },

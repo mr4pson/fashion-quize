@@ -61,15 +61,16 @@ const TasksPageContainer: FC = () => {
         increaseTaskPage={handleIncreaseTaskPage}
       />
       <Modal
-        title="Отмена задачи"
-        okText="Подтвердить"
-        cancelText="Отменить"
+        width={480}
+        title={`Вы точно хотите отменить задачу №${taskId}?`}
+        okText="Да, отменить"
+        cancelText="Назад"
         visible={visible}
         confirmLoading={confirmLoading}
         onOk={handleDelete}
         onCancel={handleCancel}
       >
-        <p>Вы точно хотите отменить задачу №{taskId}?</p>
+        <p>Вы можете отменить задачу, если до срока её исполнения остается более одного дня.</p>
       </Modal>
     </>
   );

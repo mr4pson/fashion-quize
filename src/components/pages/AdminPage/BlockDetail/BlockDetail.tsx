@@ -62,8 +62,12 @@ const BlockDetail: FC<TProps> = (props) => {
       case TITLE:
       case COLOR:
         return (
-          <Form.Item name={[field.name]} label={field.label} rules={[{ required: true, type: "string", max: 99 }]}>
-            <Input />
+          <Form.Item
+            name={[field.name]}
+            label={field.label}
+            rules={[{ required: true, type: "string", max: 99 }]}
+          >
+            <Input allowClear />
           </Form.Item>
         );
       case BUTTON:

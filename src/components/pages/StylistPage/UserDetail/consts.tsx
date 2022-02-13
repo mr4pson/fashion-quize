@@ -62,7 +62,7 @@ export const getColumns = (styles: any) => {
       key: "id",
       render: (id) => (
         <Link to={`${paths[StlPage.TASKS]}/${id}`}>
-          <Button type="link">Посмотреть</Button>
+          <button className={styles["action"]}>Посмотреть</button>
         </Link>
       ),
     },

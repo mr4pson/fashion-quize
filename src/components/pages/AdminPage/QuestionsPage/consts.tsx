@@ -1,4 +1,3 @@
-import { Button } from "antd";
 import { QuestionType } from "components/pages/QuizePage/types";
 import { QuestionDirectionAlignments } from "../QuestionDetail/types";
 
@@ -62,14 +61,13 @@ export const getColumns = (
       render: ({ id }) => (
         <>
           {actionButtons.map((button) => (
-            <Button
+            <button
               key={button.id}
               onClick={getActionRow(button.type, id)}
               className={styles["action"]}
-              type="link"
             >
               {button.action}
-            </Button>
+            </button>
           ))}
         </>
       ),

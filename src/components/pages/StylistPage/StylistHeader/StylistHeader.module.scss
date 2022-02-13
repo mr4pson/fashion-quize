@@ -1,6 +1,7 @@
 header.stl-header {
   background: #fff;
   padding: 0;
+  padding-right: 10px;
   height: 48px;
   line-height: 0;
   box-shadow: 0 1px 4px #00152914;
@@ -8,4 +9,13 @@ header.stl-header {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
+
+  button {
+    padding: 0;
+    margin-right: 6px;
+    background: none;
+    border: none;
+    color: #4b88c1;
+    cursor: pointer;
+  }
 }

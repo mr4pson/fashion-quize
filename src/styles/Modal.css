@@ -1,0 +1,44 @@
+.ant-modal-content {
+  border-radius: 8px;
+}
+
+.ant-modal-close {
+  display: none;
+}
+
+.ant-modal-title {
+  font-family: Cormorant;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 24px;
+}
+
+.ant-modal-header {
+  border-bottom: none;
+  border-radius: 8px;
+  padding-top: 25px;
+  padding-bottom: 0;
+}
+
+.ant-modal-body {
+  padding-top: 20px;
+  font-family: 'Montserrat', sans-serif;
+  color: #6F7374;
+}
+
+.ant-modal-footer {
+  padding: 10px 24px 24px 24px;
+  text-align: left;
+  border-top: none;
+}
+
+.ant-modal-footer button:first-child {
+  margin-right: 12px;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .ant-modal-body {
+    padding: 15px 24px 5px;
+  }
+}

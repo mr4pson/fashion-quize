@@ -69,3 +69,10 @@
 .ant-picker-today-btn:hover {
   color: #110e2b;
 }
+
+@media (max-width: 575px) {
+  .ant-picker {
+    max-width: 408px;
+    width: 100%;
+  }
+}

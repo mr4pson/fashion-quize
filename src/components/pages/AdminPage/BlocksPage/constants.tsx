@@ -1,4 +1,3 @@
-import { Button } from "antd";
 import { TypeBlock } from "./type";
 
 export const EDIT = "EDIT";
@@ -42,14 +41,13 @@ export const getColumns = (
       render: (blocks: TypeBlock) => (
         <>
           {actionButtons.map((button) => (
-            <Button
+            <button
               key={button.id}
               onClick={getActionRow(button.type, blocks.id)}
               className={styles["action"]}
-              type="link"
             >
               {button.action}
-            </Button>
+            </button>
           ))}
         </>
       ),

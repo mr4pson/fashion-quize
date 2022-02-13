@@ -21,7 +21,12 @@ const LoginPage: FC = () => {
       <div className={s["login-page"]}>
         <div className={s["login-card"]}>
           <h4 className={s["login-card__title"]}>Авторизация</h4>
-          <Form validateMessages={validateMessages} onFinish={onFinish} autoComplete="off">
+          <Form
+            className={s["login-form"]}
+            validateMessages={validateMessages}
+            onFinish={onFinish}
+            autoComplete="off"
+          >
             <div className={s["login-form__body"]}>
               {fields.map(({ key, name, label, rules }) => (
                 <Form.Item {...{ key, name, label, rules }}>
@@ -35,7 +40,10 @@ const LoginPage: FC = () => {
               </Button>
             </div>
           </Form>
-          <span className={s["login-card__reset-pass"]} onClick={linkToResetPassword}>
+          <span
+            className={s["login-card__reset-pass"]}
+            onClick={linkToResetPassword}
+          >
             Забыли пароль?
           </span>
         </div>

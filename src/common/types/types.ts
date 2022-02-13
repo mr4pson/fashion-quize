@@ -48,3 +48,8 @@ export type TUserInfo = {
   sex: ESexes;
   createdAt: string;
 };
+
+export enum ETheme {
+  DARK = "DARK",
+  LIGHT = "LIGHT"
+}

@@ -151,7 +151,7 @@ const QuestionDetail: FC<TProps> = (props) => {
             label="Вопрос"
             rules={[{ required: true, type: "string", max: 255 }]}
           >
-            <Input.TextArea />
+            <Input.TextArea allowClear />
           </Form.Item>
 
           <Form.Item
@@ -159,11 +159,11 @@ const QuestionDetail: FC<TProps> = (props) => {
             label="Описание"
             rules={[{ type: "string", max: 255 }]}
           >
-            <Input.TextArea />
+            <Input.TextArea allowClear />
           </Form.Item>
 
           <Form.Item name="image" label="Изображение">
-            <Input type="file" onChange={uploadMediaFile} />
+            <Input type="file" onChange={uploadMediaFile} allowClear />
           </Form.Item>
 
           {question?.image && (
