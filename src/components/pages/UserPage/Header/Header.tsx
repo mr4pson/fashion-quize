@@ -153,7 +153,7 @@ const Header: React.FC = () => {
                 Eyelish@mail.ru
               </div>
               <div className={styles["nav-mobile__contact"]}>
-                +7 (900) 999-99-99
+                +7 (993) 201-34-53
               </div>
               <div className={styles["nav-mobile__social-links"]}>
                 <InstIcon className={styles["nav-mobile__social-link"]} />

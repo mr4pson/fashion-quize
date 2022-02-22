@@ -46,4 +46,11 @@ export const fields: TFields[] = [
     label: "Email",
     rules: [{ required: true, type: "email" }],
   },
+  {
+    key: "5",
+    name: "age",
+    label: "Возраст",
+    rules: [{ required: true }],
+    mask: "11",
+  },
 ];

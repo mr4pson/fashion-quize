@@ -68,7 +68,7 @@ const HomePage: FC = () => {
                 <div className={styles["receive-price"]}>
                   <div className={styles["receive-price__content"]}>
                     <div className={styles["receive-price__label"]}>Стоимость услуги:</div>
-                    <div className={styles["receive-price__value"]}>1490₽</div>
+                    <div className={styles["receive-price__value"]}>1990₽</div>
                   </div>
                 </div>
               </div>

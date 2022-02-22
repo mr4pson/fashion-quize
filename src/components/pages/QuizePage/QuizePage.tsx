@@ -6,8 +6,16 @@ import { useHistory, useLocation } from "react-router";
 import { EQuize } from "common/types/types";
 import { Footer, Header } from "components/modules";
 import { TRootState, useAppDispatch } from "redux/ReduxStore";
-import { quizeThunks, setSex, setStateAnswers } from "redux/slicers/quizePageSlice";
-import { checkIfHeaderVisible, getNextQuestionLink, getPrevQuestionLink } from "./helper";
+import {
+  quizeThunks,
+  setSex,
+  setStateAnswers,
+} from "redux/slicers/quizePageSlice";
+import {
+  checkIfHeaderVisible,
+  getNextQuestionLink,
+  getPrevQuestionLink,
+} from "./helper";
 import QuizeHeader from "./QuizeHeader";
 import { TQuizeHeaderConfig } from "./QuizeHeader/types";
 import s from "./QuizePage.module.scss";
@@ -18,7 +26,9 @@ const QuizePage: FC = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { pathname } = useLocation();
-  const { blocks, answers, baseFields, sex } = useSelector((state: TRootState) => state.quizePage);
+  const { blocks, answers, baseFields, sex } = useSelector(
+    (state: TRootState) => state.quizePage
+  );
 
   const pathSections = pathname.split("/");
   const quizeType = pathSections[2] as EQuize;
@@ -40,7 +50,8 @@ const QuizePage: FC = () => {
       case paths[QzPage.SEX]:
         config = {
           title: "Выберите ваш пол",
-          description: "Укажите для кого нашим стилистам необходимо подобрать образы.",
+          description:
+            "Укажите для кого нашим стилистам необходимо подобрать образы.",
           backUrl: paths[QzPage.BASE],
           currentSectionNumber: 2,
           sectionLength: blocks?.length + 2,
@@ -50,7 +61,10 @@ const QuizePage: FC = () => {
         config = {
           title: currentBlock?.title,
           description: undefined,
-          backUrl: sectionNumber === 1 ? paths[QzPage.SEX] : getPrevQuestionLink(sectionNumber ?? 0, quizeType),
+          backUrl:
+            sectionNumber === 1
+              ? paths[QzPage.SEX]
+              : getPrevQuestionLink(sectionNumber ?? 0, quizeType),
           currentSectionNumber: (sectionNumber ?? 0) + 2,
           sectionLength: blocks?.length + 2,
         };
@@ -84,7 +98,9 @@ const QuizePage: FC = () => {
   const onFinish = async (form) => {
     switch (pathname) {
       case paths[QzPage.BASE]:
-        const response: any = await dispatch(quizeThunks.checkEmail(form.email));
+        const response: any = await dispatch(
+          quizeThunks.checkEmail(form.email)
+        );
         if (!response || !response.status) return;
         dispatch(quizeThunks.setBaseFields(form));
         history.push(paths[QzPage.SEX]);
@@ -92,16 +108,23 @@ const QuizePage: FC = () => {
 
       case paths[QzPage.SEX]:
         dispatch(setSex(form.sex.type));
-        history.push(paths[QzPage.ROUTE].replace(QUIZE_TYPE, form.sex.path).replace(SECTION_NUMBER, "1"));
+        history.push(
+          paths[QzPage.ROUTE]
+            .replace(QUIZE_TYPE, form.sex.path)
+            .replace(SECTION_NUMBER, "1")
+        );
         break;
 
       default:
         const currentAnswers = { ...answers, ...form };
         dispatch(setStateAnswers(currentAnswers));
         if (+sectionNumber === blocks.length) {
-          const payload = { ...baseFields, sex, data: JSON.stringify(currentAnswers) };
+          const payload = {
+            ...baseFields,
+            sex,
+            data: JSON.stringify(currentAnswers),
+          };
           await dispatch(quizeThunks.registrateUser(payload));
-          dispatch(quizeThunks.clearAnswers());
           history.push(paths[QzPage.COMPLETE]);
           return;
         }
@@ -115,16 +138,20 @@ const QuizePage: FC = () => {
       <Header />
       <div className={s["quize-page"]}>
         <div className={s["quize-page__ctr"]}>
-          {checkIfHeaderVisible(pathname) && <QuizeHeader {...getQuizeHeaderConfig()} />}
+          {checkIfHeaderVisible(pathname) && (
+            <QuizeHeader {...getQuizeHeaderConfig()} />
+          )}
           <div className={s["quize-form"]}>
             <Form onFinish={onFinish} labelAlign="left">
               <div className={s["quize-form__body"]}>
                 <QuizeRoutes />
               </div>
               <div className={s["quize-form__btn"]}>
-                <Button type="primary" size="large" htmlType="submit">
-                  Далее
-                </Button>
+                {pathSections[2] !== "complete" && (
+                  <Button type="primary" size="large" htmlType="submit">
+                    Далее
+                  </Button>
+                )}
               </div>
             </Form>
           </div>

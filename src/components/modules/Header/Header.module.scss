@@ -41,6 +41,11 @@
     justify-content: space-between;
     margin-right: 80px;
     width: 72px;
+    
+    a {
+      display: block;
+      height: 24px;
+    }
   }
 
   &__login-btn {

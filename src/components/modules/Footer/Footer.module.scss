@@ -31,6 +31,10 @@
     width: 100%;
   }
 
+  &__col {
+    padding-left: 0;
+  }
+
   &__logo {
     color: #fff;
     height: 48px;
@@ -45,12 +49,20 @@
   }
 
   &__nav-item {
-    color: #fff;
     font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 300;
     line-height: 24px;
     margin-bottom: 12px;
+    list-style: none;
+    
+    a {
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+      }
+    }
   }
 
   &__social-link {

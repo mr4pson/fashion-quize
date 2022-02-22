@@ -61,7 +61,8 @@ export const TaskCreationPage: FC = () => {
   const headerConfig: TQuizeHeaderConfig = {
     title: "Создание задачи",
     sectionLength: 0,
-    description: "Укажите что и когда вы хотели бы опробовать",
+    description:
+      "Здесь вы можете создать определённую задачу и стилист подберёт вам образы в соответсвии с ней. Правила и сроки определяете вы! Поделитесь вашими планами.",
   };
 
   const options = types?.map((type) => ({
@@ -85,36 +86,47 @@ export const TaskCreationPage: FC = () => {
           >
             <div className={styles["task-creation-form__body"]}>
               {fields.map(({ key, name, label, rules, mask, type }) => (
-                <Form.Item {...{ key, name, label, rules }}>
+                <React.Fragment key={key}>
                   {type === FieldTypes.TYPE && (
-                    <Select>
-                      {options.map(({ value, title }, index) => (
-                        <Select.Option
-                          key={`task-${name}` + index}
-                          value={value}
-                        >
-                          {title}
-                        </Select.Option>
-                      ))}
-                    </Select>
+                    <Form.Item {...{ name, label, rules }}>
+                      <Select>
+                        {options.map(({ value, title }, index) => (
+                          <Select.Option
+                            key={`task-${name}` + index}
+                            value={value}
+                          >
+                            {title}
+                          </Select.Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
                   )}
                   {type === FieldTypes.DATE && (
-                    <DatePicker
-                      format={"DD.MM.YYYY"}
-                      className={styles["form-item__date"]}
-                    />
+                    <Form.Item {...{ name, label, rules }}>
+                      <DatePicker
+                        format={"DD.MM.YYYY"}
+                        disabledDate={(current) => {
+                          return current && current.valueOf() < Date.now();
+                        }}
+                        className={styles["form-item__date"]}
+                      />
+                    </Form.Item>
                   )}
                   {![FieldTypes.TYPE, FieldTypes.DATE].includes(type) &&
                     (mask ? (
-                      <MaskedInput
-                        mask={mask}
-                        allowClear
-                        onChange={(e) => handleTimeChange(e, form)}
-                      />
+                      <Form.Item {...{ name, label, rules }}>
+                        <MaskedInput
+                          mask={mask}
+                          allowClear
+                          onChange={(e) => handleTimeChange(e, form)}
+                        />
+                      </Form.Item>
                     ) : (
-                      <Input allowClear />
+                      <Form.Item {...{ name, label, rules }}>
+                        <Input allowClear />
+                      </Form.Item>
                     ))}
-                </Form.Item>
+                </React.Fragment>
               ))}
             </div>
             <div className={styles["task-creation-form__footer"]}>

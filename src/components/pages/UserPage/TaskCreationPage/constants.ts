@@ -23,7 +23,7 @@ export const fields = [
     key: "1",
     type: FieldTypes.TYPE,
     name: "type",
-    label: "Тип",
+    label: "Что у вас намечается?",
     rules: [{ required: true }],
   },
   {
