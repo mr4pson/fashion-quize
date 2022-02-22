@@ -16,11 +16,11 @@ const CompletePage: React.FC<Props> = (props) => {
         <div className={styles["complete-page__body"]}>
           <h1 className={styles["complete-page__title"]}>
             Поздравляем, {props.name}! После прохождени опроса вы были успешно
-            зарегистрированы в eylish.ru.
+            зарегистрированы в eyelish.ru.
           </h1>
           <div className={styles["complete-page__desc"]}>
             На вашу почту <b>{props.email}</b> отправлено письмо с паролем от
-            личного кабинета. Вы можете <Link to={paths[Page.LOGIN]}>пройти авторизацию</Link>, воспользовавшись
+            личного кабинета. Вы можете <Link to={paths[Page.LOGIN]}><b>пройти авторизацию</b></Link>, воспользовавшись
             данными в этом письме. Предоставленная вами информация строго
             конфиденциальна, не подлежит передаче третьим лицам и используется
             только для работы над вашим стилем.

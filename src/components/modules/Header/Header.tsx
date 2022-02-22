@@ -67,7 +67,9 @@ function Header(): JSX.Element {
           </Link>
           <div className={styles["header__actions"]}>
             <div className={styles["header__links"]}>
-              <InstIcon className={styles["header__link"]} />
+              <a href="https://instagram.com/eyelish.ru" target="_blank">
+                <InstIcon className={styles["header__link"]} />
+              </a>
               <FbIcon className={styles["header__link"]} />
             </div>
             <div className={styles["header__login-btn"]}>
@@ -108,7 +110,7 @@ function Header(): JSX.Element {
                 Eyelish@mail.ru
               </div>
               <div className={styles["nav-mobile__contact"]}>
-                +7 (900) 999-99-99
+                +7 (993) 201-34-53
               </div>
               <div className={styles["nav-mobile__social-links"]}>
                 <InstIcon className={styles["nav-mobile__social-link"]} />

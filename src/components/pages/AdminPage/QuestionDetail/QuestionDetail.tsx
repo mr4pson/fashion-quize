@@ -137,7 +137,7 @@ const QuestionDetail: FC<TProps> = (props) => {
       <div className={styles["detail__header"]}>
         <h1>{getPageTitle(id)}</h1>
       </div>
-      {(!!id && !!question.description) ||
+      {(!!id && !!question.title) ||
       props.method === PageMethods.CREATE ? (
         <Form
           initialValues={initialValues}

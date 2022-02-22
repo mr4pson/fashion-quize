@@ -82,7 +82,8 @@ export const getFormField = (
   field: TFormField,
   statuses: TaskStatus[],
   loading: boolean,
-  compilation: TCompilation
+  compilation: TCompilation,
+  disabled?: boolean
 ) =>
   ({
     STATUS: (
@@ -110,7 +111,12 @@ export const getFormField = (
     ),
     BUTTON: compilation.task?.status.title !== "Завершена" && (
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button loading={loading} type="primary" htmlType="submit">
+        <Button
+          disabled={disabled}
+          loading={loading}
+          type="primary"
+          htmlType="submit"
+        >
           {field.label}
         </Button>
       </Form.Item>

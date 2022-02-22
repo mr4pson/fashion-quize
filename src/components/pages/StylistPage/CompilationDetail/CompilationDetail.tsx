@@ -59,9 +59,17 @@ const CompilationDetail: FC<TProps> = (props) => {
     task: state.tasksPage.task,
   }));
 
-  const curTask = compilation.task ?? task;
+  const curTask = compilation?.task ?? task;
   const compilationIsNotEmpty =
     (!!statuses && !!compilation.id) || (!!taskId && !!task.id && !!statuses);
+
+  const disabled = !compilation.looks?.reduce((accum, look) => {
+    return (
+      accum &&
+      look.items.reduce((accum, lookItem) => accum && !!lookItem.price, true)
+    );
+  }, true);
+  console.log(compilation, disabled);
 
   useEffect(() => {
     (async () => {
@@ -288,7 +296,8 @@ const CompilationDetail: FC<TProps> = (props) => {
                   field,
                   statuses,
                   loading,
-                  compilation
+                  compilation,
+                  disabled
                 )}
               </div>
             ))}
