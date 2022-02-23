@@ -39,6 +39,7 @@
     height: 32px;
     padding: 0;
     cursor: pointer;
+    transform: rotate(180deg);
   }
 
   &--active {
@@ -47,7 +48,7 @@
     }
 
     #{ $self }__expand-btn {
-      transform: rotate(180deg);
+      transform: rotate(0deg);
     }
   }
 }
