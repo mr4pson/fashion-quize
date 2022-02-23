@@ -1,4 +1,3 @@
-import { Button } from "antd";
 import { TypeTask } from "components/pages/StylistPage/TasksPage/types";
 import moment from "moment";
 import React, { memo, useEffect } from "react";
@@ -10,6 +9,7 @@ import PageHeader from "../common/PageHeader";
 import TaskCardSkeleton from "./TaskCardSkeleton";
 import { TASK_CARD_SKELETON_NUMBER } from "./constants";
 import IncreasePageButton from "../common/IncreasePageButton";
+import { declOfNum } from "common/helpers/decl-helper";
 
 type Props = {
   tasks: TypeTask[];
@@ -40,9 +40,13 @@ const TasksPage: React.FC<Props> = (props) => {
   return (
     <div className={styles["tasks-page"]}>
       <PageHeader
-        title={"Список задач"}
+        title={"Ваш список задач"}
         btnTitle={"Добавить задачу"}
-        elementsNumberLabel={`Всего ${tasks.length} задач`}
+        elementsNumberLabel={`Всего ${tasks.length} ${declOfNum(tasks.length, [
+          "задача",
+          "задачи",
+          "задач",
+        ])}`}
         handleBtnClick={handleAddTask}
       />
       <div className={styles["tasks-page__body"]}>
