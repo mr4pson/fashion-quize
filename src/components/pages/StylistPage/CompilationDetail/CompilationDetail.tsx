@@ -248,6 +248,7 @@ const CompilationDetail: FC<TProps> = (props) => {
                             className={styles["look-item__input"]}
                             bordered={false}
                             value={lookItem.price}
+                            type={"number"}
                             onChange={(e) =>
                               handleEditItemParam(
                                 e,

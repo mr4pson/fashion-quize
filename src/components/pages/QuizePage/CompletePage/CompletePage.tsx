@@ -15,7 +15,7 @@ const CompletePage: React.FC<Props> = (props) => {
       <div className="container">
         <div className={styles["complete-page__body"]}>
           <h1 className={styles["complete-page__title"]}>
-            Поздравляем, {props.name}! После прохождени опроса вы были успешно
+            Поздравляем, {props.name}! После прохождения опроса вы были успешно
             зарегистрированы в eyelish.ru.
           </h1>
           <div className={styles["complete-page__desc"]}>
