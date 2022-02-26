@@ -51,3 +51,21 @@
     }
   }
 }
+
+.badge {
+  display: inline-block;
+  margin-right: 3px;
+  background: #000;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  vertical-align: middle;
+
+  &--approved {
+    background: #379456;
+  }
+
+  &--disapproved {
+    background: #d1d1d1;
+  }
+}

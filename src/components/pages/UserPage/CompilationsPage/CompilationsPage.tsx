@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { TCompilation } from "components/pages/StylistPage/CompilationsPage/types";
 import React, { memo } from "react";
 import IncreasePageButton from "../common/IncreasePageButton";
@@ -29,7 +30,37 @@ const CompilationsPage: React.FC<TProps> = (props) => {
       <div className={styles["compilations-page"]}>
         <PageHeader
           title={"Список подборок"}
-          elementsNumberLabel={'Выберитие понравившиеся луки из подборки. Подтвердите свой выбор, нажав «Да» внизу галереи при просмотре лука.'}
+          elementsNumberLabel={
+            <>
+              <div>
+                Выберитие понравившиеся луки из подборки. Подтвердите свой
+                выбор, нажав «Да» внизу галереи при просмотре лука.
+              </div>
+              <div>Обозначения:</div>
+              <div>
+                <span className={styles["badge"]}></span> - образы,
+                которые еще не рассмотрены
+              </div>
+              <div>
+                <span
+                  className={classNames(
+                    styles["badge"],
+                    styles["badge--approved"]
+                  )}
+                ></span>{" "}
+                - образы, которые были одобрены вами
+              </div>
+              <div>
+                <span
+                  className={classNames(
+                    styles["badge"],
+                    styles["badge--disapproved"]
+                  )}
+                ></span>{" "}
+                - образы, которые были не одобрены вами
+              </div>
+            </>
+          }
         />
         <div className={styles["compilations-page__body"]}>
           {props.compilations?.map((compilation, index) => (

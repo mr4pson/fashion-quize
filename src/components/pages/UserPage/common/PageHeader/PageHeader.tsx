@@ -5,7 +5,7 @@ import styles from "./PageHeader.module.scss";
 type TProps = {
   title: string;
   btnTitle?: string;
-  elementsNumberLabel?: string;
+  elementsNumberLabel?: string | React.ReactNode;
   handleBtnClick?: () => void;
 };
 
