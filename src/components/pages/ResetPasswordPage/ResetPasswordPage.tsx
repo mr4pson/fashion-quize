@@ -17,10 +17,8 @@ const ResetPasswordPage: FC = () => {
   const queryParams = new URLSearchParams(search);
   const token = queryParams.get("token");
 
-  const onFinish = async ({ login }) => {
-    await dispatch(resetPasswordThunks.resetPassword(login));
-    history.push(paths[Page.LOGIN]);
-  }
+  const onFinish = ({ login }) =>
+    dispatch(resetPasswordThunks.resetPassword(login));
 
   useEffect(() => {
     if (token) {
@@ -28,7 +26,7 @@ const ResetPasswordPage: FC = () => {
         const isPasswordRefreshed = (await dispatch(
           resetPasswordThunks.sendPasswordResetRequest(token)
         )) as any;
-        if (!isPasswordRefreshed) history.push(paths[Page.RESET_PASSWORD]);
+        if (!isPasswordRefreshed) history.push(paths[Page.LOGIN]);
       })();
     }
   }, [history, dispatch, token]);
