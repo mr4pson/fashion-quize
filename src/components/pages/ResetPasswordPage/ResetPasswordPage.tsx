@@ -17,8 +17,10 @@ const ResetPasswordPage: FC = () => {
   const queryParams = new URLSearchParams(search);
   const token = queryParams.get("token");
 
-  const onFinish = ({ login }) =>
-    dispatch(resetPasswordThunks.resetPassword(login));
+  const onFinish = async ({ login }) => {
+    await dispatch(resetPasswordThunks.resetPassword(login));
+    history.push(paths[Page.LOGIN]);
+  }
 
   useEffect(() => {
     if (token) {
@@ -36,9 +38,11 @@ const ResetPasswordPage: FC = () => {
       <Header />
       <div className={s["reset-password-page"]}>
         {token ? (
-          <h1 className={s["reset-password-title"]}>
-            Восстановление пароля...
-          </h1>
+          <div className={s["reset-password-card"]}>
+            <h4 className={s["reset-password-card__title"]}>
+              Идет Восстановление пароля...
+            </h4>
+          </div>
         ) : (
           <div className={s["reset-password-card"]}>
             <h4 className={s["reset-password-card__title"]}>
