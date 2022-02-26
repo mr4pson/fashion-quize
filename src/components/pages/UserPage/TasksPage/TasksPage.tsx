@@ -42,11 +42,16 @@ const TasksPage: React.FC<Props> = (props) => {
       <PageHeader
         title={"Ваш список задач"}
         btnTitle={"Добавить задачу"}
-        elementsNumberLabel={`Всего ${tasks.length} ${declOfNum(tasks.length, [
-          "задача",
-          "задачи",
-          "задач",
-        ])}`}
+        elementsNumberLabel={
+          <>
+            <div>Заводите задачи, чтобы наши стилисты могли подобрать вам образ согласно вашим нуждам.</div>
+            <div>{`Всего ${tasks.length} ${declOfNum(tasks.length, [
+              "задача",
+              "задачи",
+              "задач",
+            ])}`}</div>
+          </>
+        }
         handleBtnClick={handleAddTask}
       />
       <div className={styles["tasks-page__body"]}>
