@@ -18,3 +18,4 @@ export const paths = {
   [Page.LOGIN]: "/login",
   [Page.RESET_PASSWORD]: "/reset-password",
 };
+

@@ -61,7 +61,7 @@ export const menuItems = [
 ];
 
 const defaultOptions = {
-  baseURL: "",
+  baseURL: "http://127.0.0.1:3100",
 };
 
 // Create instance
