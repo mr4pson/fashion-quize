@@ -32,18 +32,18 @@ const stylistsPageSlice = createSlice({
 export const stylistsThunks = {
   getStylists: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/stylists");
+    const response = await axiosInstance.get("/stylists");
     dispatch(setStylists(response?.data));
     dispatch(setLoading(false));
   },
   getStylist: (id: number) => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get(`/api/stylists/${id}`);
+    const response = await axiosInstance.get(`/stylists/${id}`);
     dispatch(setStylist(response?.data));
     dispatch(setLoading(false));
   },
   createStylist: (payload: TypeEditStylistDto) => async (dispatch) => {
-    const response = await axiosInstance.post("/api/stylists", payload);
+    const response = await axiosInstance.post("/stylists", payload);
     if (response && response.status === 201) {
       openNotification("success", `Email с паролем был отправлен стилисту на почту ${payload.login}`);
     } else {
@@ -51,7 +51,7 @@ export const stylistsThunks = {
     }
   },
   updateStylist: (id: number, payload: TypeEditStylistDto) => async () => {
-    const response = await axiosInstance.put(`/api/stylists/${id}`, payload);
+    const response = await axiosInstance.put(`/stylists/${id}`, payload);
     if (!(response && response.status === 200)) {
       openNotification("error", `Не удалось обновить стилиста`);
     }
@@ -63,7 +63,7 @@ export const stylistsThunks = {
     dispatch(setStylists([]));
   },
   removeStylist: (id: number) => async (dispatch: TypeDispatch) => {
-    await axiosInstance.delete(`/api/stylists/${id}`);
+    await axiosInstance.delete(`/stylists/${id}`);
     dispatch(stylistsThunks.getStylists());
   },
 };

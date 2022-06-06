@@ -7,7 +7,7 @@ export function useUploadFile(
   fieldName: string = 'uploadFile',
 ): any {
   const [mediaFile, setMediaFile] = useState<string>();
-  const path = '/api/attachments/addAttachments';
+  const path = '/attachments/addAttachments';
 
   async function uploadFiles(files: FileList) {
     const formData = new FormData();

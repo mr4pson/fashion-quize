@@ -53,19 +53,19 @@ const quizePageSlice = createSlice({
 
 export const quizeThunks = {
   getQuestionsByQuizeType: (quizeType: EQuize) => async (dispatch: TypeDispatch) => {
-    const response = await axiosInstance.get(`/api/questions/byQuizeType/${quizeType}`);
+    const response = await axiosInstance.get(`/questions/byQuizeType/${quizeType}`);
     dispatch(setQuestions(response?.data));
   },
   getQuestionBlocks: () => async (dispatch: TypeDispatch) => {
-    const response = await axiosInstance.get(`/api/blocks`);
+    const response = await axiosInstance.get(`/blocks`);
     dispatch(setBlocks(response?.data));
   },
   getQuestionBlocksByQuizeType: (quizeType: EQuize) => async (dispatch: TypeDispatch) => {
-    const response = await axiosInstance.get(`/api/blocks/filterQuestionsByQuizeType/${quizeType}`);
+    const response = await axiosInstance.get(`/blocks/filterQuestionsByQuizeType/${quizeType}`);
     dispatch(setBlocks(response?.data));
   },
   getAnswers: (id: number) => async (dispatch: TypeDispatch) => {
-    const response = await axiosInstance.get(`/api/answers/${id}`);
+    const response = await axiosInstance.get(`/answers/${id}`);
     await dispatch(setStateAnswers(JSON.parse(response?.data.data)));
     dispatch(setUser(response?.data.user));
   },
@@ -79,10 +79,10 @@ export const quizeThunks = {
     dispatch(setSex(payload));
   },
   checkEmail: (payload: string) => async () => {
-    return await axiosInstance.get(`/api/auth/check-email/${payload}`);
+    return await axiosInstance.get(`/auth/check-email/${payload}`);
   },
   registrateUser: (payload: any) => async (dispatch: TypeDispatch) => {
-    await axiosInstance.post("/api/auth/registrate", payload);
+    await axiosInstance.post("/auth/registrate", payload);
   },
   clearAnswers: () => (dispatch: TypeDispatch) => {
     dispatch(setStateAnswers({} as Object));

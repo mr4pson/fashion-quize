@@ -62,13 +62,13 @@ const QuestionDetail: FC<TProps> = (props) => {
     setLoading(true);
 
     if (id) {
-      await axiosInstance.put(`/api/questions/${id}`, payload);
+      await axiosInstance.put(`/questions/${id}`, payload);
       setLoading(false);
       history.push(`${paths[AdmPage.QUESTIONS]}/${quizeType}`);
       return;
     }
 
-    await axiosInstance.post("/api/questions", payload);
+    await axiosInstance.post("/questions", payload);
     setLoading(false);
     history.push(`${paths[AdmPage.QUESTIONS]}/${quizeType}`);
   };

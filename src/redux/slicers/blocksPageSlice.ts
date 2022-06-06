@@ -30,12 +30,12 @@ const blocksPageSlice = createSlice({
 export const blocksThunks = {
   getBlocks: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/blocks");
+    const response = await axiosInstance.get("/blocks");
     dispatch(setBlocks(response?.data));
     dispatch(setLoading(false));
   },
   getBlock: (id: number) => async (dispatch: TypeDispatch) => {
-    const response = await axiosInstance.get(`/api/blocks/${id}`);
+    const response = await axiosInstance.get(`/blocks/${id}`);
     dispatch(setBlock(response?.data));
     dispatch(setLoading(false));
   },
@@ -46,7 +46,7 @@ export const blocksThunks = {
     dispatch(setBlocks([]));
   },
   removeBlock: (id: number) => async (dispatch: TypeDispatch) => {
-    await axiosInstance.delete(`/api/blocks/${id}`);
+    await axiosInstance.delete(`/blocks/${id}`);
     dispatch(blocksThunks.getBlocks());
   },
 };

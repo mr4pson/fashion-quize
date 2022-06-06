@@ -32,19 +32,19 @@ const questionsPageSlice = createSlice({
 export const questionsThunks = {
   getQuestions: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/questions");
+    const response = await axiosInstance.get("/questions");
     dispatch(setQuestions(response?.data));
     dispatch(setLoading(false));
   },
   getQuestionsByQuizeType: (quizeType: EQuize) => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get(`/api/questions/byQuizeType/${quizeType}`);
+    const response = await axiosInstance.get(`/questions/byQuizeType/${quizeType}`);
     dispatch(setQuestions(response?.data));
     dispatch(setLoading(false));
   },
   getQuestion: (id: number) => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get(`/api/questions/${id}`);
+    const response = await axiosInstance.get(`/questions/${id}`);
     dispatch(setLoading(false));
     try {
       dispatch(
@@ -64,7 +64,7 @@ export const questionsThunks = {
     dispatch(setQuestions([]));
   },
   removeQuestion: (id: number, quizeType: EQuize) => async (dispatch: TypeDispatch) => {
-    await axiosInstance.delete(`/api/questions/${id}`);
+    await axiosInstance.delete(`/questions/${id}`);
     dispatch(questionsThunks.getQuestionsByQuizeType(quizeType));
   },
 };

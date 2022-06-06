@@ -62,20 +62,20 @@ const compilationsPageSlice = createSlice({
 export const compilationsThunks = {
   getCompilations: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/compilations");
+    const response = await axiosInstance.get("/compilations");
     dispatch(setCompilations(response?.data));
     dispatch(setLoading(false));
   },
   getUserCompilations: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/compilations/user-compilations");
+    const response = await axiosInstance.get("/compilations/user-compilations");
     await dispatch(setCompilations(response?.data));
     dispatch(increasePageNumber());
     dispatch(setLoading(false));
   },
   getStylistCompilations: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/compilations/stylist-compilations");
+    const response = await axiosInstance.get("/compilations/stylist-compilations");
     dispatch(setCompilations(response?.data));
     dispatch(setLoading(false));
   },
@@ -100,7 +100,7 @@ export const compilationsThunks = {
   },
   getCompilation: (id: number) => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get(`/api/compilations/${id}`);
+    const response = await axiosInstance.get(`/compilations/${id}`);
     dispatch(setCompilation(response?.data));
     dispatch(setLoading(false));
   },
@@ -108,14 +108,14 @@ export const compilationsThunks = {
     dispatch(setCompilation({} as TCompilation));
   },
   createCompilation: (payload: any) => async () => {
-    await axiosInstance.post(`/api/compilations`, payload);
+    await axiosInstance.post(`/compilations`, payload);
   },
   updateCompilation: (id, payload: any) => async (dispatch: TypeDispatch) => {
-    await axiosInstance.put(`/api/compilations/${id}`, payload);
+    await axiosInstance.put(`/compilations/${id}`, payload);
     dispatch(setCompilation({} as TCompilation));
   },
   rateCompilation: (payload: any) => async () => {
-    await axiosInstance.post(`/api/compilations/rate`, payload);
+    await axiosInstance.post(`/compilations/rate`, payload);
   },
 };
 

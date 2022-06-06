@@ -86,7 +86,7 @@ export const errorResponseHandler = ({ error, logout }) => {
 };
 
 export function getImageUrl(fileName: string): string {
-  return `/api/attachments/${fileName}`;
+  return `/attachments/${fileName}`;
 }
 
 export function getWindowDimensions() {

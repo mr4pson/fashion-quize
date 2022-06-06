@@ -43,12 +43,12 @@ const BlockDetail: FC<TProps> = (props) => {
   const onFinish = async (payload: ChangeBlockDto) => {
     setLoading(true);
     if (id) {
-      await axiosInstance.put(`/api/blocks/${id}`, payload);
+      await axiosInstance.put(`/blocks/${id}`, payload);
       setLoading(false);
       history.push(paths[AdmPage.BLOCKS]);
       return;
     }
-    await axiosInstance.post("/api/blocks", payload);
+    await axiosInstance.post("/blocks", payload);
     setLoading(false);
     history.push(paths[AdmPage.BLOCKS]);
   };

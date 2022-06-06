@@ -63,20 +63,20 @@ const tasksPageSlice = createSlice({
 export const tasksThunks = {
   getTasks: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/tasks");
+    const response = await axiosInstance.get("/tasks");
     dispatch(setTasks(response?.data));
     dispatch(setLoading(false));
   },
   getUserTasks: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/tasks/user-tasks");
+    const response = await axiosInstance.get("/tasks/user-tasks");
     await dispatch(setTasks(response?.data));
     dispatch(increasePageNumber());
     dispatch(setLoading(false));
   },
   getStylistTasks: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/tasks/stylist-tasks");
+    const response = await axiosInstance.get("/tasks/stylist-tasks");
     dispatch(setTasks(response?.data));
     dispatch(setLoading(false));
   },
@@ -91,7 +91,7 @@ export const tasksThunks = {
   },
   getTask: (id: number) => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get(`/api/tasks/${id}`);
+    const response = await axiosInstance.get(`/tasks/${id}`);
     dispatch(setTask(response?.data));
     dispatch(setLoading(false));
   },
@@ -100,30 +100,30 @@ export const tasksThunks = {
   },
   getTaskStatuses: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/task-statuses");
+    const response = await axiosInstance.get("/task-statuses");
     dispatch(setTaskStatuses(response?.data));
     dispatch(setLoading(false));
   },
   getTaskTypes: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/task-types");
+    const response = await axiosInstance.get("/task-types");
     dispatch(setTaskTypes(response?.data));
     dispatch(setLoading(false));
   },
   updateTask: (id: number, payload: any) => async () => {
-    const response = await axiosInstance.put(`/api/tasks/${id}`, payload);
+    const response = await axiosInstance.put(`/tasks/${id}`, payload);
     if (!(response && response.status === 200)) {
       openNotification("error", `Не удалось обновить задачу`);
     }
   },
   createTask: (payload: any) => async () => {
-    const response = await axiosInstance.post(`/api/tasks`, payload);
+    const response = await axiosInstance.post(`/tasks`, payload);
     if (!(response && response.status === 201)) {
       openNotification("error", `Не удалось создать задачу`);
     }
   },
   cancelTask: (id: number) => async (dispatch: TypeDispatch) => {
-    const response = await axiosInstance.delete(`/api/tasks/${id}`);
+    const response = await axiosInstance.delete(`/tasks/${id}`);
     dispatch(tasksThunks.getUserTasks());
     if (!(response && response.status === 200)) {
       openNotification("error", `Не удалось отменить задачу`);

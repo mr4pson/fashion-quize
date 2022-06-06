@@ -17,7 +17,7 @@ export function useAuth(history: History<unknown> | string[]): TypeUseAuthHookRe
     try {
       message.loading({ content: "Загрузка...", key: "auth" });
       const { data: tokenData } = await axios.post<{ accessToken: string }>(
-        `/api/auth/login`,
+        `/auth/login`,
         {
           login: login,
           password: password,

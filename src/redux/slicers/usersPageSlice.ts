@@ -30,19 +30,19 @@ const usersPageSlice = createSlice({
 export const usersThunks = {
   getUsers: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/users");
+    const response = await axiosInstance.get("/users");
     dispatch(setUsers(response?.data));
     dispatch(setLoading(false));
   },
   getUser: (id: number) => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get(`/api/users/${id}`);
+    const response = await axiosInstance.get(`/users/${id}`);
     dispatch(setUser(response?.data));
     dispatch(setLoading(false));
   },
   getStylistUsers: () => async (dispatch: TypeDispatch) => {
     dispatch(setLoading(true));
-    const response = await axiosInstance.get("/api/users/stylist-users");
+    const response = await axiosInstance.get("/users/stylist-users");
     dispatch(setUsers(response?.data));
     dispatch(setLoading(false));
   },
